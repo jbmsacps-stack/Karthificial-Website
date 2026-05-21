@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TN EduPlatform - Question Papers</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, sans-serif;
+}
+
+body{
+    background:#0A0A0A;
+    color:white;
+}
+
+header{
+    padding:20px;
+    text-align:center;
+    background:#111111;
+    border-bottom:1px solid #D4AF37;
+}
+
+h1{
+    color:#D4AF37;
+}
+
+.container{
+    width:90%;
+    margin:auto;
+    padding:30px 0;
+}
+
+.tabs,
+.subject-filters,
+.controls{
+    display:flex;
+    flex-wrap:wrap;
+    gap:15px;
+    margin-bottom:25px;
+}
+
+button,
+select{
+    padding:10px 18px;
+    border:none;
+    border-radius:30px;
+    cursor:pointer;
+}
+
+.tab-btn,
+.subject-btn{
+    background:#1A1A1A;
+    color:white;
+}
+
+.tab-btn.active,
+.subject-btn.active{
+    background:#D4AF37;
+    color:black;
+}
+
+.search-select{
+    background:#1A1A1A;
+    color:white;
+}
+
+.papers-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+    gap:25px;
+}
+
+.paper-card{
+    background:#111111;
+    padding:20px;
+    border-radius:20px;
+    border:1px solid rgba(212,175,55,0.2);
+    transition:0.4s;
+}
+
+.paper-card:hover{
+    transform:translateY(-8px);
+    box-shadow:0 15px 30px rgba(212,175,55,0.2);
+}
+
+.badge{
+    display:inline-block;
+    margin-top:10px;
+    margin-right:10px;
+    padding:6px 12px;
+    border-radius:20px;
+    font-size:13px;
+}
+
+.subject-badge{
+    background:#D4AF37;
+    color:black;
+}
+
+.year-badge{
+    background:#222;
+    color:#ddd;
+}
+
+.download-btn{
+    display:inline-block;
+    margin-top:20px;
+    padding:10px 18px;
+    background:#D4AF37;
+    color:black;
+    text-decoration:none;
+    border-radius:30px;
+    font-weight:bold;
+}
+
+.message{
+    text-align:center;
+    color:#D4AF37;
+    margin-top:20px;
+}
+
+@media(max-width:768px){
+    .tabs,
+    .subject-filters,
+    .controls{
+        flex-direction:column;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <h1>TN EduPlatform Question Papers</h1>
+</header>
+
+<div class="container">
+
+    <div class="tabs">
+        <button class="tab-btn active" data-class="10">10th Standard</button>
+        <button class="tab-btn" data-class="12">12th Standard</button>
+    </div>
+
+    <div class="subject-filters">
+        <button class="subject-btn active" data-subject="">All</button>
+        <button class="subject-btn" data-subject="Tamil">Tamil</button>
+        <button class="subject-btn" data-subject="English">English</button>
+        <button class="subject-btn" data-subject="Maths">Maths</button>
+        <button class="subject-btn" data-subject="Science">Science</button>
+        <button class="subject-btn" data-subject="Social Science">Social Science</button>
+    </div>
+
+    <div class="controls">
+        <select id="yearSelect" class="search-select">
+            <option value="">All Years</option>
+        </select>
+    </div>
+
+    <div id="message" class="message"></div>
+
+    <div class="papers-grid" id="papersGrid"></div>
+
+</div>
+
+<script>
+const papersGrid = document.getElementById("papersGrid");
+const message = document.getElementById("message");
+
+let currentClass = "10";
+let currentSubject = "";
+let currentYear = "";
+
+for(let year = 2024; year >= 2015; year--){
+    document.getElementById("yearSelect").innerHTML +=
+        `<option value="${year}">${year}</option>`;
+}
+
+async function fetchPapers(){
+
+    message.innerText = "Loading papers...";
+    papersGrid.innerHTML = "";
+
+    try{
+
+        const url =
+        `/api/question-papers?class_level=${currentClass}&subject=${currentSubject}&year=${currentYear}`;
+
+        const response = await fetch(url);
+
+        if(!response.ok){
+            throw new Error("Fetch failed");
+        }
+
+        const papers = await response.json();
+
+        renderPapers(papers);
+
+        message.innerText = "";
+
+    }catch(error){
+        message.innerText = "Error loading question papers.";
+    }
+}
+
+function renderPapers(papers){
+
+    if(papers.length === 0){
+        papersGrid.innerHTML = "<p>No papers found.</p>";
+        return;
+    }
+
+    papersGrid.innerHTML = papers.map(paper => `
+        <div class="paper-card">
+            <h3>${paper.title}</h3>
+
+            <span class="badge subject-badge">${paper.subject}</span>
+            <span class="badge year-badge">${paper.year}</span>
+
+            <br>
+
+            <a href="${paper.download_url}" class="download-btn">
+                Download
+            </a>
+        </div>
+    `).join("");
+}
+
+document.querySelectorAll(".tab-btn").forEach(btn=>{
+    btn.addEventListener("click",()=>{
+
+        document.querySelectorAll(".tab-btn").forEach(b=>b.classList.remove("active"));
+        btn.classList.add("active");
+
+        currentClass = btn.dataset.class;
+
+        fetchPapers();
+    });
+});
+
+document.querySelectorAll(".subject-btn").forEach(btn=>{
+    btn.addEventListener("click",()=>{
+
+        document.querySelectorAll(".subject-btn").forEach(b=>b.classList.remove("active"));
+        btn.classList.add("active");
+
+        currentSubject = btn.dataset.subject;
+
+        fetchPapers();
+    });
+});
+
+document.getElementById("yearSelect").addEventListener("change",(e)=>{
+    currentYear = e.target.value;
+    fetchPapers();
+});
+
+fetchPapers();
+</script>
+
+</body>
+</html>
