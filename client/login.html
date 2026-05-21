@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Login | TN EduPlatform</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- ================================
+         NAVBAR
+    ================================= -->
+
+    <nav class="navbar">
+        <div class="navbar-inner">
+
+            <a href="index.html" class="logo">
+                <div class="logo-mark">TN</div>
+                <div class="logo-text">Edu<span>Platform</span></div>
+            </a>
+
+            <input type="checkbox" id="menu-toggle" class="menu-toggle">
+
+            <label for="menu-toggle" class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </label>
+
+            <ul class="nav-menu">
+                <li><a href="index.html" class="nav-link">Home</a></li>
+
+                <li class="dropdown">
+                    <a href="#" class="nav-link">Notes</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="notes-10th.html">10th Standard</a></li>
+                        <li><a href="notes-12th.html">12th Standard</a></li>
+                    </ul>
+                </li>
+
+                <li class="dropdown">
+                    <a href="#" class="nav-link">Question Papers</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="papers-10th.html">10th Standard</a></li>
+                        <li><a href="papers-12th.html">12th Standard</a></li>
+                    </ul>
+                </li>
+
+                <li><a href="contact.html" class="nav-link">Contact</a></li>
+                <li><a href="career-guidance.html" class="nav-link">Career Guidance</a></li>
+
+                <li class="mobile-actions auth-mobile-actions">
+                    <a href="login.html" class="btn-outline">Login</a>
+                    <a href="signup.html" class="btn-gold">Signup</a>
+                </li>
+            </ul>
+
+            <div class="nav-actions auth-actions">
+                <a href="login.html" class="btn-outline">Login</a>
+                <a href="signup.html" class="btn-gold">Signup</a>
+            </div>
+
+        </div>
+    </nav>
+
+    <!-- ================================
+         LOGIN SECTION
+    ================================= -->
+
+    <main class="auth-page">
+        <section class="auth-card">
+
+            <h1>Login</h1>
+
+            <p class="auth-subtitle">
+                Welcome back. Access your learning dashboard.
+            </p>
+
+            <p class="form-message success-message" id="loginSuccessMessage"></p>
+
+            <form id="loginForm">
+
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input 
+                        type="email" 
+                        id="email" 
+                        name="email" 
+                        placeholder="Enter your email"
+                        required
+                    >
+                </div>
+
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input 
+                        type="password" 
+                        id="password" 
+                        name="password" 
+                        placeholder="Enter your password"
+                        required
+                    >
+                </div>
+
+                <button type="submit" class="btn-gold auth-submit">
+                    Login
+                </button>
+
+                <p class="form-message" id="loginMessage"></p>
+
+            </form>
+
+            <p class="auth-switch">
+                Don't have an account?
+                <a href="signup.html">Sign up</a>
+            </p>
+
+        </section>
+    </main>
+
+    <script src="auth.js"></script>
+
+    <script>
+        const loginForm = document.getElementById("loginForm");
+        const loginMessage = document.getElementById("loginMessage");
+        const loginSuccessMessage = document.getElementById("loginSuccessMessage");
+
+        const savedMessage = sessionStorage.getItem("loginMessage");
+
+        if (savedMessage) {
+            loginSuccessMessage.textContent = savedMessage;
+            sessionStorage.removeItem("loginMessage");
+        }
+
+        loginForm.addEventListener("submit", async function(event) {
+            event.preventDefault();
+
+            loginMessage.textContent = "";
+            loginMessage.className = "form-message";
+
+            const email = document.getElementById("email").value.trim();
+            const password = document.getElementById("password").value;
+
+            try {
+                const response = await fetch("/api/login", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({
+                        email: email,
+                        password: password
+                    })
+                });
+
+                const data = await response.json();
+
+                if (!response.ok) {
+                    loginMessage.textContent = data.message || data.error || "Login failed. Please check your details.";
+                    loginMessage.classList.add("error-message");
+                    return;
+                }
+
+                localStorage.setItem("token", data.token);
+                localStorage.setItem("user", JSON.stringify(data.user));
+
+                window.location.href = "index.html";
+
+            } catch (error) {
+                loginMessage.textContent = "Server error. Please try again later.";
+                loginMessage.classList.add("error-message");
+            }
+        });
+    </script>
+
+</body>
+</html>

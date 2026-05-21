@@ -1,239 +1,320 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="UTF-8">
 
-  <title>Karthificial</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <link rel="stylesheet" href="style.css" />
+    <title>karthificial</title>
+
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-  <!-- NAVBAR -->
-  <header class="navbar">
-    <div class="nav-container">
+    <!-- ================================
+         NAVBAR
+    ================================= -->
 
-      <!-- Logo -->
-      <div class="logo">
-        <div class="logo-box">TN</div>
-        <div>
-          <h2>TN EduPlatform</h2>
-          <p>State Board Excellence</p>
+    <nav class="navbar">
+        <div class="navbar-inner">
+
+            <!-- Logo -->
+            <a href="index.html" class="logo">
+                <div class="logo-mark">TN</div>
+                <div class="logo-text">Karthif<span>icial</span></div>
+            </a>
+
+            <!-- Mobile Toggle -->
+            <input type="checkbox" id="menu-toggle" class="menu-toggle">
+
+            <!-- Hamburger Icon -->
+            <label for="menu-toggle" class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </label>
+
+            <!-- Navigation Links -->
+            <ul class="nav-menu">
+                <li>
+                    <a href="index.html" class="nav-link">Home</a>
+                </li>
+
+                <li class="dropdown">
+                    <a href="#" class="nav-link">Notes</a>
+
+                    <ul class="dropdown-menu">
+                        <li><a href="notes-10th.html">10th Standard</a></li>
+                        <li><a href="notes-12th.html">12th Standard</a></li>
+                    </ul>
+                </li>
+
+                <li class="dropdown">
+                    <a href="#" class="nav-link">Question Papers</a>
+
+                    <ul class="dropdown-menu">
+                        <li><a href="papers-10th.html">10th Standard</a></li>
+                        <li><a href="papers-12th.html">12th Standard</a></li>
+                    </ul>
+                </li>
+
+                <li>
+                    <a href="contact.html" class="nav-link">Contact</a>
+                </li>
+
+                <li>
+                    <a href="career-guidance.html" class="nav-link">Career Guidance</a>
+                </li>
+
+                <!-- Mobile Login Buttons -->
+                <li class="mobile-actions">
+                    <a href="login.html" class="btn-outline">Login</a>
+                    <a href="signup.html" class="btn-gold">Signup</a>
+                </li>
+            </ul>
+
+            <!-- Desktop Login Buttons -->
+            <div class="nav-actions">
+                <a href="login.html" class="btn-outline">Login</a>
+                <a href="signup.html" class="btn-gold">Signup</a>
+            </div>
+
         </div>
-      </div>
+    </nav>
 
-      <!-- Desktop Links -->
-      <nav class="nav-links">
+    <!-- ================================
+         MAIN CONTENT
+    ================================= -->
 
-        <a href="#">Home</a>
+    <main>
 
-        <div class="dropdown">
-          <a href="#">Notes ▾</a>
-          <div class="dropdown-menu">
-            <a href="#">10th Notes</a>
-            <a href="#">12th Notes</a>
-          </div>
+        <!-- ================================
+             LOGO HERO SECTION
+        ================================= -->
+
+        <section class="home-hero">
+            <div class="container hero-content">
+
+                <img src="logo.png" alt="TN EduPlatform Logo" class="hero-logo">
+
+                <p class="hero-tagline">
+                    Excellence in Tamil Nadu State Board Education
+                </p>
+
+                <div class="hero-buttons">
+                    <a href="notes-10th.html" class="btn-gold">Explore Notes</a>
+                    <a href="signup.html" class="btn-outline">Join Free</a>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- ================================
+             PHOTO SLIDER SECTION
+        ================================= -->
+
+        <section class="slider-section">
+            <div class="container">
+
+                <div class="slider">
+
+                    <div class="slides">
+
+                        <div class="slide active">
+                            <img 
+                                src="https://placehold.co/1100x400/111111/D4AF37?text=Premium+Notes+For+10th+and+12th"
+                                alt="Premium Notes Banner"
+                            >
+                        </div>
+
+                        <div class="slide">
+                            <img 
+                                src="https://placehold.co/1100x400/111111/D4AF37?text=Past+Question+Papers"
+                                alt="Past Question Papers Banner"
+                            >
+                        </div>
+
+                        <div class="slide">
+                            <img 
+                                src="https://placehold.co/1100x400/111111/D4AF37?text=Career+Guidance+For+Students"
+                                alt="Career Guidance Banner"
+                            >
+                        </div>
+
+                    </div>
+
+                    <!-- Slider Arrows -->
+                    <button class="slider-btn prev-btn" aria-label="Previous Slide">
+                        &#10094;
+                    </button>
+
+                    <button class="slider-btn next-btn" aria-label="Next Slide">
+                        &#10095;
+                    </button>
+
+                    <!-- Dot Indicators -->
+                    <div class="slider-dots">
+                        <button class="dot active" aria-label="Go to slide 1"></button>
+                        <button class="dot" aria-label="Go to slide 2"></button>
+                        <button class="dot" aria-label="Go to slide 3"></button>
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+
+        <!-- ================================
+             ABOUT SECTION
+        ================================= -->
+
+        <section class="about-section">
+            <div class="container">
+
+                <h2 class="section-heading">
+                    What is TN EduPlatform?
+                </h2>
+
+                <p class="about-text">
+                    TN EduPlatform is an educational website created for Tamil Nadu
+                    State Board 10th and 12th standard students. It provides organized
+                    notes, previous question papers, subject resources, and career
+                    guidance in one clean learning platform.
+                </p>
+
+                <div class="feature-grid">
+
+                    <div class="card feature-card">
+                        <div class="feature-icon">📘</div>
+                        <h3>Curated Notes</h3>
+                        <p>
+                            Well-arranged notes for important subjects, made simple
+                            for quick revision and exam preparation.
+                        </p>
+                    </div>
+
+                    <div class="card feature-card">
+                        <div class="feature-icon">📄</div>
+                        <h3>Past Question Papers</h3>
+                        <p>
+                            Access previous year question papers to understand exam
+                            patterns, repeated questions, and important topics.
+                        </p>
+                    </div>
+
+                    <div class="card feature-card">
+                        <div class="feature-icon">🎯</div>
+                        <h3>Career Guidance</h3>
+                        <p>
+                            Helpful guidance for students to choose courses, careers,
+                            and next steps after school.
+                        </p>
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+
+        <!-- ================================
+             STATS SECTION
+        ================================= -->
+
+        <section class="stats-section" id="stats">
+            <div class="container">
+
+                <h2 class="section-heading">
+                    Our Growing Learning Network
+                </h2>
+
+                <div class="stats-grid">
+
+                    <div class="card stat-box">
+                        <h3>
+                            <span class="counter" data-target="500">0</span>+
+                        </h3>
+                        <p>Notes</p>
+                    </div>
+
+                    <div class="card stat-box">
+                        <h3>
+                            <span class="counter" data-target="200">0</span>+
+                        </h3>
+                        <p>Question Papers</p>
+                    </div>
+
+                    <div class="card stat-box">
+                        <h3>
+                            <span class="counter" data-target="10">0</span>+
+                        </h3>
+                        <p>Subjects</p>
+                    </div>
+
+                    <div class="card stat-box">
+                        <h3>
+                            <span class="counter" data-target="1000">0</span>+
+                        </h3>
+                        <p>Students</p>
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+
+    </main>
+
+    <!-- ================================
+         FOOTER
+    ================================= -->
+
+    <footer class="footer">
+        <div class="container footer-grid">
+
+            <!-- Brand Column -->
+            <div class="footer-brand">
+                <h2>TN EduPlatform</h2>
+                <p>
+                    Excellence in Tamil Nadu State Board Education.
+                    Premium notes, question papers, and career guidance for
+                    10th and 12th standard students.
+                </p>
+            </div>
+
+            <!-- Quick Links Column -->
+            <div class="footer-column">
+                <h3>Quick Links</h3>
+
+                <ul class="footer-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="notes-10th.html">10th Notes</a></li>
+                    <li><a href="notes-12th.html">12th Notes</a></li>
+                    <li><a href="papers-10th.html">10th Question Papers</a></li>
+                    <li><a href="papers-12th.html">12th Question Papers</a></li>
+                    <li><a href="career-guidance.html">Career Guidance</a></li>
+                </ul>
+            </div>
+
+            <!-- Contact Column -->
+            <div class="footer-column footer-contact">
+                <h3>Contact Info</h3>
+
+                <p>Email: support@tneduplatform.com</p>
+                <p>Location: Tamil Nadu, India</p>
+                <p>For: 10th & 12th State Board Students</p>
+            </div>
+
         </div>
 
-        <div class="dropdown">
-          <a href="#">Question Papers ▾</a>
-          <div class="dropdown-menu">
-            <a href="#">10th Papers</a>
-            <a href="#">12th Papers</a>
-          </div>
+        <div class="container footer-bottom">
+            <p>
+                © 2026 TN EduPlatform. All rights reserved.
+            </p>
         </div>
+    </footer>
 
-        <a href="#">Contact</a>
-        <a href="#">Career Guidance</a>
+    <script src="script.js"></script>
+    <script src="auth.js"></script>
 
-      </nav>
-
-      <!-- Buttons -->
-      <div class="nav-buttons">
-        <a href="#" class="outline-btn">Login</a>
-        <a href="#" class="gold-btn">Signup</a>
-      </div>
-
-      <!-- Mobile Menu Button -->
-      <button class="menu-btn" onclick="toggleMenu()">☰</button>
-    </div>
-
-    <!-- Mobile Menu -->
-    <div class="mobile-menu" id="mobileMenu">
-      <a href="#">Home</a>
-      <a href="#">10th Notes</a>
-      <a href="#">12th Notes</a>
-      <a href="#">10th Papers</a>
-      <a href="#">12th Papers</a>
-      <a href="#">Contact</a>
-      <a href="#">Career Guidance</a>
-
-      <div class="mobile-buttons">
-        <a href="#" class="outline-btn">Login</a>
-        <a href="#" class="gold-btn">Signup</a>
-      </div>
-    </div>
-  </header>
-
-  <!-- HERO SECTION -->
-  <section class="hero">
-    <div class="hero-content">
-      <p class="small-title">Tamil Nadu State Board Learning</p>
-
-      <h1>Premium Notes, Papers & Guidance for Serious Students</h1>
-
-      <p class="hero-text">
-        TN EduPlatform helps 10th and 12th students prepare with structured notes,
-        previous question papers, and career guidance.
-      </p>
-
-      <div class="hero-buttons">
-        <a href="#" class="gold-btn">Start Learning</a>
-        <a href="#" class="outline-btn">View Papers</a>
-      </div>
-    </div>
-  </section>
-
-  <!-- SUBJECT SECTION -->
-  <section class="section">
-    <div class="section-heading">
-      <p>Subjects</p>
-      <h2>Choose Your Learning Path</h2>
-      <span>
-        Explore organized subject materials designed for Tamil Nadu board students.
-      </span>
-    </div>
-
-    <div class="card-container">
-
-      <div class="subject-card">
-        <div class="icon">📘</div>
-        <p class="standard">10th Standard</p>
-        <h3>Mathematics</h3>
-        <p>
-          Chapter-wise formulas, important sums, and exam-focused explanations.
-        </p>
-        <a href="#">Explore Subject →</a>
-      </div>
-
-      <div class="subject-card">
-        <div class="icon">🔬</div>
-        <p class="standard">10th Standard</p>
-        <h3>Science</h3>
-        <p>
-          Simple notes for physics, chemistry, and biology with important points.
-        </p>
-        <a href="#">Explore Subject →</a>
-      </div>
-
-      <div class="subject-card">
-        <div class="icon">📊</div>
-        <p class="standard">12th Standard</p>
-        <h3>Commerce</h3>
-        <p>
-          Accounts, economics, and business studies materials for board preparation.
-        </p>
-        <a href="#">Explore Subject →</a>
-      </div>
-
-    </div>
-  </section>
-
-  <!-- BLOG SECTION -->
-  <section class="section dark-section">
-    <div class="section-heading">
-      <p>Guidance</p>
-      <h2>Latest Student Resources</h2>
-      <span>
-        Smart preparation tips, exam strategies, and career guidance.
-      </span>
-    </div>
-
-    <div class="card-container">
-
-      <div class="blog-card">
-        <div class="blog-image">TN EduPlatform</div>
-        <div class="blog-content">
-          <span class="tag">Exam Tips</span>
-          <h3>How to Prepare for TN Board Exams Effectively</h3>
-          <p>
-            A practical study method for students who want better marks without confusion.
-          </p>
-          <a href="#">Read More →</a>
-        </div>
-      </div>
-
-      <div class="blog-card">
-        <div class="blog-image">Career</div>
-        <div class="blog-content">
-          <span class="tag">Career</span>
-          <h3>Best Career Options After 12th in Tamil Nadu</h3>
-          <p>
-            Understand degree choices, professional courses, and skill-based paths.
-          </p>
-          <a href="#">Read More →</a>
-        </div>
-      </div>
-
-      <div class="blog-card">
-        <div class="blog-image">Notes</div>
-        <div class="blog-content">
-          <span class="tag">Notes</span>
-          <h3>How to Use Notes for Quick Revision</h3>
-          <p>
-            Learn how to revise faster using summaries and important questions.
-          </p>
-          <a href="#">Read More →</a>
-        </div>
-      </div>
-
-    </div>
-  </section>
-
-  <!-- FOOTER -->
-  <footer class="footer">
-    <div class="footer-container">
-
-      <div>
-        <h2>TN <span>EduPlatform</span></h2>
-        <p>
-          Premium learning support for Tamil Nadu state board students.
-        </p>
-      </div>
-
-      <div>
-        <h3>Quick Links</h3>
-        <a href="#">Home</a>
-        <a href="#">10th Notes</a>
-        <a href="#">12th Notes</a>
-        <a href="#">Question Papers</a>
-      </div>
-
-      <div>
-        <h3>Contact</h3>
-        <p>Email: support@tneduplatform.com</p>
-        <p>Location: Tamil Nadu, India</p>
-        <p>Support: Mon - Sat</p>
-      </div>
-
-      <div>
-        <h3>Social</h3>
-        <div class="social-icons">
-          <a href="#">F</a>
-          <a href="#">I</a>
-          <a href="#">Y</a>
-          <a href="#">L</a>
-        </div>
-      </div>
-
-    </div>
-
-    <div class="copyright">
-      © 2026 TN EduPlatform. All rights reserved.
-    </div>
-  </footer>
-
-  <script src="script.js"></script>
 </body>
 </html>

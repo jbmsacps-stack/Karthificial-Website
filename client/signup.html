@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Sign Up | TN EduPlatform</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- ================================
+         NAVBAR
+    ================================= -->
+
+    <nav class="navbar">
+        <div class="navbar-inner">
+
+            <a href="index.html" class="logo">
+                <div class="logo-mark">TN</div>
+                <div class="logo-text">Edu<span>Platform</span></div>
+            </a>
+
+            <input type="checkbox" id="menu-toggle" class="menu-toggle">
+
+            <label for="menu-toggle" class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </label>
+
+            <ul class="nav-menu">
+                <li><a href="index.html" class="nav-link">Home</a></li>
+
+                <li class="dropdown">
+                    <a href="#" class="nav-link">Notes</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="notes-10th.html">10th Standard</a></li>
+                        <li><a href="notes-12th.html">12th Standard</a></li>
+                    </ul>
+                </li>
+
+                <li class="dropdown">
+                    <a href="#" class="nav-link">Question Papers</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="papers-10th.html">10th Standard</a></li>
+                        <li><a href="papers-12th.html">12th Standard</a></li>
+                    </ul>
+                </li>
+
+                <li><a href="contact.html" class="nav-link">Contact</a></li>
+                <li><a href="career-guidance.html" class="nav-link">Career Guidance</a></li>
+
+                <li class="mobile-actions auth-mobile-actions">
+                    <a href="login.html" class="btn-outline">Login</a>
+                    <a href="signup.html" class="btn-gold">Signup</a>
+                </li>
+            </ul>
+
+            <div class="nav-actions auth-actions">
+                <a href="login.html" class="btn-outline">Login</a>
+                <a href="signup.html" class="btn-gold">Signup</a>
+            </div>
+
+        </div>
+    </nav>
+
+    <!-- ================================
+         SIGNUP SECTION
+    ================================= -->
+
+    <main class="auth-page">
+        <section class="auth-card">
+
+            <h1>Create Account</h1>
+
+            <p class="auth-subtitle">
+                Join TN EduPlatform and start learning with premium resources.
+            </p>
+
+            <form id="signupForm">
+
+                <div class="form-group">
+                    <label for="fullName">Full Name</label>
+                    <input 
+                        type="text" 
+                        id="fullName" 
+                        name="fullName" 
+                        placeholder="Enter your full name"
+                        required
+                    >
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input 
+                        type="email" 
+                        id="email" 
+                        name="email" 
+                        placeholder="Enter your email"
+                        required
+                    >
+                </div>
+
+                <div class="form-group">
+                    <label for="studentClass">Class</label>
+                    <select id="studentClass" name="studentClass" required>
+                        <option value="">Select your class</option>
+                        <option value="10th">10th Standard</option>
+                        <option value="12th">12th Standard</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input 
+                        type="password" 
+                        id="password" 
+                        name="password" 
+                        placeholder="Create password"
+                        required
+                    >
+                </div>
+
+                <div class="form-group">
+                    <label for="confirmPassword">Confirm Password</label>
+                    <input 
+                        type="password" 
+                        id="confirmPassword" 
+                        name="confirmPassword" 
+                        placeholder="Confirm password"
+                        required
+                    >
+                    <small class="field-error" id="passwordError"></small>
+                </div>
+
+                <button type="submit" class="btn-gold auth-submit">
+                    Sign Up
+                </button>
+
+                <p class="form-message" id="signupMessage"></p>
+
+            </form>
+
+            <p class="auth-switch">
+                Already have an account?
+                <a href="login.html">Login</a>
+            </p>
+
+        </section>
+    </main>
+
+    <script src="auth.js"></script>
+
+    <script>
+        const signupForm = document.getElementById("signupForm");
+        const passwordError = document.getElementById("passwordError");
+        const signupMessage = document.getElementById("signupMessage");
+
+        signupForm.addEventListener("submit", async function(event) {
+            event.preventDefault();
+
+            passwordError.textContent = "";
+            signupMessage.textContent = "";
+            signupMessage.className = "form-message";
+
+            const fullName = document.getElementById("fullName").value.trim();
+            const email = document.getElementById("email").value.trim();
+            const studentClass = document.getElementById("studentClass").value;
+            const password = document.getElementById("password").value;
+            const confirmPassword = document.getElementById("confirmPassword").value;
+
+            if (password !== confirmPassword) {
+                passwordError.textContent = "Passwords do not match.";
+                return;
+            }
+
+            try {
+                const response = await fetch("/api/signup", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({
+                        fullName: fullName,
+                        email: email,
+                        password: password,
+                        studentClass: studentClass
+                    })
+                });
+
+                const data = await response.json();
+
+                if (!response.ok) {
+                    signupMessage.textContent = data.message || data.error || "Signup failed. Please try again.";
+                    signupMessage.classList.add("error-message");
+                    return;
+                }
+
+                sessionStorage.setItem("loginMessage", "Account created! Please login.");
+                window.location.href = "login.html";
+
+            } catch (error) {
+                signupMessage.textContent = "Server error. Please try again later.";
+                signupMessage.classList.add("error-message");
+            }
+        });
+    </script>
+
+</body>
+</html>
