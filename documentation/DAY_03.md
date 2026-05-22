@@ -9,11 +9,17 @@
 ## Problems Faced
 - Github errors and website errors
 - Hard time finding fonts and icons which suits the project
-- 
+- Duplicated found
+- Got our documentation(this file too T-T)
+- Didn't get our expected output
+- Got our source code mixed
 
 ## How We Fixed It
-- decision making and team work
+- Consistency and repetition of trying the word
 
 ## What We Learned
-- basic skeleton
-- prompting of a website using Claude
+- Website Structure and planning in Figma
+- Learnt SQL
+- Experienced Debugging
+- Teamwork in github
+
