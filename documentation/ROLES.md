@@ -8,8 +8,6 @@
 
 ---
 
-## Detailed Responsibilities
-
 ### Joshua Baskar PG  
 **Role:** Project Manager, Frontend Developer, Integration Coordinator
 
