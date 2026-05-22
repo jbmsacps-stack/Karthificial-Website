@@ -98,7 +98,6 @@ img {
 
 .btn-gold:hover {
     color: var(--black);
-    transform: translateY(-2px);
     box-shadow: 0 8px 22px var(--shadow-gold);
 }
 
@@ -117,7 +116,6 @@ img {
 .btn-outline:hover {
     background-color: var(--gold);
     color: var(--black);
-    transform: translateY(-2px);
     box-shadow: 0 8px 22px var(--shadow-gold);
 }
 
@@ -158,9 +156,8 @@ img {
 }
 
 .card:hover {
-    transform: translateY(-6px);
+    background-color: #d4af370e;
     border-color: var(--gold);
-    box-shadow: 0 16px 40px var(--shadow-gold);
 }
 
 /* ================================
@@ -361,7 +358,6 @@ img {
 
 .footer-links a:hover {
     color: var(--gold);
-    padding-left: 4px;
 }
 
 .footer-contact p {
