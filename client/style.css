@@ -208,10 +208,25 @@ img {
     font-weight: 800;
     color: var(--white);
     letter-spacing: 0.5px;
+    font-family: "Science Gothic", sans-serif;
+    font-optical-sizing: auto;
+    font-size: 1.25rem;
+    font-style: normal;
+    font-variation-settings:
+        "slnt" 0,
+        "wdth" 66.9,
+        "CTRS" 32;
 }
 
 .logo-text span {
     color: var(--gold);
+    font-family: "Science Gothic", sans-serif;
+    font-optical-sizing: auto;
+    font-style: normal;
+    font-variation-settings:
+        "slnt" 0,
+        "wdth" 66.9,
+        "CTRS" 32;
 }
 
 /* Navigation */
@@ -406,7 +421,7 @@ img {
         display: none;
     }
 
-    .menu-toggle:checked ~ .nav-menu {
+    .menu-toggle:checked~.nav-menu {
         display: flex;
     }
 

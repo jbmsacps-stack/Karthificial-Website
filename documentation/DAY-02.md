@@ -1,18 +1,20 @@
 # Day 02 - 21/05/26
 
 ## Work Done Today
-- Github creation for members without it
-- Collaboration the repository with everyone
+- discussion with the client
+- did the skeleton with the help of AI for reference
+- generated prompt
 
 ## Problems Faced
-- some one push a different website into the repo and couldn't pull the website
+- hard time thinking for the output and ai errors
+- deleted some implementation which didn't work
 
 ## How I Fixed It
-- after deleting that file the problem was fixed as we weren't looking at the right place
+- decision making and team work
 
 ## What I Learned
-- How to link a repo
-- How to push and pull
+- basic skeleton
+- prompting of a website using Claude
 
 ## Next Plan
-- discussing the structure
+- deciding the features and font and icons and layout

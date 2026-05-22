@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
 
@@ -8,9 +9,14 @@
     <title>Sign Up | TN EduPlatform</title>
 
     <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Science+Gothic:wdth,wght,CTRS@66.9,100..900,32&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&icon_names=chess" />
 </head>
+
 <body>
 
     <!-- ================================
@@ -23,7 +29,7 @@
             <!-- Logo -->
             <a href="index.html" class="logo">
                 <div class="logo-mark"><span class="material-symbols-outlined">chess</span></div>
-                <div class="logo-text">karthi<span>ficial</span></div>
+                <div class="logo-text">Karthi<span>ficial</span></div>
             </a>
 
             <!-- Mobile Toggle -->
@@ -102,24 +108,12 @@
 
                 <div class="form-group">
                     <label for="fullName">Full Name</label>
-                    <input 
-                        type="text" 
-                        id="fullName" 
-                        name="fullName" 
-                        placeholder="Enter your full name"
-                        required
-                    >
+                    <input type="text" id="fullName" name="fullName" placeholder="Enter your full name" required>
                 </div>
 
                 <div class="form-group">
                     <label for="email">Email</label>
-                    <input 
-                        type="email" 
-                        id="email" 
-                        name="email" 
-                        placeholder="Enter your email"
-                        required
-                    >
+                    <input type="email" id="email" name="email" placeholder="Enter your email" required>
                 </div>
 
                 <div class="form-group">
@@ -133,24 +127,13 @@
 
                 <div class="form-group">
                     <label for="password">Password</label>
-                    <input 
-                        type="password" 
-                        id="password" 
-                        name="password" 
-                        placeholder="Create password"
-                        required
-                    >
+                    <input type="password" id="password" name="password" placeholder="Create password" required>
                 </div>
 
                 <div class="form-group">
                     <label for="confirmPassword">Confirm Password</label>
-                    <input 
-                        type="password" 
-                        id="confirmPassword" 
-                        name="confirmPassword" 
-                        placeholder="Confirm password"
-                        required
-                    >
+                    <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Confirm password"
+                        required>
                     <small class="field-error" id="passwordError"></small>
                 </div>
 
@@ -178,7 +161,7 @@
         const passwordError = document.getElementById("passwordError");
         const signupMessage = document.getElementById("signupMessage");
 
-        signupForm.addEventListener("submit", async function(event) {
+        signupForm.addEventListener("submit", async function (event) {
             event.preventDefault();
 
             passwordError.textContent = "";
@@ -229,4 +212,5 @@
     </script>
 
 </body>
+
 </html>
