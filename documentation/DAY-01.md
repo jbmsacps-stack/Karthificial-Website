@@ -7,10 +7,10 @@
 ## Problems Faced
 - some one push a different website into the repo and couldn't pull the website
 
-## How I Fixed It
+## How We Fixed It
 - after deleting that file the problem was fixed as we weren't looking at the right place
 
-## What I Learned
+## What We Learned
 - How to link a repo
 - How to push and pull
 

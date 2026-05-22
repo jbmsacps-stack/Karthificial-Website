@@ -9,10 +9,10 @@
 - hard time thinking for the output and ai errors
 - deleted some implementation which didn't work
 
-## How I Fixed It
+## How We Fixed It
 - decision making and team work
 
-## What I Learned
+## What We Learned
 - basic skeleton
 - prompting of a website using Claude
 
