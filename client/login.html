@@ -8,6 +8,8 @@
     <title>Login | TN EduPlatform</title>
 
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&icon_names=chess" />
 </head>
 <body>
 
@@ -18,24 +20,31 @@
     <nav class="navbar">
         <div class="navbar-inner">
 
+            <!-- Logo -->
             <a href="index.html" class="logo">
-                <div class="logo-mark">TN</div>
-                <div class="logo-text">Edu<span>Platform</span></div>
+                <div class="logo-mark"><span class="material-symbols-outlined">chess</span></div>
+                <div class="logo-text">karthi<span>ficial</span></div>
             </a>
 
+            <!-- Mobile Toggle -->
             <input type="checkbox" id="menu-toggle" class="menu-toggle">
 
+            <!-- Hamburger Icon -->
             <label for="menu-toggle" class="hamburger">
                 <span></span>
                 <span></span>
                 <span></span>
             </label>
 
+            <!-- Navigation Links -->
             <ul class="nav-menu">
-                <li><a href="index.html" class="nav-link">Home</a></li>
+                <li>
+                    <a href="index.html" class="nav-link">Home</a>
+                </li>
 
                 <li class="dropdown">
                     <a href="#" class="nav-link">Notes</a>
+
                     <ul class="dropdown-menu">
                         <li><a href="notes-10th.html">10th Standard</a></li>
                         <li><a href="notes-12th.html">12th Standard</a></li>
@@ -44,22 +53,31 @@
 
                 <li class="dropdown">
                     <a href="#" class="nav-link">Question Papers</a>
+
                     <ul class="dropdown-menu">
                         <li><a href="papers-10th.html">10th Standard</a></li>
                         <li><a href="papers-12th.html">12th Standard</a></li>
                     </ul>
                 </li>
 
-                <li><a href="contact.html" class="nav-link">Contact</a></li>
-                <li><a href="career-guidance.html" class="nav-link">Career Guidance</a></li>
+                <li>
+                    <a href="career-guidance.html" class="nav-link">Career Guidance</a>
+                </li>
 
-                <li class="mobile-actions auth-mobile-actions">
+                <li>
+                    <a href="contact.html" class="nav-link">Contact</a>
+                </li>
+
+
+                <!-- Mobile Login Buttons -->
+                <li class="mobile-actions">
                     <a href="login.html" class="btn-outline">Login</a>
                     <a href="signup.html" class="btn-gold">Signup</a>
                 </li>
             </ul>
 
-            <div class="nav-actions auth-actions">
+            <!-- Desktop Login Buttons -->
+            <div class="nav-actions">
                 <a href="login.html" class="btn-outline">Login</a>
                 <a href="signup.html" class="btn-gold">Signup</a>
             </div>
