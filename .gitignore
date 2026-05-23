@@ -1,1 +1,4 @@
 ROLES.md
+.env
+application.properties
+application.yml
