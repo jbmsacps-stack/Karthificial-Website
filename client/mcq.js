@@ -1,51 +1,157 @@
-let questions = [];
+let questions = [
+
+    {
+        question: "Who is the CM of Tamil Nadu?",
+        options: [
+            "Joseph Vijay",
+            "M.K. Stalin",
+            "Narendra Modi",
+            "Rajinikanth"
+        ],
+        answer: "Joseph Vijay"
+    },
+
+    {
+        question: "What is the National Animal of India?",
+        options: [
+            "Lion",
+            "Elephant",
+            "Tiger",
+            "Leopard"
+        ],
+        answer: "Tiger"
+    },
+
+    {
+        question: "Who is the hero of Karuppu?",
+        options: [
+            "Ajith",
+            "Vijay",
+            "Suriya",
+            "Dhanush"
+        ],
+        answer: "Suriya"
+    },
+
+    {
+        question: "What is OOPS?",
+        options: [
+            "Object Oriented Programming Language",
+            "Only Operating Program",
+            "Object Operating Python System",
+            "Open Object Processing System"
+        ],
+        answer: "Object Oriented Programming Language"
+    },
+
+    {
+        question: "Which planet is known as the Red Planet?",
+        options: [
+            "Earth",
+            "Mars",
+            "Venus",
+            "Jupiter"
+        ],
+        answer: "Mars"
+    },
+
+    {
+        question: "What is the capital of Tamil Nadu?",
+        options: [
+            "Madurai",
+            "Chennai",
+            "Trichy",
+            "Salem"
+        ],
+        answer: "Chennai"
+    },
+
+    {
+        question: "Which language is used for web page styling?",
+        options: [
+            "Java",
+            "Python",
+            "CSS",
+            "C++"
+        ],
+        answer: "CSS"
+    },
+
+    {
+        question: "Which data structure follows FIFO?",
+        options: [
+            "Stack",
+            "Queue",
+            "Tree",
+            "Graph"
+        ],
+        answer: "Queue"
+    },
+
+    {
+        question: "Who invented Java?",
+        options: [
+            "James Gosling",
+            "Bill Gates",
+            "Elon Musk",
+            "Mark Zuckerberg"
+        ],
+        answer: "James Gosling"
+    },
+
+    {
+        question: "Which gas do plants absorb?",
+        options: [
+            "Oxygen",
+            "Hydrogen",
+            "Carbon Dioxide",
+            "Nitrogen"
+        ],
+        answer: "Carbon Dioxide"
+    }
+
+];
+
 let userAnswers = [];
 
-fetch("http://localhost:8080/api/mcq")
-.then(response => response.json())
-.then(data => {
+const mcqContainer = document.getElementById("mcqQuestions");
 
-    questions = data;
+questions.forEach((q, index) => {
 
-    const mcqContainer = document.getElementById("mcqQuestions");
+    let questionHTML = `
+        <div class="question-box">
 
-    data.forEach((q, index) => {
+            <div class="question">
+                ${index + 1}. ${q.question}
+            </div>
+    `;
 
-        let questionHTML = `
-            <div class="question-box">
+    q.options.forEach(option => {
 
-                <div class="question">
-                    ${index + 1}. ${q.question}
-                </div>
+        questionHTML += `
+            <label class="option" id="q${index}-${option}">
+
+                <input
+                    type="radio"
+                    name="question${index}"
+                    value="${option}"
+                    onchange="saveAnswer(${index}, '${option}')"
+                >
+
+                ${option}
+
+            </label>
         `;
-
-        q.options.forEach(option => {
-
-            questionHTML += `
-                <label class="option">
-
-                    <input
-                        type="radio"
-                        name="question${index}"
-                        value="${option}"
-                        onchange="saveAnswer(${index}, '${option}')"
-                    >
-
-                    ${option}
-
-                </label>
-            `;
-        });
-
-        questionHTML += `</div>`;
-
-        mcqContainer.innerHTML += questionHTML;
-
     });
 
-})
-.catch(error => {
-    console.log("Error fetching MCQ data:", error);
+    questionHTML += `
+        <div class="answer-box" id="answer${index}"></div>
+    `;
+
+    questionHTML += `</div>`;
+
+    mcqContainer.innerHTML += questionHTML;
+
 });
 
 function saveAnswer(index, answer){
@@ -58,10 +164,33 @@ function submitMCQ(){
 
     questions.forEach((q, index) => {
 
-        if(userAnswers[index] === q.answer){
+        let correctAnswer = q.answer;
+        let userAnswer = userAnswers[index];
+
+        const answerBox = document.getElementById(`answer${index}`);
+
+        if(userAnswer === correctAnswer){
+
             score++;
+
+            document.getElementById(`q${index}-${correctAnswer}`)
+                .style.background = "green";
+
+        } else {
+
+            if(userAnswer){
+
+                document.getElementById(`q${index}-${userAnswer}`)
+                    .style.background = "red";
+            }
+
+            document.getElementById(`q${index}-${correctAnswer}`)
+                .style.background = "green";
         }
 
+        answerBox.innerHTML = `
+            Correct Answer: <b>${correctAnswer}</b>
+        `;
     });
 
     document.getElementById("result").innerHTML =
