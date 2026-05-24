@@ -17,6 +17,217 @@
         rel="stylesheet">
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&icon_names=chess" />
+    <style>
+        /* ================================
+       CAREER GUIDANCE PAGE FIX
+    ================================ */
+
+        .career-path-section {
+            padding: 70px 8%;
+            background:
+                radial-gradient(circle at top left, rgba(212, 175, 55, 0.08), transparent 35%),
+                linear-gradient(180deg, #080808, #050505);
+        }
+
+        .career-path-section .section-heading {
+            display: block;
+            text-align: center;
+            margin: 0 auto 42px;
+        }
+
+        .career-path-section .section-heading::after {
+            display: none;
+        }
+
+        .career-path-section .section-heading h2 {
+            color: var(--gold);
+            font-size: clamp(2rem, 4vw, 3rem);
+            margin-bottom: 12px;
+        }
+
+        .career-path-section .section-heading p {
+            max-width: 720px;
+            margin: 0 auto;
+            color: #cfcfcf;
+            line-height: 1.7;
+        }
+
+        .career-blog-grid {
+            width: min(1150px, 100%);
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 26px;
+        }
+
+        .career-blog-card {
+            position: relative;
+            isolation: isolate;
+            display: block;
+            overflow: hidden;
+            min-height: 100%;
+            background:
+                linear-gradient(180deg, #141414, #090909);
+            border: 1px solid rgba(212, 175, 55, 0.25);
+            border-radius: 22px;
+            text-decoration: none;
+            color: inherit;
+            box-shadow:
+                0 18px 45px rgba(0, 0, 0, 0.45),
+                inset 0 0 35px rgba(212, 175, 55, 0.02);
+            transition:
+                border-color 0.35s ease,
+                box-shadow 0.35s ease,
+                background 0.35s ease;
+        }
+
+        .career-blog-card:hover {
+            border-color: var(--gold);
+            background:
+                linear-gradient(180deg, #1a1a1a, #080808);
+            box-shadow:
+                0 0 0 1px rgba(212, 175, 55, 0.28),
+                0 0 32px rgba(212, 175, 55, 0.16),
+                0 24px 60px rgba(0, 0, 0, 0.65),
+                inset 0 0 42px rgba(212, 175, 55, 0.04);
+        }
+
+        .career-blog-card img {
+            width: 100%;
+            height: 210px;
+            object-fit: cover;
+            display: block;
+            transform-origin: center;
+            filter: brightness(0.85) contrast(1.08);
+            transition:
+                transform 0.45s ease,
+                filter 0.45s ease;
+        }
+
+        .career-blog-card:hover img {
+            transform: scale(1.06);
+            filter: brightness(0.68) contrast(1.18) saturate(1.08);
+        }
+
+        .career-blog-content {
+            padding: 24px;
+        }
+
+        .career-blog-tag {
+            display: inline-block;
+            margin-bottom: 12px;
+            padding: 6px 11px;
+            border: 1px solid rgba(212, 175, 55, 0.35);
+            border-radius: 999px;
+            color: var(--gold);
+            background: rgba(212, 175, 55, 0.08);
+            font-size: 0.76rem;
+            font-weight: 800;
+            letter-spacing: 0.6px;
+            text-transform: uppercase;
+        }
+
+        .career-blog-content h3 {
+            color: #ffffff;
+            font-size: 1.25rem;
+            line-height: 1.35;
+            margin-bottom: 12px;
+        }
+
+        .career-blog-content p {
+            color: #c9c9c9;
+            font-size: 0.95rem;
+            line-height: 1.7;
+            margin-bottom: 18px;
+        }
+
+        .read-more {
+            display: inline-block;
+            color: var(--gold);
+            font-size: 0.95rem;
+            font-weight: 800;
+            letter-spacing: 0.3px;
+        }
+
+        .career-blog-card:hover .read-more {
+            color: #f2cf5b;
+            text-shadow: 0 0 14px rgba(212, 175, 55, 0.45);
+        }
+
+        /* ================================
+       FINAL NOTE
+    ================================ */
+
+        .career-final-note {
+            width: min(950px, 90%);
+            margin: 20px auto 80px;
+            padding: 38px 32px;
+            text-align: center;
+            background:
+                radial-gradient(circle at top, rgba(212, 175, 55, 0.13), transparent 45%),
+                linear-gradient(180deg, #141414, #080808);
+            border: 1px solid rgba(212, 175, 55, 0.35);
+            border-radius: 24px;
+            box-shadow:
+                0 24px 60px rgba(0, 0, 0, 0.55),
+                inset 0 0 40px rgba(212, 175, 55, 0.035);
+        }
+
+        .career-final-note h2 {
+            color: var(--gold);
+            font-size: clamp(1.6rem, 4vw, 2.3rem);
+            margin-bottom: 14px;
+        }
+
+        .career-final-note p {
+            max-width: 760px;
+            margin: 0 auto;
+            color: #d0d0d0;
+            line-height: 1.8;
+        }
+
+        /* ================================
+       RESPONSIVE
+    ================================ */
+
+        @media (max-width: 768px) {
+            .career-path-section {
+                padding: 55px 6%;
+            }
+
+            .career-blog-grid {
+                grid-template-columns: 1fr;
+                gap: 22px;
+            }
+
+            .career-blog-card img {
+                height: 190px;
+            }
+
+            .career-blog-content {
+                padding: 21px;
+            }
+
+            .career-final-note {
+                padding: 30px 22px;
+                margin-bottom: 65px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .career-path-section .section-heading h2 {
+                font-size: 1.8rem;
+            }
+
+            .career-blog-card img {
+                height: 175px;
+            }
+
+            .career-blog-content h3 {
+                font-size: 1.15rem;
+            }
+        }
+    </style>
 </head>
 
 <body>
@@ -97,89 +308,145 @@
     </nav>
 
     <main>
-        <section class="career-blog-section">
+
+        <!-- HERO SECTION -->
+        <section class="career-hero">
+            <h1>Career Guidance</h1>
+            <p>
+                Career Guidance for 10th and 12th students. Understand what group to choose,
+                what difficulties you may face, what degree options are available, and what
+                mindset is needed to build a better future.
+            </p>
+        </section>
+
+        <!-- FEATURED GUIDE -->
+        <section class="featured-career-guide">
+            <div class="featured-content">
+                <span class="career-blog-tag">Start Here</span>
+
+                <h2>Confused After 10th or 12th?</h2>
+
+                <p>
+                    Many students choose their group or degree because of friends, family pressure,
+                    marks, or fear. This guide helps you think clearly before choosing your path.
+                </p>
+
+                <a href="after-10th-group-selection.html" class="featured-btn">
+                    Read Student Guide
+                </a>
+            </div>
+
+            <div class="featured-image">
+                <img src="images/career-guidance.jpg" alt="Career Guidance for Students">
+            </div>
+        </section>
+
+        <!-- STUDENT GUIDANCE SECTION -->
+        <section class="career-path-section">
+            <div class="section-heading">
+                <h2>Choose Your Path</h2>
+                <p>
+                    Simple guidance for students who are confused about what to choose after 10th or 12th.
+                </p>
+            </div>
+
             <div class="career-blog-grid">
 
-                <a href="blogs/software-developer.html" class="career-blog-card">
-                    <img src="images/software-developer.jpg" alt="Software Developer Career">
+                <a href="after-10th.html" class="career-blog-card" data-category="after10">
+                    <img src="images/after-10th.jpg" alt="After 10th Guidance">
+
                     <div class="career-blog-content">
-                        <span class="career-blog-tag">IT Career</span>
-                        <h3>How to Become a Software Developer</h3>
+                        <span class="career-blog-tag">After 10th</span>
+                        <h3>What Should I Choose After 10th?</h3>
                         <p>
-                            Learn the basic skills, projects, and learning path needed to start a career in software
-                            development.
+                            Understand Science, Commerce, Computer Science, and Arts in a simple way before choosing
+                            your group.
                         </p>
-                        <span class="read-more">Read More →</span>
+                        <span class="read-more">Explore →</span>
                     </div>
                 </a>
 
-                <a href="blogs/web-development.html" class="career-blog-card">
-                    <img src="images/web-development.jpg" alt="Web Development Career">
-                    <div class="career-blog-content">
-                        <span class="career-blog-tag">Web Development</span>
-                        <h3>Web Development Roadmap for Students</h3>
-                        <p>
-                            Understand how to learn HTML, CSS, JavaScript, backend, database, and hosting in the correct
-                            order.
-                        </p>
-                        <span class="read-more">Read More →</span>
-                    </div>
-                </a>
+                <a href="after-12th.html" class="career-blog-card" data-category="after12">
+                    <img src="images/after-12th.jpg" alt="After 12th Guidance">
 
-                <a href="blogs/after-12th.html" class="career-blog-card">
-                    <img src="images/after-12th.jpg" alt="Career After 12th">
                     <div class="career-blog-content">
                         <span class="career-blog-tag">After 12th</span>
-                        <h3>Best Career Options After 12th</h3>
+                        <h3>What Should I Study After 12th?</h3>
                         <p>
-                            Explore degree choices, job-oriented courses, entrance exams, and practical career paths
-                            after 12th standard.
+                            Learn how to choose a degree based on your interest, marks, family situation, and future
+                            goals.
                         </p>
-                        <span class="read-more">Read More →</span>
+                        <span class="read-more">Explore →</span>
                     </div>
                 </a>
 
-                <a href="blogs/study-skills.html" class="career-blog-card">
-                    <img src="images/study-skills.jpg" alt="Study Skills">
+                <a href="group-selection.html" class="career-blog-card" data-category="group">
+                    <img src="images/group-selection.jpg" alt="Group Selection Guidance">
+
                     <div class="career-blog-content">
-                        <span class="career-blog-tag">Student Advice</span>
-                        <h3>How to Build Strong Study Skills</h3>
+                        <span class="career-blog-tag">Group Selection</span>
+                        <h3>How to Choose the Right Group?</h3>
                         <p>
-                            Learn simple methods to improve focus, manage time, revise properly, and prepare better for
-                            exams.
+                            Do not choose a group only because of friends. Learn what difficulty each group has before
+                            deciding.
                         </p>
-                        <span class="read-more">Read More →</span>
+                        <span class="read-more">Explore →</span>
                     </div>
                 </a>
 
-                <a href="blogs/communication-skills.html" class="career-blog-card">
-                    <img src="images/communication-skills.jpg" alt="Communication Skills">
+                <a href="degree-selection.html" class="career-blog-card" data-category="degree">
+                    <img src="images/degree-selection.jpg" alt="Degree Selection Guidance">
+
                     <div class="career-blog-content">
-                        <span class="career-blog-tag">Soft Skills</span>
-                        <h3>Why Communication Skills Matter</h3>
+                        <span class="career-blog-tag">Degree Choice</span>
+                        <h3>How to Choose the Right Degree?</h3>
                         <p>
-                            Good communication helps students perform better in interviews, group discussions,
-                            presentations, and teamwork.
+                            A degree should match your interest, skill, and career plan. Learn how to choose without
+                            confusion.
                         </p>
-                        <span class="read-more">Read More →</span>
+                        <span class="read-more">Explore →</span>
                     </div>
                 </a>
 
-                <a href="blogs/resume-building.html" class="career-blog-card">
-                    <img src="images/resume-building.jpg" alt="Resume Building">
+                <a href="student-mindset.html" class="career-blog-card" data-category="mindset">
+                    <img src="images/student-mindset.jpg" alt="Student Mindset Guidance">
+
                     <div class="career-blog-content">
-                        <span class="career-blog-tag">Job Preparation</span>
-                        <h3>How to Build Your First Resume</h3>
+                        <span class="career-blog-tag">Student Mindset</span>
+                        <h3>Mindset Needed for Your Future</h3>
                         <p>
-                            A beginner-friendly guide to writing a clean resume with skills, education, projects, and
-                            achievements.
+                            Marks are important, but discipline, confidence, communication, and consistency matter too.
                         </p>
-                        <span class="read-more">Read More →</span>
+                        <span class="read-more">Explore →</span>
+                    </div>
+                </a>
+
+                <a href="career-mistakes.html" class="career-blog-card" data-category="mistakes">
+                    <img src="images/career-mistakes.jpg" alt="Career Mistakes Students Should Avoid">
+
+                    <div class="career-blog-content">
+                        <span class="career-blog-tag">Avoid Mistakes</span>
+                        <h3>Common Career Mistakes Students Make</h3>
+                        <p>
+                            Avoid choosing blindly, copying friends, ignoring skills, and thinking marks alone decide
+                            your life.
+                        </p>
+                        <span class="read-more">Explore →</span>
                     </div>
                 </a>
 
             </div>
         </section>
+
+        <!-- FINAL NOTE -->
+        <section class="career-final-note">
+            <h2>Simple Advice for Students</h2>
+            <p>
+                Do not panic about your future. Choose step by step. First understand yourself,
+                then understand the course, then build the skills needed for your goal.
+            </p>
+        </section>
+
     </main>
 
     <footer class="footer">
@@ -230,6 +497,47 @@
 
     <script src="script.js"></script>
     <script src="auth.js"></script>
+    <script>
+        const searchInput = document.getElementById("careerSearch");
+        const filterButtons = document.querySelectorAll(".filter-btn");
+        const blogCards = document.querySelectorAll(".career-blog-card");
+
+        let activeFilter = "all";
+
+        filterButtons.forEach(button => {
+            button.addEventListener("click", () => {
+                filterButtons.forEach(btn => btn.classList.remove("active"));
+                button.classList.add("active");
+
+                activeFilter = button.dataset.filter;
+                filterBlogs();
+            });
+        });
+
+        searchInput.addEventListener("input", filterBlogs);
+
+        function filterBlogs() {
+            const searchValue = searchInput.value.toLowerCase();
+
+            blogCards.forEach(card => {
+                const title = card.querySelector("h3").textContent.toLowerCase();
+                const text = card.querySelector("p").textContent.toLowerCase();
+                const category = card.dataset.category;
+
+                const matchesSearch =
+                    title.includes(searchValue) || text.includes(searchValue);
+
+                const matchesFilter =
+                    activeFilter === "all" || category === activeFilter;
+
+                if (matchesSearch && matchesFilter) {
+                    card.style.display = "block";
+                } else {
+                    card.style.display = "none";
+                }
+            });
+        }
+    </script>
 
 </body>
 

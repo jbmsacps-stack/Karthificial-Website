@@ -23,7 +23,6 @@
     <!-- ================================
          NAVBAR
     ================================= -->
-
     <nav class="navbar">
         <div class="navbar-inner">
 
@@ -95,8 +94,74 @@
 
         </div>
     </nav>
+    <main class="contact-wheel-main">
 
+        <section class="contact-wheel-layout">
 
+            <div class="wheel-intro">
+                <span>Contact Hub</span>
+                <h1>Choose a Contact Option</h1>
+                <p>Hover an icon to view the details.</p>
+            </div>
+
+            <div class="contact-wheel">
+
+                <div class="wheel-center">
+                    <span id="centerMini">Contact Hub</span>
+                    <div id="centerSymbol">♞</div>
+                    <h2 id="centerTitle">Hover an Icon</h2>
+                    <h3 id="centerValue">Select a contact option</h3>
+                    <p id="centerText">
+                        Move your cursor over an icon to preview the contact details.
+                    </p>
+                </div>
+
+                <a href="mailto:yourmail@example.com" class="wheel-item item-1" data-label="Email" data-symbol="✉"
+                    data-title="Official Email" data-value="yourmail@example.com"
+                    data-text="Use this for doubts, feedback, and official contact.">
+                    <span>✉</span>
+                    <small>Email</small>
+                </a>
+
+                <a href="https://wa.me/0000000000" class="wheel-item item-2" data-label="WhatsApp" data-symbol="☏"
+                    data-title="WhatsApp" data-value="+91 00000 00000"
+                    data-text="Use this for quick support and direct contact.">
+                    <span>☏</span>
+                    <small>WhatsApp</small>
+                </a>
+
+                <a href="https://t.me/username" class="wheel-item item-3" data-label="Telegram" data-symbol="✈"
+                    data-title="Telegram" data-value="@username"
+                    data-text="Use this for updates, resources, and announcements.">
+                    <span>✈</span>
+                    <small>Telegram</small>
+                </a>
+
+                <a href="https://youtube.com/@channelname" class="wheel-item item-4" data-label="YouTube"
+                    data-symbol="▷" data-title="YouTube" data-value="@channelname"
+                    data-text="Use this for videos, explanations, and guidance content.">
+                    <span>▷</span>
+                    <small>YouTube</small>
+                </a>
+
+                <a href="#" class="wheel-item item-5" data-label="Instagram" data-symbol="⌾" data-title="Instagram"
+                    data-value="@profile_name" data-text="Use this for posts, updates, and student announcements.">
+                    <span>⌾</span>
+                    <small>Instagram</small>
+                </a>
+
+                <a href="#" class="wheel-item item-6" data-label="Other" data-symbol="⌘" data-title="Other Profile"
+                    data-value="Add profile here"
+                    data-text="Use this for GitHub, LinkedIn, or any other official link.">
+                    <span>⌘</span>
+                    <small>Other</small>
+                </a>
+
+            </div>
+
+        </section>
+
+    </main>
 
     <footer class="footer">
         <div class="container footer-grid">
@@ -146,6 +211,47 @@
 
     <script src="script.js"></script>
     <script src="auth.js"></script>
+    <script>
+        const wheelItems = document.querySelectorAll(".wheel-item");
+
+        const centerMini = document.getElementById("centerMini");
+        const centerSymbol = document.getElementById("centerSymbol");
+        const centerTitle = document.getElementById("centerTitle");
+        const centerValue = document.getElementById("centerValue");
+        const centerText = document.getElementById("centerText");
+
+        const defaultCenter = {
+            mini: "Contact Hub",
+            symbol: "♞",
+            title: "Hover an Icon",
+            value: "Select a contact option",
+            text: "Move your cursor over an icon to preview the contact details."
+        };
+
+        function updateCenter(item) {
+            centerMini.textContent = item.dataset.label;
+            centerSymbol.textContent = item.dataset.symbol;
+            centerTitle.textContent = item.dataset.title;
+            centerValue.textContent = item.dataset.value;
+            centerText.textContent = item.dataset.text;
+        }
+
+        function resetCenter() {
+            centerMini.textContent = defaultCenter.mini;
+            centerSymbol.textContent = defaultCenter.symbol;
+            centerTitle.textContent = defaultCenter.title;
+            centerValue.textContent = defaultCenter.value;
+            centerText.textContent = defaultCenter.text;
+        }
+
+        wheelItems.forEach(item => {
+            item.addEventListener("mouseenter", () => updateCenter(item));
+            item.addEventListener("focus", () => updateCenter(item));
+
+            item.addEventListener("mouseleave", resetCenter);
+            item.addEventListener("blur", resetCenter);
+        });
+    </script>
 
 </body>
 
