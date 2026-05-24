@@ -1166,3 +1166,75 @@ img {
         padding: 10px 12px;
     }
 }
+/* mcq section start from here */
+.mcq-container{
+    max-width: 800px;
+    margin: 40px auto;
+    padding: 25px;
+    background: #111;
+    border-radius: 12px;
+    border: 1px solid gold;
+}
+
+.mcq-title{
+    text-align: center;
+    color: gold;
+    margin-bottom: 30px;
+    font-size: 36px;
+}
+
+.question-box{
+    margin-bottom: 30px;
+    padding: 20px;
+    background: #1b1b1b;
+    border-radius: 10px;
+}
+
+.question{
+    font-size: 20px;
+    margin-bottom: 15px;
+    color: white;
+}
+
+.option{
+    background: #222;
+    padding: 12px;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    transition: 0.3s;
+    cursor: pointer;
+}
+
+.option:hover{
+    background: gold;
+    color: black;
+}
+
+.option input{
+    margin-right: 10px;
+}
+
+.submit-btn{
+    width: 100%;
+    padding: 15px;
+    background: gold;
+    color: black;
+    border: none;
+    border-radius: 8px;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.submit-btn:hover{
+    background: white;
+}
+
+#result{
+    margin-top: 25px;
+    text-align: center;
+    font-size: 28px;
+    color: gold;
+    font-weight: bold;
+}
