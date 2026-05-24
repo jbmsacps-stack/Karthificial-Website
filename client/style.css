@@ -1032,6 +1032,7 @@ img {
 
 .resource-box-card:hover .resource-thumbnail span {
     transform: scale(0.95);
+    transition: transform 0.35s ease;
 }
 
 .resource-card-body {
