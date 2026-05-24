@@ -991,8 +991,10 @@ img {
 
 .resource-card-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(240px, 280px));
     gap: 24px;
+    justify-content: start;
+    align-items: stretch;
 }
 
 .resource-box-card {
