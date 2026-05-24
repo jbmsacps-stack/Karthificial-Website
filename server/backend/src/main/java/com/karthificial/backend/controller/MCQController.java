@@ -1,52 +1,53 @@
 package com.karthificial.backend.controller;
 
+import com.karthificial.backend.dto.McqSubmitRequest;
+import com.karthificial.backend.dto.McqSubmitResponse;
+import com.karthificial.backend.model.McqAttempt;
+import com.karthificial.backend.repository.McqAttemptRepository;
+import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
-import java.util.*;
+
+import java.util.Map;
 
 @RestController
 @RequestMapping("/api/mcq")
-@CrossOrigin(origins = "*")
-public class MCQController {
+public class McqController {
 
-    @GetMapping
-    public List<Map<String, Object>> getMCQQuestions() {
+    private final McqAttemptRepository mcqAttemptRepository;
 
-        List<Map<String, Object>> questions = new ArrayList<>();
+    public McqController(McqAttemptRepository mcqAttemptRepository) {
+        this.mcqAttemptRepository = mcqAttemptRepository;
+    }
 
-        Map<String, Object> q1 = new HashMap<>();
-        q1.put("question", "What is HTML?");
-        q1.put("options", Arrays.asList(
-                "Programming Language",
-                "Markup Language",
-                "Database",
-                "Operating System"
-        ));
-        q1.put("answer", "Markup Language");
+    @PostMapping("/submit")
+    public McqSubmitResponse submitMcq(@Valid @RequestBody McqSubmitRequest request) {
 
-        Map<String, Object> q2 = new HashMap<>();
-        q2.put("question", "Which language is used for styling?");
-        q2.put("options", Arrays.asList(
-                "Java",
-                "Python",
-                "CSS",
-                "C++"
-        ));
-        q2.put("answer", "CSS");
+        McqAttempt attempt = new McqAttempt();
+        attempt.setMcqSet(request.getMcqSet());
+        attempt.setScore(request.getScore());
+        attempt.setCorrectCount(request.getCorrectCount());
+        attempt.setWrongCount(request.getWrongCount());
+        attempt.setTimeTakenSeconds(request.getTimeTakenSeconds());
 
-        Map<String, Object> q3 = new HashMap<>();
-        q3.put("question", "Which is used for backend?");
-        q3.put("options", Arrays.asList(
-                "Spring Boot",
-                "HTML",
-                "CSS",
-                "Photoshop"
-        ));
-        q3.put("answer", "Spring Boot");
+        mcqAttemptRepository.save(attempt);
 
-        questions.add(q1);
-        questions.add(q2);
-        questions.add(q3);
+        long completedCount = mcqAttemptRepository.countByMcqSet(request.getMcqSet());
 
-        return questions;
+        return new McqSubmitResponse(
+                true,
+                "MCQ attempt saved successfully",
+                completedCount
+        );
+    }
+
+    @GetMapping("/stats/{mcqSet}")
+    public Map<String, Object> getStats(@PathVariable String mcqSet) {
+        long completedCount = mcqAttemptRepository.countByMcqSet(mcqSet);
+
+        return Map.of(
+                "success", true,
+                "mcqSet", mcqSet,
+                "completedCount", completedCount
+        );
     }
 }

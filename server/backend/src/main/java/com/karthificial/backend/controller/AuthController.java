@@ -4,14 +4,11 @@ import com.karthificial.backend.dto.AuthResponse;
 import com.karthificial.backend.dto.LoginRequest;
 import com.karthificial.backend.dto.SignupRequest;
 import com.karthificial.backend.service.AuthService;
-import org.springframework.http.ResponseEntity;
+import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Map;
-
 @RestController
-@CrossOrigin(origins = "*")
-@RequestMapping("/api")
+@RequestMapping("/api/auth")
 public class AuthController {
 
     private final AuthService authService;
@@ -21,26 +18,12 @@ public class AuthController {
     }
 
     @PostMapping("/signup")
-    public ResponseEntity<?> signup(@RequestBody SignupRequest request) {
-        try {
-            Map<String, String> response = authService.signup(request);
-            return ResponseEntity.ok(response);
-        } catch (RuntimeException error) {
-            return ResponseEntity.badRequest().body(
-                    Map.of("message", error.getMessage())
-            );
-        }
+    public AuthResponse signup(@Valid @RequestBody SignupRequest request) {
+        return authService.signup(request);
     }
 
     @PostMapping("/login")
-    public ResponseEntity<?> login(@RequestBody LoginRequest request) {
-        try {
-            AuthResponse response = authService.login(request);
-            return ResponseEntity.ok(response);
-        } catch (RuntimeException error) {
-            return ResponseEntity.badRequest().body(
-                    Map.of("message", error.getMessage())
-            );
-        }
+    public AuthResponse login(@Valid @RequestBody LoginRequest request) {
+        return authService.login(request);
     }
 }

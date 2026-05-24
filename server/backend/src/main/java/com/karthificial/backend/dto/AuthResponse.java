@@ -1,22 +1,44 @@
 package com.karthificial.backend.dto;
 
-import java.util.Map;
-
 public class AuthResponse {
 
-    private String token;
-    private Map<String, Object> user;
+    private boolean success;
+    private String message;
+    private Long userId;
+    private String fullName;
+    private String email;
+    private String studentClass;
 
-    public AuthResponse(String token, Map<String, Object> user) {
-        this.token = token;
-        this.user = user;
+    public AuthResponse(boolean success, String message, Long userId, String fullName, String email, String studentClass) {
+        this.success = success;
+        this.message = message;
+        this.userId = userId;
+        this.fullName = fullName;
+        this.email = email;
+        this.studentClass = studentClass;
     }
 
-    public String getToken() {
-        return token;
+    public boolean isSuccess() {
+        return success;
     }
 
-    public Map<String, Object> getUser() {
-        return user;
+    public String getMessage() {
+        return message;
+    }
+
+    public Long getUserId() {
+        return userId;
+    }
+
+    public String getFullName() {
+        return fullName;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public String getStudentClass() {
+        return studentClass;
     }
 }
