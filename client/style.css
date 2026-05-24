@@ -1272,7 +1272,6 @@ img {
 /* SUBTLE CELEBRATION EFFECT */
 
 .submit-btn::after{
-    content: "✦ ✦ ✦";
     position: absolute;
     right: 15px;
     top: 50%;
@@ -1285,7 +1284,6 @@ img {
 /* CLICK CELEBRATION */
 
 .submit-btn:active::before{
-    content: "🎉 ✨ 🎊";
     position: absolute;
     left: 50%;
     top: 50%;
