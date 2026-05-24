@@ -1174,48 +1174,46 @@ img {
     max-width: 850px;
     margin: 40px auto;
     padding: 30px;
-    background: linear-gradient(145deg, #111, #1a1a1a);
-    border-radius: 18px;
-    border: 2px solid gold;
-    box-shadow: 0 0 25px rgba(255, 215, 0, 0.3);
-    animation: fadeIn 1s ease;
+    background: #121212;
+    border-radius: 16px;
+    border: 1px solid rgba(255, 215, 0, 0.4);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+    animation: fadeIn 0.6s ease;
 }
 
 /* TITLE */
 
 .mcq-title{
     text-align: center;
-    color: gold;
+    color: #f5c542;
     margin-bottom: 35px;
-    font-size: 42px;
-    font-weight: bold;
-    letter-spacing: 2px;
-    text-shadow: 0 0 12px gold;
+    font-size: 38px;
+    font-weight: 700;
+    letter-spacing: 1px;
 }
 
 /* QUESTION BOX */
 
 .question-box{
-    margin-bottom: 30px;
-    padding: 25px;
-    background: #1b1b1b;
-    border-radius: 15px;
-    border-left: 5px solid gold;
-    transition: 0.3s;
-    animation: slideUp 0.5s ease;
+    margin-bottom: 28px;
+    padding: 24px;
+    background: #1a1a1a;
+    border-radius: 14px;
+    border-left: 4px solid #d4af37;
+    transition: 0.3s ease;
 }
 
 .question-box:hover{
-    transform: translateY(-5px);
-    box-shadow: 0 0 18px rgba(255, 215, 0, 0.25);
+    transform: translateY(-2px);
+    background: #1f1f1f;
 }
 
 /* QUESTION */
 
 .question{
-    font-size: 22px;
+    font-size: 21px;
     margin-bottom: 18px;
-    color: white;
+    color: #ffffff;
     font-weight: 600;
     line-height: 1.5;
 }
@@ -1225,29 +1223,27 @@ img {
 .option{
     display: flex;
     align-items: center;
-    background: #222;
-    padding: 15px;
-    border-radius: 12px;
+    background: #242424;
+    padding: 14px;
+    border-radius: 10px;
     margin-bottom: 12px;
-    transition: all 0.3s ease;
+    transition: 0.25s ease;
     cursor: pointer;
     border: 1px solid transparent;
-    font-size: 17px;
-    color: white;
+    font-size: 16px;
+    color: #f2f2f2;
 }
 
 .option:hover{
-    background: gold;
-    color: black;
-    transform: scale(1.02);
-    border: 1px solid white;
+    background: #2e2e2e;
+    border-color: #d4af37;
 }
 
 /* RADIO BUTTON */
 
 .option input{
     margin-right: 12px;
-    transform: scale(1.2);
+    transform: scale(1.1);
     cursor: pointer;
 }
 
@@ -1256,66 +1252,66 @@ img {
 .submit-btn{
     width: 100%;
     padding: 16px;
-    background: linear-gradient(to right, gold, #ffcc00);
-    color: black;
+    background: #d4af37;
+    color: #111;
     border: none;
-    border-radius: 12px;
-    font-size: 20px;
-    font-weight: bold;
+    border-radius: 10px;
+    font-size: 18px;
+    font-weight: 700;
     cursor: pointer;
-    transition: 0.3s;
+    transition: 0.3s ease;
     position: relative;
     overflow: hidden;
 }
 
 .submit-btn:hover{
-    background: white;
-    transform: scale(1.02);
-    box-shadow: 0 0 20px gold;
+    background: #e5c158;
+    transform: translateY(-2px);
 }
 
-/* BUTTON FIREWORK EFFECT */
+/* SUBTLE CELEBRATION EFFECT */
 
-.submit-btn::before,
 .submit-btn::after{
-    content: "✨";
+    content: "✦ ✦ ✦";
     position: absolute;
-    font-size: 24px;
-    opacity: 0;
-    animation: sparkle 1.5s infinite;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 14px;
+    opacity: 0.7;
+    animation: sparkle 2s infinite;
 }
 
-.submit-btn::before{
-    left: 20%;
-    top: -10px;
-}
+/* CLICK CELEBRATION */
 
-.submit-btn::after{
-    right: 20%;
-    top: -10px;
-    animation-delay: 0.7s;
+.submit-btn:active::before{
+    content: "🎉 ✨ 🎊";
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 22px;
+    animation: celebrateBurst 0.6s ease;
+    pointer-events: none;
 }
 
 /* RESULT */
 
 #result{
-    margin-top: 30px;
+    margin-top: 28px;
     text-align: center;
-    font-size: 32px;
-    color: gold;
-    font-weight: bold;
-    text-shadow: 0 0 10px gold;
-    animation: pulse 1s infinite alternate;
+    font-size: 28px;
+    color: #f5c542;
+    font-weight: 700;
 }
 
 /* ANSWER BOX */
 
 .answer-box{
     margin-top: 14px;
-    font-size: 18px;
-    color: gold;
-    font-weight: bold;
-    padding-top: 10px;
+    font-size: 17px;
+    color: #d4af37;
+    font-weight: 600;
 }
 
 /* ANIMATIONS */
@@ -1323,48 +1319,43 @@ img {
 @keyframes fadeIn{
     from{
         opacity: 0;
-        transform: translateY(20px);
+        transform: translateY(15px);
     }
     to{
         opacity: 1;
         transform: translateY(0);
-    }
-}
-
-@keyframes slideUp{
-    from{
-        opacity: 0;
-        transform: translateY(30px);
-    }
-    to{
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-@keyframes pulse{
-    from{
-        transform: scale(1);
-    }
-    to{
-        transform: scale(1.05);
     }
 }
 
 @keyframes sparkle{
     0%{
+        opacity: 0.3;
+    }
+    50%{
+        opacity: 0.9;
+    }
+    100%{
+        opacity: 0.3;
+    }
+}
+
+/* BUTTON CELEBRATION ANIMATION */
+
+@keyframes celebrateBurst{
+
+    0%{
         opacity: 0;
-        transform: translateY(0) scale(0.5);
+        transform: translate(-50%, -50%) scale(0.5);
     }
 
-    50%{
+    40%{
         opacity: 1;
-        transform: translateY(-15px) scale(1.2);
+        transform: translate(-50%, -90%) scale(1.2);
     }
 
     100%{
         opacity: 0;
-        transform: translateY(-30px) scale(0.5);
+        transform: translate(-50%, -140%) scale(0.8);
     }
 }
 
@@ -1374,22 +1365,22 @@ img {
 
     .mcq-container{
         margin: 20px;
-        padding: 20px;
+        padding: 22px;
     }
 
     .mcq-title{
-        font-size: 32px;
+        font-size: 30px;
     }
 
     .question{
-        font-size: 19px;
+        font-size: 18px;
     }
 
     .option{
-        font-size: 16px;
+        font-size: 15px;
     }
 
     #result{
-        font-size: 26px;
+        font-size: 24px;
     }
 }
