@@ -21,7 +21,7 @@ signupForm.addEventListener("submit", async function (event) {
     }
 
     try {
-        const response = await fetch("/api/signup", {
+        const response = await fetch("http://localhost:8080/api/signup", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
@@ -46,7 +46,7 @@ signupForm.addEventListener("submit", async function (event) {
         window.location.href = "login.html";
 
     } catch (error) {
-        signupMessage.textContent = "Server error. Please try again later.";
+        signupMessage.textContent = "Backend server is not running or cannot be reached.";
         signupMessage.classList.add("error-message");
     }
 });

@@ -1,4 +1,14 @@
-ROLES.md
+# Secrets
 .env
 application.properties
 application.yml
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# Node / frontend
+node_modules/
