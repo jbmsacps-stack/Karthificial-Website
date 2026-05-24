@@ -996,6 +996,9 @@ img {
 }
 
 .resource-box-card {
+    display: block;
+    text-decoration: none;
+    color: inherit;
     background: #111;
     border: 1px solid rgba(212, 175, 55, 0.22);
     border-radius: 22px;
@@ -1006,7 +1009,7 @@ img {
 
 .resource-box-card:hover {
     transform: scale(1.01);
-    background: rgba(212, 175, 55, 0.072);
+    background: rgba(212, 175, 55, 0.067);
     border-color: rgba(212, 175, 55, 0.65);
     box-shadow: 0 18px 45px rgba(212, 175, 55, 0.13);
 }
@@ -1016,6 +1019,7 @@ img {
     display: grid;
     place-items: center;
     background: linear-gradient(135deg, #222, #3a2d08);
+    overflow: hidden;
 }
 
 .resource-thumbnail span {
@@ -1023,6 +1027,11 @@ img {
     font-size: 2.3rem;
     font-weight: 800;
     letter-spacing: 1px;
+    transition: transform 0.35s ease, opacity 0.35s ease;
+}
+
+.resource-box-card:hover .resource-thumbnail span {
+    transform: scale(0.95);
 }
 
 .resource-card-body {
