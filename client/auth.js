@@ -33,12 +33,12 @@ function isAdmin() {
 function logout() {
     localStorage.removeItem("token");
     localStorage.removeItem("user");
-    window.location.href = "login.html";
+    window.location.href = "index.html";
 }
 
 function requireAdmin() {
     if (!getToken() || !isAdmin()) {
-        window.location.href = "login.html";
+        window.location.href = "index.html";
     }
 }
 
@@ -88,29 +88,22 @@ function updateNavbarAuth() {
     }
 }
 
-document.addEventListener("DOMContentLoaded", updateNavbarAuth);
-
 /* ================================
-   PROTECT STUDENT PAGES
+   REDIRECT LOGGED-IN USERS FROM AUTH PAGES
 ================================ */
 
-function requireLoginForProtectedPages() {
-    const protectedPages = [
-        "notes-10th.html",
-        "notes-12th.html",
-        "papers-10th.html",
-        "papers-12th.html",
-        "test.html"
-    ];
-
+function redirectLoggedInUsersFromAuthPages() {
     const currentPage = window.location.pathname.split("/").pop();
 
-    if (protectedPages.includes(currentPage)) {
-        if (!getToken() || !getUser()) {
-            sessionStorage.setItem("loginMessage", "Please login to access this page.");
-            window.location.href = "login.html";
-        }
+    const authPages = [
+        "login.html",
+        "signup.html"
+    ];
+
+    if (authPages.includes(currentPage) && getToken() && getUser()) {
+        window.location.href = "index.html";
     }
 }
 
-document.addEventListener("DOMContentLoaded", requireLoginForProtectedPages);
+document.addEventListener("DOMContentLoaded", updateNavbarAuth);
+document.addEventListener("DOMContentLoaded", redirectLoggedInUsersFromAuthPages);
