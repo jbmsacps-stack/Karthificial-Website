@@ -1174,12 +1174,12 @@ img {
     padding: 25px;
     background: #111;
     border-radius: 12px;
-    border: 1px solid gold;
+    border: 1px solid var(--border-gold);
 }
 
 .mcq-title{
     text-align: center;
-    color: gold;
+    color: var(--gold);
     margin-bottom: 30px;
     font-size: 36px;
 }
@@ -1207,7 +1207,7 @@ img {
 }
 
 .option:hover{
-    background: gold;
+    background: var(--gold);
     color: black;
 }
 
@@ -1218,7 +1218,7 @@ img {
 .submit-btn{
     width: 100%;
     padding: 15px;
-    background: gold;
+    background: var(--gold);
     color: black;
     border: none;
     border-radius: 8px;
@@ -1229,13 +1229,13 @@ img {
 }
 
 .submit-btn:hover{
-    background: white;
+    background: var(--gold);
 }
 
 #result{
     margin-top: 25px;
     text-align: center;
     font-size: 28px;
-    color: gold;
+    color: var(--gold);
     font-weight: bold;
 }
