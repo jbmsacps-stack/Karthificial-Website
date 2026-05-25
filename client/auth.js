@@ -125,37 +125,6 @@ function redirectLoggedInUsersFromAuthPages() {
 document.addEventListener("DOMContentLoaded", updateNavbarAuth);
 document.addEventListener("DOMContentLoaded", redirectLoggedInUsersFromAuthPages);
 
-async function checkBackendStatus() {
-    let statusBox = document.querySelector("#backendStatus");
-
-    if (!statusBox) {
-        statusBox = document.createElement("p");
-        statusBox.id = "backendStatus";
-        statusBox.style.textAlign = "center";
-        statusBox.style.marginTop = "12px";
-        statusBox.style.fontWeight = "700";
-        statusBox.style.fontSize = "0.9rem";
-
-        const authCard = document.querySelector(".auth-card") || document.body;
-        authCard.appendChild(statusBox);
-    }
-
-    try {
-        const response = await fetch(`${API_BASE_URL}/health`);
-
-        if (response.ok) {
-            statusBox.textContent = "Backend online";
-            statusBox.style.color = "#6bff9c";
-        } else {
-            statusBox.textContent = "Backend error";
-            statusBox.style.color = "#ffcc66";
-        }
-    } catch (error) {
-        statusBox.textContent = "Cannot connect to backend. Make sure Spring Boot is running on port 8080.";
-        statusBox.style.color = "#ff6b6b";
-        console.error("Backend status error:", error);
-    }
-}
 
 document.addEventListener("DOMContentLoaded", checkBackendStatus);
 

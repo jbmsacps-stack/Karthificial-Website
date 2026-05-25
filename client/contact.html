@@ -13,7 +13,8 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="icon" type="image/svg+xml" href="https://fonts.gstatic.com/s/i/short-term/release/materialsymbolsoutlined/chess/default/24px.svg">
+    <link rel="icon" type="image/svg+xml"
+        href="https://fonts.gstatic.com/s/i/short-term/release/materialsymbolsoutlined/chess/default/24px.svg">
     <link href="https://fonts.googleapis.com/css2?family=Science+Gothic:wdth,wght,CTRS@66.9,100..900,32&display=swap"
         rel="stylesheet">
     <link rel="stylesheet"
@@ -29,7 +30,8 @@
 
             <!-- Logo -->
             <a href="index.html" class="logo">
-                <div class="logo-mark"><span class="material-symbols-outlined">chess</span></div>
+                <div class="logo-mark"><span class="material-symbols-outlined"><img src="assets/images/Favicon.png"
+                            alt="Favicon"></span></div>
                 <div class="logo-text">Karthi<span>ficial</span></div>
             </a>
 
@@ -95,6 +97,7 @@
 
         </div>
     </nav>
+
     <main class="contact-wheel-main">
 
         <section class="contact-wheel-layout">
@@ -109,7 +112,9 @@
 
                 <div class="wheel-center">
                     <span id="centerMini">Contact Hub</span>
-                    <div id="centerSymbol">♞</div>
+                    <div id="centerSymbol">
+                        <div class="logo-mark"><span><img src="assets/images/Favicon.png" alt="Favicon"></span></div>
+                    </div>
                     <h2 id="centerTitle">Hover an Icon</h2>
                     <h3 id="centerValue">Select a contact option</h3>
                     <p id="centerText">
@@ -213,46 +218,52 @@
     <script src="script.js"></script>
     <script src="auth.js"></script>
     <script>
-        const wheelItems = document.querySelectorAll(".wheel-item");
+    const wheelItems = document.querySelectorAll(".wheel-item");
 
-        const centerMini = document.getElementById("centerMini");
-        const centerSymbol = document.getElementById("centerSymbol");
-        const centerTitle = document.getElementById("centerTitle");
-        const centerValue = document.getElementById("centerValue");
-        const centerText = document.getElementById("centerText");
+    const centerMini = document.getElementById("centerMini");
+    const centerSymbol = document.getElementById("centerSymbol");
+    const centerTitle = document.getElementById("centerTitle");
+    const centerValue = document.getElementById("centerValue");
+    const centerText = document.getElementById("centerText");
 
-        const defaultCenter = {
-            mini: "Contact Hub",
-            symbol: "♞",
-            title: "Hover an Icon",
-            value: "Select a contact option",
-            text: "Move your cursor over an icon to preview the contact details."
-        };
+    const defaultCenter = {
+        mini: "Contact Hub",
+        symbolHTML: `
+            <div class="logo-mark">
+                <span>
+                    <img src="assets/images/Favicon.png" alt="Karthificial Logo">
+                </span>
+            </div>
+        `,
+        title: "Hover an Icon",
+        value: "Select a contact option",
+        text: "Move your cursor over an icon to preview the contact details."
+    };
 
-        function updateCenter(item) {
-            centerMini.textContent = item.dataset.label;
-            centerSymbol.textContent = item.dataset.symbol;
-            centerTitle.textContent = item.dataset.title;
-            centerValue.textContent = item.dataset.value;
-            centerText.textContent = item.dataset.text;
-        }
+    function updateCenter(item) {
+        centerMini.textContent = item.dataset.label;
+        centerSymbol.textContent = item.dataset.symbol;
+        centerTitle.textContent = item.dataset.title;
+        centerValue.textContent = item.dataset.value;
+        centerText.textContent = item.dataset.text;
+    }
 
-        function resetCenter() {
-            centerMini.textContent = defaultCenter.mini;
-            centerSymbol.textContent = defaultCenter.symbol;
-            centerTitle.textContent = defaultCenter.title;
-            centerValue.textContent = defaultCenter.value;
-            centerText.textContent = defaultCenter.text;
-        }
+    function resetCenter() {
+        centerMini.textContent = defaultCenter.mini;
+        centerSymbol.innerHTML = defaultCenter.symbolHTML;
+        centerTitle.textContent = defaultCenter.title;
+        centerValue.textContent = defaultCenter.value;
+        centerText.textContent = defaultCenter.text;
+    }
 
-        wheelItems.forEach(item => {
-            item.addEventListener("mouseenter", () => updateCenter(item));
-            item.addEventListener("focus", () => updateCenter(item));
+    wheelItems.forEach(item => {
+        item.addEventListener("mouseenter", () => updateCenter(item));
+        item.addEventListener("focus", () => updateCenter(item));
 
-            item.addEventListener("mouseleave", resetCenter);
-            item.addEventListener("blur", resetCenter);
-        });
-    </script>
+        item.addEventListener("mouseleave", resetCenter);
+        item.addEventListener("blur", resetCenter);
+    });
+</script>
 
 </body>
 
