@@ -5,8 +5,13 @@ import com.karthificial.backend.dto.LoginRequest;
 import com.karthificial.backend.dto.SignupRequest;
 import com.karthificial.backend.service.AuthService;
 import jakarta.validation.Valid;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.*;
 
+@CrossOrigin(origins = {
+    "http://127.0.0.1:3000",
+    "http://localhost:3000"
+})
 @RestController
 @RequestMapping("/api/auth")
 public class AuthController {
@@ -25,5 +30,10 @@ public class AuthController {
     @PostMapping("/login")
     public AuthResponse login(@Valid @RequestBody LoginRequest request) {
         return authService.login(request);
+    }
+
+    @GetMapping("/health")
+    public String health() {
+        return "Backend is running";
     }
 }
