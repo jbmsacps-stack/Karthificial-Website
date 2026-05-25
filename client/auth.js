@@ -1,6 +1,12 @@
-/* ================================
-   AUTH HELPER FUNCTIONS
-================================ */
+const API_BASE_URL = (() => {
+    // Local development backend URL. For deployment, change this one value only.
+    const localBackendUrl = "http://localhost:8080/api/auth";
+    const productionBackendUrl = "/api/auth";
+
+    return window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1"
+        ? localBackendUrl
+        : productionBackendUrl;
+})();
 
 function getToken() {
     return localStorage.getItem("token");
@@ -18,6 +24,12 @@ function getUser() {
     } catch (error) {
         return null;
     }
+}
+
+function getMessageBox() {
+    return document.querySelector("#authMessage")
+        || document.querySelector("#loginMessage")
+        || document.querySelector("#signupMessage");
 }
 
 function isAdmin() {
@@ -112,3 +124,168 @@ function redirectLoggedInUsersFromAuthPages() {
 
 document.addEventListener("DOMContentLoaded", updateNavbarAuth);
 document.addEventListener("DOMContentLoaded", redirectLoggedInUsersFromAuthPages);
+
+async function checkBackendStatus() {
+    let statusBox = document.querySelector("#backendStatus");
+
+    if (!statusBox) {
+        statusBox = document.createElement("p");
+        statusBox.id = "backendStatus";
+        statusBox.style.textAlign = "center";
+        statusBox.style.marginTop = "12px";
+        statusBox.style.fontWeight = "700";
+        statusBox.style.fontSize = "0.9rem";
+
+        const authCard = document.querySelector(".auth-card") || document.body;
+        authCard.appendChild(statusBox);
+    }
+
+    try {
+        const response = await fetch(`${API_BASE_URL}/health`);
+
+        if (response.ok) {
+            statusBox.textContent = "Backend online";
+            statusBox.style.color = "#6bff9c";
+        } else {
+            statusBox.textContent = "Backend error";
+            statusBox.style.color = "#ffcc66";
+        }
+    } catch (error) {
+        statusBox.textContent = "Cannot connect to backend. Make sure Spring Boot is running on port 8080.";
+        statusBox.style.color = "#ff6b6b";
+        console.error("Backend status error:", error);
+    }
+}
+
+document.addEventListener("DOMContentLoaded", checkBackendStatus);
+
+/* ================================
+   SIGNUP FORM HANDLER
+================================ */
+
+const signupForm = document.querySelector("#signupForm");
+
+if (signupForm) {
+    signupForm.addEventListener("submit", async function (event) {
+        event.preventDefault();
+
+        const fullName = document.querySelector("#fullName")?.value.trim();
+        const email = document.querySelector("#email")?.value.trim();
+        const password = document.querySelector("#password")?.value.trim();
+        const confirmPassword = document.querySelector("#confirmPassword")?.value.trim();
+        const studentClass = document.querySelector("#studentClass")?.value;
+
+        const messageBox = getMessageBox();
+
+        if (password !== confirmPassword) {
+            if (messageBox) {
+                messageBox.textContent = "Passwords do not match.";
+                messageBox.className = "form-message error-message";
+            }
+            return;
+        }
+
+        try {
+            const response = await fetch(`${API_BASE_URL}/signup`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    fullName,
+                    email,
+                    password,
+                    studentClass
+                })
+            });
+
+            const data = await response.json();
+
+            if (!response.ok) {
+                if (messageBox) {
+                    messageBox.textContent = data.message || "Signup failed.";
+                    messageBox.className = "form-message error-message";
+                }
+                return;
+            }
+
+            if (messageBox) {
+                messageBox.textContent = "Account created successfully. Please login.";
+                messageBox.className = "form-message success-message";
+            }
+
+            setTimeout(() => {
+                window.location.href = "login.html";
+            }, 1000);
+
+        } catch (error) {
+            if (messageBox) {
+                messageBox.textContent = "Cannot connect to backend. Make sure Spring Boot is running on port 8080.";
+                messageBox.className = "form-message error-message";
+            }
+            console.error("Signup error:", error);
+        }
+    });
+}
+
+/* ================================
+   LOGIN FORM HANDLER
+================================ */
+
+const loginForm = document.querySelector("#loginForm");
+
+if (loginForm) {
+    loginForm.addEventListener("submit", async function (event) {
+        event.preventDefault();
+
+        const email = document.querySelector("#email")?.value.trim();
+        const password = document.querySelector("#password")?.value.trim();
+
+        const messageBox = getMessageBox();
+
+        try {
+            const response = await fetch(`${API_BASE_URL}/login`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    email,
+                    password
+                })
+            });
+
+            const data = await response.json();
+
+            if (!response.ok) {
+                if (messageBox) {
+                    messageBox.textContent = data.message || "Login failed.";
+                    messageBox.className = "form-message error-message";
+                }
+                return;
+            }
+
+            localStorage.setItem("token", data.token || "");
+            localStorage.setItem("user", JSON.stringify(data.user || data));
+            localStorage.setItem("isLoggedIn", "true");
+
+            updateNavbarAuth();
+
+            if (messageBox) {
+                messageBox.textContent = "Login successful.";
+                messageBox.className = "form-message success-message";
+            }
+
+            setTimeout(() => {
+                window.location.href = "index.html";
+            }, 1000);
+
+        } catch (error) {
+            if (messageBox) {
+                messageBox.textContent = "Cannot connect to backend. Make sure Spring Boot is running on port 8080.";
+                messageBox.className = "form-message error-message";
+            }
+            console.error("Login error:", error);
+        }
+    });
+}
