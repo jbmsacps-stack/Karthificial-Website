@@ -21,7 +21,7 @@ signupForm.addEventListener("submit", async function (event) {
     }
 
     try {
-        const response = await fetch("http://localhost:8080/api/signup", {
+        const response = await fetch("http://localhost:8080/api/auth/signup", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
@@ -37,15 +37,23 @@ signupForm.addEventListener("submit", async function (event) {
         const data = await response.json();
 
         if (!response.ok) {
-            signupMessage.textContent = data.message || data.error || "Signup failed. Please try again.";
+            console.error("Signup failed response:", response.status, data);
+            signupMessage.textContent = data.message || "Signup failed. Please try again.";
             signupMessage.classList.add("error-message");
             return;
         }
 
+        if (data.success === false) {
+            console.error("Signup response indicates failure:", data);
+            signupMessage.textContent = data.message || "Signup failed. Please try again.";
+            signupMessage.classList.add("error-message");
+            return;
+        }
         sessionStorage.setItem("loginMessage", "Account created! Please login.");
         window.location.href = "login.html";
 
     } catch (error) {
+        console.error("Signup network error:", error);
         signupMessage.textContent = "Backend server is not running or cannot be reached.";
         signupMessage.classList.add("error-message");
     }

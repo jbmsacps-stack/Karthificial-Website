@@ -33,7 +33,12 @@ function isAdmin() {
 function logout() {
     localStorage.removeItem("token");
     localStorage.removeItem("user");
-    window.location.href = "index.html";
+    localStorage.removeItem("isLoggedIn");
+    window.location.href = "login.html";
+}
+
+function isLoggedIn() {
+    return localStorage.getItem("isLoggedIn") === "true" && getUser() !== null;
 }
 
 function requireAdmin() {
@@ -57,7 +62,7 @@ function updateNavbarAuth() {
         return;
     }
 
-    if (token && user) {
+    if (isLoggedIn() && user) {
         const userName = user.fullName || user.name || "Student";
 
         const loggedInHTML = `
@@ -100,7 +105,7 @@ function redirectLoggedInUsersFromAuthPages() {
         "signup.html"
     ];
 
-    if (authPages.includes(currentPage) && getToken() && getUser()) {
+    if (authPages.includes(currentPage) && isLoggedIn()) {
         window.location.href = "index.html";
     }
 }
