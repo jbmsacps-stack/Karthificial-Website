@@ -125,9 +125,6 @@ function redirectLoggedInUsersFromAuthPages() {
 document.addEventListener("DOMContentLoaded", updateNavbarAuth);
 document.addEventListener("DOMContentLoaded", redirectLoggedInUsersFromAuthPages);
 
-
-document.addEventListener("DOMContentLoaded", checkBackendStatus);
-
 /* ================================
    SIGNUP FORM HANDLER
 ================================ */
