@@ -1093,6 +1093,10 @@ img {
     background: linear-gradient(135deg, #5b3a1f, #d4af37);
 }
 
+.general-knowledge-bg {
+    background: linear-gradient(135deg, #242262, #881f94);
+}
+
 @media (max-width: 768px) {
     .resource-main {
         margin-top: 90px;
