@@ -13,3 +13,72 @@ Thumbs.db
 # Node / frontend
 node_modules/
 start.ps1
+
+# ================================
+# Build / Deployment Output
+# ================================
+deploy-folder/
+target/
+*.jar
+*.war
+*.ear
+
+# ================================
+# Maven
+# ================================
+.mvn/wrapper/maven-wrapper.jar
+
+# Keep Maven wrapper files if you use them
+!mvnw
+!mvnw.cmd
+!.mvn/wrapper/maven-wrapper.properties
+
+# ================================
+# Java / Spring Boot
+# ================================
+*.class
+*.log
+logs/
+spring.log
+
+# ================================
+# Environment / Secrets
+# ================================
+.env
+.env.*
+application-local.properties
+application-dev.properties
+application-prod.properties
+
+# Do NOT ignore main application.properties if it does not contain secrets
+# server/backend/src/main/resources/application.properties
+
+# ================================
+# IDE / Editor
+# ================================
+.vscode/
+.idea/
+*.iml
+
+# ================================
+# OS Files
+# ================================
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# ================================
+# Node / Frontend if ever used
+# ================================
+node_modules/
+dist/
+build/
+.cache/
+
+# ================================
+# Temporary / Backup Files
+# ================================
+*.bak
+*.tmp
+*.swp
+*.old
