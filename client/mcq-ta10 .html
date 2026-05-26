@@ -17,7 +17,7 @@
         rel="stylesheet">
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&icon_names=chess" />
-    <link rel="icon" type="image/svg+xml" href="assets/images/favi.svg?v=3">
+    <link rel="icon" type="image/svg+xml" href="assets/images/favi.svg?v=3">     
 </head>
 
 <body>
@@ -30,8 +30,7 @@
 
             <!-- Logo -->
             <a href="index.html" class="logo">
-                <div class="logo-mark"><span class="material-symbols-outlined"><img src="assets/images/Favicon.png"
-                            alt="Favicon" loading="lazy"></span></div>
+                <div class="logo-mark"><span class="material-symbols-outlined"><img src="assets/images/Favicon.png" alt="Favicon" loading="lazy"></span></div>
                 <div class="logo-text">Karthi<span>ficial</span></div>
             </a>
 
@@ -98,108 +97,20 @@
         </div>
     </nav>
 
-    <main class="resource-main">
+    <main>
+        <div class="mcq-container">
 
-        <section class="resource-hero-box">
-            <span class="resource-badge">Practice Zone</span>
+            <h1 class="mcq-title">MCQ Section</h1>
 
-            <h1>MCQ Section</h1>
+            <div id="mcqQuestions"></div>
 
-            <p>
-                Choose an MCQ set and start practicing with subject-wise questions.
-            </p>
-        </section>
+            <button class="submit-btn" onclick="submitMCQ()">
+                Submit Test
+            </button>
 
-        <section class="resource-toolbar">
-            <h2>Available MCQ Sets</h2>
-        </section>
+            <div id="result"></div>
 
-        <section class="resource-card-grid">
-
-            <article class="resource-box-card">
-                <div class="resource-thumbnail english-bg">
-                    <span>GK</span>
-                </div>
-
-                <div class="resource-card-body">
-                    <h3>General Knowledge MCQ</h3>
-
-                    <p>
-                        Improve your basic awareness with quick general knowledge questions.
-                    </p>
-
-                    <div class="resource-card-info">
-                        <span>10 Questions</span>
-                        <span>Quiz</span>
-                    </div>
-
-                    <a href="mcq-gk.html" class="resource-card-btn">Open</a>
-                </div>
-            </article>
-
-            <article class="resource-box-card">
-                <div class="resource-thumbnail maths-bg">
-                    <span>10</span>
-                </div>
-
-                <div class="resource-card-body">
-                    <h3>Mathematics 10th Standard MCQ</h3>
-
-                    <p>
-                        Practice important objective questions for Mathematics 10th standard subjects.
-                    </p>
-
-                    <div class="resource-card-info">
-                        <span>10 Questions</span>
-                        <span>Practice</span>
-                    </div>
-
-                    <a href="mcq-m10.html" class="resource-card-btn">Open</a>
-                </div>
-            </article>
-
-            <article class="resource-box-card">
-                <div class="resource-thumbnail science-bg">
-                    <span>12</span>
-                </div>
-
-                <div class="resource-card-body">
-                    <h3>Mathematics 12th Standard MCQ</h3>
-
-                    <p>
-                        Practice important objective questions for Mathematics 12th standard subjects.
-                    </p>
-
-                    <div class="resource-card-info">
-                        <span>10 Questions</span>
-                        <span>Practice</span>
-                    </div>
-
-                    <a href="mcq-m12.html" class="resource-card-btn">Open</a>
-                </div>
-            </article>
-
-            <article class="resource-box-card">
-                <div class="resource-thumbnail science-bg">
-                    <span>10</span>
-                </div>
-
-                <div class="resource-card-body">
-                    <h3>Tamil 10th Standard MCQ</h3>
-
-                    <p>
-                        Practice important objective questions for Tamil 10th standard subjects.
-                    </p>
-
-                    <div class="resource-card-info">
-                        <span>10 Questions</span>
-                        <span>Practice</span>
-                    </div>
-
-                    <a href="mcq-ta10.html" class="resource-card-btn">Open</a>
-                </div>
-            </article>
-        </section>
+        </div>
 
     </main>
 
@@ -251,6 +162,7 @@
 
     <script src="script.js"></script>
     <script src="auth.js"></script>
+    <script src="mcq-ta10.js"></script>
 
 </body>
 
