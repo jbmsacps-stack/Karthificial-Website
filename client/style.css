@@ -3453,3 +3453,17 @@ section,
 .auth-card .form-message {
     min-height: 22px;
 }
+
+/* ================================
+   FORGOT PASSWORD LINK
+================================ */
+
+.forgot-auth-link {
+    margin-top: 14px;
+    font-size: 0.92rem;
+}
+
+.forgot-auth-link a {
+    color: var(--gold);
+    font-weight: 800;
+}

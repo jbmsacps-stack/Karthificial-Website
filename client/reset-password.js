@@ -1,3 +1,51 @@
+function getQueryParam(name) {
+    const params = new URLSearchParams(window.location.search);
+    return params.get(name);
+}
+
+const resetForm = document.querySelector('#resetForm');
+const resetMessage = document.querySelector('#resetMessage');
+
+if (resetForm) {
+    resetForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+
+        const newPassword = document.querySelector('#newPassword').value.trim();
+        const confirmPassword = document.querySelector('#confirmPassword').value.trim();
+        const token = getQueryParam('token') || '';
+
+        if (!newPassword || newPassword !== confirmPassword) {
+            resetMessage.textContent = 'Passwords do not match.';
+            resetMessage.className = 'form-message error-message';
+            return;
+        }
+
+        try {
+            const res = await fetch(`${APP_CONFIG.API_AUTH_BASE_URL}/reset-password`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ token, newPassword })
+            });
+
+            const data = await res.json();
+
+            if (!res.ok) {
+                resetMessage.textContent = data.message || 'Reset failed.';
+                resetMessage.className = 'form-message error-message';
+                return;
+            }
+
+            resetMessage.textContent = data.message || 'Password reset successful.';
+            resetMessage.className = 'form-message success-message';
+
+            setTimeout(() => { window.location.href = 'login.html'; }, 1200);
+        } catch (err) {
+            resetMessage.textContent = 'Cannot connect to backend.';
+            resetMessage.className = 'form-message error-message';
+            console.error('Reset password error:', err);
+        }
+    });
+}
 const resetPasswordForm = document.querySelector("#resetPasswordForm");
 const resetMessage = document.querySelector("#resetMessage");
 

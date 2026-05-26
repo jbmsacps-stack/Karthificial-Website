@@ -1,3 +1,34 @@
+const forgotForm = document.querySelector('#forgotForm');
+const forgotMessage = document.querySelector('#forgotMessage');
+
+if (forgotForm) {
+    forgotForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+
+        const email = document.querySelector('#email').value.trim();
+
+        if (!email) return;
+
+        forgotMessage.textContent = '';
+
+        try {
+            const res = await fetch(`${APP_CONFIG.API_AUTH_BASE_URL}/forgot-password`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ email })
+            });
+
+            const data = await res.json();
+
+            forgotMessage.textContent = data.message || 'If this email exists, a reset link has been sent.';
+            forgotMessage.className = 'form-message success-message';
+        } catch (err) {
+            forgotMessage.textContent = 'Cannot connect to backend.';
+            forgotMessage.className = 'form-message error-message';
+            console.error('Forgot password error:', err);
+        }
+    });
+}
 const forgotPasswordForm = document.querySelector("#forgotPasswordForm");
 const forgotMessage = document.querySelector("#forgotMessage");
 
