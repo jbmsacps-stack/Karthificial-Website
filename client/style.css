@@ -3432,3 +3432,24 @@ section,
         padding: 8px 8px !important;
     }
 }
+
+/* ================================
+   FORGOT / RESET PASSWORD SMALL FIX
+================================ */
+
+.auth-card .btn-gold.auth-submit {
+    text-align: center;
+}
+
+.auth-card .auth-subtitle {
+    line-height: 1.7;
+}
+
+.auth-card input[type="password"],
+.auth-card input[type="email"] {
+    letter-spacing: 0.2px;
+}
+
+.auth-card .form-message {
+    min-height: 22px;
+}
