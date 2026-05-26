@@ -1,19 +1,26 @@
-# Day 04 - 23/05/26
+# Day 04 - 22/05/26
 
 ## Work Done Today
-- installed the spring boot package
-- created server files in the Backend
+- Improved the navbar and continued frontend development across multiple pages.
+- Added more frontend updates through team contributions.
+- Moved internal JavaScript into external files for better maintainability.
+- Added and revised project documentation, including team role documentation.
+- Updated README and cleaned documentation structure by removing or simplifying unnecessary sections.
 
 ## Problems Faced
-- Errors occured while installing the package
-- unable to fetch the data
+- Navbar layout needed repeated adjustments.
+- Documentation structure became too detailed in some places and had to be simplified.
+- Internal JavaScript was not ideal for long-term maintenance.
+- Multiple contributors working on frontend created a need for cleaner structure.
 
 ## How We Fixed It
-- Again repeated the installation process  properly
-- corrected the file branch
+- Refined navbar changes through multiple commits.
+- Shifted JavaScript into external files to reduce clutter in HTML.
+- Updated README and documentation to better represent the project.
+- Simplified the roles documentation so it looked cleaner and more usable.
 
 ## What We Learned
-- SpringBoot
-- Learnt how to install the SpringBoot package
-- Learnt how to fetch the data  
-
+- External JavaScript is cleaner than keeping everything inside HTML.
+- Documentation should be useful, not overloaded.
+- Navbar work is important because every page depends on it.
+- Team projects need both code commits and documentation commits.

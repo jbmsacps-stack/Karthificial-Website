@@ -3472,15 +3472,6 @@ section,
    FORGOT PASSWORD PAGE FIX
 ================================ */
 
-.auth-page {
-    padding-top: 55px;
-    padding-bottom: 55px;
-}
-
-.auth-card .auth-switch + .auth-switch {
-    margin-top: 10px;
-}
-
 .auth-card .form-message {
     min-height: 22px;
     line-height: 1.5;
@@ -3505,4 +3496,14 @@ section,
         font-size: 0.9rem;
         line-height: 1.6;
     }
+}
+
+/* ================================
+   AUTH BUTTON LOADING STATE
+================================ */
+
+.auth-submit:disabled {
+    opacity: 0.65;
+    cursor: not-allowed;
+    box-shadow: none;
 }
