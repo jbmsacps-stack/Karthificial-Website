@@ -12,15 +12,18 @@ import org.springframework.stereotype.Service;
 public class AuthService {
 
     private final UserRepository userRepository;
+    private final JwtService jwtService;
     private final BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
-    public AuthService(UserRepository userRepository) {
+    public AuthService(UserRepository userRepository, JwtService jwtService) {
         this.userRepository = userRepository;
+        this.jwtService = jwtService;
     }
 
     public AuthResponse signup(SignupRequest request) {
 
         if (userRepository.existsByEmail(request.getEmail())) {
+            System.out.println("[AuthService] Signup attempt with existing email: " + request.getEmail());
             return new AuthResponse(false, "Email already exists", null, null, null, null);
         }
 
@@ -32,13 +35,15 @@ public class AuthService {
 
         User savedUser = userRepository.save(user);
 
+        System.out.println("[AuthService] New user created: " + savedUser.getEmail());
+
         return new AuthResponse(
-                true,
-                "Account created successfully",
-                savedUser.getId(),
-                savedUser.getFullName(),
-                savedUser.getEmail(),
-                savedUser.getStudentClass()
+            true,
+            "Account created successfully",
+            savedUser.getId(),
+            savedUser.getFullName(),
+            savedUser.getEmail(),
+            savedUser.getStudentClass()
         );
     }
 
@@ -48,22 +53,29 @@ public class AuthService {
                 .orElse(null);
 
         if (user == null) {
+            System.out.println("[AuthService] Login failed - user not found: " + request.getEmail());
             return new AuthResponse(false, "Invalid email or password", null, null, null, null);
         }
 
         boolean passwordMatches = passwordEncoder.matches(request.getPassword(), user.getPassword());
 
         if (!passwordMatches) {
+            System.out.println("[AuthService] Login failed - wrong password for: " + request.getEmail());
             return new AuthResponse(false, "Invalid email or password", null, null, null, null);
         }
 
+        // Generate JWT only on successful authentication
+        String token = jwtService.generateToken(user);
+        System.out.println("[AuthService] Login successful for " + user.getEmail());
+
         return new AuthResponse(
-                true,
-                "Login successful",
-                user.getId(),
-                user.getFullName(),
-                user.getEmail(),
-                user.getStudentClass()
+            true,
+            "Login successful",
+            user.getId(),
+            user.getFullName(),
+            user.getEmail(),
+            user.getStudentClass(),
+            token
         );
     }
 }

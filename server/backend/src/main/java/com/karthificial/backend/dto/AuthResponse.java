@@ -8,14 +8,20 @@ public class AuthResponse {
     private String fullName;
     private String email;
     private String studentClass;
+    private String token;
 
     public AuthResponse(boolean success, String message, Long userId, String fullName, String email, String studentClass) {
+        this(success, message, userId, fullName, email, studentClass, null);
+    }
+
+    public AuthResponse(boolean success, String message, Long userId, String fullName, String email, String studentClass, String token) {
         this.success = success;
         this.message = message;
         this.userId = userId;
         this.fullName = fullName;
         this.email = email;
         this.studentClass = studentClass;
+        this.token = token;
     }
 
     public boolean isSuccess() {
@@ -40,5 +46,9 @@ public class AuthResponse {
 
     public String getStudentClass() {
         return studentClass;
+    }
+
+    public String getToken() {
+        return token;
     }
 }

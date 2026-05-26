@@ -23,13 +23,26 @@ public class AuthController {
     }
 
     @PostMapping("/signup")
-    public AuthResponse signup(@Valid @RequestBody SignupRequest request) {
-        return authService.signup(request);
+    public org.springframework.http.ResponseEntity<AuthResponse> signup(@Valid @RequestBody SignupRequest request) {
+        AuthResponse resp = authService.signup(request);
+
+        if (!resp.isSuccess()) {
+            // Conflict when email exists
+            return org.springframework.http.ResponseEntity.status(org.springframework.http.HttpStatus.CONFLICT).body(resp);
+        }
+
+        return org.springframework.http.ResponseEntity.status(org.springframework.http.HttpStatus.CREATED).body(resp);
     }
 
     @PostMapping("/login")
-    public AuthResponse login(@Valid @RequestBody LoginRequest request) {
-        return authService.login(request);
+    public org.springframework.http.ResponseEntity<AuthResponse> login(@Valid @RequestBody LoginRequest request) {
+        AuthResponse resp = authService.login(request);
+
+        if (!resp.isSuccess()) {
+            return org.springframework.http.ResponseEntity.status(org.springframework.http.HttpStatus.UNAUTHORIZED).body(resp);
+        }
+
+        return org.springframework.http.ResponseEntity.ok(resp);
     }
 
     @GetMapping("/health")
