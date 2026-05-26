@@ -1074,27 +1074,39 @@ img {
 
 /* Thumbnail color variations */
 .tamil-bg {
-    background: linear-gradient(135deg, #5b1f1f, #d4af37);
+    background:
+        radial-gradient(circle at top left, rgba(255, 183, 77, 0.22), transparent 35%),
+        linear-gradient(135deg, #2a0505 0%, #7f1d1d 45%, #c2410c 100%);
 }
 
 .english-bg {
-    background: linear-gradient(135deg, #1f2d5b, #d4af37);
+    background:
+        radial-gradient(circle at top left, rgba(255, 255, 255, 0.18), transparent 35%),
+        linear-gradient(135deg, #111827 0%, #334155 48%, #94a3b8 100%);
 }
 
 .maths-bg {
-    background: linear-gradient(135deg, #1f5b3b, #d4af37);
+    background:
+        radial-gradient(circle at top left, rgba(56, 189, 248, 0.25), transparent 35%),
+        linear-gradient(135deg, #020617 0%, #0f2a5f 48%, #2563eb 100%);
 }
 
 .science-bg {
-    background: linear-gradient(135deg, #4b1f5b, #d4af37);
+    background:
+        radial-gradient(circle at top left, rgba(132, 204, 22, 0.22), transparent 35%),
+        linear-gradient(135deg, #031b12 0%, #064e3b 48%, #16a34a 100%);
 }
 
 .social-bg {
-    background: linear-gradient(135deg, #5b3a1f, #d4af37);
+    background:
+        radial-gradient(circle at top left, rgba(251, 191, 36, 0.24), transparent 35%),
+        linear-gradient(135deg, #1c0f05 0%, #7c2d12 48%, #b45309 100%);
 }
 
 .general-knowledge-bg {
-    background: linear-gradient(135deg, #565385, #df6aeea4);
+    background:
+        radial-gradient(circle at top left, rgba(250, 204, 21, 0.22), transparent 35%),
+        linear-gradient(135deg, #0f1028 0%, #312e81 48%, #7c3aed 100%);
 }
 
 @media (max-width: 768px) {
