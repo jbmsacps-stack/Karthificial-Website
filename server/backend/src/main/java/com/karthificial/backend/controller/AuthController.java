@@ -44,17 +44,18 @@ public class AuthController {
         return ResponseEntity.ok(resp);
     }
 
-    // Forgot-password temporarily disabled — returns 501 until email is configured
+    // Contact moderator flow — no email sending, no SMTP secrets required
     @PostMapping("/forgot-password")
     public ResponseEntity<Map<String, String>> forgotPassword(@RequestBody Map<String, String> body) {
-        return ResponseEntity.status(HttpStatus.NOT_IMPLEMENTED)
-                .body(Map.of("message", "Forgot password is temporarily disabled."));
+        return ResponseEntity.ok(Map.of(
+                "message", "Password recovery is handled by moderators. Please contact the admin team with your registered email."
+        ));
     }
 
-    // Reset-password temporarily disabled — returns 501 until email is configured
+    // Automatic reset disabled — direct users to moderators
     @PostMapping("/reset-password")
     public ResponseEntity<Map<String, String>> resetPassword(@RequestBody Map<String, String> body) {
         return ResponseEntity.status(HttpStatus.NOT_IMPLEMENTED)
-                .body(Map.of("message", "Forgot password is temporarily disabled."));
+                .body(Map.of("message", "Automatic password reset is temporarily disabled. Please contact moderators."));
     }
 }

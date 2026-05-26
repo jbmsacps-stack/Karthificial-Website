@@ -1,0 +1,71 @@
+Wait, change of plan.
+
+I do NOT want automatic forgot-password email reset links for now.
+
+For now, I only want a simple "Contact Moderator for Password Help" feature.
+
+Goal:
+When a user forgets their password, they should be guided to contact the website/server moderators/admins. The system should NOT send emails automatically and should NOT require Gmail SMTP secrets.
+
+Please keep login/signup working and keep forgot-password simple.
+
+Required backend behavior:
+1. Keep these working:
+   GET /api/auth/health
+   POST /api/auth/signup
+   POST /api/auth/login
+
+2. For forgot password:
+   Either keep:
+   POST /api/auth/forgot-password
+
+   But make it return a simple 200 response like:
+   {
+     "message": "Password recovery is handled by moderators. Please contact the admin team with your registered email."
+   }
+
+3. Do NOT require these secrets:
+   SPRING_MAIL_HOST
+   SPRING_MAIL_PORT
+   SPRING_MAIL_USERNAME
+   SPRING_MAIL_PASSWORD
+   SPRING_MAIL_SMTP_AUTH
+   SPRING_MAIL_STARTTLS
+
+4. Do NOT use:
+   EmailService
+   JavaMailSender
+   spring-boot-starter-mail
+   password reset email links
+   automatic token emails
+
+5. It is okay if reset-password endpoint is disabled for now:
+   POST /api/auth/reset-password
+   should return 501 Not Implemented with:
+   "Automatic password reset is temporarily disabled. Please contact moderators."
+
+6. Required Replit secrets should only be:
+   DB_URL
+   DB_USERNAME
+   DB_PASSWORD
+   JWT_SECRET
+
+7. Keep CORS open temporarily while I test Vercel frontend.
+   Do not lock CORS yet.
+
+8. After changes:
+   - Run mvn clean compile
+   - Run mvn spring-boot:run
+   - Confirm backend starts
+   - Confirm health endpoint works
+   - Confirm fake login returns 401
+   - Confirm correct login returns 200 with token
+   - Confirm signup works
+
+Please tell me exactly:
+1. Which forgot-password/email files were disabled or simplified
+2. Which files changed
+3. Whether Maven compile passed
+4. Whether backend started
+5. Whether only DB_URL, DB_USERNAME, DB_PASSWORD, and JWT_SECRET are required now
+6. The final backend API base URL for frontend config.js
