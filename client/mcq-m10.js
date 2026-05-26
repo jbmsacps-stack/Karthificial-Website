@@ -1,58 +1,108 @@
 const questions = [
+
     {
-        question: "Who is the CM of Tamil Nadu?",
-        options: ["Joseph Vijay", "M.K. Stalin", "Narendra Modi", "Rajinikanth"],
-        answer: "Joseph Vijay"
+        question: "The sum of angles in a triangle is:",
+        options: ["90°", "180°", "270°", "360°"],
+        answer: "180°"
     },
+
     {
-        question: "What is the National Animal of India?",
-        options: ["Lion", "Elephant", "Tiger", "Leopard"],
-        answer: "Tiger"
-    },
-    {
-        question: "Who is the hero of Karuppu?",
-        options: ["Ajith", "Vijay", "Suriya", "Dhanush"],
-        answer: "Suriya"
-    },
-    {
-        question: "What is OOPS?",
+        question: "Which theorem is used in right angled triangles?",
         options: [
-            "Object Oriented Programming Language",
-            "Only Operating Program",
-            "Object Operating Python System",
-            "Open Object Processing System"
+            "Thales Theorem",
+            "Pythagoras Theorem",
+            "Angle Bisector Theorem",
+            "Similarity Theorem"
         ],
-        answer: "Object Oriented Programming Language"
+        answer: "Pythagoras Theorem"
     },
+
     {
-        question: "Which planet is known as the Red Planet?",
-        options: ["Earth", "Mars", "Venus", "Jupiter"],
-        answer: "Mars"
+        question: "The longest side of a right triangle is called:",
+        options: [
+            "Base",
+            "Height",
+            "Hypotenuse",
+            "Median"
+        ],
+        answer: "Hypotenuse"
     },
+
     {
-        question: "What is the capital of Tamil Nadu?",
-        options: ["Madurai", "Chennai", "Trichy", "Salem"],
-        answer: "Chennai"
+        question: "Two figures having same shape are called:",
+        options: [
+            "Congruent",
+            "Similar",
+            "Parallel",
+            "Intersecting"
+        ],
+        answer: "Similar"
     },
+
     {
-        question: "Which language is used for web page styling?",
-        options: ["Java", "Python", "CSS", "C++"],
-        answer: "CSS"
+        question: "A tangent touches the circle at:",
+        options: [
+            "Two points",
+            "One point",
+            "Three points",
+            "No point"
+        ],
+        answer: "One point"
     },
+
     {
-        question: "Which data structure follows FIFO?",
-        options: ["Stack", "Queue", "Tree", "Graph"],
-        answer: "Queue"
+        question: "Radius is drawn from:",
+        options: [
+            "Center to circumference",
+            "Diameter to center",
+            "Chord to tangent",
+            "Arc to point"
+        ],
+        answer: "Center to circumference"
     },
+
     {
-        question: "Who invented Java?",
-        options: ["James Gosling", "Bill Gates", "Elon Musk", "Mark Zuckerberg"],
-        answer: "James Gosling"
+        question: "Thales theorem is related to:",
+        options: [
+            "Circles",
+            "Triangles",
+            "Squares",
+            "Rectangles"
+        ],
+        answer: "Triangles"
     },
+
     {
-        question: "Which gas do plants absorb?",
-        options: ["Oxygen", "Hydrogen", "Carbon Dioxide", "Nitrogen"],
-        answer: "Carbon Dioxide"
+        question: "The square of hypotenuse equals:",
+        options: [
+            "Sum of squares of other two sides",
+            "Difference of sides",
+            "Product of sides",
+            "Half of sides"
+        ],
+        answer: "Sum of squares of other two sides"
+    },
+
+    {
+        question: "A line joining two points on a circle is called:",
+        options: [
+            "Radius",
+            "Arc",
+            "Chord",
+            "Diameter"
+        ],
+        answer: "Chord"
+    },
+
+    {
+        question: "Which theorem deals with equal figures?",
+        options: [
+            "Congruency Theorem",
+            "Circle Theorem",
+            "Similarity Theorem",
+            "Pythagoras Theorem"
+        ],
+        answer: "Congruency Theorem"
     }
 ];
 
