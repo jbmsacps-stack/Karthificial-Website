@@ -1,34 +1,3 @@
-const forgotForm = document.querySelector('#forgotForm');
-const forgotMessage = document.querySelector('#forgotMessage');
-
-if (forgotForm) {
-    forgotForm.addEventListener('submit', async (e) => {
-        e.preventDefault();
-
-        const email = document.querySelector('#email').value.trim();
-
-        if (!email) return;
-
-        forgotMessage.textContent = '';
-
-        try {
-            const res = await fetch(`${APP_CONFIG.API_AUTH_BASE_URL}/forgot-password`, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ email })
-            });
-
-            const data = await res.json();
-
-            forgotMessage.textContent = data.message || 'If this email exists, a reset link has been sent.';
-            forgotMessage.className = 'form-message success-message';
-        } catch (err) {
-            forgotMessage.textContent = 'Cannot connect to backend.';
-            forgotMessage.className = 'form-message error-message';
-            console.error('Forgot password error:', err);
-        }
-    });
-}
 const forgotPasswordForm = document.querySelector("#forgotPasswordForm");
 const forgotMessage = document.querySelector("#forgotMessage");
 
@@ -40,13 +9,13 @@ if (forgotPasswordForm) {
         const submitButton = forgotPasswordForm.querySelector("button[type='submit']");
 
         if (!email) {
-            showForgotMessage("Please enter your email address.", "error");
+            showForgotMessage("Please enter your registered email address.", "error");
             return;
         }
 
         try {
             submitButton.disabled = true;
-            submitButton.textContent = "Sending...";
+            submitButton.textContent = "Sending Request...";
 
             const response = await fetch(`${APP_CONFIG.API_AUTH_BASE_URL}/forgot-password`, {
                 method: "POST",
@@ -59,12 +28,12 @@ if (forgotPasswordForm) {
             const data = await response.json();
 
             if (!response.ok) {
-                showForgotMessage(data.message || "Something went wrong. Try again.", "error");
+                showForgotMessage(data.message || "Password recovery is temporarily unavailable.", "error");
                 return;
             }
 
             showForgotMessage(
-                data.message || "If this email exists, a reset link has been sent.",
+                data.message || "Password recovery is handled by moderators. Please contact the admin team with your registered email.",
                 "success"
             );
 
@@ -75,7 +44,7 @@ if (forgotPasswordForm) {
             showForgotMessage("Cannot connect to backend. Please try again later.", "error");
         } finally {
             submitButton.disabled = false;
-            submitButton.textContent = "Send Reset Link";
+            submitButton.textContent = "Request Moderator Help";
         }
     });
 }

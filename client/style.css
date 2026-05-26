@@ -3467,3 +3467,42 @@ section,
     color: var(--gold);
     font-weight: 800;
 }
+
+/* ================================
+   FORGOT PASSWORD PAGE FIX
+================================ */
+
+.auth-page {
+    padding-top: 55px;
+    padding-bottom: 55px;
+}
+
+.auth-card .auth-switch + .auth-switch {
+    margin-top: 10px;
+}
+
+.auth-card .form-message {
+    min-height: 22px;
+    line-height: 1.5;
+}
+
+.auth-card .btn-gold.auth-submit,
+.auth-card .btn-outline.auth-submit {
+    text-align: center;
+}
+
+.auth-card input[type="email"] {
+    letter-spacing: 0.2px;
+}
+
+@media (max-width: 500px) {
+    .auth-page {
+        padding-top: 35px;
+        padding-bottom: 35px;
+    }
+
+    .auth-card .auth-switch {
+        font-size: 0.9rem;
+        line-height: 1.6;
+    }
+}
