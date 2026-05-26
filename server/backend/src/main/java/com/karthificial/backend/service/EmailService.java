@@ -1,27 +1,16 @@
 package com.karthificial.backend.service;
 
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.mail.SimpleMailMessage;
-import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 
+/**
+ * Email sending is temporarily disabled.
+ * This stub exists so PasswordResetService compiles without breaking the build.
+ * Re-enable by adding spring-boot-starter-mail to pom.xml and configuring SMTP secrets.
+ */
 @Service
 public class EmailService {
 
-    private final JavaMailSender mailSender;
-    private final String fromAddress;
-
-    public EmailService(JavaMailSender mailSender, @Value("${spring.mail.username:}") String fromAddress) {
-        this.mailSender = mailSender;
-        this.fromAddress = fromAddress;
-    }
-
     public void sendSimpleMessage(String to, String subject, String text) {
-        SimpleMailMessage message = new SimpleMailMessage();
-        message.setFrom(fromAddress);
-        message.setTo(to);
-        message.setSubject(subject);
-        message.setText(text);
-        mailSender.send(message);
+        System.out.println("[EmailService] Email sending is disabled. Would have sent to: " + to);
     }
 }
