@@ -2,4 +2,4 @@
 WEBSITE UNDER CONSTRUCTION
 
 
-https://karthificial-website.vercel.app/index.html
+https://jbmsacps-stack.github.io/Karthificial-Website/client/index.html

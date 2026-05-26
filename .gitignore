@@ -67,24 +67,3 @@ build/
 *.swp
 *backup*
 ROLES.md
-
-# VS Code local settings
-.vscode/
-
-# Backup files
-*.bak
-*.backup
-*.old
-
-# Environment files
-.env
-*.env
-
-# Java build output
-target/
-
-# Replit / local temporary files
-.replit.local
-
-# GitHub modernization/tooling folder
-.github/modernize/

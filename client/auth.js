@@ -133,7 +133,6 @@ if (signupForm) {
         const studentClass = document.querySelector("#studentClass")?.value;
 
         const messageBox = getMessageBox();
-        const submitButton = signupForm.querySelector("button[type='submit']");
 
         if (password !== confirmPassword) {
             if (messageBox) {
@@ -144,11 +143,6 @@ if (signupForm) {
         }
 
         try {
-            if (submitButton) {
-                submitButton.disabled = true;
-                submitButton.textContent = "Creating Account...";
-            }
-
             const response = await fetch(`${API_BASE_URL}/signup`, {
                 method: "POST",
                 headers: {
@@ -166,16 +160,7 @@ if (signupForm) {
 
             if (!response.ok) {
                 if (messageBox) {
-                    if (response.status === 401) {
-                        messageBox.textContent = "Invalid email or password.";
-                    } else if (response.status === 400) {
-                        messageBox.textContent = data.message || "Please check your login details.";
-                    } else if (response.status >= 500) {
-                        messageBox.textContent = "Server error. Please try again later.";
-                    } else {
-                        messageBox.textContent = data.message || "Login failed. Please try again.";
-                    }
-
+                    messageBox.textContent = data.message || "Signup failed.";
                     messageBox.className = "form-message error-message";
                 }
                 return;
@@ -192,15 +177,10 @@ if (signupForm) {
 
         } catch (error) {
             if (messageBox) {
-                messageBox.textContent = "Cannot connect to backend. Please try again later.";
+                messageBox.textContent = "Cannot connect to backend. Make sure Spring Boot is running on port 8080.";
                 messageBox.className = "form-message error-message";
             }
             console.error("Signup error:", error);
-        } finally {
-            if (submitButton) {
-                submitButton.disabled = false;
-                submitButton.textContent = "Sign Up";
-            }
         }
     });
 }
@@ -219,14 +199,8 @@ if (loginForm) {
         const password = document.querySelector("#password")?.value.trim();
 
         const messageBox = getMessageBox();
-        const submitButton = loginForm.querySelector("button[type='submit']");
 
         try {
-            if (submitButton) {
-                submitButton.disabled = true;
-                submitButton.textContent = "Logging in...";
-            }
-
             const response = await fetch(`${API_BASE_URL}/login`, {
                 method: "POST",
                 headers: {
@@ -265,15 +239,10 @@ if (loginForm) {
 
         } catch (error) {
             if (messageBox) {
-                messageBox.textContent = "Cannot connect to backend. Please try again later.";
+                messageBox.textContent = "Cannot connect to backend. Make sure Spring Boot is running on port 8080.";
                 messageBox.className = "form-message error-message";
             }
             console.error("Login error:", error);
-        } finally {
-            if (submitButton) {
-                submitButton.disabled = false;
-                submitButton.textContent = "Login";
-            }
         }
     });
 }
