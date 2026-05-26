@@ -1,0 +1,20 @@
+{
+  "name": "karthificial-website-client",
+  "version": "1.0.0",
+  "description": "Karthificial educational website for Tamil Nadu State Board students",
+  "type": "module",
+  "scripts": {
+    "dev": "echo 'Development server - serve files from current directory'",
+    "build": "echo 'No build step required for vanilla HTML/JS project'"
+  },
+  "keywords": [
+    "education",
+    "tamil-nadu",
+    "state-board"
+  ],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@vercel/speed-insights": "^2.0.0"
+  }
+}
