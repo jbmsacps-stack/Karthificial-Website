@@ -1,13 +1,4 @@
-const API_BASE_URL = (() => {
-    // Local development backend URL. For deployment, change this one value only.
-    const localBackendUrl = "http://localhost:8080/api/auth";
-    const productionBackendUrl = "/api/auth";
-
-    return window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1"
-        ? localBackendUrl
-        : productionBackendUrl;
-})();
-
+const API_BASE_URL = APP_CONFIG.API_AUTH_BASE_URL;
 function getToken() {
     return localStorage.getItem("token");
 }
