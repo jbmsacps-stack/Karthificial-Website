@@ -82,3 +82,40 @@ build/
 *.tmp
 *.swp
 *.old
+
+# Deployment output
+deploy-folder/
+
+# Maven / Java build output
+target/
+server/backend/target/
+*.jar
+*.war
+*.ear
+*.class
+
+# Secrets
+.env
+.env.*
+application-local.properties
+application-dev.properties
+application-prod.properties
+
+# Logs
+*.log
+logs/
+
+# IDE
+.vscode/
+.idea/
+*.iml
+
+# OS files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Temporary files
+*.bak
+*.tmp
+*.old
