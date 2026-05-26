@@ -1,0 +1,159 @@
+My project is currently failing after the forgot-password/email changes.
+
+For now, I do NOT want email sending or forgot-password to run. Put the forgot-password feature on hold until login/signup and deployment are stable.
+
+Project context:
+- Backend: Spring Boot Maven
+- Database: Supabase PostgreSQL
+- Frontend: plain HTML/CSS/JS on Vercel
+- Backend: Replit
+- pom.xml is currently directly in the Replit project root
+- I only want login/signup working for now
+
+Main goal:
+Fix the Replit backend so it builds, starts, connects to Supabase PostgreSQL, and supports only:
+
+GET /api/auth/health
+POST /api/auth/signup
+POST /api/auth/login
+
+Important:
+Do not restructure the project.
+Do not move files.
+Do not delete my frontend.
+Do not add email functionality now.
+Do not require Gmail SMTP secrets now.
+Do not make the app fail just because mail secrets are missing.
+
+Tasks:
+
+1. Diagnose the build/start failure
+Run:
+pwd
+ls
+java -version
+mvn -v
+find . -name "pom.xml"
+find . -name "application.properties"
+mvn clean compile
+
+Find the exact error causing Maven/Spring Boot failure.
+
+2. Temporarily disable forgot password email feature
+If any of these are causing startup/build failure, safely disable or comment them for now:
+- EmailService.java
+- PasswordResetService.java
+- PasswordResetToken.java
+- PasswordResetTokenRepository.java
+- forgot-password endpoint
+- reset-password endpoint
+- spring-boot-starter-mail dependency
+- spring.mail.* required properties
+
+I want forgot-password to be kept for later, but it must not break the backend now.
+
+Preferred temporary behavior:
+- Either remove/comment the forgot-password and reset-password endpoints for now
+OR
+- Make them return 501 Not Implemented with message:
+  "Forgot password is temporarily disabled."
+
+3. Fix login authentication
+Verify these files:
+- AuthController.java
+- AuthService.java
+- UserRepository.java
+- User.java
+- LoginRequest.java
+- SignupRequest.java
+- AuthResponse.java
+- JwtService.java
+
+Required behavior:
+- Fake email login must return 401 Unauthorized.
+- Wrong password must return 401 Unauthorized.
+- Correct login must return 200 OK and JWT token.
+- Login must never create a new user.
+- Login must never return 200 for failed login.
+- Password must never be returned in response.
+- Signup must hash password with BCrypt.
+- Signup must reject duplicate emails.
+
+4. Keep JWT working
+application.properties should support:
+jwt.secret=${JWT_SECRET:change-me-secret-change-this}
+jwt.expiration-ms=${JWT_EXPIRATION_MS:86400000}
+
+But the deployed Replit should use JWT_SECRET from Secrets.
+
+5. Check database connection
+application.properties should use:
+spring.datasource.url=${DB_URL}
+spring.datasource.username=${DB_USERNAME}
+spring.datasource.password=${DB_PASSWORD}
+spring.datasource.driver-class-name=org.postgresql.Driver
+
+Make sure Spring Boot can start with Supabase PostgreSQL.
+
+6. Replit environment
+Make sure Replit can run Java 17 and Maven.
+If needed, create/fix:
+
+replit.nix:
+{ pkgs }: {
+  deps = [
+    pkgs.jdk17
+    pkgs.maven
+  ];
+}
+
+.replit:
+run = "mvn spring-boot:run"
+
+[nix]
+channel = "stable-24_05"
+
+7. Required Replit Secrets for now
+Only these should be required right now:
+- DB_URL
+- DB_USERNAME
+- DB_PASSWORD
+- JWT_SECRET
+
+Do not require these yet:
+- SPRING_MAIL_HOST
+- SPRING_MAIL_PORT
+- SPRING_MAIL_USERNAME
+- SPRING_MAIL_PASSWORD
+- SPRING_MAIL_SMTP_AUTH
+- SPRING_MAIL_STARTTLS
+
+8. Start backend
+After fixing, run:
+mvn clean compile
+mvn spring-boot:run
+
+9. Test endpoints
+Give me exact test URLs or curl commands for:
+- GET /api/auth/health
+- POST /api/auth/signup
+- POST /api/auth/login with fake email
+- POST /api/auth/login with wrong password
+- POST /api/auth/login with correct password
+
+Expected:
+- Health returns 200.
+- Fake login returns 401.
+- Wrong password returns 401.
+- Correct login returns 200 and token.
+- Signup success returns 201.
+- Duplicate signup returns 409.
+
+After finishing, tell me:
+1. What caused the build failure.
+2. What you disabled from forgot-password/email for now.
+3. Which files were changed.
+4. Whether Maven compile passed.
+5. Whether Spring Boot started.
+6. What Replit Secrets are required now.
+7. The backend health URL.
