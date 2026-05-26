@@ -1,92 +1,11 @@
-# Secrets
-.env
-application.properties
-application.yml
-
-# OS
-.DS_Store
-Thumbs.db
-
-# Logs
-*.log
-
-# Node / frontend
-node_modules/
-start.ps1
-
 # ================================
-# Build / Deployment Output
-# ================================
-deploy-folder/
-target/
-*.jar
-*.war
-*.ear
-
-# ================================
-# Maven
-# ================================
-.mvn/wrapper/maven-wrapper.jar
-
-# Keep Maven wrapper files if you use them
-!mvnw
-!mvnw.cmd
-!.mvn/wrapper/maven-wrapper.properties
-
-# ================================
-# Java / Spring Boot
-# ================================
-*.class
-*.log
-logs/
-spring.log
-
-# ================================
-# Environment / Secrets
-# ================================
-.env
-.env.*
-application-local.properties
-application-dev.properties
-application-prod.properties
-
-# Do NOT ignore main application.properties if it does not contain secrets
-# server/backend/src/main/resources/application.properties
-
-# ================================
-# IDE / Editor
-# ================================
-.vscode/
-.idea/
-*.iml
-
-# ================================
-# OS Files
-# ================================
-.DS_Store
-Thumbs.db
-desktop.ini
-
-# ================================
-# Node / Frontend if ever used
-# ================================
-node_modules/
-dist/
-build/
-.cache/
-
-# ================================
-# Temporary / Backup Files
-# ================================
-*.bak
-*.tmp
-*.swp
-*.old
-
 # Deployment output
+# ================================
 deploy-folder/
 
+# ================================
 # Maven / Java build output
+# ================================
 target/
 server/backend/target/
 *.jar
@@ -94,28 +13,56 @@ server/backend/target/
 *.ear
 *.class
 
-# Secrets
+# ================================
+# Secrets / environment files
+# ================================
 .env
 .env.*
 application-local.properties
 application-dev.properties
 application-prod.properties
 
+# Keep main Spring Boot config tracked
+!server/backend/src/main/resources/application.properties
+
+# ================================
 # Logs
+# ================================
 *.log
 logs/
+spring.log
+server/backend/error-log.txt
 
-# IDE
+# ================================
+# IDE / Editor
+# ================================
 .vscode/
 .idea/
 *.iml
+.classpath
+.project
+.settings/
 
+# ================================
 # OS files
+# ================================
 .DS_Store
 Thumbs.db
 desktop.ini
 
-# Temporary files
+# ================================
+# Node / Frontend
+# ================================
+node_modules/
+dist/
+build/
+.cache/
+
+# ================================
+# Temporary / Backup files
+# ================================
 *.bak
 *.tmp
 *.old
+*.swp
+*backup*
