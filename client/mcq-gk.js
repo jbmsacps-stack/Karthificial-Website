@@ -64,9 +64,21 @@ const mcqContainer = document.getElementById("mcqQuestions");
 const resultContainer = document.getElementById("result");
 let mcqModalOverlay = null;
 let mcqStartTime = Date.now();
+let currentQuestions = [...questions];
+
+function shuffleQuestionsOnly(array) {
+    const copiedArray = [...array];
+
+    for (let i = copiedArray.length - 1; i > 0; i--) {
+        const randomIndex = Math.floor(Math.random() * (i + 1));
+        [copiedArray[i], copiedArray[randomIndex]] = [copiedArray[randomIndex], copiedArray[i]];
+    }
+
+    return copiedArray;
+}
 
 function renderMCQQuestions() {
-    mcqContainer.innerHTML = questions.map((q, index) => {
+    mcqContainer.innerHTML = currentQuestions.map((q, index) => {
         const optionsHTML = q.options.map((option, optionIndex) => `
             <label class="option" for="q${index}-option${optionIndex}" id="q${index}-option${optionIndex}-label">
                 <input
@@ -238,7 +250,7 @@ async function submitMCQ() {
     let wrongCount = 0;
     const startTime = performance.now();
 
-    questions.forEach((q, index) => {
+    currentQuestions.forEach((q, index) => {
         const correctIndex = q.options.findIndex(option => option === q.answer);
         const selectedIndex = userAnswers[index];
         const answerBox = document.getElementById(`answer${index}`);
@@ -261,7 +273,7 @@ async function submitMCQ() {
         answerBox.innerHTML = `<span class="answer-label">Correct Answer:</span> <strong>${correctAnswerText}</strong>`;
     });
 
-    const totalQuestions = questions.length;
+    const totalQuestions = currentQuestions.length;
     const percentage = Math.round((score / totalQuestions) * 100);
     const timeTakenSeconds = Math.round((Date.now() - mcqStartTime) / 1000);
     const timeTakenText = getTimeTaken();
@@ -343,20 +355,15 @@ function updateRankingText(text) {
 }
 
 function resetMCQ() {
-    userAnswers = new Array(questions.length).fill(null);
-    const inputs = mcqContainer.querySelectorAll("input[type=radio]");
-    inputs.forEach(input => input.checked = false);
+    currentQuestions = shuffleQuestionsOnly(questions);
+    userAnswers = new Array(currentQuestions.length).fill(null);
 
-    const labels = mcqContainer.querySelectorAll(".option");
-    labels.forEach(label => {
-        label.classList.remove("correct-option", "wrong-option", "selected-option");
-    });
-
-    const answerBoxes = mcqContainer.querySelectorAll(".answer-box");
-    answerBoxes.forEach(box => box.innerHTML = "");
+    renderMCQQuestions();
 
     resultContainer.innerHTML = "";
     mcqStartTime = Date.now();
     closeAnalysisPopup();
+
     window.scrollTo({ top: 0, behavior: "smooth" });
 }
+
