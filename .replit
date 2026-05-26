@@ -38,8 +38,3 @@ outputType = "webview"
 [[ports]]
 localPort = 5000
 externalPort = 80
-
-[deployment]
-deploymentTarget = "autoscale"
-run = ["bash", "-c", "cd server/backend && java -jar target/backend-0.0.1-SNAPSHOT.jar"]
-build = ["bash", "-c", "cp -r client deploy-folder/ && cd server/backend && chmod +x mvnw && ./mvnw package -DskipTests -q"]
