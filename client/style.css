@@ -526,35 +526,60 @@ img {
 }
 
 /* ================================
-   PHOTO SLIDER
+   PHOTO SLIDER - PREMIUM COMPACT
 ================================ */
 
 .slider-section {
-    padding: 55px 0;
+    padding: 55px 0 35px;
+    background:
+        radial-gradient(circle at top, rgba(212, 175, 55, 0.08), transparent 38%),
+        linear-gradient(180deg, #050505, #0a0a0a);
 }
 
 .slider {
     position: relative;
+    width: 100%;
     overflow: hidden;
-    border-radius: 22px;
-    border: 1px solid var(--border-gold);
-    background-color: var(--card-bg);
-    box-shadow: 0 18px 45px rgba(0, 0, 0, 0.55);
+    border-radius: 26px;
+    border: 1px solid rgba(212, 175, 55, 0.34);
+    background:
+        linear-gradient(135deg, rgba(212, 175, 55, 0.08), transparent 32%),
+        #080808;
+    box-shadow:
+        0 22px 55px rgba(0, 0, 0, 0.58),
+        0 0 0 1px rgba(212, 175, 55, 0.08),
+        inset 0 0 45px rgba(212, 175, 55, 0.035);
 }
 
 .slides {
     display: flex;
-    transition: transform 0.7s ease-in-out;
+    transition: transform 0.75s ease-in-out;
 }
 
 .slide {
     min-width: 100%;
+    position: relative;
+    background: #080808;
 }
 
 .slide img {
     width: 100%;
-    height: 400px;
+    height: clamp(320px, 42vw, 560px);
     object-fit: cover;
+    object-position: center;
+    display: block;
+    filter: brightness(0.92) contrast(1.08) saturate(1.05);
+}
+
+/* Soft cinematic shade, not too dark */
+.slide::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+        linear-gradient(90deg, rgba(0, 0, 0, 0.42), transparent 38%, rgba(0, 0, 0, 0.20)),
+        linear-gradient(180deg, transparent 62%, rgba(0, 0, 0, 0.42));
+    pointer-events: none;
 }
 
 /* Slider Buttons */
@@ -563,21 +588,35 @@ img {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
+    z-index: 5;
+
     width: 44px;
     height: 44px;
     border-radius: 50%;
-    border: 1px solid var(--gold);
-    background-color: rgba(10, 10, 10, 0.72);
+
+    border: 1px solid rgba(212, 175, 55, 0.58);
+    background: rgba(5, 5, 5, 0.68);
     color: var(--gold);
-    font-size: 1.5rem;
+
+    font-size: 1.45rem;
     cursor: pointer;
-    transition: 0.3s ease;
+
+    display: grid;
+    place-items: center;
+
+    backdrop-filter: blur(10px);
+    transition:
+        background 0.25s ease,
+        color 0.25s ease,
+        box-shadow 0.25s ease,
+        border-color 0.25s ease;
 }
 
 .slider-btn:hover {
-    background-color: var(--gold);
-    color: var(--black);
-    box-shadow: 0 0 22px var(--shadow-gold);
+    background: rgba(212, 175, 55, 0.95);
+    color: #0a0a0a;
+    border-color: var(--gold);
+    box-shadow: 0 0 24px rgba(212, 175, 55, 0.38);
 }
 
 .prev-btn {
@@ -595,23 +634,97 @@ img {
     left: 50%;
     bottom: 18px;
     transform: translateX(-50%);
+    z-index: 6;
+
     display: flex;
+    align-items: center;
     gap: 9px;
+
+    padding: 8px 11px;
+    border-radius: 999px;
+    background: rgba(5, 5, 5, 0.52);
+    border: 1px solid rgba(212, 175, 55, 0.22);
+    backdrop-filter: blur(10px);
 }
 
 .dot {
-    width: 11px;
-    height: 11px;
-    border-radius: 50%;
-    border: 1px solid var(--gold);
-    background-color: transparent;
+    width: 9px;
+    height: 9px;
+    border-radius: 999px;
+    border: none;
+    background: rgba(255, 255, 255, 0.38);
     cursor: pointer;
-    transition: 0.3s ease;
+    transition:
+        width 0.25s ease,
+        background 0.25s ease,
+        box-shadow 0.25s ease;
 }
 
 .dot.active {
-    background-color: var(--gold);
-    box-shadow: 0 0 14px var(--shadow-gold);
+    width: 28px;
+    background: var(--gold);
+    box-shadow: 0 0 14px rgba(212, 175, 55, 0.55);
+}
+
+/* ================================
+   SLIDER RESPONSIVE
+================================ */
+
+@media (max-width: 900px) {
+    .slider-section {
+        padding: 42px 0 28px;
+    }
+
+    .slide img {
+        height: clamp(280px, 48vw, 420px);
+    }
+
+    .slider {
+        border-radius: 22px;
+    }
+}
+
+@media (max-width: 500px) {
+    .slider-section {
+        padding: 32px 0 22px;
+    }
+
+    .slider {
+        border-radius: 18px;
+    }
+
+    .slide img {
+        height: 255px;
+        object-position: center;
+    }
+
+    .slider-btn {
+        width: 35px;
+        height: 35px;
+        font-size: 1.1rem;
+    }
+
+    .prev-btn {
+        left: 10px;
+    }
+
+    .next-btn {
+        right: 10px;
+    }
+
+    .slider-dots {
+        bottom: 10px;
+        padding: 6px 9px;
+    }
+
+    .dot {
+        width: 7px;
+        height: 7px;
+    }
+
+    .dot.active {
+        width: 21px;
+    }
 }
 
 /* ================================
@@ -3172,15 +3285,15 @@ img {
 }
 
 .nav-inner {
-  position: relative !important;
-  z-index: 9999 !important;
+    position: relative !important;
+    z-index: 9999 !important;
 }
 
 .nav-inner .dropdown-menu {
-  position: absolute !important;
-  top: 100% !important;
-  left: 0 !important;
-  z-index: 10000 !important;
+    position: absolute !important;
+    top: 100% !important;
+    left: 0 !important;
+    z-index: 10000 !important;
 }
 
 
@@ -3254,7 +3367,7 @@ section,
         box-shadow: 0 25px 60px rgba(0, 0, 0, 0.95) !important;
     }
 
-    .menu-toggle:checked ~ .nav-menu {
+    .menu-toggle:checked~.nav-menu {
         display: flex !important;
     }
 
@@ -3315,7 +3428,7 @@ section,
         margin-bottom: 28px !important;
     }
 
-    .resource-toolbar > div,
+    .resource-toolbar>div,
     .resource-toolbar .filters,
     .filter-group {
         display: flex !important;
@@ -3577,8 +3690,10 @@ section,
     width: 100%;
     height: 100%;
     display: flex;
-    align-items: center;       /* vertical center */
-    justify-content: center;   /* horizontal center */
+    align-items: center;
+    /* vertical center */
+    justify-content: center;
+    /* horizontal center */
     transform: none;
     line-height: 0;
 }
@@ -3868,3 +3983,195 @@ section,
         linear-gradient(135deg, #4b3826 0%, #9d7b58 52%, #6d563d 100%);
 }
 
+/* ==================================================
+   REAL FULLSCREEN SLIDER MODE
+   YouTube-style browser fullscreen
+================================================== */
+
+.slider {
+    position: relative;
+}
+
+/* When slider enters real fullscreen */
+.slider:fullscreen {
+    width: 100vw;
+    height: 100vh;
+    max-width: none;
+    border-radius: 0;
+    border: none;
+    background: #000;
+    box-shadow: none;
+}
+
+.slider:fullscreen .slides {
+    height: 100%;
+}
+
+.slider:fullscreen .slide {
+    height: 100%;
+}
+
+.slider:fullscreen .slide img {
+    width: 100vw;
+    height: 100vh;
+    object-fit: contain;
+    object-position: center;
+    background: #000;
+    filter: none;
+}
+
+/* Chrome / Safari support */
+.slider:-webkit-full-screen {
+    width: 100vw;
+    height: 100vh;
+    border-radius: 0;
+    border: none;
+    background: #000;
+    box-shadow: none;
+}
+
+.slider:-webkit-full-screen .slides,
+.slider:-webkit-full-screen .slide {
+    height: 100%;
+}
+
+.slider:-webkit-full-screen .slide img {
+    width: 100vw;
+    height: 100vh;
+    object-fit: contain;
+    background: #000;
+}
+
+/* Fullscreen controls */
+.slider:fullscreen .slider-btn,
+.slider:-webkit-full-screen .slider-btn {
+    width: 56px;
+    height: 56px;
+    z-index: 50;
+    background: rgba(0, 0, 0, 0.65);
+    border: 1px solid rgba(212, 175, 55, 0.65);
+    color: var(--gold);
+}
+
+.slider:fullscreen .slider-dots,
+.slider:-webkit-full-screen .slider-dots {
+    z-index: 50;
+    bottom: 28px;
+    background: rgba(0, 0, 0, 0.65);
+}
+
+/* Fullscreen open hint */
+.slide img {
+    cursor: pointer;
+}
+
+
+/* ==================================================
+   FINAL REAL YOUTUBE-STYLE FULLSCREEN SLIDER
+================================================== */
+
+.slider:fullscreen,
+.slider:-webkit-full-screen {
+    width: 100vw !important;
+    height: 100vh !important;
+    max-width: none !important;
+    border: none !important;
+    border-radius: 0 !important;
+    background: #000 !important;
+    box-shadow: none !important;
+}
+
+.slider:fullscreen .slides,
+.slider:fullscreen .slide,
+.slider:-webkit-full-screen .slides,
+.slider:-webkit-full-screen .slide {
+    height: 100% !important;
+}
+
+.slider:fullscreen .slide img,
+.slider:-webkit-full-screen .slide img {
+    width: 100vw !important;
+    height: 100vh !important;
+    object-fit: contain !important;
+    object-position: center !important;
+    background: #000 !important;
+    filter: none !important;
+}
+
+.fullscreen-exit-btn {
+    display: none;
+}
+
+.slider:fullscreen .fullscreen-exit-btn,
+.slider:-webkit-full-screen .fullscreen-exit-btn {
+    display: grid !important;
+    place-items: center !important;
+    position: absolute !important;
+    top: auto !important;
+    bottom: 26px !important;
+    right: 28px !important;
+    left: auto !important;
+    z-index: 90 !important;
+
+    width: 46px !important;
+    height: 46px !important;
+    border-radius: 50% !important;
+
+    border: 1px solid rgba(212, 175, 55, 0.65) !important;
+    background: rgba(0, 0, 0, 0.62) !important;
+    color: var(--gold) !important;
+
+    font-size: 1.35rem !important;
+    cursor: pointer !important;
+    opacity: 0;
+    pointer-events: none;
+
+    transition:
+        opacity 0.22s ease,
+        background 0.22s ease,
+        color 0.22s ease,
+        box-shadow 0.22s ease !important;
+}
+
+.slider.show-exit-button:fullscreen .fullscreen-exit-btn,
+.slider.show-exit-button:-webkit-full-screen .fullscreen-exit-btn {
+    opacity: 1 !important;
+    pointer-events: auto !important;
+}
+
+.slider:fullscreen .fullscreen-exit-btn:hover,
+.slider:-webkit-full-screen .fullscreen-exit-btn:hover {
+    background: var(--gold) !important;
+    color: var(--black) !important;
+    box-shadow: 0 0 24px rgba(212, 175, 55, 0.38) !important;
+}
+
+.slider:fullscreen .slider-dots,
+.slider:-webkit-full-screen .slider-dots {
+    bottom: 28px !important;
+    z-index: 70 !important;
+}
+
+.slider.fullscreen-idle:fullscreen .slider-btn,
+.slider.fullscreen-idle:fullscreen .slider-dots,
+.slider.fullscreen-idle:-webkit-full-screen .slider-btn,
+.slider.fullscreen-idle:-webkit-full-screen .slider-dots {
+    opacity: 0 !important;
+    pointer-events: none !important;
+}
+
+@media (max-width: 600px) {
+    .slider:fullscreen .fullscreen-exit-btn,
+    .slider:-webkit-full-screen .fullscreen-exit-btn {
+        bottom: 22px !important;
+        right: 16px !important;
+        width: 40px !important;
+        height: 40px !important;
+        font-size: 1.15rem !important;
+    }
+
+    .slider:fullscreen .slider-dots,
+    .slider:-webkit-full-screen .slider-dots {
+        bottom: 22px !important;
+    }
+}
