@@ -5,7 +5,8 @@
     <meta charset="UTF-8">
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Karthificial provides Tamil Nadu State Board notes, question papers, MCQs, and career guidance for 10th and 12th students.">
+    <meta name="description"
+        content="Karthificial provides Tamil Nadu State Board notes, question papers, MCQs, and career guidance for 10th and 12th students.">
 
     <title>Karthificial | Contact Us</title>
 
@@ -113,55 +114,71 @@
 
                 <div class="wheel-center">
                     <span id="centerMini">Contact Hub</span>
-                    <div id="centerSymbol">
-                        <div class="logo-mark"><span><img src="assets/images/Favicon.png" alt="Favicon" loading="lazy" fetchpriority="low"></span></div>
+
+                    <div id="centerSymbol" class="center-icon-box">
+                        <img src="assets/images/Favicon.png" alt="Karthificial Logo">
                     </div>
+
                     <h2 id="centerTitle">Hover an Icon</h2>
                     <h3 id="centerValue">Select a contact option</h3>
+
                     <p id="centerText">
                         Move your cursor over an icon to preview the contact details.
                     </p>
                 </div>
 
-                <a href="mailto:yourmail@example.com" class="wheel-item item-1" data-label="Email" data-symbol="✉"
-                    data-title="Official Email" data-value="yourmail@example.com"
+                <a href="mailto:yourmail@example.com" class="wheel-item item-1" data-label="Email"
+                    data-icon="assets/contacts/mail.png" data-title="Official Email" data-value="yourmail@example.com"
                     data-text="Use this for doubts, feedback, and official contact.">
-                    <span>✉</span>
+                    <span class="wheel-icon">
+                        <img src="assets/contacts/mail.png" alt="Email icon">
+                    </span>
                     <small>Email</small>
                 </a>
 
-                <a href="https://wa.me/0000000000" class="wheel-item item-2" data-label="WhatsApp" data-symbol="☏"
-                    data-title="WhatsApp" data-value="+91 00000 00000"
+                <a href="https://wa.me/0000000000" class="wheel-item item-2" data-label="WhatsApp"
+                    data-icon="assets/contacts/whatsapp.png" data-title="WhatsApp" data-value="+91 00000 00000"
                     data-text="Use this for quick support and direct contact.">
-                    <span>☏</span>
+                    <span class="wheel-icon">
+                        <img src="assets/contacts/whatsapp.png" alt="WhatsApp icon">
+                    </span>
                     <small>WhatsApp</small>
                 </a>
 
-                <a href="https://t.me/username" class="wheel-item item-3" data-label="Telegram" data-symbol="✈"
-                    data-title="Telegram" data-value="@username"
+                <a href="https://t.me/username" class="wheel-item item-3" data-label="Telegram"
+                    data-icon="assets/contacts/telegram.png" data-title="Telegram" data-value="@username"
                     data-text="Use this for updates, resources, and announcements.">
-                    <span>✈</span>
+                    <span class="wheel-icon">
+                        <img src="assets/contacts/telegram.png" alt="Telegram icon">
+                    </span>
                     <small>Telegram</small>
                 </a>
 
                 <a href="https://youtube.com/@channelname" class="wheel-item item-4" data-label="YouTube"
-                    data-symbol="▷" data-title="YouTube" data-value="@channelname"
+                    data-icon="assets/contacts/yt.png" data-title="YouTube" data-value="@channelname"
                     data-text="Use this for videos, explanations, and guidance content.">
-                    <span>▷</span>
+                    <span class="wheel-icon">
+                        <img src="assets/contacts/yt.png" alt="YouTube icon">
+                    </span>
                     <small>YouTube</small>
                 </a>
 
-                <a href="#" class="wheel-item item-5" data-label="Instagram" data-symbol="⌾" data-title="Instagram"
-                    data-value="@profile_name" data-text="Use this for posts, updates, and student announcements.">
-                    <span>⌾</span>
+                <a href="https://instagram.com/profile_name" class="wheel-item item-5" data-label="Instagram"
+                    data-icon="assets/contacts/insta.png" data-title="Instagram" data-value="@profile_name"
+                    data-text="Use this for posts, updates, and student announcements.">
+                    <span class="wheel-icon">
+                        <img src="assets/contacts/insta.png" alt="Instagram icon">
+                    </span>
                     <small>Instagram</small>
                 </a>
 
-                <a href="#" class="wheel-item item-6" data-label="Other" data-symbol="⌘" data-title="Other Profile"
-                    data-value="Add profile here"
-                    data-text="Use this for GitHub, LinkedIn, or any other official link.">
-                    <span>⌘</span>
-                    <small>Other</small>
+                <a href="https://linkedin.com/in/username" class="wheel-item item-6" data-label="LinkedIn"
+                    data-icon="assets/contacts/linkedin.png" data-title="LinkedIn" data-value="linkedin.com/in/username"
+                    data-text="Use this for professional contact, projects, and official profile.">
+                    <span class="wheel-icon">
+                        <img src="assets/contacts/linkedin.png" alt="LinkedIn icon">
+                    </span>
+                    <small>LinkedIn</small>
                 </a>
 
             </div>
@@ -218,7 +235,7 @@
 
     <script src="script.js"></script>
     <script src="config.js"></script>
-<script src="auth.js"></script>
+    <script src="auth.js"></script>
     <script>
         const wheelItems = document.querySelectorAll(".wheel-item");
 
@@ -230,21 +247,18 @@
 
         const defaultCenter = {
             mini: "Contact Hub",
-            symbolHTML: `
-            <div class="logo-mark">
-                <span>
-                    <img src="assets/images/Favicon.png" alt="Karthificial Logo" loading="lazy" fetchpriority="low">
-                </span>
-            </div>
-        `,
+            icon: "assets/images/Favicon.png",
             title: "Hover an Icon",
             value: "Select a contact option",
             text: "Move your cursor over an icon to preview the contact details."
         };
 
         function updateCenter(item) {
-            centerMini.textContent = item.dataset.label;
-            centerSymbol.textContent = item.dataset.symbol;
+            const iconPath = item.dataset.icon;
+            const label = item.dataset.label;
+
+            centerMini.textContent = label;
+            centerSymbol.innerHTML = `<img src="${iconPath}" alt="${label} icon">`;
             centerTitle.textContent = item.dataset.title;
             centerValue.textContent = item.dataset.value;
             centerText.textContent = item.dataset.text;
@@ -252,7 +266,7 @@
 
         function resetCenter() {
             centerMini.textContent = defaultCenter.mini;
-            centerSymbol.innerHTML = defaultCenter.symbolHTML;
+            centerSymbol.innerHTML = `<img src="${defaultCenter.icon}" alt="Karthificial Logo">`;
             centerTitle.textContent = defaultCenter.title;
             centerValue.textContent = defaultCenter.value;
             centerText.textContent = defaultCenter.text;
