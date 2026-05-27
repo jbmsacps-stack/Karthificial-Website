@@ -4415,10 +4415,10 @@ section,
 }
 
 .item-5 .wheel-icon img {
-    width: 35px !important;
-    height: 35px !important;
-    max-width: 35px !important;
-    max-height: 35px !important;
+    width: 32px !important;
+    height: 32px !important;
+    max-width: 32px !important;
+    max-height: 32px !important;
 }
 
 .item-5:hover .wheel-icon img,
