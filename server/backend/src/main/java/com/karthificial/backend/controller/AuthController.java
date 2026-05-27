@@ -4,6 +4,8 @@ import com.karthificial.backend.dto.AuthResponse;
 import com.karthificial.backend.dto.LoginRequest;
 import com.karthificial.backend.dto.SignupRequest;
 import com.karthificial.backend.service.AuthService;
+import com.karthificial.backend.service.ResendEmailService;
+
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,9 +18,11 @@ import java.util.Map;
 public class AuthController {
 
     private final AuthService authService;
+    private final ResendEmailService resendEmailService;
 
-    public AuthController(AuthService authService) {
+    public AuthController(AuthService authService, ResendEmailService resendEmailService) {
         this.authService = authService;
+        this.resendEmailService = resendEmailService;
     }
 
     @GetMapping("/health")
@@ -42,6 +46,16 @@ public class AuthController {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(resp);
         }
         return ResponseEntity.ok(resp);
+    }
+
+    @GetMapping("/test-email")
+    public ResponseEntity<?> testEmail() {
+        resendEmailService.sendResetPasswordEmail(
+                "jbmsacps@gmail.com",
+                "http://localhost:8080/reset-password.html?token=test123"
+        );
+
+        return ResponseEntity.ok("Email sent");
     }
 
     // Contact moderator flow — no email sending, no SMTP secrets required

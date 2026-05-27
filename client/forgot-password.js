@@ -5,8 +5,10 @@ if (forgotPasswordForm) {
     forgotPasswordForm.addEventListener("submit", async function (event) {
         event.preventDefault();
 
-        const email = document.querySelector("#email")?.value.trim();
+        const emailInput = document.querySelector("#email");
         const submitButton = forgotPasswordForm.querySelector("button[type='submit']");
+
+        const email = emailInput.value.trim();
 
         if (!email) {
             showForgotMessage("Please enter your registered email address.", "error");
@@ -15,7 +17,7 @@ if (forgotPasswordForm) {
 
         try {
             submitButton.disabled = true;
-            submitButton.textContent = "Sending Request...";
+            submitButton.textContent = "Sending Reset Link...";
 
             const response = await fetch(`${APP_CONFIG.API_AUTH_BASE_URL}/forgot-password`, {
                 method: "POST",
@@ -28,12 +30,12 @@ if (forgotPasswordForm) {
             const data = await response.json();
 
             if (!response.ok) {
-                showForgotMessage(data.message || "Password recovery is temporarily unavailable.", "error");
+                showForgotMessage(data.message || "Could not send reset link.", "error");
                 return;
             }
 
             showForgotMessage(
-                data.message || "Password recovery is handled by moderators. Please contact the admin team with your registered email.",
+                data.message || "If this email exists, a reset link has been sent.",
                 "success"
             );
 
@@ -44,15 +46,13 @@ if (forgotPasswordForm) {
             showForgotMessage("Cannot connect to backend. Please try again later.", "error");
         } finally {
             submitButton.disabled = false;
-            submitButton.textContent = "Request Moderator Help";
+            submitButton.textContent = "Send Reset Link";
         }
     });
 }
 
 function showForgotMessage(message, type) {
-    if (!forgotMessage) {
-        return;
-    }
+    if (!forgotMessage) return;
 
     forgotMessage.textContent = message;
 

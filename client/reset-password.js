@@ -3,54 +3,12 @@ function getQueryParam(name) {
     return params.get(name);
 }
 
-const resetForm = document.querySelector('#resetForm');
-const resetMessage = document.querySelector('#resetMessage');
+const resetPasswordForm =
+    document.querySelector("#resetPasswordForm") ||
+    document.querySelector("#resetForm");
 
-if (resetForm) {
-    resetForm.addEventListener('submit', async (e) => {
-        e.preventDefault();
-
-        const newPassword = document.querySelector('#newPassword').value.trim();
-        const confirmPassword = document.querySelector('#confirmPassword').value.trim();
-        const token = getQueryParam('token') || '';
-
-        if (!newPassword || newPassword !== confirmPassword) {
-            resetMessage.textContent = 'Passwords do not match.';
-            resetMessage.className = 'form-message error-message';
-            return;
-        }
-
-        try {
-            const res = await fetch(`${APP_CONFIG.API_AUTH_BASE_URL}/reset-password`, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ token, newPassword })
-            });
-
-            const data = await res.json();
-
-            if (!res.ok) {
-                resetMessage.textContent = data.message || 'Reset failed.';
-                resetMessage.className = 'form-message error-message';
-                return;
-            }
-
-            resetMessage.textContent = data.message || 'Password reset successful.';
-            resetMessage.className = 'form-message success-message';
-
-            setTimeout(() => { window.location.href = 'login.html'; }, 1200);
-        } catch (err) {
-            resetMessage.textContent = 'Cannot connect to backend.';
-            resetMessage.className = 'form-message error-message';
-            console.error('Reset password error:', err);
-        }
-    });
-}
-const resetPasswordForm = document.querySelector("#resetPasswordForm");
 const resetMessage = document.querySelector("#resetMessage");
-
-const urlParams = new URLSearchParams(window.location.search);
-const resetToken = urlParams.get("token");
+const resetToken = getQueryParam("token");
 
 if (!resetToken) {
     showResetMessage("Invalid reset link. Token is missing.", "error");
@@ -60,13 +18,16 @@ if (!resetToken) {
     }
 }
 
-if (resetPasswordForm) {
+if (resetPasswordForm && resetToken) {
     resetPasswordForm.addEventListener("submit", async function (event) {
         event.preventDefault();
 
-        const newPassword = document.querySelector("#newPassword")?.value.trim();
-        const confirmPassword = document.querySelector("#confirmPassword")?.value.trim();
+        const newPasswordInput = document.querySelector("#newPassword");
+        const confirmPasswordInput = document.querySelector("#confirmPassword");
         const submitButton = resetPasswordForm.querySelector("button[type='submit']");
+
+        const newPassword = newPasswordInput.value.trim();
+        const confirmPassword = confirmPasswordInput.value.trim();
 
         if (!newPassword || !confirmPassword) {
             showResetMessage("Please fill both password fields.", "error");
@@ -127,9 +88,7 @@ if (resetPasswordForm) {
 }
 
 function showResetMessage(message, type) {
-    if (!resetMessage) {
-        return;
-    }
+    if (!resetMessage) return;
 
     resetMessage.textContent = message;
 
