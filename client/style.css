@@ -1,6 +1,14 @@
-/* ================================
-   GLOBAL THEME VARIABLES
-================================ */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html,
+body {
+    width: 100%;
+    overflow-x: hidden;
+}
 
 :root {
     --gold: #D4AF37;
@@ -14,16 +22,6 @@
     --shadow-gold: rgba(212, 175, 55, 0.18);
 }
 
-/* ================================
-   BASE RESET
-================================ */
-
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
 html {
     scroll-behavior: smooth;
 }
@@ -34,10 +32,6 @@ body {
     color: var(--white);
     line-height: 1.6;
 }
-
-/* ================================
-   GLOBAL ELEMENT STYLES
-================================ */
 
 h1,
 h2,
@@ -70,19 +64,11 @@ img {
     display: block;
 }
 
-/* ================================
-   CONTAINER
-================================ */
-
 .container {
     width: 90%;
     max-width: 1100px;
     margin: 0 auto;
 }
-
-/* ================================
-   BUTTONS
-================================ */
 
 .btn-gold {
     display: inline-block;
@@ -119,10 +105,6 @@ img {
     box-shadow: 0 8px 22px var(--shadow-gold);
 }
 
-/* ================================
-   SECTION HEADING
-================================ */
-
 .section-heading {
     position: relative;
     display: inline-block;
@@ -142,10 +124,6 @@ img {
     border-radius: 20px;
 }
 
-/* ================================
-   CARD
-================================ */
-
 .card {
     background-color: var(--card-bg);
     border: 1px solid var(--border-gold);
@@ -159,10 +137,6 @@ img {
     background-color: #d4af370e;
     border-color: var(--gold);
 }
-
-/* ================================
-   NAVBAR
-================================ */
 
 .navbar {
     top: 0;
@@ -181,8 +155,6 @@ img {
     align-items: center;
     justify-content: space-between;
 }
-
-/* Logo */
 
 .logo {
     display: flex;
@@ -223,8 +195,6 @@ img {
         "CTRS" 32;
 }
 
-/* Navigation */
-
 .nav-menu {
     display: flex;
     align-items: center;
@@ -242,8 +212,6 @@ img {
 .nav-link:hover {
     color: var(--gold);
 }
-
-/* Dropdown */
 
 .dropdown {
     position: relative;
@@ -285,8 +253,6 @@ img {
     color: var(--gold);
 }
 
-/* Auth Buttons */
-
 .nav-actions {
     display: flex;
     align-items: center;
@@ -298,8 +264,6 @@ img {
     padding: 8px 18px;
     font-size: 0.9rem;
 }
-
-/* Mobile Hamburger */
 
 .menu-toggle {
     display: none;
@@ -319,10 +283,6 @@ img {
     border-radius: 20px;
     transition: 0.3s ease;
 }
-
-/* ================================
-   FOOTER
-================================ */
 
 .footer {
     background: linear-gradient(180deg, #0A0A0A, #050505);
@@ -385,10 +345,6 @@ img {
     font-size: 0.9rem;
     color: #999999;
 }
-
-/* ================================
-   RESPONSIVE DESIGN
-================================ */
 
 @media (max-width: 900px) {
     .hamburger {
@@ -487,10 +443,6 @@ img {
     }
 }
 
-/* ================================
-   HOME HERO SECTION
-================================ */
-
 .home-hero {
     background:
         radial-gradient(circle at top, rgba(212, 175, 55, 0.16), transparent 35%),
@@ -524,10 +476,6 @@ img {
     gap: 18px;
     flex-wrap: wrap;
 }
-
-/* ================================
-   PHOTO SLIDER - PREMIUM COMPACT
-================================ */
 
 .slider-section {
     padding: 55px 0 35px;
@@ -571,7 +519,6 @@ img {
     filter: brightness(0.92) contrast(1.08) saturate(1.05);
 }
 
-/* Soft cinematic shade, not too dark */
 .slide::after {
     content: "";
     position: absolute;
@@ -581,8 +528,6 @@ img {
         linear-gradient(180deg, transparent 62%, rgba(0, 0, 0, 0.42));
     pointer-events: none;
 }
-
-/* Slider Buttons */
 
 .slider-btn {
     position: absolute;
@@ -627,8 +572,6 @@ img {
     right: 18px;
 }
 
-/* Slider Dots */
-
 .slider-dots {
     position: absolute;
     left: 50%;
@@ -665,10 +608,6 @@ img {
     background: var(--gold);
     box-shadow: 0 0 14px rgba(212, 175, 55, 0.55);
 }
-
-/* ================================
-   SLIDER RESPONSIVE
-================================ */
 
 @media (max-width: 900px) {
     .slider-section {
@@ -727,10 +666,6 @@ img {
     }
 }
 
-/* ================================
-   ABOUT SECTION
-================================ */
-
 .about-section {
     padding: 80px 0;
 }
@@ -769,10 +704,6 @@ img {
     font-size: 1.25rem;
 }
 
-/* ================================
-   STATS SECTION
-================================ */
-
 .stats-section {
     padding: 80px 0 30px;
     background:
@@ -800,10 +731,6 @@ img {
     font-weight: 600;
     letter-spacing: 0.4px;
 }
-
-/* ================================
-   HOME RESPONSIVE DESIGN
-================================ */
 
 @media (max-width: 900px) {
     .home-hero {
@@ -866,10 +793,6 @@ img {
         font-size: 2rem;
     }
 }
-
-/* ================================
-   AUTH PAGES
-================================ */
 
 .auth-page {
     min-height: calc(100vh - 78px);
@@ -985,10 +908,6 @@ img {
     color: #6bff9c;
 }
 
-/* ================================
-   NAVBAR LOGGED-IN USER
-================================ */
-
 .navbar-user {
     color: var(--gold);
     font-weight: 700;
@@ -1010,10 +929,6 @@ img {
     padding-bottom: 6px;
 }
 
-/* ================================
-   AUTH RESPONSIVE
-================================ */
-
 @media (max-width: 500px) {
     .auth-card {
         padding: 28px 22px;
@@ -1023,10 +938,6 @@ img {
         font-size: 1.7rem;
     }
 }
-
-/* ================================
-   RESOURCE CARD LAYOUT
-================================ */
 
 .resource-main {
     width: min(1200px, 92%);
@@ -1185,7 +1096,6 @@ img {
     transform: scale(1.01);
 }
 
-/* Thumbnail color variations */
 .tamil-bg {
     background:
         radial-gradient(circle at top left, rgba(255, 183, 77, 0.22), transparent 35%),
@@ -1273,9 +1183,6 @@ img {
     }
 }
 
-/* mcq section start from here */
-/* MAIN CONTAINER */
-
 .mcq-container {
     max-width: 850px;
     margin: 40px auto;
@@ -1287,8 +1194,6 @@ img {
     animation: fadeIn 0.6s ease;
 }
 
-/* TITLE */
-
 .mcq-title {
     text-align: center;
     color: #f5c542;
@@ -1297,8 +1202,6 @@ img {
     font-weight: 700;
     letter-spacing: 1px;
 }
-
-/* QUESTION BOX */
 
 .question-box {
     margin-bottom: 28px;
@@ -1313,8 +1216,6 @@ img {
     background: #1f1f1f;
 }
 
-/* QUESTION */
-
 .question {
     font-size: 21px;
     margin-bottom: 18px;
@@ -1322,8 +1223,6 @@ img {
     font-weight: 600;
     line-height: 1.5;
 }
-
-/* OPTIONS */
 
 .option {
     display: flex;
@@ -1344,15 +1243,12 @@ img {
     border-color: #d4af37;
 }
 
-/* RADIO BUTTON */
-
-.option input {
+.option input[type="radio"] {
     margin-right: 12px;
     transform: scale(1.1);
     cursor: pointer;
+    accent-color: var(--gold);
 }
-
-/* SUBMIT BUTTON */
 
 .submit-btn {
     width: 100%;
@@ -1374,9 +1270,6 @@ img {
     transform: translateY(-2px);
 }
 
-
-/* RESULT */
-
 #result {
     margin-top: 28px;
     text-align: center;
@@ -1384,8 +1277,6 @@ img {
     color: #f5c542;
     font-weight: 700;
 }
-
-/* ANSWER BOX */
 
 .answer-box {
     margin-top: 14px;
@@ -1626,8 +1517,6 @@ img {
     }
 }
 
-/* ANIMATIONS */
-
 @keyframes fadeIn {
     from {
         opacity: 0;
@@ -1639,9 +1528,6 @@ img {
         transform: translateY(0);
     }
 }
-
-
-/* RESPONSIVE */
 
 @media(max-width: 768px) {
 
@@ -1666,8 +1552,6 @@ img {
         font-size: 24px;
     }
 }
-
-/* Career Guidance Blog Section */
 
 .career-hero {
     padding: 70px 8% 35px;
@@ -1789,8 +1673,6 @@ img {
     font-size: 0.95rem;
 }
 
-/* Mobile Responsive */
-
 @media (max-width: 768px) {
     .career-hero {
         padding: 55px 6% 30px;
@@ -1817,10 +1699,6 @@ img {
         height: 180px;
     }
 }
-
-/* ================================
-   CAREER FEATURED GUIDE
-================================ */
 
 .featured-career-guide {
     width: min(1150px, 90%);
@@ -1892,10 +1770,6 @@ img {
     filter: brightness(0.72) contrast(1.15) saturate(1.1);
 }
 
-/* ================================
-   PROFESSIONAL STUDENT ARTICLE PAGE
-================================ */
-
 .article-main {
     width: 100%;
     margin: 0;
@@ -1905,7 +1779,6 @@ img {
         linear-gradient(180deg, #080808, #050505);
 }
 
-/* Hero takes full width */
 .article-hero {
     width: 100%;
     padding: 90px 8% 70px;
@@ -1944,7 +1817,6 @@ img {
     line-height: 1.85;
 }
 
-/* Main readable article area */
 .article-content {
     width: min(1200px, 90%);
     margin: 60px auto 0;
@@ -1952,7 +1824,6 @@ img {
     display: block;
 }
 
-/* Article text column */
 .article-body {
     width: 100%;
     max-width: none;
@@ -2002,7 +1873,6 @@ img {
     margin-bottom: 10px;
 }
 
-/* Highlight advice box */
 .article-note {
     margin: 34px 0;
     padding: 26px 28px;
@@ -2022,7 +1892,6 @@ img {
     margin-bottom: 0;
 }
 
-/* Related links at bottom */
 .related-guides {
     width: min(1180px, 88%);
     margin: 70px auto 0;
@@ -2079,7 +1948,6 @@ img {
     line-height: 1.4;
 }
 
-/* Responsive */
 @media (max-width: 950px) {
     .article-hero {
         padding: 70px 6% 55px;
@@ -2114,11 +1982,6 @@ img {
         font-size: 1.55rem;
     }
 }
-
-
-/* ================================
-   CONTACT WHEEL SINGLE SCREEN
-================================ */
 
 .contact-wheel-main {
     min-height: calc(100vh - 78px);
@@ -2167,8 +2030,6 @@ img {
     line-height: 1.7;
 }
 
-/* Wheel */
-
 .contact-wheel {
     position: relative;
     width: min(560px, 82vh);
@@ -2194,8 +2055,6 @@ img {
     border: 1px solid rgba(212, 175, 55, 0.13);
     pointer-events: none;
 }
-
-/* Center */
 
 .wheel-center {
     position: absolute;
@@ -2256,8 +2115,6 @@ img {
     line-height: 1.55;
 }
 
-/* Icons */
-
 .wheel-item {
     position: absolute;
     width: 92px;
@@ -2306,8 +2163,6 @@ img {
         0 0 34px rgba(212, 175, 55, 0.22),
         0 20px 52px rgba(0, 0, 0, 0.62);
 }
-
-/* Positions */
 
 .item-1 {
     top: 5px;
@@ -2370,10 +2225,6 @@ img {
 .item-6:focus {
     transform: scale(1.08);
 }
-
-/* ================================
-   CONTACT WHEEL MOBILE FIX
-================================ */
 
 @media (max-width: 850px) {
     .contact-wheel-main {
@@ -2528,11 +2379,6 @@ img {
     }
 }
 
-
-/* ================================
-   MOBILE FOOTER COMPACT FIX
-================================ */
-
 @media (max-width: 768px) {
     .footer {
         padding: 38px 0 16px;
@@ -2602,11 +2448,6 @@ img {
     }
 }
 
-/* ================================
-   GAME STYLE MCQ ANALYSIS POPUP OVERRIDE
-   Only affects result popup, not original MCQ layout
-================================ */
-
 .mcq-modal-overlay {
     position: fixed !important;
     inset: 0 !important;
@@ -2647,7 +2488,6 @@ img {
     animation: mcqGamePopup 0.32s ease both !important;
 }
 
-/* scrollbar inside modal */
 .mcq-modal::-webkit-scrollbar {
     width: 7px;
 }
@@ -2662,7 +2502,6 @@ img {
     border-radius: 999px;
 }
 
-/* small label: TEST ANALYSIS */
 .mcq-modal-label {
     display: inline-flex !important;
     align-items: center !important;
@@ -2680,7 +2519,6 @@ img {
     letter-spacing: 1.2px !important;
 }
 
-/* performance title */
 .mcq-modal h2,
 #mcqPerformanceTitle {
     color: #f2cf5b !important;
@@ -2693,7 +2531,6 @@ img {
         0 0 34px rgba(212, 175, 55, 0.12) !important;
 }
 
-/* close button */
 .mcq-modal-close {
     position: absolute !important;
     top: 14px !important;
@@ -2718,7 +2555,6 @@ img {
     transform: scale(1.06) !important;
 }
 
-/* score circle = game score badge */
 .mcq-score-circle {
     width: 132px !important;
     height: 132px !important;
@@ -2740,7 +2576,6 @@ img {
         inset 0 0 30px rgba(212, 175, 55, 0.08) !important;
 }
 
-/* main performance text */
 .mcq-performance-text,
 #mcqPerformanceText {
     color: #f1e3a4 !important;
@@ -2751,7 +2586,6 @@ img {
     max-width: 92% !important;
 }
 
-/* game stats grid */
 .mcq-stats-grid {
     display: grid !important;
     grid-template-columns: repeat(auto-fit, minmax(112px, 1fr)) !important;
@@ -2789,7 +2623,6 @@ img {
     line-height: 1.1 !important;
 }
 
-/* benchmark = friendly game rank */
 .mcq-ranking-text,
 #mcqBenchmark {
     color: #dfffe8 !important;
@@ -2806,7 +2639,6 @@ img {
     min-height: auto !important;
 }
 
-/* advice = comeback/motivation text */
 .mcq-advice-text,
 #mcqAdviceText {
     color: #ffffff !important;
@@ -2821,7 +2653,6 @@ img {
     line-height: 1.55 !important;
 }
 
-/* buttons */
 .mcq-modal-actions {
     display: flex !important;
     justify-content: center !important;
@@ -2855,7 +2686,6 @@ img {
     transform: scale(1.02) !important;
 }
 
-/* mobile fit fix */
 @media (max-width: 520px) {
     .mcq-modal-overlay {
         padding: 10px !important;
@@ -2954,13 +2784,6 @@ img {
     }
 }
 
-
-/* ================================
-   KARTHIFICIAL STYLE MCQ ANALYSIS POPUP OVERRIDE
-   Matches black-gold project vibe
-   Only affects result popup
-================================ */
-
 .mcq-modal-overlay {
     position: fixed !important;
     inset: 0 !important;
@@ -2997,7 +2820,6 @@ img {
     animation: mcqKarthificialPop 0.3s ease both !important;
 }
 
-/* cleaner internal scrollbar */
 .mcq-modal::-webkit-scrollbar {
     width: 6px;
 }
@@ -3296,12 +3118,6 @@ img {
     z-index: 10000 !important;
 }
 
-
-/* ================================
-   FINAL MOBILE NAV OVERLAP FIX
-   Keep navbar normal, not sticky
-================================ */
-
 .navbar {
     position: relative !important;
     z-index: 999999 !important;
@@ -3314,7 +3130,6 @@ img {
     overflow: visible !important;
 }
 
-/* Make main page content stay below nav layer */
 main,
 section,
 .resource-main,
@@ -3392,12 +3207,6 @@ section,
     }
 }
 
-/* ================================
-   FRESH ADD-ON: STUDENT RESOURCE 2-CARD MOBILE GRID
-   For papers / notes / reused resource pages
-   Desktop untouched
-================================ */
-
 @media (max-width: 768px) {
     .resource-main {
         width: 94% !important;
@@ -3420,7 +3229,6 @@ section,
         line-height: 1.65 !important;
     }
 
-    /* Filter gap fix */
     .resource-toolbar {
         flex-direction: column !important;
         align-items: flex-start !important;
@@ -3444,7 +3252,6 @@ section,
         line-height: 1.2 !important;
     }
 
-    /* 2 cards per row on mobile */
     .resource-card-grid {
         display: grid !important;
         grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
@@ -3459,7 +3266,6 @@ section,
         overflow: hidden !important;
     }
 
-    /* Compact readable thumbnail */
     .resource-thumbnail {
         height: 105px !important;
         padding: 14px 10px !important;
@@ -3546,10 +3352,6 @@ section,
     }
 }
 
-/* ================================
-   FORGOT / RESET PASSWORD SMALL FIX
-================================ */
-
 .auth-card .btn-gold.auth-submit {
     text-align: center;
 }
@@ -3567,10 +3369,6 @@ section,
     min-height: 22px;
 }
 
-/* ================================
-   FORGOT PASSWORD LINK
-================================ */
-
 .forgot-auth-link {
     margin-top: 14px;
     font-size: 0.92rem;
@@ -3580,10 +3378,6 @@ section,
     color: var(--gold);
     font-weight: 800;
 }
-
-/* ================================
-   FORGOT PASSWORD PAGE FIX
-================================ */
 
 .auth-card .form-message {
     min-height: 22px;
@@ -3611,20 +3405,11 @@ section,
     }
 }
 
-/* ================================
-   AUTH BUTTON LOADING STATE
-================================ */
-
 .auth-submit:disabled {
     opacity: 0.65;
     cursor: not-allowed;
     box-shadow: none;
 }
-
-/* ================================
-   RESOURCE THUMBNAIL PROFESSIONAL FIX
-   Keeps gradient, centers images, prevents downward shift
-================================ */
 
 .resource-card-grid {
     display: grid;
@@ -3662,7 +3447,6 @@ section,
     filter: brightness(1.03);
 }
 
-/* Keep your existing gradient backgrounds */
 .resource-thumbnail {
     height: 165px;
     padding: 14px;
@@ -3674,7 +3458,6 @@ section,
     border-bottom: 1px solid rgba(212, 175, 55, 0.16);
 }
 
-/* Subtle premium shade, gradient still remains visible */
 .resource-thumbnail::after {
     content: "";
     position: absolute;
@@ -3685,20 +3468,16 @@ section,
     pointer-events: none;
 }
 
-/* This fixes the image going downward */
 .resource-thumbnail span {
     width: 100%;
     height: 100%;
     display: flex;
     align-items: center;
-    /* vertical center */
     justify-content: center;
-    /* horizontal center */
     transform: none;
     line-height: 0;
 }
 
-/* Make image fit neatly inside top box */
 .resource-thumbnail img {
     width: 100%;
     height: 100%;
@@ -3712,7 +3491,6 @@ section,
         filter 0.35s ease;
 }
 
-/* Professional hover: image only, no card jumping */
 .resource-box-card:hover .resource-thumbnail span {
     transform: none;
 }
@@ -3722,7 +3500,6 @@ section,
     filter: brightness(0.92) contrast(1.12) saturate(1.1);
 }
 
-/* Card body alignment */
 .resource-card-body {
     padding: 24px;
     display: flex;
@@ -3770,14 +3547,12 @@ section,
     filter: brightness(1.05);
 }
 
-/* Desktop: clean 4-card row */
 @media (min-width: 1150px) {
     .resource-card-grid {
         grid-template-columns: repeat(4, 1fr);
     }
 }
 
-/* Tablet */
 @media (max-width: 1050px) {
     .resource-card-grid {
         grid-template-columns: repeat(2, minmax(250px, 1fr));
@@ -3788,7 +3563,6 @@ section,
     }
 }
 
-/* Mobile */
 @media (max-width: 640px) {
     .resource-card-grid {
         grid-template-columns: 1fr;
@@ -3813,10 +3587,6 @@ section,
     }
 }
 
-/* ================================
-   MODERATE THUMBNAIL COLOR VARIATIONS
-   3-way gradients: readable + colorful + not painful
-================================ */
 .tamil-bg,
 .tamil-card-bg {
     background:
@@ -3856,7 +3626,6 @@ section,
         linear-gradient(135deg, #312e81 0%, #7c3aed 52%, #4c1d95 100%);
 }
 
-/* 12th specific subjects */
 .physics-card-bg {
     background:
         radial-gradient(circle at top left, rgba(186, 230, 253, 0.28), transparent 38%),
@@ -3983,16 +3752,10 @@ section,
         linear-gradient(135deg, #4b3826 0%, #9d7b58 52%, #6d563d 100%);
 }
 
-/* ==================================================
-   REAL FULLSCREEN SLIDER MODE
-   YouTube-style browser fullscreen
-================================================== */
-
 .slider {
     position: relative;
 }
 
-/* When slider enters real fullscreen */
 .slider:fullscreen {
     width: 100vw;
     height: 100vh;
@@ -4020,7 +3783,6 @@ section,
     filter: none;
 }
 
-/* Chrome / Safari support */
 .slider:-webkit-full-screen {
     width: 100vw;
     height: 100vh;
@@ -4042,7 +3804,6 @@ section,
     background: #000;
 }
 
-/* Fullscreen controls */
 .slider:fullscreen .slider-btn,
 .slider:-webkit-full-screen .slider-btn {
     width: 56px;
@@ -4060,15 +3821,9 @@ section,
     background: rgba(0, 0, 0, 0.65);
 }
 
-/* Fullscreen open hint */
 .slide img {
     cursor: pointer;
 }
-
-
-/* ==================================================
-   FINAL REAL YOUTUBE-STYLE FULLSCREEN SLIDER
-================================================== */
 
 .slider:fullscreen,
 .slider:-webkit-full-screen {
@@ -4161,6 +3916,7 @@ section,
 }
 
 @media (max-width: 600px) {
+
     .slider:fullscreen .fullscreen-exit-btn,
     .slider:-webkit-full-screen .fullscreen-exit-btn {
         bottom: 22px !important;
@@ -4175,11 +3931,6 @@ section,
         bottom: 22px !important;
     }
 }
-
-
-/* ================================
-   CONTACT WHEEL IMAGE ICON FIX
-================================ */
 
 .wheel-item {
     overflow: hidden;
@@ -4200,8 +3951,7 @@ section,
     object-fit: contain;
     display: block;
     filter:
-        drop-shadow(0 0 6px rgba(255, 215, 0, 0.75))
-        drop-shadow(0 0 14px rgba(255, 215, 0, 0.45));
+        drop-shadow(0 0 6px rgba(255, 215, 0, 0.75)) drop-shadow(0 0 14px rgba(255, 215, 0, 0.45));
     transition: filter 0.25s ease, transform 0.25s ease;
 }
 
@@ -4209,8 +3959,7 @@ section,
 .wheel-item:focus .wheel-icon img {
     transform: scale(1.08);
     filter:
-        drop-shadow(0 0 8px rgba(255, 215, 0, 0.95))
-        drop-shadow(0 0 22px rgba(255, 215, 0, 0.65));
+        drop-shadow(0 0 8px rgba(255, 215, 0, 0.95)) drop-shadow(0 0 22px rgba(255, 215, 0, 0.65));
 }
 
 .center-icon-box {
@@ -4228,17 +3977,14 @@ section,
     object-fit: contain;
     display: block;
     filter:
-        drop-shadow(0 0 8px rgba(255, 215, 0, 0.75))
-        drop-shadow(0 0 18px rgba(255, 215, 0, 0.45));
+        drop-shadow(0 0 8px rgba(255, 215, 0, 0.75)) drop-shadow(0 0 18px rgba(255, 215, 0, 0.45));
 }
 
-/* Keeps the 256x256 image from becoming too huge inside the circle */
 .wheel-item img {
     max-width: 64px;
     max-height: 64px;
 }
 
-/* Mobile adjustment */
 @media (max-width: 768px) {
     .wheel-icon {
         width: 46px;
@@ -4257,11 +4003,6 @@ section,
     }
 }
 
-/* ================================
-   CONTACT WHEEL ICON IMAGE FIX
-   For 256x256 PNG icons
-================================ */
-
 .wheel-item {
     overflow: visible !important;
     width: 118px;
@@ -4276,7 +4017,6 @@ section,
     text-align: center;
 }
 
-/* Icon holder */
 .wheel-icon {
     width: 54px;
     height: 54px;
@@ -4287,7 +4027,6 @@ section,
     justify-content: center;
 }
 
-/* Actual PNG image */
 .wheel-icon img {
     width: 54px !important;
     height: 54px !important;
@@ -4300,13 +4039,11 @@ section,
     border-radius: 12px;
 
     filter:
-        drop-shadow(0 0 6px rgba(255, 220, 40, 0.75))
-        drop-shadow(0 0 14px rgba(255, 220, 40, 0.45));
+        drop-shadow(0 0 6px rgba(255, 220, 40, 0.75)) drop-shadow(0 0 14px rgba(255, 220, 40, 0.45));
 
     transition: transform 0.25s ease, filter 0.25s ease;
 }
 
-/* Label text */
 .wheel-item small {
     display: block;
     width: 100%;
@@ -4324,16 +4061,13 @@ section,
     text-align: center;
 }
 
-/* Hover effect */
 .wheel-item:hover .wheel-icon img,
 .wheel-item:focus .wheel-icon img {
     transform: scale(1.08);
     filter:
-        drop-shadow(0 0 9px rgba(255, 220, 40, 0.95))
-        drop-shadow(0 0 22px rgba(255, 220, 40, 0.7));
+        drop-shadow(0 0 9px rgba(255, 220, 40, 0.95)) drop-shadow(0 0 22px rgba(255, 220, 40, 0.7));
 }
 
-/* Center preview icon */
 .center-icon-box {
     width: 70px;
     height: 70px;
@@ -4356,16 +4090,13 @@ section,
     border-radius: 14px;
 
     filter:
-        drop-shadow(0 0 8px rgba(255, 220, 40, 0.8))
-        drop-shadow(0 0 18px rgba(255, 220, 40, 0.5));
+        drop-shadow(0 0 8px rgba(255, 220, 40, 0.8)) drop-shadow(0 0 18px rgba(255, 220, 40, 0.5));
 }
 
-/* Extra fix: prevent global image rules from breaking this page */
 .contact-wheel img {
     object-fit: contain;
 }
 
-/* Mobile fix */
 @media (max-width: 768px) {
     .wheel-item {
         width: 92px;
@@ -4404,12 +4135,6 @@ section,
     }
 }
 
-/* =====================================================
-   CONTACT WHEEL PNG ICON SIZE FIX
-   Keeps old wheel size + old container size
-===================================================== */
-
-/* Keep the original round containers */
 .wheel-item {
     width: 92px !important;
     height: 92px !important;
@@ -4425,7 +4150,6 @@ section,
     padding: 8px !important;
 }
 
-/* Icon wrapper inside wheel item */
 .wheel-icon {
     width: 34px !important;
     height: 34px !important;
@@ -4437,7 +4161,6 @@ section,
     margin: 0 !important;
 }
 
-/* Actual 256x256 PNG icon displayed small */
 .wheel-icon img {
     width: 34px !important;
     height: 34px !important;
@@ -4450,15 +4173,13 @@ section,
     border-radius: 0 !important;
 
     filter:
-        drop-shadow(0 0 5px rgba(212, 175, 55, 0.85))
-        drop-shadow(0 0 13px rgba(212, 175, 55, 0.45)) !important;
+        drop-shadow(0 0 5px rgba(212, 175, 55, 0.85)) drop-shadow(0 0 13px rgba(212, 175, 55, 0.45)) !important;
 
     transition:
         transform 0.25s ease,
         filter 0.25s ease;
 }
 
-/* Label stays readable like old design */
 .wheel-item small {
     display: block !important;
     width: 100% !important;
@@ -4475,7 +4196,6 @@ section,
     overflow: visible !important;
 }
 
-/* Hover: glow only, not huge size */
 .wheel-item:hover,
 .wheel-item:focus {
     transform: scale(1.04) !important;
@@ -4492,11 +4212,9 @@ section,
 .wheel-item:focus .wheel-icon img {
     transform: scale(1.06);
     filter:
-        drop-shadow(0 0 7px rgba(212, 175, 55, 1))
-        drop-shadow(0 0 18px rgba(212, 175, 55, 0.65)) !important;
+        drop-shadow(0 0 7px rgba(212, 175, 55, 1)) drop-shadow(0 0 18px rgba(212, 175, 55, 0.65)) !important;
 }
 
-/* Center preview icon should also stay controlled */
 .center-icon-box,
 #centerSymbol {
     width: 48px !important;
@@ -4519,17 +4237,14 @@ section,
     display: block !important;
 
     filter:
-        drop-shadow(0 0 7px rgba(212, 175, 55, 0.85))
-        drop-shadow(0 0 16px rgba(212, 175, 55, 0.48)) !important;
+        drop-shadow(0 0 7px rgba(212, 175, 55, 0.85)) drop-shadow(0 0 16px rgba(212, 175, 55, 0.48)) !important;
 }
 
-/* Keep old right-side wheel size */
 .contact-wheel {
     width: min(560px, 82vh) !important;
     height: min(560px, 82vh) !important;
 }
 
-/* Keep old two-column website layout */
 .contact-wheel-layout {
     width: min(1120px, 100%) !important;
     display: grid !important;
@@ -4538,8 +4253,8 @@ section,
     gap: 35px !important;
 }
 
-/* Mobile: still compact, not giant */
 @media (max-width: 850px) {
+
     .wheel-item,
     .item-1,
     .item-2,
@@ -4585,17 +4300,10 @@ section,
     }
 }
 
-/* =====================================================
-   CONTACT WHEEL GTA-LIKE FONT + SOFTER ICON GLOW
-   Keeps old wheel/container size
-===================================================== */
-
-/* Overall contact page typography feel */
 .contact-wheel-main {
     font-family: Arial, Helvetica, sans-serif;
 }
 
-/* Left intro: less bold, cleaner GTA-style */
 .wheel-intro span {
     font-weight: 700 !important;
     letter-spacing: 2.4px !important;
@@ -4611,7 +4319,6 @@ section,
     color: #d8d8d8 !important;
 }
 
-/* Wheel item labels: less chunky */
 .wheel-item small {
     font-weight: 700 !important;
     letter-spacing: 1.4px !important;
@@ -4619,7 +4326,6 @@ section,
     text-shadow: none !important;
 }
 
-/* Center text: less bold and more game-menu like */
 #centerMini {
     font-weight: 700 !important;
     letter-spacing: 2px !important;
@@ -4642,28 +4348,23 @@ section,
     color: #d6d6d6 !important;
 }
 
-/* Reduce individual icon glow */
 .wheel-icon img {
     filter:
-        drop-shadow(0 0 2px rgba(212, 175, 55, 0.45))
-        drop-shadow(0 0 7px rgba(212, 175, 55, 0.22)) !important;
+        drop-shadow(0 0 2px rgba(212, 175, 55, 0.45)) drop-shadow(0 0 7px rgba(212, 175, 55, 0.22)) !important;
 
     opacity: 0.9 !important;
 }
 
-/* Softer hover: no over-bright neon blast */
 .wheel-item:hover .wheel-icon img,
 .wheel-item:focus .wheel-icon img {
     transform: scale(1.04) !important;
 
     filter:
-        drop-shadow(0 0 3px rgba(212, 175, 55, 0.58))
-        drop-shadow(0 0 10px rgba(212, 175, 55, 0.32)) !important;
+        drop-shadow(0 0 3px rgba(212, 175, 55, 0.58)) drop-shadow(0 0 10px rgba(212, 175, 55, 0.32)) !important;
 
     opacity: 1 !important;
 }
 
-/* Reduce circle/container glow also */
 .wheel-item {
     box-shadow:
         0 12px 32px rgba(0, 0, 0, 0.45),
@@ -4673,7 +4374,6 @@ section,
         radial-gradient(circle, rgba(212, 175, 55, 0.08), rgba(212, 175, 55, 0.025) 46%, #111 86%) !important;
 }
 
-/* Softer selected item */
 .wheel-item:hover,
 .wheel-item:focus {
     border-color: rgba(212, 175, 55, 0.55) !important;
@@ -4687,17 +4387,14 @@ section,
         0 18px 42px rgba(0, 0, 0, 0.55) !important;
 }
 
-/* Center logo/icon glow reduced */
 #centerSymbol img,
 .center-icon-box img {
     filter:
-        drop-shadow(0 0 3px rgba(212, 175, 55, 0.55))
-        drop-shadow(0 0 10px rgba(212, 175, 55, 0.28)) !important;
+        drop-shadow(0 0 3px rgba(212, 175, 55, 0.55)) drop-shadow(0 0 10px rgba(212, 175, 55, 0.28)) !important;
 
     opacity: 0.92 !important;
 }
 
-/* Center circle glow reduced */
 .wheel-center {
     box-shadow:
         0 0 0 1px rgba(212, 175, 55, 0.08),
@@ -4708,7 +4405,6 @@ section,
         radial-gradient(circle, rgba(212, 175, 55, 0.09), rgba(212, 175, 55, 0.025) 42%, #101010 75%) !important;
 }
 
-/* Wheel rings should blend, not scream */
 .contact-wheel::before {
     border-color: rgba(212, 175, 55, 0.10) !important;
     box-shadow: inset 0 0 40px rgba(212, 175, 55, 0.015) !important;
@@ -4718,11 +4414,6 @@ section,
     border-color: rgba(212, 175, 55, 0.09) !important;
 }
 
-/* =====================================================
-   CONTACT WHEEL INSTAGRAM ICON BALANCE FIX
-   Only increases Instagram visual size
-===================================================== */
-
 .item-5 .wheel-icon img {
     width: 35px !important;
     height: 35px !important;
@@ -4730,8 +4421,19 @@ section,
     max-height: 35px !important;
 }
 
-/* Keep hover controlled */
 .item-5:hover .wheel-icon img,
 .item-5:focus .wheel-icon img {
     transform: scale(1.04) !important;
+}
+
+input[type="radio"]:checked {
+    border-color: #f2cf5b;
+}
+
+input[type="radio"]:focus {
+    outline: none;
+}
+
+label {
+    cursor: pointer;
 }
