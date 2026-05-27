@@ -3828,6 +3828,8 @@ section,
         linear-gradient(135deg, #4b3422 0%, #9c7553 52%, #6d4f36 100%);
 }
 
+/* 12th paper subjects */
+
 .paper-physics-bg {
     background:
         radial-gradient(circle at top left, rgba(185, 225, 235, 0.24), transparent 38%),
