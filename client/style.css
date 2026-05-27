@@ -1,6 +1,14 @@
-/* ================================
-   GLOBAL THEME VARIABLES
-================================ */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html,
+body {
+    width: 100%;
+    overflow-x: hidden;
+}
 
 :root {
     --gold: #D4AF37;
@@ -1345,11 +1353,11 @@ img {
 }
 
 /* RADIO BUTTON */
-
-.option input {
+.option input[type="radio"] {
     margin-right: 12px;
     transform: scale(1.1);
     cursor: pointer;
+    accent-color: var(--gold);
 }
 
 /* SUBMIT BUTTON */
@@ -4161,6 +4169,7 @@ section,
 }
 
 @media (max-width: 600px) {
+
     .slider:fullscreen .fullscreen-exit-btn,
     .slider:-webkit-full-screen .fullscreen-exit-btn {
         bottom: 22px !important;
@@ -4200,8 +4209,7 @@ section,
     object-fit: contain;
     display: block;
     filter:
-        drop-shadow(0 0 6px rgba(255, 215, 0, 0.75))
-        drop-shadow(0 0 14px rgba(255, 215, 0, 0.45));
+        drop-shadow(0 0 6px rgba(255, 215, 0, 0.75)) drop-shadow(0 0 14px rgba(255, 215, 0, 0.45));
     transition: filter 0.25s ease, transform 0.25s ease;
 }
 
@@ -4209,8 +4217,7 @@ section,
 .wheel-item:focus .wheel-icon img {
     transform: scale(1.08);
     filter:
-        drop-shadow(0 0 8px rgba(255, 215, 0, 0.95))
-        drop-shadow(0 0 22px rgba(255, 215, 0, 0.65));
+        drop-shadow(0 0 8px rgba(255, 215, 0, 0.95)) drop-shadow(0 0 22px rgba(255, 215, 0, 0.65));
 }
 
 .center-icon-box {
@@ -4228,8 +4235,7 @@ section,
     object-fit: contain;
     display: block;
     filter:
-        drop-shadow(0 0 8px rgba(255, 215, 0, 0.75))
-        drop-shadow(0 0 18px rgba(255, 215, 0, 0.45));
+        drop-shadow(0 0 8px rgba(255, 215, 0, 0.75)) drop-shadow(0 0 18px rgba(255, 215, 0, 0.45));
 }
 
 /* Keeps the 256x256 image from becoming too huge inside the circle */
@@ -4300,8 +4306,7 @@ section,
     border-radius: 12px;
 
     filter:
-        drop-shadow(0 0 6px rgba(255, 220, 40, 0.75))
-        drop-shadow(0 0 14px rgba(255, 220, 40, 0.45));
+        drop-shadow(0 0 6px rgba(255, 220, 40, 0.75)) drop-shadow(0 0 14px rgba(255, 220, 40, 0.45));
 
     transition: transform 0.25s ease, filter 0.25s ease;
 }
@@ -4329,8 +4334,7 @@ section,
 .wheel-item:focus .wheel-icon img {
     transform: scale(1.08);
     filter:
-        drop-shadow(0 0 9px rgba(255, 220, 40, 0.95))
-        drop-shadow(0 0 22px rgba(255, 220, 40, 0.7));
+        drop-shadow(0 0 9px rgba(255, 220, 40, 0.95)) drop-shadow(0 0 22px rgba(255, 220, 40, 0.7));
 }
 
 /* Center preview icon */
@@ -4356,8 +4360,7 @@ section,
     border-radius: 14px;
 
     filter:
-        drop-shadow(0 0 8px rgba(255, 220, 40, 0.8))
-        drop-shadow(0 0 18px rgba(255, 220, 40, 0.5));
+        drop-shadow(0 0 8px rgba(255, 220, 40, 0.8)) drop-shadow(0 0 18px rgba(255, 220, 40, 0.5));
 }
 
 /* Extra fix: prevent global image rules from breaking this page */
@@ -4450,8 +4453,7 @@ section,
     border-radius: 0 !important;
 
     filter:
-        drop-shadow(0 0 5px rgba(212, 175, 55, 0.85))
-        drop-shadow(0 0 13px rgba(212, 175, 55, 0.45)) !important;
+        drop-shadow(0 0 5px rgba(212, 175, 55, 0.85)) drop-shadow(0 0 13px rgba(212, 175, 55, 0.45)) !important;
 
     transition:
         transform 0.25s ease,
@@ -4492,8 +4494,7 @@ section,
 .wheel-item:focus .wheel-icon img {
     transform: scale(1.06);
     filter:
-        drop-shadow(0 0 7px rgba(212, 175, 55, 1))
-        drop-shadow(0 0 18px rgba(212, 175, 55, 0.65)) !important;
+        drop-shadow(0 0 7px rgba(212, 175, 55, 1)) drop-shadow(0 0 18px rgba(212, 175, 55, 0.65)) !important;
 }
 
 /* Center preview icon should also stay controlled */
@@ -4519,8 +4520,7 @@ section,
     display: block !important;
 
     filter:
-        drop-shadow(0 0 7px rgba(212, 175, 55, 0.85))
-        drop-shadow(0 0 16px rgba(212, 175, 55, 0.48)) !important;
+        drop-shadow(0 0 7px rgba(212, 175, 55, 0.85)) drop-shadow(0 0 16px rgba(212, 175, 55, 0.48)) !important;
 }
 
 /* Keep old right-side wheel size */
@@ -4540,6 +4540,7 @@ section,
 
 /* Mobile: still compact, not giant */
 @media (max-width: 850px) {
+
     .wheel-item,
     .item-1,
     .item-2,
@@ -4645,8 +4646,7 @@ section,
 /* Reduce individual icon glow */
 .wheel-icon img {
     filter:
-        drop-shadow(0 0 2px rgba(212, 175, 55, 0.45))
-        drop-shadow(0 0 7px rgba(212, 175, 55, 0.22)) !important;
+        drop-shadow(0 0 2px rgba(212, 175, 55, 0.45)) drop-shadow(0 0 7px rgba(212, 175, 55, 0.22)) !important;
 
     opacity: 0.9 !important;
 }
@@ -4657,8 +4657,7 @@ section,
     transform: scale(1.04) !important;
 
     filter:
-        drop-shadow(0 0 3px rgba(212, 175, 55, 0.58))
-        drop-shadow(0 0 10px rgba(212, 175, 55, 0.32)) !important;
+        drop-shadow(0 0 3px rgba(212, 175, 55, 0.58)) drop-shadow(0 0 10px rgba(212, 175, 55, 0.32)) !important;
 
     opacity: 1 !important;
 }
@@ -4691,8 +4690,7 @@ section,
 #centerSymbol img,
 .center-icon-box img {
     filter:
-        drop-shadow(0 0 3px rgba(212, 175, 55, 0.55))
-        drop-shadow(0 0 10px rgba(212, 175, 55, 0.28)) !important;
+        drop-shadow(0 0 3px rgba(212, 175, 55, 0.55)) drop-shadow(0 0 10px rgba(212, 175, 55, 0.28)) !important;
 
     opacity: 0.92 !important;
 }
@@ -4726,12 +4724,29 @@ section,
 .item-5 .wheel-icon img {
     width: 35px !important;
     height: 35px !important;
-    max-width: 35px !important;
-    max-height: 35px !important;
+    max-width: 3px !important;
+    max-height: 42px !important;
 }
 
 /* Keep hover controlled */
 .item-5:hover .wheel-icon img,
 .item-5:focus .wheel-icon img {
     transform: scale(1.04) !important;
+}
+
+/* ================================
+   COMMON RADIO BUTTON STYLE
+================================ */
+
+input[type="radio"]:checked {
+    border-color: #f2cf5b;
+}
+
+input[type="radio"]:focus {
+    outline: none;
+}
+
+/* Label spacing fix */
+label {
+    cursor: pointer;
 }
