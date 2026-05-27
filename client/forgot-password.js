@@ -52,7 +52,9 @@ if (forgotPasswordForm) {
 }
 
 function showForgotMessage(message, type) {
-    if (!forgotMessage) return;
+    if (!forgotMessage) {
+        return;
+    }
 
     forgotMessage.textContent = message;
 

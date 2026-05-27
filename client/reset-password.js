@@ -3,10 +3,7 @@ function getQueryParam(name) {
     return params.get(name);
 }
 
-const resetPasswordForm =
-    document.querySelector("#resetPasswordForm") ||
-    document.querySelector("#resetForm");
-
+const resetPasswordForm = document.querySelector("#resetPasswordForm");
 const resetMessage = document.querySelector("#resetMessage");
 const resetToken = getQueryParam("token");
 
@@ -55,7 +52,7 @@ if (resetPasswordForm && resetToken) {
                 },
                 body: JSON.stringify({
                     token: resetToken,
-                    newPassword
+                    newPassword: newPassword
                 })
             });
 
@@ -88,7 +85,9 @@ if (resetPasswordForm && resetToken) {
 }
 
 function showResetMessage(message, type) {
-    if (!resetMessage) return;
+    if (!resetMessage) {
+        return;
+    }
 
     resetMessage.textContent = message;
 
