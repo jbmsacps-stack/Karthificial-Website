@@ -3507,3 +3507,373 @@ section,
     cursor: not-allowed;
     box-shadow: none;
 }
+
+/* ================================
+   RESOURCE THUMBNAIL PROFESSIONAL FIX
+   Keeps gradient, centers images, prevents downward shift
+================================ */
+
+.resource-card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 28px;
+    align-items: stretch;
+}
+
+.resource-box-card {
+    display: flex;
+    flex-direction: column;
+    min-height: 100%;
+    background: #111111;
+    border: 1px solid rgba(212, 175, 55, 0.24);
+    border-radius: 24px;
+    overflow: hidden;
+    box-shadow:
+        0 18px 42px rgba(0, 0, 0, 0.34),
+        inset 0 0 22px rgba(212, 175, 55, 0.018);
+    transition:
+        border-color 0.3s ease,
+        box-shadow 0.3s ease,
+        background 0.3s ease,
+        filter 0.3s ease;
+}
+
+.resource-box-card:hover {
+    transform: none;
+    background: #131313;
+    border-color: rgba(212, 175, 55, 0.62);
+    box-shadow:
+        0 0 0 1px rgba(212, 175, 55, 0.14),
+        0 0 30px rgba(212, 175, 55, 0.13),
+        0 24px 56px rgba(0, 0, 0, 0.5);
+    filter: brightness(1.03);
+}
+
+/* Keep your existing gradient backgrounds */
+.resource-thumbnail {
+    height: 165px;
+    padding: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    position: relative;
+    border-bottom: 1px solid rgba(212, 175, 55, 0.16);
+}
+
+/* Subtle premium shade, gradient still remains visible */
+.resource-thumbnail::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+        linear-gradient(180deg, rgba(0, 0, 0, 0.04), rgba(0, 0, 0, 0.22)),
+        radial-gradient(circle at top, rgba(255, 255, 255, 0.10), transparent 52%);
+    pointer-events: none;
+}
+
+/* This fixes the image going downward */
+.resource-thumbnail span {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;       /* vertical center */
+    justify-content: center;   /* horizontal center */
+    transform: none;
+    line-height: 0;
+}
+
+/* Make image fit neatly inside top box */
+.resource-thumbnail img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    object-position: center;
+    padding: 4px;
+    display: block;
+    filter: saturate(1.08) contrast(1.08);
+    transition:
+        transform 0.35s ease,
+        filter 0.35s ease;
+}
+
+/* Professional hover: image only, no card jumping */
+.resource-box-card:hover .resource-thumbnail span {
+    transform: none;
+}
+
+.resource-box-card:hover .resource-thumbnail img {
+    transform: scale(1.035);
+    filter: brightness(0.92) contrast(1.12) saturate(1.1);
+}
+
+/* Card body alignment */
+.resource-card-body {
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
+.resource-card-body h3 {
+    font-size: 1.35rem;
+    margin-bottom: 12px;
+}
+
+.resource-card-body p {
+    font-size: 0.98rem;
+    line-height: 1.65;
+    color: #d0d0d0;
+    margin-bottom: 20px;
+}
+
+.resource-card-info {
+    margin-top: auto;
+    margin-bottom: 18px;
+    padding-top: 8px;
+    font-weight: 700;
+}
+
+.resource-card-btn {
+    border-radius: 14px;
+    padding: 12px 16px;
+    font-size: 1rem;
+    font-weight: 800;
+    background: linear-gradient(135deg, #d4af37, #e5c453);
+    border: 1px solid rgba(212, 175, 55, 0.9);
+    transition:
+        background 0.25s ease,
+        box-shadow 0.25s ease,
+        filter 0.25s ease;
+}
+
+.resource-card-btn:hover {
+    transform: none;
+    color: #111111;
+    background: linear-gradient(135deg, #f2d461, #d4af37);
+    box-shadow: 0 0 24px rgba(212, 175, 55, 0.24);
+    filter: brightness(1.05);
+}
+
+/* Desktop: clean 4-card row */
+@media (min-width: 1150px) {
+    .resource-card-grid {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+
+/* Tablet */
+@media (max-width: 1050px) {
+    .resource-card-grid {
+        grid-template-columns: repeat(2, minmax(250px, 1fr));
+    }
+
+    .resource-thumbnail {
+        height: 155px;
+    }
+}
+
+/* Mobile */
+@media (max-width: 640px) {
+    .resource-card-grid {
+        grid-template-columns: 1fr;
+        gap: 22px;
+    }
+
+    .resource-thumbnail {
+        height: 145px;
+        padding: 12px;
+    }
+
+    .resource-card-body {
+        padding: 21px 20px 22px;
+    }
+
+    .resource-card-body h3 {
+        font-size: 1.22rem;
+    }
+
+    .resource-card-body p {
+        font-size: 0.95rem;
+    }
+}
+
+/* ================================
+   MODERATE THUMBNAIL COLOR VARIATIONS
+   3-way gradients: readable + colorful + not painful
+================================ */
+
+/* 10th / Common subjects */
+.tamil-bg,
+.tamil-card-bg {
+    background:
+        radial-gradient(circle at top left, rgba(255, 205, 150, 0.24), transparent 38%),
+        linear-gradient(135deg, #5a1717 0%, #b4533b 52%, #7c2d12 100%);
+}
+
+.english-bg,
+.english-card-bg {
+    background:
+        radial-gradient(circle at top left, rgba(255, 255, 255, 0.22), transparent 38%),
+        linear-gradient(135deg, #1e293b 0%, #64748b 52%, #334155 100%);
+}
+
+.maths-bg,
+.mathematics-card-bg {
+    background:
+        radial-gradient(circle at top left, rgba(191, 219, 254, 0.28), transparent 38%),
+        linear-gradient(135deg, #1e3a8a 0%, #3b82f6 52%, #1d4ed8 100%);
+}
+
+.science-bg {
+    background:
+        radial-gradient(circle at top left, rgba(187, 247, 208, 0.25), transparent 38%),
+        linear-gradient(135deg, #166534 0%, #22c55e 52%, #15803d 100%);
+}
+
+.social-bg {
+    background:
+        radial-gradient(circle at top left, rgba(254, 215, 170, 0.26), transparent 38%),
+        linear-gradient(135deg, #7c2d12 0%, #d97706 52%, #92400e 100%);
+}
+
+.general-knowledge-bg {
+    background:
+        radial-gradient(circle at top left, rgba(221, 214, 254, 0.26), transparent 38%),
+        linear-gradient(135deg, #312e81 0%, #7c3aed 52%, #4c1d95 100%);
+}
+
+/* 12th specific subjects */
+.physics-card-bg {
+    background:
+        radial-gradient(circle at top left, rgba(186, 230, 253, 0.28), transparent 38%),
+        linear-gradient(135deg, #075985 0%, #38bdf8 52%, #0c4a6e 100%);
+}
+
+.chemistry-card-bg {
+    background:
+        radial-gradient(circle at top left, rgba(221, 214, 254, 0.28), transparent 38%),
+        linear-gradient(135deg, #4c1d95 0%, #a855f7 52%, #581c87 100%);
+}
+
+.biology-card-bg {
+    background:
+        radial-gradient(circle at top left, rgba(187, 247, 208, 0.27), transparent 38%),
+        linear-gradient(135deg, #14532d 0%, #22c55e 52%, #166534 100%);
+}
+
+.computer-science-card-bg {
+    background:
+        radial-gradient(circle at top left, rgba(153, 246, 228, 0.28), transparent 38%),
+        linear-gradient(135deg, #115e59 0%, #14b8a6 52%, #134e4a 100%);
+}
+
+.commerce-card-bg {
+    background:
+        radial-gradient(circle at top left, rgba(254, 240, 138, 0.28), transparent 38%),
+        linear-gradient(135deg, #854d0e 0%, #eab308 52%, #713f12 100%);
+}
+
+.accountancy-card-bg {
+    background:
+        radial-gradient(circle at top left, rgba(186, 230, 253, 0.28), transparent 38%),
+        linear-gradient(135deg, #0c4a6e 0%, #0ea5e9 52%, #075985 100%);
+}
+
+.economics-card-bg {
+    background:
+        radial-gradient(circle at top left, rgba(254, 215, 170, 0.28), transparent 38%),
+        linear-gradient(135deg, #9a3412 0%, #fb923c 52%, #7c2d12 100%);
+}
+
+.business-maths-card-bg {
+    background:
+        radial-gradient(circle at top left, rgba(253, 224, 71, 0.26), transparent 38%),
+        linear-gradient(135deg, #92400e 0%, #f59e0b 52%, #78350f 100%);
+}
+
+/* ================================
+   QUESTION PAPER THUMBNAIL GRADIENTS
+   Same gradient style as notes
+   But with a separate paper color family
+================================ */
+
+.paper-tamil-bg {
+    background:
+        radial-gradient(circle at top left, rgba(235, 180, 170, 0.22), transparent 38%),
+        linear-gradient(135deg, #4a1f24 0%, #9b4d57 52%, #6a3038 100%);
+}
+
+.paper-english-bg {
+    background:
+        radial-gradient(circle at top left, rgba(210, 220, 225, 0.22), transparent 38%),
+        linear-gradient(135deg, #2a3138 0%, #6f7f8d 52%, #43505c 100%);
+}
+
+.paper-maths-bg {
+    background:
+        radial-gradient(circle at top left, rgba(196, 214, 230, 0.24), transparent 38%),
+        linear-gradient(135deg, #2c3446 0%, #5f7ca0 52%, #3c4f70 100%);
+}
+
+.paper-science-bg {
+    background:
+        radial-gradient(circle at top left, rgba(205, 225, 205, 0.22), transparent 38%),
+        linear-gradient(135deg, #2f3d33 0%, #6f9276 52%, #465c4a 100%);
+}
+
+.paper-social-bg {
+    background:
+        radial-gradient(circle at top left, rgba(230, 210, 185, 0.24), transparent 38%),
+        linear-gradient(135deg, #4b3422 0%, #9c7553 52%, #6d4f36 100%);
+}
+
+/* 12th paper subjects */
+
+.paper-physics-bg {
+    background:
+        radial-gradient(circle at top left, rgba(185, 225, 235, 0.24), transparent 38%),
+        linear-gradient(135deg, #1f3b46 0%, #4f95a7 52%, #2d5d69 100%);
+}
+
+.paper-chemistry-bg {
+    background:
+        radial-gradient(circle at top left, rgba(220, 200, 235, 0.24), transparent 38%),
+        linear-gradient(135deg, #3b2948 0%, #7f5ca0 52%, #533a69 100%);
+}
+
+.paper-biology-bg {
+    background:
+        radial-gradient(circle at top left, rgba(205, 230, 185, 0.24), transparent 38%),
+        linear-gradient(135deg, #31452c 0%, #6d9d5c 52%, #4b693f 100%);
+}
+
+.paper-cs-bg {
+    background:
+        radial-gradient(circle at top left, rgba(185, 228, 222, 0.24), transparent 38%),
+        linear-gradient(135deg, #21403d 0%, #4aa29a 52%, #2e6862 100%);
+}
+
+.paper-commerce-bg {
+    background:
+        radial-gradient(circle at top left, rgba(235, 225, 175, 0.24), transparent 38%),
+        linear-gradient(135deg, #4b4320 0%, #9a914f 52%, #6d6732 100%);
+}
+
+.paper-accountancy-bg {
+    background:
+        radial-gradient(circle at top left, rgba(190, 220, 235, 0.24), transparent 38%),
+        linear-gradient(135deg, #243847 0%, #5a89a7 52%, #35566c 100%);
+}
+
+.paper-economics-bg {
+    background:
+        radial-gradient(circle at top left, rgba(235, 205, 180, 0.24), transparent 38%),
+        linear-gradient(135deg, #4b2d24 0%, #a06a56 52%, #6c4336 100%);
+}
+
+.paper-business-maths-bg {
+    background:
+        radial-gradient(circle at top left, rgba(230, 215, 185, 0.24), transparent 38%),
+        linear-gradient(135deg, #4b3826 0%, #9d7b58 52%, #6d563d 100%);
+}
