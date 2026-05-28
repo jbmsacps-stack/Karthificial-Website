@@ -80,32 +80,29 @@ Notes, question papers, MCQ practice, career guidance, authentication, database 
 
 </div>
 
----
-
 ## About
 
-Karthificial Website is a full-stack education platform created to help students access academic resources, practice MCQs, explore career guidance, and use personalized learning features through a clean and professional web experience.
+**Karthificial Website** is a full-stack academic platform designed to support students with structured academic resources, MCQ practice, career guidance, secure authentication, student profile management, and analytics-based improvement.
 
-The platform is built with a separate frontend and backend architecture. The frontend is developed using HTML, CSS, and JavaScript, while the backend is powered by Java Spring Boot. Supabase PostgreSQL is used as the database, Vercel is used for frontend deployment, Replit is used for backend deployment, and PostHog is used for analytics.
+The platform follows a separated full-stack architecture. The frontend is built with **HTML, CSS, and JavaScript**, while the backend is powered by **Java Spring Boot**. It uses **Supabase PostgreSQL** for database storage, **Vercel** for frontend deployment, **Replit** for backend hosting, and **PostHog** for analytics.
 
-This project was developed by a team of 3 developers with focus on frontend design, backend development, database integration, deployment configuration, debugging, and product-level improvement.
+Developed by a **3-developer team**, this project includes frontend development, backend architecture, database integration, deployment setup, debugging, analytics integration, and documentation.
 
-Karthificial is not just a static education website. It is designed as a scalable academic ecosystem that can grow into a larger student support platform.
+Karthificial is designed as more than a static education website. It is a scalable academic platform prepared for future expansion into student dashboards, performance tracking, admin tools, and institution-level learning support.
 
 ---
 
 ## Project Purpose
 
-The main purpose of Karthificial is to create a centralized learning platform where students can access useful academic materials and guidance without confusion.
+Karthificial was created to provide students with a centralized digital learning platform where academic content, practice tools, and career guidance are available in one organized environment.
 
 The platform focuses on:
 
 - Making study resources easier to access
-- Providing subject-based MCQ practice
-- Supporting career decision-making after 10th and 12th
-- Helping students understand academic paths clearly
-- Building a secure student-focused platform with backend support
-- Preparing the project for future dashboard and analytics-based improvements
+- Supporting subject-wise MCQ practice
+- Helping students make informed academic and career decisions
+- Building a secure student-focused system with backend support
+- Creating a foundation for future dashboards, analytics, and admin tools
 
 ---
 
@@ -113,23 +110,29 @@ The platform focuses on:
 
 ### Academic Resources
 
+Karthificial provides structured academic resources for students.
+
 - 10th standard notes
 - 12th standard notes
 - 10th standard question papers
 - 12th standard question papers
 - Subject-based resource pages
-- Organized academic content structure
+- Organized content navigation
 
 ### MCQ Practice System
 
+The MCQ system is designed to make learning more active and measurable.
+
 - Subject-wise MCQ pages
-- Interactive question answering
+- Interactive question practice
 - Score calculation
 - Attempt submission support
 - Backend-ready MCQ tracking
-- Result and performance data structure
+- Foundation for future performance analytics
 
 ### Career Guidance
+
+The career guidance section helps students understand academic paths and avoid common decision-making mistakes.
 
 - After 10th guidance
 - After 12th guidance
@@ -140,54 +143,60 @@ The platform focuses on:
 
 ### Authentication
 
-- Signup page
-- Login page
-- Forgot password page
-- Reset password page
-- JWT-based backend authentication structure
+The authentication system provides the foundation for student accounts and secure access.
+
+- Signup flow
+- Login flow
+- Forgot password structure
+- Reset password structure
+- JWT-based backend authentication
 - Password encryption support
 - User validation flow
 
 ### User Profile System
 
+The profile system prepares the platform for personalized student experiences.
+
 - Student profile setup
-- User profile syncing
-- Backend user profile storage
-- Profile update structure
-- Prepared foundation for future student dashboards
+- Frontend-to-backend profile syncing
+- Backend profile storage
+- Foundation for future student dashboards
 
 ### Analytics
 
-- PostHog analytics integration
-- User behavior tracking
-- Page usage insights
-- Product improvement support
-- Better understanding of student engagement
+PostHog analytics helps improve the platform based on real user behavior.
+
+- Page visit tracking
+- Navigation insights
+- Student engagement analysis
+- MCQ usage insights
+- Career guidance usage tracking
+- Data-based product improvement
 
 ---
 
 ## Spring Boot Backend
 
-The backend of Karthificial is built using Java Spring Boot. It handles the server-side logic of the platform and provides REST APIs for authentication, MCQ handling, user profiles, password reset structure, and database communication.
+The backend of Karthificial is developed using **Java Spring Boot**. It provides the server-side foundation for authentication, MCQ handling, user profile syncing, password reset structure, and database communication.
 
-Spring Boot was used because it provides a strong structure for building scalable backend applications with clean separation between controllers, services, models, repositories, and DTOs.
+Spring Boot was selected because it supports clean backend architecture through controllers, services, DTOs, models, repositories, and configuration layers. This structure improves maintainability, scalability, and long-term project quality.
 
 ### Backend Responsibilities
 
-The Spring Boot backend manages:
+The backend handles:
 
-- User signup
-- User login
+- User signup and login
 - JWT token generation
-- Password encryption
-- User profile syncing
+- Password encryption and validation
+- Student profile syncing
 - MCQ submission handling
 - MCQ attempt storage
 - Password reset token structure
 - Email service structure
-- Database communication with Supabase PostgreSQL
-- API communication with the frontend
-- CORS configuration for frontend-backend connection
+- Supabase PostgreSQL database communication
+- Frontend-backend API communication
+- CORS configuration
+- Environment-based configuration
 
 ### Backend Architecture
 
@@ -195,59 +204,61 @@ The Spring Boot backend manages:
 Spring Boot Backend
 │
 ├── Controllers
-│   └── Receive and handle API requests from the frontend
+│   └── Receive frontend API requests
 │
 ├── Services
-│   └── Contain business logic and processing rules
+│   └── Process business logic
 │
 ├── DTOs
-│   └── Transfer request and response data safely
+│   └── Handle request and response data
 │
 ├── Models
-│   └── Represent database entities and table structures
+│   └── Represent database entities
 │
 ├── Repositories
-│   └── Communicate with the Supabase PostgreSQL database
+│   └── Communicate with Supabase PostgreSQL
 │
 └── Configuration
-    └── Manage CORS, environment variables, and backend settings
+    └── Manage CORS and environment settings
 ````
 
 ### Spring Boot Concepts Used
 
-| Concept               | Usage in Project                                                  |
-| --------------------- | ----------------------------------------------------------------- |
-| REST Controllers      | API endpoints for auth, MCQ, and profile features                 |
-| Service Layer         | Business logic for authentication, JWT, email, and password reset |
-| Repository Layer      | Database access using Spring Data JPA                             |
-| DTO Classes           | Clean request and response handling                               |
-| JPA / Hibernate       | Mapping Java models to database tables                            |
-| CORS Configuration    | Allows frontend and backend to communicate across deployments     |
-| Environment Variables | Secure configuration for database, JWT, and API keys              |
-| Maven                 | Dependency management and backend execution                       |
-| JWT                   | Secure token-based authentication structure                       |
+| Concept               | Usage                                                       |
+| --------------------- | ----------------------------------------------------------- |
+| REST Controllers      | API endpoints for authentication, MCQ, and profile features |
+| Service Layer         | Separates business logic from controllers                   |
+| Repository Layer      | Handles database operations through Spring Data JPA         |
+| DTO Pattern           | Manages request and response data cleanly                   |
+| JPA / Hibernate       | Maps Java models to database tables                         |
+| CORS Configuration    | Enables frontend-backend communication                      |
+| Environment Variables | Protects database credentials and secrets                   |
+| Maven                 | Handles dependency management and backend execution         |
+| JWT                   | Supports token-based authentication                         |
 
 ---
 
 ## Database: Supabase PostgreSQL
 
-Supabase is used as the cloud database platform for Karthificial. The Spring Boot backend connects to Supabase PostgreSQL to store and manage structured application data.
+Karthificial uses **Supabase PostgreSQL** as its cloud database. The Spring Boot backend connects to Supabase to store and manage structured application data.
 
-Supabase was selected because it provides a reliable PostgreSQL database, cloud hosting, simple connection setup, and a development-friendly environment suitable for full-stack projects.
+Supabase was selected because it provides a reliable PostgreSQL database, cloud accessibility, simple connection management, and a development-friendly setup for full-stack applications.
 
 ### Data Stored in Supabase
 
-* Student user accounts
-* Encrypted user credentials
-* Student profile details
-* MCQ attempt records
-* MCQ score data
-* Password reset tokens
-* Authentication-related records
+| Data Type              | Purpose                                       |
+| ---------------------- | --------------------------------------------- |
+| User Accounts          | Stores registered student account data        |
+| Encrypted Credentials  | Supports secure login verification            |
+| Student Profiles       | Stores profile-related information            |
+| MCQ Attempts           | Records student MCQ activity                  |
+| MCQ Scores             | Supports performance tracking                 |
+| Password Reset Tokens  | Supports account recovery flow                |
+| Authentication Records | Maintains backend authentication-related data |
 
 ### Database Configuration
 
-The backend is configured to connect with Supabase using environment variables.
+The backend connects to Supabase using environment variables.
 
 ```properties
 spring.datasource.url=${DB_URL}
@@ -259,13 +270,13 @@ spring.jpa.hibernate.ddl-auto=update
 spring.jpa.show-sql=true
 ```
 
-This avoids hardcoding sensitive database credentials directly inside the code.
+This prevents sensitive database credentials from being hardcoded directly inside the source code.
 
 ---
 
 ## Deployment Architecture
 
-Karthificial uses a separated deployment architecture. The frontend and backend are deployed independently, which makes the project easier to maintain, debug, and scale.
+Karthificial follows a separated deployment model where each layer is deployed and managed independently.
 
 ```txt
 User
@@ -287,87 +298,76 @@ Supabase PostgreSQL
 Stored Users, Profiles, MCQ Attempts, Tokens
 
 Analytics Layer:
-PostHog tracks user behavior and page activity
+PostHog tracks user activity and product usage.
 ```
+
+This architecture improves maintainability, debugging, deployment flexibility, and future scalability.
 
 ---
 
 ## Frontend Deployment: Vercel
 
-The frontend is deployed using Vercel. Since the frontend is built with HTML, CSS, and JavaScript, Vercel is used to serve the static client-side files with fast loading and simple GitHub-based deployment.
+The frontend is deployed on **Vercel**, which hosts the client-side HTML, CSS, JavaScript, images, and static assets.
 
 ### Why Vercel Was Used
 
-* Fast static website hosting
-* Easy GitHub integration
-* Automatic redeployment after code updates
-* Clean production URL
-* Simple frontend deployment workflow
-* Suitable for HTML, CSS, and JavaScript projects
+* Static hosting for HTML, CSS, and JavaScript files
+* GitHub-based deployment workflow
+* Fast frontend delivery
+* Preview deployments for testing
+* Simple production deployment process
 
-### Frontend Deployment Responsibilities
-
-Vercel handles:
+### Vercel Handles
 
 * Landing page hosting
-* Notes pages
-* Question paper pages
+* Notes and question paper pages
 * MCQ pages
 * Career guidance pages
 * Login and signup pages
 * Static assets
-* CSS and JavaScript files
+* CSS and JavaScript delivery
 * Public frontend access
 
 ---
 
 ## Backend Deployment: Replit
 
-The backend is deployed using Replit. The Spring Boot backend runs publicly on Replit so the frontend can communicate with the backend APIs.
-
-Replit was used because it gives a simple development-friendly environment for running the Java Spring Boot server without needing complex VPS setup during the early stage.
+The backend is deployed on **Replit**, where the Spring Boot server runs publicly and handles API communication from the frontend.
 
 ### Why Replit Was Used
 
-* Supports Java backend execution
-* Allows public backend hosting
-* Easier backend testing
+* Java backend execution
+* Public backend URL
 * Environment variable support
-* Useful for student and academic projects
-* Faster debugging during development
-* Simple deployment compared to manual server setup
+* Easier debugging during active development
+* Student-friendly backend hosting setup
 
-### Backend Deployment Responsibilities
+### Replit Handles
 
-Replit handles:
-
-* Running the Spring Boot server
-* Serving backend REST APIs
-* Connecting to Supabase
-* Processing authentication requests
-* Processing MCQ submissions
-* Managing profile sync requests
-* Handling backend environment variables
+* Spring Boot server execution
+* REST API hosting
+* Supabase database connection
+* Authentication requests
+* MCQ submissions
+* Profile sync requests
+* Backend environment configuration
 
 ---
 
 ## Analytics: PostHog
 
-PostHog is used for analytics in this project. It helps understand how users interact with the platform and supports better product decisions.
-
-Analytics is important for an education platform because it shows which pages students use, which resources are visited more, and where improvements are needed.
+**PostHog** is used to understand how users interact with the platform. It helps the team make better improvement decisions based on actual usage behavior.
 
 ### PostHog Helps Track
 
 * Page visits
-* User navigation flow
+* Navigation flow
 * Student engagement
-* Popular sections
-* MCQ page usage
-* Career guidance interactions
-* Resource page activity
+* MCQ usage
+* Career guidance usage
+* Product improvement insights
 
-This helps the project move from guesswork to data-based improvement.
+This makes the platform more professional because future improvements can be guided by analytics instead of assumptions.
 
 ---
 
@@ -396,12 +396,6 @@ Karthificial-Website/
 │
 ├── client/
 │   ├── assets/
-│   │   ├── cg_thumb/
-│   │   ├── contacts/
-│   │   ├── images/
-│   │   ├── slides/
-│   │   └── thumbnail/
-│   │
 │   ├── index.html
 │   ├── career-guidance.html
 │   ├── after-10th.html
@@ -452,46 +446,46 @@ Karthificial-Website/
 
 ## Main Pages
 
-| Page                    | Purpose                         |
-| ----------------------- | ------------------------------- |
-| `index.html`            | Main landing page               |
-| `career-guidance.html`  | Career guidance hub             |
-| `after-10th.html`       | Guidance after 10th             |
-| `after-12th.html`       | Guidance after 12th             |
-| `group-selection.html`  | Group selection guidance        |
-| `degree-selection.html` | Degree selection guidance       |
-| `career-mistakes.html`  | Common career mistake awareness |
-| `student-mindset.html`  | Student mindset and planning    |
-| `mcq.html`              | MCQ selection page              |
-| `notes-10th.html`       | 10th standard notes             |
-| `notes-12th.html`       | 12th standard notes             |
-| `papers-10th.html`      | 10th standard question papers   |
-| `papers-12th.html`      | 12th standard question papers   |
-| `login.html`            | Student login                   |
-| `signup.html`           | Student signup                  |
-| `forgot-password.html`  | Forgot password flow            |
-| `reset-password.html`   | Password reset flow             |
-| `profile-setup.html`    | Student profile setup           |
-| `contact.html`          | Contact and social links        |
+| Page                    | Purpose                       |
+| ----------------------- | ----------------------------- |
+| `index.html`            | Main landing page             |
+| `career-guidance.html`  | Career guidance hub           |
+| `after-10th.html`       | Guidance after 10th           |
+| `after-12th.html`       | Guidance after 12th           |
+| `group-selection.html`  | Group selection guidance      |
+| `degree-selection.html` | Degree selection guidance     |
+| `career-mistakes.html`  | Career mistake awareness      |
+| `student-mindset.html`  | Student mindset and planning  |
+| `mcq.html`              | MCQ selection page            |
+| `notes-10th.html`       | 10th standard notes           |
+| `notes-12th.html`       | 12th standard notes           |
+| `papers-10th.html`      | 10th standard question papers |
+| `papers-12th.html`      | 12th standard question papers |
+| `login.html`            | Student login                 |
+| `signup.html`           | Student signup                |
+| `forgot-password.html`  | Forgot password flow          |
+| `reset-password.html`   | Password reset flow           |
+| `profile-setup.html`    | Student profile setup         |
+| `contact.html`          | Contact and social links      |
 
 ---
 
 ## Backend Modules
 
-| Module                         | Responsibility                                  |
-| ------------------------------ | ----------------------------------------------- |
-| `AuthController`               | Handles authentication API routes               |
-| `McqController`                | Handles MCQ submission and stats APIs           |
-| `UserProfileController`        | Handles student profile sync APIs               |
-| `AuthService`                  | Manages signup, login, and authentication logic |
-| `JwtService`                   | Generates and manages JWT tokens                |
-| `PasswordResetService`         | Handles password reset logic                    |
-| `EmailService`                 | Supports email-related backend logic            |
-| `ResendEmailService`           | Supports Resend-based email service structure   |
-| `UserRepository`               | Manages user database operations                |
-| `UserProfileRepository`        | Manages user profile database operations        |
-| `McqAttemptRepository`         | Stores and retrieves MCQ attempt data           |
-| `PasswordResetTokenRepository` | Manages password reset token data               |
+| Module                         | Responsibility                          |
+| ------------------------------ | --------------------------------------- |
+| `AuthController`               | Authentication API routes               |
+| `McqController`                | MCQ submission and stats APIs           |
+| `UserProfileController`        | Student profile sync APIs               |
+| `AuthService`                  | Signup, login, and authentication logic |
+| `JwtService`                   | JWT token generation                    |
+| `PasswordResetService`         | Password reset logic                    |
+| `EmailService`                 | Email-related backend logic             |
+| `ResendEmailService`           | Resend-based email service structure    |
+| `UserRepository`               | User database operations                |
+| `UserProfileRepository`        | User profile database operations        |
+| `McqAttemptRepository`         | MCQ attempt data operations             |
+| `PasswordResetTokenRepository` | Password reset token data operations    |
 
 ---
 
@@ -526,25 +520,16 @@ Karthificial-Website/
 ## Production Workflow
 
 ```txt
-1. User opens the website hosted on Vercel.
-
-2. Frontend pages load using HTML, CSS, and JavaScript.
-
-3. User interacts with login, signup, MCQ, or profile features.
-
-4. Frontend sends API requests to the Replit-hosted Spring Boot backend.
-
-5. Spring Boot receives the request through REST controllers.
-
-6. Service classes process the business logic.
-
+1. User opens the frontend hosted on Vercel.
+2. The frontend loads static pages, assets, styles, and scripts.
+3. The user interacts with login, signup, MCQ, profile, or content pages.
+4. JavaScript sends API requests to the Replit-hosted Spring Boot backend.
+5. Spring Boot receives requests through REST controllers.
+6. Service classes process the required business logic.
 7. Repository classes communicate with Supabase PostgreSQL.
-
-8. Backend sends a structured response back to the frontend.
-
-9. Frontend updates the user interface.
-
-10. PostHog tracks useful analytics events for product improvement.
+8. The backend sends structured responses to the frontend.
+9. The frontend updates the interface based on the response.
+10. PostHog records product analytics for future improvement.
 ```
 
 ---
@@ -553,27 +538,19 @@ Karthificial-Website/
 
 This project required work across multiple areas of full-stack development.
 
-The 3-developer team worked on:
+The 3-developer team contributed to:
 
-* UI and visual design
-* Frontend page development
-* Responsive layout fixes
-* MCQ page logic
-* Authentication flow
-* Spring Boot backend setup
-* REST API development
-* DTO, model, repository, and service-layer structure
-* Supabase database integration
-* Vercel frontend deployment
-* Replit backend deployment
-* PostHog analytics integration
-* CORS and API connection debugging
-* Environment variable configuration
-* Deployment testing
-* GitHub project organization
-* README and documentation preparation
+| Area          | Work Completed                                                    |
+| ------------- | ----------------------------------------------------------------- |
+| Frontend      | UI pages, responsive layouts, styling, JavaScript logic           |
+| Backend       | Spring Boot APIs, authentication, MCQ logic, service architecture |
+| Database      | Supabase PostgreSQL connection and data modeling                  |
+| Deployment    | Vercel frontend deployment and Replit backend hosting             |
+| Analytics     | PostHog setup for product usage insights                          |
+| Debugging     | CORS, environment variables, API communication, deployment errors |
+| Documentation | README structure, project explanation, and usage guidance         |
 
-This project reflects practical software development, real debugging experience, and teamwork across frontend, backend, database, analytics, and deployment.
+This project reflects practical software engineering experience, teamwork, debugging discipline, and full-stack implementation from frontend to deployment.
 
 ---
 
@@ -581,16 +558,16 @@ This project reflects practical software development, real debugging experience,
 
 ### Prerequisites
 
-* Java 17 or later
-* Maven or Maven Wrapper
-* Git
-* Supabase account
-* Replit account
-* Vercel account
-* PostHog account
-* Modern web browser
-
----
+| Requirement           | Purpose                           |
+| --------------------- | --------------------------------- |
+| Java 17+              | Run the Spring Boot backend       |
+| Maven / Maven Wrapper | Build and execute the backend     |
+| Git                   | Clone and manage the project      |
+| Supabase Account      | Configure the PostgreSQL database |
+| Replit Account        | Run the backend deployment        |
+| Vercel Account        | Deploy the frontend               |
+| PostHog Account       | Enable product analytics          |
+| Modern Browser        | Test and use the frontend         |
 
 ### 1. Clone the Repository
 
@@ -598,8 +575,6 @@ This project reflects practical software development, real debugging experience,
 git clone https://github.com/jbmsacps-stack/Karthificial-Website.git
 cd Karthificial-Website
 ```
-
----
 
 ### 2. Configure Backend Environment Variables
 
@@ -613,8 +588,6 @@ JWT_SECRET=your_jwt_secret
 FRONTEND_URL=your_frontend_url
 RESEND_API_KEY=your_resend_api_key
 ```
-
----
 
 ### 3. Run the Backend Locally
 
@@ -630,20 +603,16 @@ cd server/backend
 .\mvnw spring-boot:run
 ```
 
----
-
 ### 4. Run the Frontend Locally
 
 Open the `client` folder using a static server.
-
-Example:
 
 ```bash
 cd client
 npx serve
 ```
 
-Or open `client/index.html` directly in a browser for basic static preview.
+Or open `client/index.html` directly in a browser for a basic static preview.
 
 ---
 
@@ -651,87 +620,48 @@ Or open `client/index.html` directly in a browser for basic static preview.
 
 ### Frontend Deployment on Vercel
 
-The frontend is deployed using Vercel.
-
-Basic deployment flow:
-
 ```txt
 1. Push frontend code to GitHub.
-
 2. Import the GitHub repository into Vercel.
-
 3. Select the frontend/client directory if required.
-
 4. Configure frontend environment variables if needed.
-
 5. Deploy the project.
-
 6. Vercel generates a public frontend URL.
-
 7. Update frontend API configuration to point to the Replit backend URL.
 ```
 
 ### Backend Deployment on Replit
 
-The backend is deployed using Replit.
-
-Basic deployment flow:
-
 ```txt
 1. Import the backend project into Replit.
-
-2. Make sure Java and Maven are available.
-
+2. Confirm Java and Maven support.
 3. Configure backend environment variables in Replit Secrets.
-
 4. Run the Spring Boot application using Maven.
-
-5. Confirm that the health API works.
-
+5. Test the health API.
 6. Copy the public Replit backend URL.
-
 7. Connect the Vercel frontend to the Replit backend URL.
 ```
 
 ### Database Setup on Supabase
 
-Supabase is used for the PostgreSQL database.
-
-Basic database flow:
-
 ```txt
 1. Create a Supabase project.
-
 2. Get the PostgreSQL connection string.
-
 3. Add database credentials to backend environment variables.
-
 4. Configure Spring Boot datasource properties.
-
 5. Run the backend.
-
-6. Hibernate/JPA creates or updates the required tables based on models.
-
+6. Hibernate/JPA creates or updates tables based on models.
 7. Backend starts storing user, profile, MCQ, and token data.
 ```
 
 ### Analytics Setup with PostHog
 
-PostHog is used to monitor platform usage.
-
-Basic analytics flow:
-
 ```txt
 1. Create a PostHog project.
-
 2. Add the PostHog script or integration to the frontend.
-
 3. Configure the project API key.
-
 4. Deploy the frontend.
-
-5. Track user visits, navigation, and engagement.
-
+5. Track visits, navigation, and engagement.
 6. Use analytics insights to improve the platform.
 ```
 
@@ -762,8 +692,8 @@ This project was developed by a 3-developer team.
 
 | Role                     | Contribution                                                                             |
 | ------------------------ | ---------------------------------------------------------------------------------------- |
-| Frontend Development     | UI pages, responsive design, styling, JavaScript interactions                            |
-| Backend Development      | Spring Boot APIs, authentication, MCQ logic, database connection                         |
+| Frontend Development     | UI pages, responsive design, styling, JavaScript logic                                   |
+| Backend Development      | Spring Boot APIs, authentication, MCQ handling, database connection                      |
 | Deployment & Integration | Vercel frontend deployment, Replit backend deployment, Supabase setup, PostHog analytics |
 
 ---
@@ -825,3 +755,10 @@ Unauthorized use may be subject to applicable intellectual property and copyrigh
 
 </div>
 ```
+
+## Important
+
+Do **not** wrap this section inside:
+
+```md
+<div align="center">
