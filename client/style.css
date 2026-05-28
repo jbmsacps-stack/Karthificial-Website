@@ -5176,12 +5176,15 @@ body.auth-checking .mobile-actions {
 .cl-card,
 .cl-main,
 .cl-headerTitle,
-.cl-headerSubtitle,
 .cl-formFieldLabel,
 .cl-formFieldInfoText,
 .cl-formFieldSuccessText,
 .cl-identityPreviewText {
-    color: #f5f0dc !important;
+    color: var(--gold) !important;
+}
+
+.cl-headerSubtitle{
+    color: white !important;
 }
 
 /* Email / OTP input boxes */
