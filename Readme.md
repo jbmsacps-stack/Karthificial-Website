@@ -1,9 +1,4 @@
-﻿Yes — this version matches the **WatchVault README style**: centered logo/title, shield badges, clean layout, readable sections, professional wording, and stronger client-facing explanation. It also includes **Spring Boot**, **Supabase**, **Vercel**, **Replit**, **PostHog**, and the **3-developer team effort**. Your WatchVault README style reference uses centered branding, badges, structured sections, tech table, architecture block, API reference, and usage terms, so I followed that format. 
-
-Copy this as your full `README.md`:
-
-````md
-<div align="center">
+﻿<div align="center">
 
 <img src="client/assets/images/Logo.png" alt="Karthificial Logo" width="160" />
 
