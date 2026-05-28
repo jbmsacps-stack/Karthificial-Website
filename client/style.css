@@ -4545,11 +4545,284 @@ main,
     z-index: 0;
 }
 
-.home-hero > *,
-.slider-section > *,
-.about-section > *,
-.stats-section > * {
+.home-hero>*,
+.slider-section>*,
+.about-section>*,
+.stats-section>* {
     position: relative;
     z-index: 1;
 }
 
+/* ================================
+   NAVBAR TEXT READABILITY ONLY
+   No layout / size / shadow changes
+================================ */
+
+.nav-link {
+    color: #e8e1cf !important;
+    font-weight: 700;
+    letter-spacing: 0.35px;
+}
+
+.nav-link:hover {
+    color: #f2cf5b !important;
+}
+
+.logo-text {
+    color: #f4f0e4 !important;
+}
+
+.logo-text span {
+    color: #d4af37 !important;
+}
+
+.nav-actions .btn-outline {
+    color: #e7c75a !important;
+}
+
+.nav-actions .btn-outline:hover {
+    color: #0a0a0a !important;
+}
+
+.nav-actions .btn-gold {
+    color: #050505 !important;
+}
+
+/* Dropdown text only */
+.dropdown-menu a {
+    color: #ded6c3 !important;
+}
+
+.dropdown-menu a:hover {
+    color: #f2cf5b !important;
+}
+
+/* Mobile menu text only */
+@media (max-width: 900px) {
+    .nav-link {
+        color: #eee6d4 !important;
+    }
+
+    .dropdown-menu a {
+        color: #ded6c3 !important;
+    }
+}
+
+/* ================================
+   NAVBAR COLOR TONE ONLY
+   Slightly warmer, not fully dark
+================================ */
+
+.navbar {
+    background:
+        linear-gradient(180deg,
+            rgba(18, 16, 9, 0.96) 0%,
+            rgba(12, 11, 7, 0.95) 55%,
+            rgba(8, 8, 6, 0.96) 100%) !important;
+
+    border-bottom: 1px solid rgba(212, 175, 55, 0.42) !important;
+}
+
+/* Slight contrast improvement for navbar text only */
+.nav-link {
+    color: #e6dcc4 !important;
+}
+
+.nav-link:hover {
+    color: #f2cf5b !important;
+}
+
+/* Logo text tone */
+.logo-text {
+    color: #f1ead9 !important;
+}
+
+.logo-text span {
+    color: #d4af37 !important;
+}
+
+/* Login button text only */
+.nav-actions .btn-outline {
+    color: #e2c65a !important;
+}
+
+/* ================================
+   GLOBAL VISIBILITY + SOFT BODY GLOW
+   No left/right spotlight effect
+================================ */
+
+html {
+    background: #050505;
+}
+
+body {
+    background:
+        linear-gradient(180deg,
+            rgba(212, 175, 55, 0.035) 0%,
+            rgba(212, 175, 55, 0.018) 38%,
+            rgba(212, 175, 55, 0.012) 70%,
+            rgba(212, 175, 55, 0.025) 100%),
+        linear-gradient(180deg,
+            #070707 0%,
+            #0a0a0a 45%,
+            #050505 100%) !important;
+
+    color: #f1f1f1;
+    background-attachment: fixed;
+}
+
+/* ================================
+   SECTION VISIBILITY FIX
+================================ */
+
+.home-hero,
+.slider-section,
+.about-section,
+.stats-section,
+.career-hero,
+.career-path-section {
+    background:
+        linear-gradient(180deg,
+            rgba(8, 8, 8, 0.82),
+            rgba(5, 5, 5, 0.88)) !important;
+}
+
+/* ================================
+   FOOTER READABILITY + SIZE FIX
+================================ */
+
+.footer {
+    margin-top: 40px !important;
+    padding: 42px 0 18px !important;
+
+    background:
+        linear-gradient(180deg,
+            rgba(10, 10, 10, 0.96),
+            rgba(4, 4, 4, 0.98)) !important;
+
+    border-top: 1px solid rgba(212, 175, 55, 0.28) !important;
+}
+
+.footer-grid {
+    align-items: start !important;
+    gap: 34px !important;
+}
+
+.footer-brand h2 {
+    color: #d4af37 !important;
+    margin-bottom: 10px !important;
+}
+
+.footer-brand p,
+.footer-links a,
+.footer-contact p {
+    color: #e0e0e0 !important;
+    line-height: 1.6 !important;
+}
+
+.footer-column h3 {
+    color: #ffffff !important;
+    margin-bottom: 12px !important;
+}
+
+.footer-links li {
+    margin-bottom: 7px !important;
+}
+
+.footer-bottom {
+    margin-top: 26px !important;
+    padding-top: 14px !important;
+}
+
+@media (max-width: 768px) {
+    body {
+        background-attachment: scroll;
+    }
+
+    .footer {
+        margin-top: 30px !important;
+        padding: 32px 0 14px !important;
+    }
+
+    .footer-grid {
+        gap: 22px !important;
+    }
+
+    .footer-brand p,
+    .footer-links a,
+    .footer-contact p {
+        font-size: 0.9rem !important;
+        line-height: 1.55 !important;
+    }
+
+    .footer-bottom {
+        margin-top: 20px !important;
+    }
+}
+
+/* ================================
+   CLERK AUTH THEME FIX
+================================ */
+
+#clerk-sign-in,
+#clerk-sign-up {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.cl-rootBox {
+    width: 100%;
+}
+
+.cl-card {
+    background: linear-gradient(145deg, #0b0b0b, #15110a) !important;
+    border: 1px solid rgba(212, 175, 55, 0.35) !important;
+    box-shadow:
+        0 0 35px rgba(212, 175, 55, 0.18),
+        inset 0 0 18px rgba(212, 175, 55, 0.05) !important;
+    border-radius: 22px !important;
+}
+
+.cl-headerTitle,
+.cl-headerSubtitle,
+.cl-socialButtonsBlockButtonText,
+.cl-formFieldLabel,
+.cl-footerActionText {
+    color: #f5e6b8 !important;
+}
+
+.cl-headerTitle {
+    color: #d4af37 !important;
+}
+
+.cl-formFieldInput {
+    background: #090909 !important;
+    color: #fff !important;
+    border: 1px solid rgba(212, 175, 55, 0.28) !important;
+    border-radius: 12px !important;
+}
+
+.cl-formButtonPrimary {
+    background: linear-gradient(135deg, #d4af37, #8f6b13) !important;
+    color: #080808 !important;
+    font-weight: 700 !important;
+    border-radius: 999px !important;
+}
+
+.cl-formButtonPrimary:hover {
+    filter: brightness(1.12);
+}
+
+.cl-footerActionLink,
+.cl-internal-b3fm6y {
+    color: #d4af37 !important;
+}
+
+.cl-dividerLine {
+    background: rgba(212, 175, 55, 0.25) !important;
+}
+
+.cl-dividerText {
+    color: #b8a66a !important;
+}
