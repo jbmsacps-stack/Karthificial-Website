@@ -28,8 +28,6 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
 
     try {
-        document.body.classList.remove("auth-checking");
-
         console.log("Loading Clerk UI bundle...");
 
         await loadScript(
@@ -79,7 +77,12 @@ document.addEventListener("DOMContentLoaded", async () => {
         });
 
         console.log("Clerk loaded successfully with UI components");
+
         updateNavbarAuthState();
+
+        if (window.Clerk.user) {
+            await syncUserWithBackend();
+        }
 
         const clerkAppearance = {
             layout: {
@@ -190,11 +193,58 @@ document.addEventListener("DOMContentLoaded", async () => {
                 `;
             }
         }
+        document.body.classList.remove("auth-checking");
+
     } catch (error) {
         console.error("Clerk failed to initialize:", error);
         document.body.classList.remove("auth-checking");
     }
 });
+
+async function syncUserWithBackend() {
+    const user = window.Clerk.user;
+    if (!user) return;
+
+    const displayName =
+        user.fullName ||
+        user.firstName ||
+        user.username ||
+        user.primaryEmailAddress?.emailAddress?.split("@")[0] ||
+        "Student";
+
+    const email = user.primaryEmailAddress?.emailAddress || "";
+
+    try {
+        const response = await fetch("https://karthificial-backend--jbmsacps.replit.app/api/user/sync", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                clerkUserId: user.id,
+                displayName: displayName,
+                email: email
+            })
+        });
+
+        if (!response.ok) {
+            throw new Error("Backend user sync failed");
+        }
+
+        const savedUser = await response.json();
+
+        localStorage.setItem("karthificialUser", JSON.stringify({
+            clerkUserId: savedUser.clerkUserId,
+            displayName: savedUser.displayName || displayName,
+            email: savedUser.email || email
+        }));
+
+        updateNavbarAuthState();
+
+    } catch (error) {
+        console.error("User profile sync failed:", error);
+    }
+}
 
 function updateNavbarAuthState() {
     const navActions = document.querySelector(".nav-actions");
@@ -203,9 +253,12 @@ function updateNavbarAuthState() {
     if (!navActions && !mobileActions) return;
 
     const user = window.Clerk.user;
+    const cachedUser = JSON.parse(localStorage.getItem("karthificialUser") || "null");
 
     if (user) {
         const displayName =
+            cachedUser?.displayName ||
+            user.fullName ||
             user.firstName ||
             user.username ||
             user.primaryEmailAddress?.emailAddress?.split("@")[0] ||
@@ -221,11 +274,14 @@ function updateNavbarAuthState() {
 
         document.querySelectorAll(".nav-logout-btn").forEach((button) => {
             button.addEventListener("click", async () => {
+                localStorage.removeItem("karthificialUser");
                 await window.Clerk.signOut();
                 window.location.href = "index.html";
             });
         });
     } else {
+        localStorage.removeItem("karthificialUser");
+
         const signedOutHTML = `
             <a href="login.html" class="btn-outline">Login</a>
             <a href="signup.html" class="btn-gold">Signup</a>
