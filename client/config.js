@@ -1,3 +1,1 @@
-const APP_CONFIG = {
-    API_AUTH_BASE_URL: "https://karthificial-backend--jbmsacps.replit.app/api/auth"
-};
+const CLERK_PUBLISHABLE_KEY = "pk_test_Zm9uZC1mbGVhLTM2LmNsZXJrLmFjY291bnRzLmRldiQ";
