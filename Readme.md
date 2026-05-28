@@ -1,5 +1,4 @@
-﻿````md
-# Karthificial Website
+﻿# Karthificial Website
 
 Karthificial Website is a premium education-focused digital platform built to support students with structured academic resources, interactive learning tools, career guidance, and secure user-based features.
 
