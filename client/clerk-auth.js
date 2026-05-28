@@ -1,4 +1,9 @@
 document.body.classList.add("auth-checking");
+
+if (sessionStorage.getItem("karthificialGreetingSeen") === "true") {
+    document.body.classList.add("auth-greeting-seen");
+}
+
 document.addEventListener("DOMContentLoaded", async () => {
     const signInBox = document.getElementById("clerk-sign-in");
     const signUpBox = document.getElementById("clerk-sign-up");
@@ -272,9 +277,13 @@ function updateNavbarAuthState() {
         if (navActions) navActions.innerHTML = signedInHTML;
         if (mobileActions) mobileActions.innerHTML = signedInHTML;
 
+        sessionStorage.setItem("karthificialGreetingSeen", "true");
+        document.body.classList.add("auth-greeting-seen");
+
         document.querySelectorAll(".nav-logout-btn").forEach((button) => {
             button.addEventListener("click", async () => {
                 localStorage.removeItem("karthificialUser");
+                sessionStorage.removeItem("karthificialGreetingSeen");
                 await window.Clerk.signOut();
                 window.location.href = "index.html";
             });
