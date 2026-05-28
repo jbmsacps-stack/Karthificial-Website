@@ -5304,3 +5304,51 @@ body.auth-ready .nav-user-greeting {
     visibility: visible !important;
 }
 
+.nav-actions,
+.mobile-actions {
+    transition: none !important;
+}
+
+@keyframes greetingSweep {
+    0% {
+        opacity: 0;
+        transform: translateX(-18px);
+    }
+
+    35% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+        transform: translateX(18px);
+    }
+}
+
+.mobile-actions .nav-user-greeting {
+    margin: 0 0 12px;
+    justify-content: center;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .nav-user-greeting,
+    .nav-user-greeting::after,
+    .nav-logout-btn {
+        animation: none;
+        opacity: 1;
+        transform: none;
+        filter: none;
+    }
+}
+/* =================================
+   HIDE CONTACT NAV ONLY IN MOBILE
+================================= */
+
+@media screen and (max-width: 768px) {
+
+    /* Hide the last navbar item (Contact) */
+    .nav-menu li:nth-last-child(2) {
+        display: none !important;
+    }
+
+}
