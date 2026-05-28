@@ -754,11 +754,3 @@ Unauthorized use may be subject to applicable intellectual property and copyrigh
 ⭐ If this project is useful, a star is appreciated.
 
 </div>
-```
-
-## Important
-
-Do **not** wrap this section inside:
-
-```md
-<div align="center">
