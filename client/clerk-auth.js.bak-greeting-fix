@@ -1,6 +1,6 @@
 document.body.classList.add("auth-checking");
 
-if (localStorage.getItem("karthificialGreetingAnimated") === "true") {
+if (sessionStorage.getItem("karthificialGreetingSeen") === "true") {
     document.body.classList.add("auth-greeting-seen");
 }
 
@@ -244,7 +244,9 @@ async function syncUserWithBackend() {
             email: savedUser.email || email
         }));
 
-        } catch (error) {
+        updateNavbarAuthState();
+
+    } catch (error) {
         console.error("User profile sync failed:", error);
     }
 }
@@ -275,19 +277,13 @@ function updateNavbarAuthState() {
         if (navActions) navActions.innerHTML = signedInHTML;
         if (mobileActions) mobileActions.innerHTML = signedInHTML;
 
-        if (localStorage.getItem("karthificialGreetingAnimated") !== "true") {
-            setTimeout(() => {
-                localStorage.setItem("karthificialGreetingAnimated", "true");
-                document.body.classList.add("auth-greeting-seen");
-            }, 700);
-        } else {
-            document.body.classList.add("auth-greeting-seen");
-        }
+        sessionStorage.setItem("karthificialGreetingSeen", "true");
+        document.body.classList.add("auth-greeting-seen");
 
         document.querySelectorAll(".nav-logout-btn").forEach((button) => {
             button.addEventListener("click", async () => {
                 localStorage.removeItem("karthificialUser");
-                localStorage.removeItem("karthificialGreetingAnimated");
+                sessionStorage.removeItem("karthificialGreetingSeen");
                 await window.Clerk.signOut();
                 window.location.href = "index.html";
             });

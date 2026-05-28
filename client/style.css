@@ -5287,15 +5287,3 @@ body.auth-checking .mobile-actions {
         animation: none;
     }
 }
-
-/* ================================
-   STOP GREETING RE-ANIMATION BETWEEN PAGES
-================================ */
-
-body.auth-greeting-seen .nav-user-greeting,
-body.auth-greeting-seen .nav-logout-btn {
-    animation: none !important;
-    opacity: 1 !important;
-    transform: none !important;
-    filter: none !important;
-}
