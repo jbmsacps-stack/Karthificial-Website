@@ -5247,3 +5247,24 @@ body.auth-checking .mobile-actions {
     color: #ffd86b !important;
     text-shadow: 0 0 10px rgba(212, 175, 55, 0.55) !important;
 }
+
+/* ================================
+   ZERO DELAY NAV GREETING FIX
+================================ */
+
+body.auth-checking .nav-actions,
+body.auth-checking .mobile-actions {
+    opacity: 1 !important;
+    visibility: visible !important;
+}
+
+.nav-actions,
+.mobile-actions {
+    transition: none !important;
+}
+
+.nav-user-greeting {
+    opacity: 1 !important;
+    visibility: visible !important;
+    animation: none !important;
+}

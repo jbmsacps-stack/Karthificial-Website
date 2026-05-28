@@ -1,53 +1,143 @@
 document.body.classList.add("auth-checking");
 
-if (localStorage.getItem("karthificialGreetingAnimated") === "true") {
-    document.body.classList.add("auth-greeting-seen");
+function getCachedUser() {
+    try {
+        return JSON.parse(localStorage.getItem("karthificialUser") || "null");
+    } catch {
+        return null;
+    }
 }
 
-function renderCachedNavbarInstantly() {
-    const cachedUser = JSON.parse(localStorage.getItem("karthificialUser") || "null");
-    if (!cachedUser?.displayName) return;
+function getDisplayNameFromClerkUser(user) {
+    return (
+        user?.fullName ||
+        user?.firstName ||
+        user?.username ||
+        user?.primaryEmailAddress?.emailAddress?.split("@")[0] ||
+        "Student"
+    );
+}
 
-    const navActions = document.querySelector(".nav-actions");
-    const mobileActions = document.querySelector(".mobile-actions");
-
-    if (!navActions && !mobileActions) return;
-
-    const signedInHTML = `
-        <span class="nav-user-greeting">Hi, ${cachedUser.displayName}</span>
+function getSignedInHTML(displayName) {
+    return `
+        <span class="nav-user-greeting">Hi, ${displayName}</span>
         <button class="btn-outline nav-logout-btn" type="button">Logout</button>
     `;
+}
 
-    const desktopAlreadyRendered =
-        navActions?.querySelector(".nav-user-greeting") &&
-        navActions.textContent.includes(displayName);
+function getSignedOutHTML() {
+    return `
+        <a href="login.html" class="btn-outline">Login</a>
+        <a href="signup.html" class="btn-gold">Signup</a>
+    `;
+}
 
-    const mobileAlreadyRendered =
-        mobileActions?.querySelector(".nav-user-greeting") &&
-        mobileActions.textContent.includes(displayName);
-
-    if (navActions && !desktopAlreadyRendered) {
-        navActions.innerHTML = signedInHTML;
-    }
-
-    if (mobileActions && !mobileAlreadyRendered) {
-        mobileActions.innerHTML = signedInHTML;
-    }
-
-    document.body.classList.add("auth-greeting-seen");
-
+function attachLogoutHandler() {
     document.querySelectorAll(".nav-logout-btn").forEach((button) => {
-        button.addEventListener("click", async () => {
+        button.onclick = async () => {
             localStorage.removeItem("karthificialUser");
-            localStorage.removeItem("karthificialGreetingAnimated");
 
             if (window.Clerk) {
                 await window.Clerk.signOut();
             }
 
             window.location.href = "index.html";
-        });
+        };
     });
+}
+
+function renderCachedNavbarInstantly() {
+    const cachedUser = getCachedUser();
+    if (!cachedUser?.displayName) return;
+
+    const navActions = document.querySelector(".nav-actions");
+    const mobileActions = document.querySelector(".mobile-actions");
+
+    const signedInHTML = getSignedInHTML(cachedUser.displayName);
+
+    if (navActions) navActions.innerHTML = signedInHTML;
+    if (mobileActions) mobileActions.innerHTML = signedInHTML;
+
+    document.body.classList.remove("auth-checking");
+    document.body.classList.add("auth-ready");
+
+    attachLogoutHandler();
+}
+
+async function syncUserWithBackend() {
+    const user = window.Clerk?.user;
+    if (!user) return;
+
+    const displayName = getDisplayNameFromClerkUser(user);
+    const email = user.primaryEmailAddress?.emailAddress || "";
+
+    localStorage.setItem("karthificialUser", JSON.stringify({
+        clerkUserId: user.id,
+        displayName,
+        email
+    }));
+
+    try {
+        const response = await fetch("https://karthificial-backend--jbmsacps.replit.app/api/user/sync", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                clerkUserId: user.id,
+                displayName,
+                email
+            })
+        });
+
+        if (!response.ok) {
+            throw new Error("Backend user sync failed");
+        }
+
+        const savedUser = await response.json();
+
+        localStorage.setItem("karthificialUser", JSON.stringify({
+            clerkUserId: savedUser.clerkUserId || user.id,
+            displayName: savedUser.displayName || displayName,
+            email: savedUser.email || email
+        }));
+    } catch (error) {
+        console.error("User profile sync failed:", error);
+    }
+}
+
+function updateNavbarAuthState() {
+    const navActions = document.querySelector(".nav-actions");
+    const mobileActions = document.querySelector(".mobile-actions");
+
+    if (!navActions && !mobileActions) return;
+
+    const user = window.Clerk?.user;
+    const cachedUser = getCachedUser();
+
+    if (user || cachedUser?.displayName) {
+        const displayName = cachedUser?.displayName || getDisplayNameFromClerkUser(user);
+        const signedInHTML = getSignedInHTML(displayName);
+
+        if (navActions) navActions.innerHTML = signedInHTML;
+        if (mobileActions) mobileActions.innerHTML = signedInHTML;
+
+        document.body.classList.remove("auth-checking");
+        document.body.classList.add("auth-ready");
+
+        attachLogoutHandler();
+        return;
+    }
+
+    localStorage.removeItem("karthificialUser");
+
+    const signedOutHTML = getSignedOutHTML();
+
+    if (navActions) navActions.innerHTML = signedOutHTML;
+    if (mobileActions) mobileActions.innerHTML = signedOutHTML;
+
+    document.body.classList.remove("auth-checking");
+    document.body.classList.add("auth-ready");
 }
 
 document.addEventListener("DOMContentLoaded", async () => {
@@ -81,132 +171,50 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
 
     try {
-        console.log("Loading Clerk UI bundle...");
+        await loadScript(`https://${clerkHost}/npm/@clerk/ui@1/dist/ui.browser.js`);
 
-        await loadScript(
-            `https://${clerkHost}/npm/@clerk/ui@1/dist/ui.browser.js`
-        );
-
-        if (!window.__internal_ClerkUICtor) {
-            console.error("Clerk UI bundle loaded, but UI constructor is missing.");
-            return;
-        }
-
-        console.log("Loading Clerk JS...");
-
-        await loadScript(
-            `https://${clerkHost}/npm/@clerk/clerk-js@6/dist/clerk.browser.js`,
-            {
-                "data-clerk-publishable-key": CLERK_PUBLISHABLE_KEY
-            }
-        );
-
-        if (!window.Clerk) {
-            console.error("ClerkJS loaded, but window.Clerk is missing.");
-            return;
-        }
-
-        // NOTE: Email vs Phone authentication options are configured in the Clerk Dashboard
-        // under "User & Authentication" -> "Identifiers". The Clerk JS SDK automatically
-        // respects these settings without requiring manual code changes.
         await window.Clerk.load({
-            ui: {
-                ClerkUI: window.__internal_ClerkUICtor
-            },
-            localization: {
-                signIn: {
-                    start: {
-                        title: "Login",
-                        subtitle: "to access Karthificial"
-                    }
-                },
-                signUp: {
-                    start: {
-                        title: "Create Account",
-                        subtitle: "to join Karthificial"
-                    }
-                }
-            }
+            publishableKey: CLERK_PUBLISHABLE_KEY
         });
 
-        console.log("Clerk loaded successfully with UI components");
-
+        await syncUserWithBackend();
         updateNavbarAuthState();
 
-        if (window.Clerk.user) {
-            await syncUserWithBackend();
-        }
-
         const clerkAppearance = {
-            layout: {
-                unsafe_disableDevelopmentModeWarnings: true
-            },
             variables: {
                 colorPrimary: "#d4af37",
-                colorBackground: "transparent",
+                colorBackground: "#080808",
                 colorInputBackground: "#111111",
                 colorInputText: "#ffffff",
                 colorText: "#f5e8b8",
                 colorTextSecondary: "#c9b875",
-                colorDanger: "#ff5a5a",
-                borderRadius: "12px",
-                fontFamily: "Arial, Helvetica, sans-serif"
+                colorDanger: "#ff4d4d",
+                borderRadius: "14px"
             },
             elements: {
-                cardBox: {
-                    boxShadow: "none",
-                    background: "transparent",
-                    width: "100%"
-                },
                 card: {
-                    background: "transparent",
-                    boxShadow: "none",
-                    border: "none",
-                    width: "100%"
+                    backgroundColor: "#080808",
+                    border: "1px solid rgba(212, 175, 55, 0.25)",
+                    boxShadow: "0 0 35px rgba(212, 175, 55, 0.15)"
                 },
                 headerTitle: {
-                    color: "#d4af37",
-                    letterSpacing: "2px",
-                    fontSize: "28px",
-                    fontWeight: "800",
-                    textTransform: "none",
-                    textAlign: "center"
+                    color: "#d4af37"
                 },
                 headerSubtitle: {
-                    color: "#c9b875",
-                    textAlign: "center"
+                    color: "#f5e8b8"
+                },
+                formButtonPrimary: {
+                    backgroundColor: "#d4af37",
+                    color: "#080808",
+                    fontWeight: "800"
+                },
+                footerActionLink: {
+                    color: "#d4af37"
                 },
                 socialButtonsBlockButton: {
                     backgroundColor: "#111111",
-                    border: "1px solid rgba(212, 175, 55, 0.25)",
-                    color: "#f5e8b8"
-                },
-                formFieldInput: {
-                    backgroundColor: "#111111",
-                    color: "#ffffff",
-                    border: "1px solid rgba(212, 175, 55, 0.25)",
-                    borderRadius: "10px"
-                },
-                formButtonPrimary: {
-                    background: "linear-gradient(135deg, #d4af37, #b08d25)",
-                    color: "#000000",
-                    borderRadius: "999px",
-                    fontWeight: "800",
-                    border: "none"
-                },
-                footer: {
-                    background: "transparent",
-                    borderTop: "none"
-                },
-                footerActionText: {
-                    color: "#c9b875"
-                },
-                footerActionLink: {
-                    color: "#d4af37",
-                    fontWeight: "800"
-                },
-                dividerLine: {
-                    background: "rgba(212, 175, 55, 0.2)"
+                    color: "#f5e8b8",
+                    border: "1px solid rgba(212, 175, 55, 0.2)"
                 },
                 dividerText: {
                     color: "#c9b875"
@@ -221,7 +229,6 @@ document.addEventListener("DOMContentLoaded", async () => {
                 signInUrl: "login.html",
                 fallbackRedirectUrl: "index.html"
             });
-            console.log("Clerk sign-in mounted");
         }
 
         if (signUpBox) {
@@ -232,125 +239,20 @@ document.addEventListener("DOMContentLoaded", async () => {
                 fallbackRedirectUrl: "index.html",
                 forceRedirectUrl: "index.html"
             });
-            console.log("Clerk sign-up mounted");
         }
 
         if (userButtonBox) {
             if (window.Clerk.user) {
                 window.Clerk.mountUserButton(userButtonBox);
-                console.log("Clerk user button mounted");
             } else {
-                userButtonBox.innerHTML = `
-                    <a href="login.html" class="btn-outline">Login</a>
-                    <a href="signup.html" class="btn-gold">Signup</a>
-                `;
+                userButtonBox.innerHTML = getSignedOutHTML();
             }
         }
-        document.body.classList.remove("auth-checking");
 
+        document.body.classList.remove("auth-checking");
+        document.body.classList.add("auth-ready");
     } catch (error) {
         console.error("Clerk failed to initialize:", error);
-        document.body.classList.remove("auth-checking");
+        updateNavbarAuthState();
     }
 });
-
-async function syncUserWithBackend() {
-    const user = window.Clerk.user;
-    if (!user) return;
-
-    const displayName =
-        user.fullName ||
-        user.firstName ||
-        user.username ||
-        user.primaryEmailAddress?.emailAddress?.split("@")[0] ||
-        "Student";
-
-    const email = user.primaryEmailAddress?.emailAddress || "";
-
-    try {
-        const response = await fetch("https://karthificial-backend--jbmsacps.replit.app/api/user/sync", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
-                clerkUserId: user.id,
-                displayName: displayName,
-                email: email
-            })
-        });
-
-        if (!response.ok) {
-            throw new Error("Backend user sync failed");
-        }
-
-        const savedUser = await response.json();
-
-        localStorage.setItem("karthificialUser", JSON.stringify({
-            clerkUserId: savedUser.clerkUserId,
-            displayName: savedUser.displayName || displayName,
-            email: savedUser.email || email
-        }));
-
-    } catch (error) {
-        console.error("User profile sync failed:", error);
-    }
-}
-
-function updateNavbarAuthState() {
-    const navActions = document.querySelector(".nav-actions");
-    const mobileActions = document.querySelector(".mobile-actions");
-
-    if (!navActions && !mobileActions) return;
-
-    const user = window.Clerk.user;
-    const cachedUser = JSON.parse(localStorage.getItem("karthificialUser") || "null");
-
-    if (user) {
-        const displayName =
-            cachedUser?.displayName ||
-            user.fullName ||
-            user.firstName ||
-            user.username ||
-            user.primaryEmailAddress?.emailAddress?.split("@")[0] ||
-            "Student";
-
-        const signedInHTML = `
-            <span class="nav-user-greeting">Hi, ${displayName}</span>
-            <button class="btn-outline nav-logout-btn" type="button">Logout</button>
-        `;
-
-        if (navActions) navActions.innerHTML = signedInHTML;
-        if (mobileActions) mobileActions.innerHTML = signedInHTML;
-
-        if (localStorage.getItem("karthificialGreetingAnimated") !== "true") {
-            setTimeout(() => {
-                localStorage.setItem("karthificialGreetingAnimated", "true");
-                document.body.classList.add("auth-greeting-seen");
-            }, 700);
-        } else {
-            document.body.classList.add("auth-greeting-seen");
-        }
-
-        document.querySelectorAll(".nav-logout-btn").forEach((button) => {
-            button.addEventListener("click", async () => {
-                localStorage.removeItem("karthificialUser");
-                localStorage.removeItem("karthificialGreetingAnimated");
-                await window.Clerk.signOut();
-                window.location.href = "index.html";
-            });
-        });
-    } else {
-        localStorage.removeItem("karthificialUser");
-        localStorage.removeItem("karthificialGreetingAnimated");
-
-        const signedOutHTML = `
-            <a href="login.html" class="btn-outline">Login</a>
-            <a href="signup.html" class="btn-gold">Signup</a>
-        `;
-
-        if (navActions) navActions.innerHTML = signedOutHTML;
-        if (mobileActions) mobileActions.innerHTML = signedOutHTML;
-    }
-}
-
