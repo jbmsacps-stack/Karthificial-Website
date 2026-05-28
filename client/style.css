@@ -5283,23 +5283,24 @@ body.auth-checking .mobile-actions {
     opacity: 1 !important;
     visibility: visible !important;
 }
+
 /* ================================
-   ZERO DELAY NAV GREETING FIX
+   AUTH FLASH FIX
+   Prevents Login/Signup flash after login
 ================================ */
 
-body.auth-checking .nav-actions,
-body.auth-checking .mobile-actions {
-    opacity: 1 !important;
-    visibility: visible !important;
-    pointer-events: auto !important;
+body.auth-checking .nav-actions a[href="login.html"],
+body.auth-checking .nav-actions a[href="signup.html"],
+body.auth-checking .mobile-actions a[href="login.html"],
+body.auth-checking .mobile-actions a[href="signup.html"] {
+    opacity: 0 !important;
+    visibility: hidden !important;
+    pointer-events: none !important;
 }
 
-.nav-actions,
-.mobile-actions {
-    transition: none !important;
-}
-
-.nav-user-greeting {
+body.auth-checking .nav-user-greeting,
+body.auth-ready .nav-user-greeting {
     opacity: 1 !important;
     visibility: visible !important;
 }
+
