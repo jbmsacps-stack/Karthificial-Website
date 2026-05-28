@@ -80,6 +80,11 @@ Notes, question papers, MCQ practice, career guidance, authentication, database 
 
 </div>
 
+
+</div>
+
+---
+
 ## About
 
 **Karthificial Website** is a full-stack academic platform designed to support students with structured academic resources, MCQ practice, career guidance, secure authentication, student profile management, and analytics-based improvement.
