@@ -5337,3 +5337,15 @@ body.auth-checking .mobile-actions {
         filter: none;
     }
 }
+/* =================================
+   HIDE CONTACT NAV ONLY IN MOBILE
+================================= */
+
+@media screen and (max-width: 768px) {
+
+    /* Hide the last navbar item (Contact) */
+    .nav-menu li:nth-last-child(2) {
+        display: none !important;
+    }
+
+}
