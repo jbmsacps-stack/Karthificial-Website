@@ -5423,7 +5423,7 @@ main,
 
 .hero-logo {
     max-width: min(340px, 78vw);
-    margin: 0 auto 10px;
+    margin: 0 auto 30px;
     display: block;
     filter:
         drop-shadow(0 0 34px rgba(212, 175, 55, 0.32)) drop-shadow(0 22px 42px rgba(0, 0, 0, 0.78));
@@ -5848,4 +5848,146 @@ main,
             transparent 0%,
             rgba(5, 5, 5, 0.45) 45%,
             rgba(3, 3, 3, 0.95) 100%);
+}
+
+/* =================================================
+   FINAL HERO UPGRADE BASED ON CURRENT HTML
+================================================= */
+
+.home-hero {
+    min-height: 92vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 80px 6% 90px;
+}
+
+.hero-content {
+    max-width: 1050px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.hero-logo {
+    max-width: 320px;
+    width: 100%;
+    margin: 0 auto 18px;
+    display: block;
+}
+
+.hero-kicker {
+    color: var(--gold);
+    font-size: 0.9rem;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin: 10px auto 18px;
+    font-weight: 700;
+}
+
+.hero-main-title {
+    color: #fff1bd;
+    font-size: clamp(2.2rem, 5.5vw, 5.3rem);
+    line-height: 1.02;
+    margin: 0 auto 22px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    text-shadow:
+        0 0 28px rgba(212, 175, 55, 0.28),
+        0 28px 55px rgba(0, 0, 0, 0.95);
+}
+
+.hero-role-badges {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 11px;
+    margin: 0 auto 28px;
+}
+
+.hero-role-badges span {
+    padding: 9px 15px;
+    border-radius: 999px;
+    border: 1px solid rgba(212, 175, 55, 0.34);
+    background:
+        linear-gradient(135deg, rgba(212, 175, 55, 0.12), rgba(0, 0, 0, 0.45));
+    color: #f5dc8a;
+    font-size: 0.86rem;
+    letter-spacing: 0.4px;
+    box-shadow:
+        0 0 18px rgba(212, 175, 55, 0.10),
+        inset 0 0 14px rgba(212, 175, 55, 0.05);
+}
+
+.hero-subtitle {
+    max-width: 850px;
+    margin: 0 auto;
+    color: #eee3ca;
+    text-align: center;
+    font-size: clamp(1rem, 1.55vw, 1.18rem);
+    line-height: 1.75;
+    text-wrap: balance;
+}
+
+.hero-signature {
+    margin: 30px auto 0;
+    color: rgba(255, 255, 255, 0.78);
+    text-align: center;
+    font-size: 0.92rem;
+    letter-spacing: 2.8px;
+    text-transform: uppercase;
+}
+
+.hero-buttons {
+    margin-top: 34px;
+}
+
+/* Smooth background continuation into slider */
+.slider-section {
+    margin-top: -20px;
+    padding-top: 0;
+    background: transparent !important;
+}
+
+/* Mobile fix */
+@media (max-width: 700px) {
+    .home-hero {
+        min-height: auto;
+        padding: 58px 5% 62px;
+    }
+
+    .hero-logo {
+        max-width: 230px;
+    }
+
+    .hero-kicker {
+        font-size: 0.75rem;
+        letter-spacing: 2px;
+    }
+
+    .hero-main-title {
+        font-size: clamp(2rem, 11vw, 3.5rem);
+        line-height: 1.08;
+    }
+
+    .hero-role-badges {
+        gap: 8px;
+        margin-bottom: 22px;
+    }
+
+    .hero-role-badges span {
+        font-size: 0.76rem;
+        padding: 8px 11px;
+    }
+
+    .hero-subtitle {
+        max-width: 100%;
+        font-size: 0.95rem;
+        line-height: 1.65;
+    }
+
+    .hero-signature {
+        font-size: 0.76rem;
+        letter-spacing: 1.7px;
+        line-height: 1.8;
+    }
 }
