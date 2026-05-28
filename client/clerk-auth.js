@@ -1,3 +1,4 @@
+document.body.classList.add("auth-checking");
 document.addEventListener("DOMContentLoaded", async () => {
     const signInBox = document.getElementById("clerk-sign-in");
     const signUpBox = document.getElementById("clerk-sign-up");
@@ -27,6 +28,8 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
 
     try {
+        document.body.classList.remove("auth-checking");
+
         console.log("Loading Clerk UI bundle...");
 
         await loadScript(
@@ -165,15 +168,15 @@ document.addEventListener("DOMContentLoaded", async () => {
             console.log("Clerk sign-in mounted");
         }
 
-        if (signInBox) {
-            window.Clerk.mountSignIn(signInBox, {
+        if (signUpBox) {
+            window.Clerk.mountSignUp(signUpBox, {
                 appearance: clerkAppearance,
-                signUpUrl: "signup.html",
                 signInUrl: "login.html",
+                signUpUrl: "signup.html",
                 fallbackRedirectUrl: "index.html",
                 forceRedirectUrl: "index.html"
             });
-            console.log("Clerk sign-in mounted");
+            console.log("Clerk sign-up mounted");
         }
 
         if (userButtonBox) {
@@ -189,6 +192,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         }
     } catch (error) {
         console.error("Clerk failed to initialize:", error);
+        document.body.classList.remove("auth-checking");
     }
 });
 
@@ -231,3 +235,4 @@ function updateNavbarAuthState() {
         if (mobileActions) mobileActions.innerHTML = signedOutHTML;
     }
 }
+
