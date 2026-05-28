@@ -1,5 +1,58 @@
 document.body.classList.add("auth-checking");
+
+if (localStorage.getItem("karthificialGreetingAnimated") === "true") {
+    document.body.classList.add("auth-greeting-seen");
+}
+
+function renderCachedNavbarInstantly() {
+    const cachedUser = JSON.parse(localStorage.getItem("karthificialUser") || "null");
+    if (!cachedUser?.displayName) return;
+
+    const navActions = document.querySelector(".nav-actions");
+    const mobileActions = document.querySelector(".mobile-actions");
+
+    if (!navActions && !mobileActions) return;
+
+    const signedInHTML = `
+        <span class="nav-user-greeting">Hi, ${cachedUser.displayName}</span>
+        <button class="btn-outline nav-logout-btn" type="button">Logout</button>
+    `;
+
+    const desktopAlreadyRendered =
+        navActions?.querySelector(".nav-user-greeting") &&
+        navActions.textContent.includes(displayName);
+
+    const mobileAlreadyRendered =
+        mobileActions?.querySelector(".nav-user-greeting") &&
+        mobileActions.textContent.includes(displayName);
+
+    if (navActions && !desktopAlreadyRendered) {
+        navActions.innerHTML = signedInHTML;
+    }
+
+    if (mobileActions && !mobileAlreadyRendered) {
+        mobileActions.innerHTML = signedInHTML;
+    }
+
+    document.body.classList.add("auth-greeting-seen");
+
+    document.querySelectorAll(".nav-logout-btn").forEach((button) => {
+        button.addEventListener("click", async () => {
+            localStorage.removeItem("karthificialUser");
+            localStorage.removeItem("karthificialGreetingAnimated");
+
+            if (window.Clerk) {
+                await window.Clerk.signOut();
+            }
+
+            window.location.href = "index.html";
+        });
+    });
+}
+
 document.addEventListener("DOMContentLoaded", async () => {
+    renderCachedNavbarInstantly();
+
     const signInBox = document.getElementById("clerk-sign-in");
     const signUpBox = document.getElementById("clerk-sign-up");
     const userButtonBox = document.getElementById("clerk-user-button");
@@ -239,8 +292,6 @@ async function syncUserWithBackend() {
             email: savedUser.email || email
         }));
 
-        updateNavbarAuthState();
-
     } catch (error) {
         console.error("User profile sync failed:", error);
     }
@@ -272,15 +323,26 @@ function updateNavbarAuthState() {
         if (navActions) navActions.innerHTML = signedInHTML;
         if (mobileActions) mobileActions.innerHTML = signedInHTML;
 
+        if (localStorage.getItem("karthificialGreetingAnimated") !== "true") {
+            setTimeout(() => {
+                localStorage.setItem("karthificialGreetingAnimated", "true");
+                document.body.classList.add("auth-greeting-seen");
+            }, 700);
+        } else {
+            document.body.classList.add("auth-greeting-seen");
+        }
+
         document.querySelectorAll(".nav-logout-btn").forEach((button) => {
             button.addEventListener("click", async () => {
                 localStorage.removeItem("karthificialUser");
+                localStorage.removeItem("karthificialGreetingAnimated");
                 await window.Clerk.signOut();
                 window.location.href = "index.html";
             });
         });
     } else {
         localStorage.removeItem("karthificialUser");
+        localStorage.removeItem("karthificialGreetingAnimated");
 
         const signedOutHTML = `
             <a href="login.html" class="btn-outline">Login</a>
