@@ -5127,3 +5127,31 @@ body {
     margin: 0 0 12px;
     text-align: center;
 }
+
+/* ================================
+   CLERK OTP READABILITY FIX
+================================ */
+
+.cl-otpCodeFieldInput {
+    background: #090909 !important;
+    color: #ffffff !important;
+    border: 1px solid rgba(212, 175, 55, 0.5) !important;
+}
+
+.cl-identityPreviewText,
+.cl-formHeaderSubtitle,
+.cl-formResendCodeLink,
+.cl-alternativeMethodsBlockButton,
+.cl-footerActionText,
+.cl-footerActionLink,
+.cl-poweredBy,
+.cl-internal-1vbdq0x,
+.cl-internal-wkkub3 {
+    color: #f5e8b8 !important;
+}
+
+.cl-footer,
+.cl-footerPages {
+    background: #080808 !important;
+    border-color: rgba(212, 175, 55, 0.18) !important;
+}
