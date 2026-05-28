@@ -76,6 +76,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         });
 
         console.log("Clerk loaded successfully with UI components");
+        updateNavbarAuthState();
 
         const clerkAppearance = {
             layout: {
@@ -164,14 +165,15 @@ document.addEventListener("DOMContentLoaded", async () => {
             console.log("Clerk sign-in mounted");
         }
 
-        if (signUpBox) {
-            window.Clerk.mountSignUp(signUpBox, {
+        if (signInBox) {
+            window.Clerk.mountSignIn(signInBox, {
                 appearance: clerkAppearance,
-                signInUrl: "login.html",
                 signUpUrl: "signup.html",
-                fallbackRedirectUrl: "profile-setup.html"
+                signInUrl: "login.html",
+                fallbackRedirectUrl: "index.html",
+                forceRedirectUrl: "index.html"
             });
-            console.log("Clerk sign-up mounted");
+            console.log("Clerk sign-in mounted");
         }
 
         if (userButtonBox) {
@@ -189,3 +191,43 @@ document.addEventListener("DOMContentLoaded", async () => {
         console.error("Clerk failed to initialize:", error);
     }
 });
+
+function updateNavbarAuthState() {
+    const navActions = document.querySelector(".nav-actions");
+    const mobileActions = document.querySelector(".mobile-actions");
+
+    if (!navActions && !mobileActions) return;
+
+    const user = window.Clerk.user;
+
+    if (user) {
+        const displayName =
+            user.firstName ||
+            user.username ||
+            user.primaryEmailAddress?.emailAddress?.split("@")[0] ||
+            "Student";
+
+        const signedInHTML = `
+            <span class="nav-user-greeting">Hi, ${displayName}</span>
+            <button class="btn-outline nav-logout-btn" type="button">Logout</button>
+        `;
+
+        if (navActions) navActions.innerHTML = signedInHTML;
+        if (mobileActions) mobileActions.innerHTML = signedInHTML;
+
+        document.querySelectorAll(".nav-logout-btn").forEach((button) => {
+            button.addEventListener("click", async () => {
+                await window.Clerk.signOut();
+                window.location.href = "index.html";
+            });
+        });
+    } else {
+        const signedOutHTML = `
+            <a href="login.html" class="btn-outline">Login</a>
+            <a href="signup.html" class="btn-gold">Signup</a>
+        `;
+
+        if (navActions) navActions.innerHTML = signedOutHTML;
+        if (mobileActions) mobileActions.innerHTML = signedOutHTML;
+    }
+}

@@ -5030,3 +5030,100 @@ body {
         font-size: 1.75rem !important;
     }
 }
+
+/* ================================
+   CLERK OTP / VERIFICATION READABILITY FIX
+================================ */
+
+.cl-rootBox,
+.cl-card,
+.cl-cardBox {
+    color: #f5e8b8 !important;
+}
+
+.cl-headerTitle,
+.cl-title,
+.cl-main {
+    color: #d4af37 !important;
+}
+
+.cl-headerSubtitle,
+.cl-subtitle,
+.cl-formHeaderSubtitle,
+.cl-footerActionText,
+.cl-identityPreviewText,
+.cl-alternativeMethodsBlockButton,
+.cl-formFieldLabel,
+.cl-formFieldHintText,
+.cl-formResendCodeLink,
+.cl-formFieldAction,
+.cl-internal-1eekank,
+.cl-internal-1vbdq0x,
+.cl-internal-wkkub3 {
+    color: #f5e8b8 !important;
+}
+
+.cl-identityPreviewEditButton,
+.cl-footerActionLink,
+.cl-formResendCodeLink,
+.cl-alternativeMethodsBlockButton {
+    color: #d4af37 !important;
+    font-weight: 700 !important;
+}
+
+.cl-otpCodeFieldInput {
+    background: #090909 !important;
+    color: #ffffff !important;
+    border: 1px solid rgba(212, 175, 55, 0.45) !important;
+    border-radius: 14px !important;
+}
+
+.cl-otpCodeFieldInput:focus {
+    border-color: #d4af37 !important;
+    box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.22) !important;
+}
+
+.cl-formFieldErrorText,
+.cl-alertText,
+.cl-error {
+    color: #ff6b6b !important;
+}
+
+.cl-footer,
+.cl-footerPages,
+.cl-internal-1dauvpw,
+.cl-internal-1hp5nqm,
+.cl-internal-1vbkfwh,
+.cl-internal-13u79ez {
+    background: #080808 !important;
+    color: #c9b875 !important;
+    border-color: rgba(212, 175, 55, 0.16) !important;
+}
+
+.cl-badge {
+    background: rgba(255, 122, 24, 0.12) !important;
+    color: #ff7a18 !important;
+}
+
+/* ================================
+   AUTH NAVBAR STATE
+================================ */
+
+.nav-user-greeting {
+    color: #d4af37;
+    font-weight: 800;
+    letter-spacing: 1px;
+    margin-right: 14px;
+    white-space: nowrap;
+}
+
+.nav-logout-btn {
+    cursor: pointer;
+    font-family: inherit;
+}
+
+.mobile-actions .nav-user-greeting {
+    display: block;
+    margin: 0 0 12px;
+    text-align: center;
+}
