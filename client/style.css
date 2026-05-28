@@ -864,6 +864,11 @@ img {
     box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.14);
 }
 
+.form-group select option {
+    background-color: #111111;
+    color: var(--white);
+}
+
 .auth-submit {
     width: 100%;
     border: none;

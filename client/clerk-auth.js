@@ -169,7 +169,7 @@ document.addEventListener("DOMContentLoaded", async () => {
                 appearance: clerkAppearance,
                 signInUrl: "login.html",
                 signUpUrl: "signup.html",
-                fallbackRedirectUrl: "index.html"
+                fallbackRedirectUrl: "profile-setup.html"
             });
             console.log("Clerk sign-up mounted");
         }
