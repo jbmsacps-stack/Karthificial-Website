@@ -5249,61 +5249,54 @@ body.auth-checking .mobile-actions {
 }
 
 /* ================================
-   AUTH GREETING ANIMATION
+   ZERO DELAY NAV GREETING FIX
 ================================ */
 
+body.auth-checking .nav-actions,
+body.auth-checking .mobile-actions {
+    opacity: 1 !important;
+    visibility: visible !important;
+}
+
+.nav-actions,
+.mobile-actions {
+    transition: none !important;
+}
+
 .nav-user-greeting {
-    position: relative;
-    display: inline-flex;
-    align-items: center;
-    color: #d4af37;
-    font-weight: 800;
-    letter-spacing: 0.8px;
-    margin-right: 14px;
-    white-space: nowrap;
-    opacity: 0;
-    transform: translateX(8px);
-    animation: greetingReveal 0.45s ease forwards;
-    text-shadow:
-        0 0 8px rgba(212, 175, 55, 0.35),
-        0 0 18px rgba(212, 175, 55, 0.18);
+    opacity: 1 !important;
+    visibility: visible !important;
+    animation: none !important;
 }
 
-.nav-user-greeting::after {
-    content: "";
-    position: absolute;
-    inset: -4px -8px;
-    border-radius: 999px;
-    background: linear-gradient(
-        90deg,
-        transparent,
-        rgba(212, 175, 55, 0.22),
-        transparent
-    );
-    opacity: 0;
-    transform: translateX(-18px);
-    animation: greetingSweep 0.8s ease 0.15s forwards;
-    pointer-events: none;
+/* ================================
+   ZERO DELAY NAV GREETING FIX
+================================ */
+
+body.auth-checking .nav-actions,
+body.auth-checking .mobile-actions {
+    opacity: 1 !important;
+    visibility: visible !important;
 }
 
-.nav-logout-btn {
-    opacity: 0;
-    transform: translateX(8px);
-    animation: greetingReveal 0.45s ease 0.12s forwards;
+.nav-user-greeting {
+    opacity: 1 !important;
+    visibility: visible !important;
+}
+/* ================================
+   ZERO DELAY NAV GREETING FIX
+================================ */
+
+body.auth-checking .nav-actions,
+body.auth-checking .mobile-actions {
+    opacity: 1 !important;
+    visibility: visible !important;
+    pointer-events: auto !important;
 }
 
-@keyframes greetingReveal {
-    from {
-        opacity: 0;
-        transform: translateX(8px);
-        filter: blur(4px);
-    }
-
-    to {
-        opacity: 1;
-        transform: translateX(0);
-        filter: blur(0);
-    }
+.nav-actions,
+.mobile-actions {
+    transition: none !important;
 }
 
 @keyframes greetingSweep {
