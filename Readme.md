@@ -7,19 +7,76 @@
 **A full-stack academic platform built for smarter student learning.**  
 Notes, question papers, MCQ practice, career guidance, authentication, database integration, and analytics — all in one structured education platform.
 
-[![Live Demo](https://img.shields.io/badge/Live%20Demo-Visit%20Website-brightgreen?style=for-the-badge)](https://karthificial-website.vercel.app/index.html)
-[![Frontend](https://img.shields.io/badge/Frontend-Vercel-000000?style=for-the-badge&logo=vercel)](https://vercel.com/)
-[![Backend](https://img.shields.io/badge/Backend-Replit-F26207?style=for-the-badge&logo=replit)](https://replit.com/)
-[![Database](https://img.shields.io/badge/Database-Supabase-3ECF8E?style=for-the-badge&logo=supabase)](https://supabase.com/)
+<br>
 
-[![HTML](https://img.shields.io/badge/HTML-Frontend-E34F26?style=for-the-badge&logo=html5)](https://developer.mozilla.org/en-US/docs/Web/HTML)
-[![CSS](https://img.shields.io/badge/CSS-Styling-1572B6?style=for-the-badge&logo=css3)](https://developer.mozilla.org/en-US/docs/Web/CSS)
-[![JavaScript](https://img.shields.io/badge/JavaScript-Logic-F7DF1E?style=for-the-badge&logo=javascript)](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
-[![Java](https://img.shields.io/badge/Java-Backend-ED8B00?style=for-the-badge&logo=openjdk)](https://www.java.com/)
-[![Spring Boot](https://img.shields.io/badge/Spring%20Boot-REST%20API-6DB33F?style=for-the-badge&logo=springboot)](https://spring.io/projects/spring-boot)
-[![PostHog](https://img.shields.io/badge/PostHog-Analytics-F54E00?style=for-the-badge&logo=posthog)](https://posthog.com/)
+<div align="center">
 
-🌐 **Live Website:** <a href="https://karthificial-website.vercel.app/index.html" target="_blank" rel="noopener noreferrer">Open Karthificial</a>
+# 🌐 Live Project Preview
+
+### Karthificial is deployed as a full-stack academic platform.
+
+<a href="https://karthificial-website.vercel.app/index.html" target="_blank" rel="noopener noreferrer">
+  <img src="https://img.shields.io/badge/OPEN-KARTHIFICIAL-d4af37?style=for-the-badge&logo=googlechrome&logoColor=black" alt="Open Karthificial Live Website" />
+</a>
+
+<br><br>
+
+<table>
+  <tr>
+    <td align="center">
+      <a href="https://vercel.com/" target="_blank" rel="noopener noreferrer">
+        <img src="https://img.shields.io/badge/Frontend-Vercel-000000?style=for-the-badge&logo=vercel&logoColor=white" alt="Vercel" />
+      </a>
+      <br>
+      <strong>Hosting</strong>
+    </td>
+    <td align="center">
+      <a href="https://replit.com/" target="_blank" rel="noopener noreferrer">
+        <img src="https://img.shields.io/badge/Backend-Replit-F26207?style=for-the-badge&logo=replit&logoColor=white" alt="Replit" />
+      </a>
+      <br>
+      <strong>Runtime</strong>
+    </td>
+    <td align="center">
+      <a href="https://supabase.com/" target="_blank" rel="noopener noreferrer">
+        <img src="https://img.shields.io/badge/Database-Supabase-3ECF8E?style=for-the-badge&logo=supabase&logoColor=white" alt="Supabase" />
+      </a>
+      <br>
+      <strong>Storage</strong>
+    </td>
+    <td align="center">
+      <a href="https://posthog.com/" target="_blank" rel="noopener noreferrer">
+        <img src="https://img.shields.io/badge/Analytics-PostHog-F54E00?style=for-the-badge&logo=posthog&logoColor=white" alt="PostHog" />
+      </a>
+      <br>
+      <strong>Insights</strong>
+    </td>
+  </tr>
+</table>
+
+</div>
+
+---
+
+<div align="center">
+
+## Core Technologies
+
+### Frontend
+
+[![HTML5](https://img.shields.io/badge/HTML5-Structure-E34F26?style=for-the-badge&logo=html5&logoColor=white)](https://developer.mozilla.org/en-US/docs/Web/HTML)
+[![CSS3](https://img.shields.io/badge/CSS3-Interface-1572B6?style=for-the-badge&logo=css3&logoColor=white)](https://developer.mozilla.org/en-US/docs/Web/CSS)
+[![JavaScript](https://img.shields.io/badge/JavaScript-Logic-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
+
+### Backend
+
+[![Java](https://img.shields.io/badge/Java-Server-ED8B00?style=for-the-badge&logo=openjdk&logoColor=white)](https://www.java.com/)
+[![Spring Boot](https://img.shields.io/badge/Spring%20Boot-API-6DB33F?style=for-the-badge&logo=springboot&logoColor=white)](https://spring.io/projects/spring-boot)
+[![Maven](https://img.shields.io/badge/Maven-Build-C71A36?style=for-the-badge&logo=apachemaven&logoColor=white)](https://maven.apache.org/)
+
+### Architecture
+
+`REST API` · `JPA` · `Hibernate` · `JWT` · `DTO` · `Repository` · `Service Layer` · `CORS` · `Environment Config`
 
 </div>
 
