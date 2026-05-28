@@ -5283,3 +5283,23 @@ body.auth-checking .mobile-actions {
     opacity: 1 !important;
     visibility: visible !important;
 }
+/* ================================
+   ZERO DELAY NAV GREETING FIX
+================================ */
+
+body.auth-checking .nav-actions,
+body.auth-checking .mobile-actions {
+    opacity: 1 !important;
+    visibility: visible !important;
+    pointer-events: auto !important;
+}
+
+.nav-actions,
+.mobile-actions {
+    transition: none !important;
+}
+
+.nav-user-greeting {
+    opacity: 1 !important;
+    visibility: visible !important;
+}
