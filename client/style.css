@@ -4852,18 +4852,22 @@ body {
     color: var(--color-a89f7c) !important;
     opacity: 0.85 !important;
 }
+
 .cl-formFieldInput::-webkit-input-placeholder {
     color: var(--color-a89f7c) !important;
     opacity: 0.85 !important;
 }
+
 .cl-formFieldInput::-moz-placeholder {
     color: var(--color-a89f7c) !important;
     opacity: 0.85 !important;
 }
+
 .cl-formFieldInput:-ms-input-placeholder {
     color: var(--color-a89f7c) !important;
     opacity: 0.85 !important;
 }
+
 .cl-formFieldInput:-moz-placeholder {
     color: var(--color-a89f7c) !important;
     opacity: 0.85 !important;
@@ -5007,10 +5011,12 @@ body {
     .auth-page {
         padding: 40px 14px !important;
     }
+
     .auth-card {
         padding: 30px 20px !important;
         border-radius: 20px !important;
     }
+
     .cl-headerTitle {
         font-size: 1.75rem !important;
     }
@@ -5168,7 +5174,7 @@ body.auth-checking .mobile-actions {
     color: var(--gold) !important;
 }
 
-.cl-headerSubtitle{
+.cl-headerSubtitle {
     color: white !important;
 }
 
@@ -5268,15 +5274,25 @@ body.auth-checking .mobile-actions {
     opacity: 1 !important;
     visibility: visible !important;
 }
+
 /* ================================
-   ZERO DELAY NAV GREETING FIX
+   AUTH FLASH FIX
+   Prevents Login/Signup flash after login
 ================================ */
 
-body.auth-checking .nav-actions,
-body.auth-checking .mobile-actions {
+body.auth-checking .nav-actions a[href="login.html"],
+body.auth-checking .nav-actions a[href="signup.html"],
+body.auth-checking .mobile-actions a[href="login.html"],
+body.auth-checking .mobile-actions a[href="signup.html"] {
+    opacity: 0 !important;
+    visibility: hidden !important;
+    pointer-events: none !important;
+}
+
+body.auth-checking .nav-user-greeting,
+body.auth-ready .nav-user-greeting {
     opacity: 1 !important;
     visibility: visible !important;
-    pointer-events: auto !important;
 }
 
 .nav-actions,
@@ -5306,6 +5322,7 @@ body.auth-checking .mobile-actions {
 }
 
 @media (prefers-reduced-motion: reduce) {
+
     .nav-user-greeting,
     .nav-user-greeting::after,
     .nav-logout-btn {
@@ -5315,6 +5332,7 @@ body.auth-checking .mobile-actions {
         filter: none;
     }
 }
+
 /* =================================
    HIDE CONTACT NAV ONLY IN MOBILE
 ================================= */
@@ -5326,4 +5344,635 @@ body.auth-checking .mobile-actions {
         display: none !important;
     }
 
+}
+
+main,
+.home-hero,
+.slider-section,
+.about-section,
+.stats-section,
+.portfolio-section {
+    background: transparent !important;
+}
+
+/* Hero section */
+.home-hero {
+    position: relative;
+    min-height: 88vh;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    isolation: isolate;
+    padding: 80px 8% 70px;
+}
+
+.home-hero::before {
+    content: "";
+    position: absolute;
+    top: -80px;
+    left: -180px;
+    width: 680px;
+    height: 620px;
+    background:
+        radial-gradient(ellipse at left top,
+            rgba(212, 175, 55, 0.45) 0%,
+            rgba(212, 175, 55, 0.25) 24%,
+            rgba(212, 175, 55, 0.10) 48%,
+            transparent 76%);
+    filter: blur(10px);
+    z-index: -1;
+    pointer-events: none;
+}
+
+.home-hero::after {
+    content: "";
+    position: absolute;
+    right: -220px;
+    bottom: -220px;
+    width: 560px;
+    height: 560px;
+    background:
+        radial-gradient(circle,
+            rgba(212, 175, 55, 0.10),
+            transparent 68%);
+    filter: blur(12px);
+    z-index: -1;
+    pointer-events: none;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+}
+
+.hero-logo {
+    max-width: min(340px, 78vw);
+    margin: 0 auto 30px;
+    display: block;
+    filter:
+        drop-shadow(0 0 34px rgba(212, 175, 55, 0.32)) drop-shadow(0 22px 42px rgba(0, 0, 0, 0.78));
+}
+
+/* Identity badges */
+.karthik-badge-row {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin: 26px auto 16px;
+}
+
+.karthik-badge {
+    border: 1px solid rgba(212, 175, 55, 0.42);
+    background:
+        linear-gradient(135deg, rgba(212, 175, 55, 0.12), rgba(0, 0, 0, 0.45));
+    color: #f9e8a8;
+    padding: 9px 16px;
+    border-radius: 999px;
+    font-size: 0.88rem;
+    letter-spacing: 0.45px;
+    box-shadow:
+        0 0 20px rgba(212, 175, 55, 0.12),
+        inset 0 0 14px rgba(212, 175, 55, 0.06);
+}
+
+/* Hero text */
+.hero-title {
+    color: #fff5d2;
+    font-size: clamp(2.35rem, 7vw, 5.7rem);
+    line-height: 0.95;
+    text-align: center;
+    margin: 24px auto 18px;
+    text-transform: uppercase;
+    letter-spacing: 1.4px;
+    text-shadow:
+        0 0 24px rgba(212, 175, 55, 0.28),
+        0 25px 45px rgba(0, 0, 0, 0.95);
+}
+
+.hero-title span {
+    color: var(--gold);
+}
+
+.hero-subtitle {
+    max-width: 960px;
+    margin: 0 auto;
+    color: #e7dcc3;
+    text-align: center;
+    font-size: clamp(1rem, 2vw, 1.18rem);
+    line-height: 1.8;
+}
+
+.hero-signature {
+    margin: 24px auto 0;
+    color: rgba(255, 255, 255, 0.72);
+    text-align: center;
+    font-size: 0.92rem;
+    letter-spacing: 2.2px;
+    text-transform: uppercase;
+}
+
+/* Hero buttons spacing */
+.hero-buttons {
+    margin-top: 34px;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 16px;
+}
+
+.hero-buttons .btn-gold,
+.hero-buttons .btn-outline {
+    min-width: 190px;
+    text-align: center;
+}
+
+/* Slider premium fix */
+.slider-section {
+    padding: 30px 8% 75px;
+}
+
+.slider {
+    border-radius: 28px;
+    overflow: hidden;
+    border: 1px solid rgba(212, 175, 55, 0.22);
+    box-shadow:
+        0 28px 70px rgba(0, 0, 0, 0.65),
+        0 0 34px rgba(212, 175, 55, 0.10),
+        inset 0 0 30px rgba(212, 175, 55, 0.025);
+}
+
+.slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: brightness(0.95) contrast(1.08) saturate(1.04);
+}
+
+.slider-btn {
+    background: rgba(0, 0, 0, 0.58);
+    border: 1px solid rgba(212, 175, 55, 0.38);
+    color: var(--gold);
+    backdrop-filter: blur(8px);
+}
+
+.slider-btn:hover {
+    background: rgba(212, 175, 55, 0.16);
+    box-shadow: 0 0 22px rgba(212, 175, 55, 0.20);
+}
+
+.dot {
+    border: 1px solid rgba(212, 175, 55, 0.5);
+}
+
+.dot.active {
+    background: var(--gold);
+    box-shadow: 0 0 16px rgba(212, 175, 55, 0.55);
+}
+
+/* Portfolio section */
+.portfolio-section {
+    padding: 85px 8%;
+    position: relative;
+}
+
+.profile-panel {
+    border: 1px solid rgba(212, 175, 55, 0.24);
+    border-radius: 30px;
+    padding: clamp(24px, 4vw, 48px);
+    background:
+        linear-gradient(135deg, rgba(212, 175, 55, 0.11), rgba(0, 0, 0, 0.16) 38%),
+        rgba(8, 8, 8, 0.78);
+    box-shadow:
+        0 26px 74px rgba(0, 0, 0, 0.58),
+        0 0 36px rgba(212, 175, 55, 0.10),
+        inset 0 0 30px rgba(212, 175, 55, 0.035);
+}
+
+.profile-grid {
+    display: grid;
+    grid-template-columns: 1.05fr 1fr;
+    gap: 36px;
+    align-items: center;
+}
+
+.profile-kicker {
+    color: var(--gold);
+    font-size: 0.86rem;
+    text-transform: uppercase;
+    letter-spacing: 2.5px;
+    margin-bottom: 13px;
+}
+
+.profile-panel h2 {
+    color: #fff1bd;
+    font-size: clamp(1.9rem, 4vw, 3.35rem);
+    line-height: 1.08;
+    margin-bottom: 20px;
+}
+
+.profile-panel p {
+    color: #ded2ba;
+    line-height: 1.85;
+    font-size: 1rem;
+}
+
+/* Identity cards */
+.identity-list {
+    display: grid;
+    gap: 14px;
+}
+
+.identity-card {
+    border: 1px solid rgba(212, 175, 55, 0.18);
+    background:
+        linear-gradient(135deg, rgba(212, 175, 55, 0.06), rgba(0, 0, 0, 0.50));
+    border-radius: 18px;
+    padding: 18px 20px;
+    transition:
+        box-shadow 0.25s ease,
+        border-color 0.25s ease,
+        filter 0.25s ease;
+}
+
+.identity-card:hover {
+    border-color: rgba(212, 175, 55, 0.50);
+    filter: brightness(1.08);
+    box-shadow: 0 0 28px rgba(212, 175, 55, 0.14);
+}
+
+.identity-card h3 {
+    color: #ffe7a1;
+    margin-bottom: 7px;
+    font-size: 1.05rem;
+}
+
+.identity-card p {
+    color: #cec1a8;
+    font-size: 0.94rem;
+    line-height: 1.65;
+}
+
+/* Feature/service cards */
+.feature-card,
+.service-card,
+.stat-box {
+    border: 1px solid rgba(212, 175, 55, 0.18);
+    background:
+        linear-gradient(145deg, rgba(212, 175, 55, 0.075), rgba(0, 0, 0, 0.58));
+    box-shadow:
+        0 18px 48px rgba(0, 0, 0, 0.58),
+        0 0 28px rgba(212, 175, 55, 0.09),
+        inset 0 0 30px rgba(212, 175, 55, 0.025);
+    transition:
+        border-color 0.25s ease,
+        box-shadow 0.25s ease,
+        filter 0.25s ease;
+}
+
+.feature-card:hover,
+.service-card:hover,
+.stat-box:hover {
+    border-color: rgba(212, 175, 55, 0.48);
+    filter: brightness(1.07);
+    box-shadow:
+        0 22px 58px rgba(0, 0, 0, 0.66),
+        0 0 34px rgba(212, 175, 55, 0.17),
+        inset 0 0 34px rgba(212, 175, 55, 0.04);
+}
+
+.service-card h3,
+.feature-card h3,
+.stat-box h3 {
+    color: var(--gold);
+}
+
+.service-card p,
+.feature-card p,
+.stat-box p,
+.about-text {
+    color: #d8ccb4;
+    line-height: 1.75;
+}
+
+/* Founder / entrepreneur strip */
+.founder-strip {
+    margin-top: 60px;
+    padding: 36px;
+    border-radius: 26px;
+    border: 1px solid rgba(212, 175, 55, 0.24);
+    background:
+        radial-gradient(circle at left, rgba(212, 175, 55, 0.15), transparent 42%),
+        linear-gradient(135deg, rgba(212, 175, 55, 0.055), rgba(0, 0, 0, 0.55));
+    text-align: center;
+    box-shadow:
+        0 18px 52px rgba(0, 0, 0, 0.55),
+        0 0 28px rgba(212, 175, 55, 0.08);
+}
+
+.founder-strip h2 {
+    color: #fff0b4;
+    margin-bottom: 12px;
+    font-size: clamp(1.7rem, 3vw, 2.65rem);
+}
+
+.founder-strip p {
+    color: #d8ccb4;
+    max-width: 900px;
+    margin: 0 auto;
+    line-height: 1.8;
+}
+
+/* Footer polish */
+.footer {
+    background:
+        radial-gradient(circle at center, rgba(212, 175, 55, 0.075), transparent 60%),
+        linear-gradient(180deg, rgba(6, 6, 6, 0.88), rgba(3, 3, 3, 0.98)) !important;
+}
+
+/* Tablet */
+@media (max-width: 900px) {
+    .home-hero {
+        min-height: auto;
+        padding: 70px 6% 55px;
+    }
+
+    .profile-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .portfolio-section {
+        padding: 65px 6%;
+    }
+
+    .slider-section {
+        padding: 25px 6% 60px;
+    }
+}
+
+/* Mobile */
+@media (max-width: 600px) {
+    .home-hero {
+        padding: 56px 5% 46px;
+    }
+
+    .hero-logo {
+        max-width: 240px;
+    }
+
+    .karthik-badge-row {
+        gap: 9px;
+        margin-top: 20px;
+    }
+
+    .karthik-badge {
+        font-size: 0.78rem;
+        padding: 8px 12px;
+    }
+
+    .hero-title {
+        font-size: clamp(2.05rem, 13vw, 3.8rem);
+        letter-spacing: 0.6px;
+    }
+
+    .hero-subtitle {
+        font-size: 0.95rem;
+        line-height: 1.7;
+    }
+
+    .hero-signature {
+        font-size: 0.76rem;
+        letter-spacing: 1.4px;
+    }
+
+    .hero-buttons {
+        gap: 12px;
+    }
+
+    .hero-buttons .btn-gold,
+    .hero-buttons .btn-outline {
+        width: 100%;
+        max-width: 300px;
+    }
+
+    .slider {
+        border-radius: 18px;
+    }
+
+    .profile-panel {
+        border-radius: 22px;
+        padding: 22px;
+    }
+
+    .identity-card {
+        padding: 16px;
+    }
+
+    .founder-strip {
+        padding: 24px 18px;
+        border-radius: 20px;
+    }
+
+    .section-heading {
+        text-align: center;
+    }
+}
+
+/* =========================================================
+   HOME PAGE BACKGROUND COLOR BREAK FIX
+   Removes harsh horizontal section break
+========================================================= */
+
+body {
+    background:
+        radial-gradient(circle at 18% 10%, rgba(212, 175, 55, 0.16), transparent 28%),
+        radial-gradient(circle at 88% 35%, rgba(212, 175, 55, 0.10), transparent 34%),
+        linear-gradient(180deg,
+            #080806 0%,
+            #070706 38%,
+            #050505 68%,
+            #030303 100%) !important;
+}
+
+/* Make all homepage sections use same continuous background */
+main,
+.home-hero,
+.slider-section,
+.about-section,
+.stats-section,
+.portfolio-section {
+    background: transparent !important;
+}
+
+/* Remove the blocky color cut after hero */
+.home-hero {
+    background: transparent !important;
+    padding-bottom: 90px !important;
+}
+
+/* Pull slider section slightly upward into same background flow */
+.slider-section {
+    background: transparent !important;
+    margin-top: -35px;
+    padding-top: 0 !important;
+}
+
+/* Add smooth fade between hero and slider */
+.home-hero::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -1px;
+    width: 100%;
+    height: 180px;
+    pointer-events: none;
+    z-index: -1;
+
+    background: linear-gradient(180deg,
+            transparent 0%,
+            rgba(5, 5, 5, 0.45) 45%,
+            rgba(3, 3, 3, 0.95) 100%);
+}
+
+/* =================================================
+   FINAL HERO UPGRADE BASED ON CURRENT HTML
+================================================= */
+
+.home-hero {
+    min-height: 92vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 80px 6% 90px;
+}
+
+.hero-content {
+    max-width: 1050px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.hero-logo {
+    max-width: 320px;
+    width: 100%;
+    margin: 0 auto 18px;
+    display: block;
+}
+
+.hero-kicker {
+    color: var(--gold);
+    font-size: 0.9rem;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin: 10px auto 18px;
+    font-weight: 700;
+}
+
+.hero-main-title {
+    color: #fff1bd;
+    font-size: clamp(2.2rem, 5.5vw, 5.3rem);
+    line-height: 1.02;
+    margin: 0 auto 22px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    text-shadow:
+        0 0 28px rgba(212, 175, 55, 0.28),
+        0 28px 55px rgba(0, 0, 0, 0.95);
+}
+
+.hero-role-badges {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 11px;
+    margin: 0 auto 28px;
+}
+
+.hero-role-badges span {
+    padding: 9px 15px;
+    border-radius: 999px;
+    border: 1px solid rgba(212, 175, 55, 0.34);
+    background:
+        linear-gradient(135deg, rgba(212, 175, 55, 0.12), rgba(0, 0, 0, 0.45));
+    color: #f5dc8a;
+    font-size: 0.86rem;
+    letter-spacing: 0.4px;
+    box-shadow:
+        0 0 18px rgba(212, 175, 55, 0.10),
+        inset 0 0 14px rgba(212, 175, 55, 0.05);
+}
+
+.hero-subtitle {
+    max-width: 850px;
+    margin: 0 auto;
+    color: #eee3ca;
+    text-align: center;
+    font-size: clamp(1rem, 1.55vw, 1.18rem);
+    line-height: 1.75;
+    text-wrap: balance;
+}
+
+.hero-signature {
+    margin: 30px auto 0;
+    color: rgba(255, 255, 255, 0.78);
+    text-align: center;
+    font-size: 0.92rem;
+    letter-spacing: 2.8px;
+    text-transform: uppercase;
+}
+
+.hero-buttons {
+    margin-top: 34px;
+}
+
+/* Smooth background continuation into slider */
+.slider-section {
+    margin-top: -20px;
+    padding-top: 0;
+    background: transparent !important;
+}
+
+/* Mobile fix */
+@media (max-width: 700px) {
+    .home-hero {
+        min-height: auto;
+        padding: 58px 5% 62px;
+    }
+
+    .hero-logo {
+        max-width: 230px;
+    }
+
+    .hero-kicker {
+        font-size: 0.75rem;
+        letter-spacing: 2px;
+    }
+
+    .hero-main-title {
+        font-size: clamp(2rem, 11vw, 3.5rem);
+        line-height: 1.08;
+    }
+
+    .hero-role-badges {
+        gap: 8px;
+        margin-bottom: 22px;
+    }
+
+    .hero-role-badges span {
+        font-size: 0.76rem;
+        padding: 8px 11px;
+    }
+
+    .hero-subtitle {
+        max-width: 100%;
+        font-size: 0.95rem;
+        line-height: 1.65;
+    }
+
+    .hero-signature {
+        font-size: 0.76rem;
+        letter-spacing: 1.7px;
+        line-height: 1.8;
+    }
 }

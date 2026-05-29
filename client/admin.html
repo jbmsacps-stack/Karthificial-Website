@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Karthificial | Admin Dashboard</title>
+
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="image/svg+xml" href="assets/images/favi.svg?v=3">
+
+    <style>
+        body.admin-checking main {
+            display: none;
+        }
+
+        .admin-dashboard {
+            min-height: 80vh;
+            padding: 90px 8%;
+            background:
+                radial-gradient(circle at top left, rgba(212, 175, 55, 0.08), transparent 35%),
+                linear-gradient(180deg, #080808, #050505);
+        }
+
+        .admin-header {
+            max-width: 900px;
+            margin: 0 auto 40px;
+            text-align: center;
+        }
+
+        .admin-header h1 {
+            color: var(--gold);
+            font-size: clamp(2rem, 4vw, 3.2rem);
+            margin-bottom: 12px;
+        }
+
+        .admin-header p {
+            color: var(--light-gray);
+        }
+
+        .admin-grid {
+            max-width: 1100px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 22px;
+        }
+
+        .admin-card {
+            padding: 26px;
+            border: 1px solid rgba(212, 175, 55, 0.25);
+            border-radius: 18px;
+            background: rgba(255, 255, 255, 0.035);
+            box-shadow: 0 0 28px rgba(212, 175, 55, 0.08);
+        }
+
+        .admin-card h2 {
+            color: var(--gold);
+            margin-bottom: 10px;
+            font-size: 1.25rem;
+        }
+
+        .admin-card p {
+            color: var(--light-gray);
+            margin-bottom: 18px;
+            line-height: 1.6;
+        }
+
+        .admin-card button {
+            cursor: pointer;
+        }
+
+        .admin-denied {
+            min-height: 70vh;
+            display: grid;
+            place-items: center;
+            text-align: center;
+            padding: 40px;
+        }
+
+        .admin-denied h1 {
+            color: var(--gold);
+            margin-bottom: 12px;
+        }
+
+        .admin-denied p {
+            color: var(--light-gray);
+        }
+    </style>
+</head>
+
+<body class="admin-checking">
+
+    <nav class="navbar">
+        <div class="navbar-inner">
+
+            <a href="index.html" class="logo">
+                <div class="logo-mark">
+                    <span class="material-symbols-outlined">
+                        <img src="assets/images/Favicon.png" alt="Favicon" loading="eager" fetchpriority="high">
+                    </span>
+                </div>
+                <div class="logo-text">Karthi<span>ficial</span></div>
+            </a>
+
+            <input type="checkbox" id="menu-toggle" class="menu-toggle">
+
+            <label for="menu-toggle" class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </label>
+
+            <ul class="nav-menu">
+                <li><a href="index.html" class="nav-link">Home</a></li>
+                <li><a href="career-guidance.html" class="nav-link">Career Guidance</a></li>
+                <li><a href="mcq.html" class="nav-link">MCQ</a></li>
+                <li><a href="contact.html" class="nav-link">Contact</a></li>
+                <li class="mobile-actions auth-nav-slot"></li>
+            </ul>
+
+            <div class="nav-actions">
+                <a href="login.html" class="btn-outline">Login</a>
+                <a href="signup.html" class="btn-gold">Signup</a>
+            </div>
+
+        </div>
+    </nav>
+
+    <main class="admin-dashboard">
+        <section class="admin-header">
+            <h1>Admin Dashboard</h1>
+            <p>Manage Karthificial website content from one place.</p>
+        </section>
+
+        <section class="admin-grid">
+            <article class="admin-card">
+                <h2>Manage MCQs</h2>
+                <p>Add, edit, and remove MCQ questions.</p>
+                <button class="btn-gold" type="button">Open MCQ Manager</button>
+            </article>
+
+            <article class="admin-card">
+                <h2>Career Guidance</h2>
+                <p>Update career guidance content and resources.</p>
+                <button class="btn-gold" type="button">Open Career Manager</button>
+            </article>
+
+            <article class="admin-card">
+                <h2>Question Papers</h2>
+                <p>Manage uploaded question paper links and files.</p>
+                <button class="btn-gold" type="button">Open Paper Manager</button>
+            </article>
+
+            <article class="admin-card">
+                <h2>Notes</h2>
+                <p>Manage notes section content and links.</p>
+                <button class="btn-gold" type="button">Open Notes Manager</button>
+            </article>
+        </section>
+    </main>
+
+    <script src="script.js" defer></script>
+    <script src="config.js"></script>
+    <script src="clerk-auth.js"></script>
+    <script src="admin.js"></script>
+
+</body>
+
+</html>

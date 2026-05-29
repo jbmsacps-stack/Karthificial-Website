@@ -5,8 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description"
-        content="Karthificial provides Tamil Nadu State Board notes, question papers, MCQs, and career guidance for 10th and 12th students.">
-    <title>Karthificial | Home</title>
+        content="Karthificial is a smart learning and career guidance platform designed for 10th and 12th State Board students.">
+    <title>Karthificial | Smart Learning & Career Guidance Platform</title>
 
     <link rel="stylesheet" href="variables.css">\r\n    <link rel="stylesheet" href="structure.css">\r\n    <link rel="stylesheet" href="style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -98,6 +98,201 @@
             position: relative;
             z-index: 1;
         }
+
+
+        /* ================================
+           KARTHIK PERSONAL BRAND PORTFOLIO
+        ================================ */
+
+        .karthik-badge-row {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin: 24px auto 10px;
+        }
+
+        .karthik-badge {
+            border: 1px solid rgba(212, 175, 55, 0.38);
+            background: rgba(0, 0, 0, 0.42);
+            color: #f7e7a6;
+            padding: 9px 16px;
+            border-radius: 999px;
+            font-size: 0.9rem;
+            letter-spacing: 0.4px;
+            box-shadow:
+                0 0 18px rgba(212, 175, 55, 0.12),
+                inset 0 0 16px rgba(212, 175, 55, 0.05);
+        }
+
+        .hero-title {
+            color: #fff7d7;
+            font-size: clamp(2.25rem, 6vw, 5.4rem);
+            line-height: 0.95;
+            text-align: center;
+            margin: 22px auto 18px;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            text-shadow:
+                0 0 24px rgba(212, 175, 55, 0.26),
+                0 22px 45px rgba(0, 0, 0, 0.9);
+        }
+
+        .hero-title span {
+            color: var(--gold);
+        }
+
+        .hero-subtitle {
+            max-width: 950px;
+            margin: 0 auto;
+            color: #e8dfc8;
+            text-align: center;
+            font-size: clamp(1rem, 2vw, 1.22rem);
+            line-height: 1.8;
+        }
+
+        .hero-signature {
+            margin: 24px auto 0;
+            color: rgba(255, 255, 255, 0.72);
+            text-align: center;
+            font-size: 0.95rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .portfolio-section {
+            padding: 80px 8%;
+            position: relative;
+        }
+
+        .portfolio-intro {
+            max-width: 980px;
+            margin: 0 auto 42px;
+            text-align: center;
+            color: #ddd2b8;
+            font-size: 1.05rem;
+            line-height: 1.85;
+        }
+
+        .profile-panel {
+            border: 1px solid rgba(212, 175, 55, 0.24);
+            border-radius: 28px;
+            padding: clamp(24px, 4vw, 46px);
+            background:
+                linear-gradient(135deg, rgba(212, 175, 55, 0.10), rgba(0, 0, 0, 0.12) 36%),
+                rgba(8, 8, 8, 0.78);
+            box-shadow:
+                0 24px 70px rgba(0, 0, 0, 0.55),
+                0 0 34px rgba(212, 175, 55, 0.10),
+                inset 0 0 28px rgba(212, 175, 55, 0.035);
+        }
+
+        .profile-grid {
+            display: grid;
+            grid-template-columns: 1.05fr 1fr;
+            gap: 34px;
+            align-items: center;
+        }
+
+        .profile-kicker {
+            color: var(--gold);
+            font-size: 0.88rem;
+            text-transform: uppercase;
+            letter-spacing: 2.4px;
+            margin-bottom: 12px;
+        }
+
+        .profile-panel h2 {
+            color: #fff2bf;
+            font-size: clamp(1.9rem, 4vw, 3.4rem);
+            line-height: 1.08;
+            margin-bottom: 20px;
+        }
+
+        .profile-panel p {
+            color: #dfd4bb;
+            line-height: 1.85;
+            font-size: 1rem;
+        }
+
+        .identity-list {
+            display: grid;
+            gap: 14px;
+        }
+
+        .identity-card {
+            border: 1px solid rgba(212, 175, 55, 0.18);
+            background: rgba(0, 0, 0, 0.42);
+            border-radius: 18px;
+            padding: 18px 20px;
+            transition: box-shadow 0.25s ease, border-color 0.25s ease, filter 0.25s ease;
+        }
+
+        .identity-card:hover {
+            border-color: rgba(212, 175, 55, 0.5);
+            filter: brightness(1.08);
+            box-shadow: 0 0 26px rgba(212, 175, 55, 0.13);
+        }
+
+        .identity-card h3 {
+            color: #ffe8a3;
+            margin-bottom: 7px;
+            font-size: 1.05rem;
+        }
+
+        .identity-card p {
+            color: #cfc3ab;
+            font-size: 0.94rem;
+            line-height: 1.65;
+        }
+
+        .service-card h3,
+        .stat-box h3 {
+            color: var(--gold);
+        }
+
+        .service-card p {
+            color: #d8ccb4;
+            line-height: 1.7;
+        }
+
+        .founder-strip {
+            margin-top: 60px;
+            padding: 34px;
+            border-radius: 24px;
+            border: 1px solid rgba(212, 175, 55, 0.22);
+            background:
+                radial-gradient(circle at left, rgba(212, 175, 55, 0.14), transparent 42%),
+                rgba(0, 0, 0, 0.45);
+            text-align: center;
+        }
+
+        .founder-strip h2 {
+            color: #fff0b4;
+            margin-bottom: 12px;
+            font-size: clamp(1.7rem, 3vw, 2.7rem);
+        }
+
+        .founder-strip p {
+            color: #d8ccb4;
+            max-width: 900px;
+            margin: 0 auto;
+            line-height: 1.8;
+        }
+
+        @media (max-width: 850px) {
+            .profile-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .karthik-badge-row {
+                justify-content: center;
+            }
+
+            .portfolio-section {
+                padding: 60px 6%;
+            }
+        }
     </style>
 </head>
 
@@ -154,10 +349,7 @@
                     <a href="contact.html" class="nav-link">Contact</a>
                 </li>
 
-                <li class="mobile-actions">
-                    <a href="login.html" class="btn-outline">Login</a>
-                    <a href="signup.html" class="btn-gold">Signup</a>
-                </li>
+                <li class="mobile-actions auth-nav-slot"></li>
             </ul>
 
             <div class="nav-actions">
@@ -175,13 +367,28 @@
                 <img src="assets/images/Logo.png" alt="Karthificial Logo IMG" class="hero-logo" loading="lazy"
                     fetchpriority="low">
 
-                <p class="hero-tagline">
-                    Excellence in Tamil Nadu State Board Education
+                <p class="hero-kicker">Lighting the Path for Every Learner</p>
+
+                <div class="hero-role-badges">
+                    <span>Academic Mentor</span>
+                    <span>Tuition Centre Leader</span>
+                    <span>Education Entrepreneur</span>
+                    <span>Digital Creator</span>
+                </div>
+
+                <p class="hero-subtitle">
+                    Karthificial is a premium academic brand shaped by teaching excellence,
+                    personal mentorship, tuition centre leadership, and modern digital education —
+                    built to guide students with clarity, confidence, discipline, and purpose.
+                </p>
+
+                <p class="hero-signature">
+                    Teaching • Mentoring • Building • Inspiring
                 </p>
 
                 <div class="hero-buttons">
-                    <a href="notes-10th.html" class="btn-gold">Explore Notes</a>
-                    <a href="signup.html" class="btn-outline">Join Free</a>
+                    <a href="contact.html" class="btn-gold">Connect With Karthik</a>
+                    <a href="career-guidance.html" class="btn-outline">Explore Guidance</a>
                 </div>
 
             </div>
@@ -195,18 +402,18 @@
                     <div class="slides">
 
                         <div class="slide active">
-                            <img src="assets/slides/Slider1.png" alt="Premium Notes Banner" width="1600" height="900"
-                                loading="eager" fetchpriority="high" sizes="100vw" fetchpriority="low">
+                            <img src="assets/slides/Slider1.png" alt="Karthik premium teaching and mentoring banner"
+                                width="1600" height="900" loading="eager" fetchpriority="high" sizes="100vw">
                         </div>
 
                         <div class="slide">
-                            <img src="assets/slides/Slider2.png" alt="Past Question Papers Banner" width="1600"
-                                height="900" loading="eager" fetchpriority="high" sizes="100vw" fetchpriority="low">
+                            <img src="assets/slides/Slider2.png" alt="Tuition centre and academic success banner"
+                                width="1600" height="900" loading="eager" fetchpriority="high" sizes="100vw">
                         </div>
 
                         <div class="slide">
-                            <img src="assets/slides/Slider3.png" alt="Career Guidance Banner" width="1600" height="900"
-                                loading="eager" fetchpriority="high" sizes="100vw" fetchpriority="low">
+                            <img src="assets/slides/Slider3.png" alt="Career guidance and educational creator banner"
+                                width="1600" height="900" loading="eager" fetchpriority="high" sizes="100vw">
                         </div>
 
                     </div>
@@ -230,49 +437,127 @@
             </div>
         </section>
 
+        <section class="portfolio-section">
+            <div class="container">
+
+                <div class="profile-panel">
+                    <div class="profile-grid">
+
+                        <div>
+                            <p class="profile-kicker">Personal Portfolio</p>
+
+                            <h2>
+                                Karthik — Assistant Professor, Tutor & Education Entrepreneur
+                            </h2>
+
+                            <p>
+                                Karthik is positioned as a grand, elite, and trusted academic personality
+                                who combines classroom teaching, private tutoring, tuition centre leadership,
+                                student mentoring, and digital education. His brand is built for students
+                                who need clarity, confidence, discipline, and practical academic direction.
+                            </p>
+
+                            <p>
+                                Through Karthificial, his identity expands beyond a normal tutor. He becomes
+                                a mentor, founder, guide, and educational creator who can teach inside the
+                                classroom, support students personally, run a learning centre, and build
+                                an online audience through valuable educational content.
+                            </p>
+                        </div>
+
+                        <div class="identity-list">
+
+                            <div class="identity-card">
+                                <h3>Assistant Professor</h3>
+                                <p>
+                                    Represents academic authority, subject knowledge, discipline,
+                                    and professional teaching experience.
+                                </p>
+                            </div>
+
+                            <div class="identity-card">
+                                <h3>Tuition Centre Founder</h3>
+                                <p>
+                                    Builds a focused learning ecosystem where school and college students
+                                    receive structured guidance and exam-ready preparation.
+                                </p>
+                            </div>
+
+                            <div class="identity-card">
+                                <h3>Educational Entrepreneur</h3>
+                                <p>
+                                    Develops education as a brand, service, platform, and long-term mission
+                                    instead of limiting it to only classroom teaching.
+                                </p>
+                            </div>
+
+                            <div class="identity-card">
+                                <h3>YouTube-Style Educator</h3>
+                                <p>
+                                    Creates a modern digital-teacher image with explainers, motivation,
+                                    academic tips, career guidance, and student-focused content.
+                                </p>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
         <section class="about-section">
             <div class="container">
 
                 <h2 class="section-heading">
-                    What is Karthificial ?
+                    What Karthik Offers
                 </h2>
 
-                <p class="about-text">
-                    Karthificial is an educational website created for Tamil Nadu
-                    State Board 10th and 12th standard students. It provides organized
-                    notes, previous question papers, subject resources, and career
-                    guidance in one clean learning platform.
+                <p class="portfolio-intro">
+                    This portfolio presents Karthik as a complete education brand:
+                    a professor with academic credibility, a tutor with personal attention,
+                    a founder with leadership, and a creator with modern influence.
                 </p>
 
                 <div class="feature-grid">
 
-                    <a href="notes-10th.html" class="card feature-card feature-link-card">
-                        <div class="feature-icon">📘</div>
-                        <h3>Curated Notes</h3>
+                    <a href="notes-10th.html" class="card feature-card feature-link-card service-card">
+                        <div class="feature-icon">🎓</div>
+                        <h3>Academic Mentoring</h3>
                         <p>
-                            Well-arranged notes for important subjects, made simple
-                            for quick revision and exam preparation.
+                            Clear subject explanation, exam preparation support, revision planning,
+                            and student-friendly guidance for better academic performance.
                         </p>
                     </a>
 
-                    <a href="papers-10th.html" class="card feature-card feature-link-card">
-                        <div class="feature-icon">📄</div>
-                        <h3>Past Question Papers</h3>
+                    <a href="career-guidance.html" class="card feature-card feature-link-card service-card">
+                        <div class="feature-icon">🏛️</div>
+                        <h3>Tuition Centre Leadership</h3>
                         <p>
-                            Access previous year question papers to understand exam
-                            patterns, repeated questions, and important topics.
+                            A structured learning environment focused on discipline, consistency,
+                            strong basics, repeated practice, and measurable student progress.
                         </p>
                     </a>
 
-                    <a href="career-guidance.html" class="card feature-card feature-link-card">
-                        <div class="feature-icon">🎯</div>
-                        <h3>Career Guidance</h3>
+                    <a href="mcq.html" class="card feature-card feature-link-card service-card">
+                        <div class="feature-icon">📹</div>
+                        <h3>Digital Education Brand</h3>
                         <p>
-                            Helpful guidance for students to choose courses, careers,
-                            and next steps after school.
+                            YouTube-style educational presence through useful lessons, tips,
+                            academic motivation, student awareness, and career-oriented content.
                         </p>
                     </a>
 
+                </div>
+
+                <div class="founder-strip">
+                    <h2>Not Just a Tutor — A Learning Brand</h2>
+                    <p>
+                        Karthik is presented as a premium academic personality who teaches, guides,
+                        creates, leads, and builds. The goal is to make students and parents see him
+                        as a reliable mentor, professional educator, and ambitious education entrepreneur.
+                    </p>
                 </div>
 
             </div>
@@ -282,7 +567,7 @@
             <div class="container">
 
                 <h2 class="section-heading">
-                    Our Growing Learning Network
+                    Karthik's Growing Education Impact
                 </h2>
 
                 <div class="stats-grid">
@@ -291,28 +576,28 @@
                         <h3>
                             <span class="counter" data-target="500">0</span>+
                         </h3>
-                        <p>Notes</p>
+                        <p>Learning Resources</p>
                     </div>
 
                     <div class="card stat-box">
                         <h3>
                             <span class="counter" data-target="200">0</span>+
                         </h3>
-                        <p>Question Papers</p>
+                        <p>Practice Materials</p>
                     </div>
 
                     <div class="card stat-box">
                         <h3>
                             <span class="counter" data-target="10">0</span>+
                         </h3>
-                        <p>Subjects</p>
+                        <p>Subjects Guided</p>
                     </div>
 
                     <div class="card stat-box">
                         <h3>
                             <span class="counter" data-target="1000">0</span>+
                         </h3>
-                        <p>Students</p>
+                        <p>Student Reach</p>
                     </div>
 
                 </div>
@@ -326,11 +611,10 @@
         <div class="container footer-grid">
 
             <div class="footer-brand">
-                <h2>Karthificial</h2>
+                <h2>About</h2>
                 <p>
-                    Excellence in Tamil Nadu State Board Education.
-                    Premium notes, question papers, and career guidance for
-                    10th and 12th standard students.
+                    Karthificial is a premium learning platform for 10th and 12th State Board
+                    students, offering study resources, practice support, and career guidance.
                 </p>
             </div>
 
@@ -344,30 +628,32 @@
                     <li><a href="papers-10th.html">10th Question Papers</a></li>
                     <li><a href="papers-12th.html">12th Question Papers</a></li>
                     <li><a href="career-guidance.html">Career Guidance</a></li>
+                    <li><a href="mcq.html">MCQ</a></li>
                     <li><a href="contact.html">Contact</a></li>
                 </ul>
             </div>
 
             <div class="footer-column footer-contact">
-                <h3>Contact Info</h3>
+                <h3>Professional Identity</h3>
 
-                <p>Email: support@karthificial.com</p>
+                <p>Role: Assistant Professor & Tutor</p>
+                <p>Brand: Karthificial</p>
+                <p>Focus: Academic Mentoring, Tuition, Career Guidance</p>
                 <p>Location: Tamil Nadu, India</p>
-                <p>For: 10th & 12th State Board Students</p>
             </div>
 
         </div>
 
         <div class="container footer-bottom">
             <p>
-                © 2026 Karthificial. All rights reserved.
+                © 2026 Karthik / Karthificial. All rights reserved.
             </p>
         </div>
     </footer>
 
     <script src="script.js" defer></script>
     <script src="config.js" defer></script>
-    <script src="clerk-auth.js"defer></script>
+    <script src="clerk-auth.js" defer></script>
 
 </body>
 
