@@ -140,3 +140,454 @@ img {
     font-weight: 500;
 }
 
+/* ================================
+   ADMIN DASHBOARD STRUCTURE
+================================ */
+
+body.admin-checking main {
+    display: none;
+}
+
+.admin-dashboard {
+    min-height: 80vh;
+    padding: 90px 8%;
+}
+
+.admin-header {
+    max-width: 900px;
+    margin: 0 auto 40px;
+    text-align: center;
+}
+
+.admin-header h1 {
+    margin-bottom: 12px;
+}
+
+.admin-grid {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 22px;
+}
+
+.admin-card {
+    padding: 26px;
+    border-radius: 18px;
+}
+
+.admin-card h2 {
+    margin-bottom: 10px;
+}
+
+.admin-card p {
+    margin-bottom: 18px;
+    line-height: 1.6;
+}
+
+.admin-card button {
+    cursor: pointer;
+}
+
+.manager-panel {
+    max-width: 1100px;
+    margin: 40px auto 0;
+}
+
+.hidden {
+    display: none !important;
+}
+
+#toast-container {
+    position: fixed;
+    right: 24px;
+    bottom: 24px;
+    z-index: 9999;
+}
+
+/* ================================
+   NAVBAR WRAP FIX
+================================ */
+
+.navbar-inner {
+    gap: 18px;
+}
+
+.nav-menu {
+    gap: 20px;
+    flex-wrap: nowrap;
+}
+
+.nav-link {
+    white-space: nowrap;
+}
+
+.logo {
+    flex-shrink: 0;
+}
+
+.logo-text {
+    white-space: nowrap;
+}
+
+.nav-actions {
+    flex-shrink: 0;
+    white-space: nowrap;
+}
+
+.nav-user-greeting {
+    white-space: nowrap;
+}
+
+@media (max-width: 1250px) {
+    .navbar-inner {
+        gap: 14px;
+    }
+
+    .nav-menu {
+        gap: 14px;
+    }
+
+    .nav-link {
+        font-size: 0.9rem;
+    }
+
+    .logo-text {
+        font-size: 1.25rem;
+    }
+
+    .nav-user-greeting {
+        font-size: 0.9rem;
+    }
+}
+
+@media (max-width: 1050px) {
+    .nav-menu {
+        gap: 12px;
+    }
+
+    .nav-link {
+        font-size: 0.85rem;
+    }
+
+    .nav-actions {
+        gap: 8px;
+    }
+
+    .btn-outline,
+    .btn-gold {
+        padding: 10px 18px;
+        font-size: 0.85rem;
+    }
+}
+
+
+/* ================================
+   ADMIN MANAGER STRUCTURE
+================================ */
+
+body.admin-checking main {
+    display: none;
+}
+
+.admin-manager {
+    min-height: 82vh;
+    padding: 90px 8%;
+}
+
+.admin-manager-header {
+    max-width: 920px;
+    margin: 0 auto 34px;
+    text-align: center;
+}
+
+.admin-manager-header h1 {
+    margin-bottom: 10px;
+}
+
+.admin-manager-header p {
+    max-width: 720px;
+    margin: 0 auto;
+    line-height: 1.7;
+}
+
+.admin-form {
+    max-width: 920px;
+    margin: 0 auto;
+    display: grid;
+    gap: 18px;
+    padding: 28px;
+    border-radius: 20px;
+}
+
+.admin-form label {
+    display: block;
+    margin-bottom: 8px;
+}
+
+.admin-form input,
+.admin-form select,
+.admin-form textarea {
+    width: 100%;
+    padding: 13px 15px;
+    border-radius: 12px;
+    outline: none;
+}
+
+.admin-form textarea {
+    min-height: 120px;
+    resize: vertical;
+}
+
+.form-row {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 18px;
+}
+
+.admin-actions {
+    display: flex;
+    gap: 14px;
+    flex-wrap: wrap;
+    margin-top: 4px;
+}
+
+/* ================================
+   ADMIN NAV CLEAN FIX
+================================ */
+
+.navbar-inner {
+    gap: 18px;
+}
+
+.nav-menu {
+    gap: 20px;
+    flex-wrap: nowrap;
+}
+
+.nav-link,
+.logo-text,
+.nav-user-greeting {
+    white-space: nowrap;
+}
+
+.logo,
+.nav-actions {
+    flex-shrink: 0;
+}
+
+.nav-actions {
+    gap: 12px;
+    white-space: nowrap;
+}
+
+.admin-nav-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+@media (max-width: 1250px) {
+    .navbar-inner {
+        gap: 14px;
+    }
+
+    .nav-menu {
+        gap: 14px;
+    }
+
+    .nav-link {
+        font-size: 0.9rem;
+    }
+
+    .logo-text {
+        font-size: 1.25rem;
+    }
+
+    .nav-user-greeting {
+        font-size: 0.9rem;
+    }
+
+    .btn-outline,
+    .btn-gold {
+        padding: 10px 18px;
+        font-size: 0.85rem;
+    }
+}
+
+@media (max-width: 900px) {
+    .form-row {
+        grid-template-columns: 1fr;
+    }
+
+    .admin-manager {
+        padding: 75px 6%;
+    }
+
+    .admin-form {
+        padding: 22px;
+    }
+}
+
+/* ================================
+   ADMIN MCQ MANAGER STRUCTURE
+================================ */
+
+body.admin-checking main {
+    display: none;
+}
+
+.admin-manager {
+    min-height: 85vh;
+    padding: 90px 8%;
+}
+
+.admin-manager-header {
+    max-width: 950px;
+    margin: 0 auto 42px;
+    text-align: center;
+}
+
+.admin-manager-header h1 {
+    margin-bottom: 12px;
+}
+
+.admin-manager-header p {
+    max-width: 760px;
+    margin: 0 auto;
+    line-height: 1.7;
+}
+
+.admin-panel {
+    max-width: 1100px;
+    margin: 0 auto 34px;
+    padding: 28px;
+    border-radius: 22px;
+}
+
+.admin-panel-header {
+    margin-bottom: 22px;
+}
+
+.admin-panel-header h2 {
+    margin-bottom: 8px;
+}
+
+.admin-panel-header p {
+    line-height: 1.6;
+}
+
+.admin-form {
+    display: grid;
+    gap: 18px;
+}
+
+.form-row {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 18px;
+}
+
+.admin-form label {
+    display: block;
+    margin-bottom: 8px;
+}
+
+.admin-form input,
+.admin-form select,
+.admin-form textarea {
+    width: 100%;
+    padding: 14px 16px;
+    border-radius: 12px;
+    outline: none;
+}
+
+.admin-form textarea {
+    min-height: 125px;
+    resize: vertical;
+}
+
+.admin-actions {
+    display: flex;
+    gap: 14px;
+    flex-wrap: wrap;
+    margin-top: 4px;
+}
+
+.admin-actions button {
+    min-width: 150px;
+}
+
+.admin-list {
+    display: grid;
+    gap: 14px;
+}
+
+.admin-list-card {
+    display: grid;
+    gap: 10px;
+    padding: 18px;
+    border-radius: 16px;
+}
+
+.admin-list-card-actions {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.admin-empty-text {
+    margin: 0;
+}
+
+/* Navbar cleanup for admin pages */
+.navbar-inner {
+    gap: 18px;
+}
+
+.nav-menu {
+    gap: 20px;
+    flex-wrap: nowrap;
+}
+
+.nav-link,
+.logo-text,
+.nav-user-greeting {
+    white-space: nowrap;
+}
+
+.logo,
+.nav-actions {
+    flex-shrink: 0;
+}
+
+.nav-actions {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    white-space: nowrap;
+}
+
+@media (max-width: 900px) {
+    .admin-manager {
+        padding: 75px 6%;
+    }
+
+    .form-row {
+        grid-template-columns: 1fr;
+    }
+
+    .admin-panel {
+        padding: 22px;
+    }
+}
+
+@media (max-width: 600px) {
+    .admin-actions {
+        flex-direction: column;
+    }
+
+    .admin-actions button {
+        width: 100%;
+    }
+}

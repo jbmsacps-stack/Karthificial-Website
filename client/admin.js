@@ -8,6 +8,7 @@ async function waitForClerk() {
             if (window.Clerk) {
                 clearInterval(timer);
                 resolve(window.Clerk);
+                return;
             }
 
             if (attempts > 50) {
@@ -20,12 +21,19 @@ async function waitForClerk() {
 
 function showAccessDenied() {
     document.body.classList.remove("admin-checking");
+    setupAdminManagerButtons();
 
-    document.querySelector("main").innerHTML = `
+    const main = document.querySelector("main");
+
+    if (!main) {
+        return;
+    }
+
+    main.innerHTML = `
         <section class="admin-denied">
             <div>
                 <h1>Access Denied</h1>
-                <p>You do not have permission to open the admin dashboard.</p>
+                <p>You do not have permission to open this admin page.</p>
                 <br>
                 <a href="index.html" class="btn-gold">Go Home</a>
             </div>
@@ -59,4 +67,22 @@ async function protectAdminPage() {
     }
 }
 
-protectAdminPage();
+document.addEventListener("DOMContentLoaded", protectAdminPage);
+
+function setupAdminManagerButtons() {
+    const mcqButton = document.getElementById("openMcqManagerBtn");
+
+    if (!mcqButton) {
+        return;
+    }
+
+    mcqButton.addEventListener("click", () => {
+        if (typeof window.openMCQManager === "function") {
+            window.openMCQManager();
+            return;
+        }
+
+        console.error("openMCQManager is not available. Check mcq-manager.js.");
+        alert("MCQ Manager failed to load. Check mcq-manager.js and Supabase config.");
+    });
+}

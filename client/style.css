@@ -6233,102 +6233,423 @@ main,
 /* =========================================================
    AFTER 12TH PAGE RADIAL BG FIX
 ========================================================= */
- .article-hero {
-            width: 100%;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            gap: 60px;
-            padding: 100px 60px;
-            flex-wrap: wrap;
-        }
+.article-hero {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 60px;
+    padding: 100px 60px;
+    flex-wrap: wrap;
+}
 
-        /* LEFT CONTENT */
+/* LEFT CONTENT */
 
-        .article-hero-content {
-            flex: 1;
-            min-width: 320px;
-            max-width: 700px;
-        }
+.article-hero-content {
+    flex: 1;
+    min-width: 320px;
+    max-width: 700px;
+}
 
-        .article-label {
-            display: inline-block;
-            padding: 8px 18px;
-            border: 1px solid var(--gold-warm);
-            border-radius: 999px;
-            color: var(--gold-warm);
-            font-size: 14px;
-            font-weight: 600;
-            margin-bottom: 24px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
+.article-label {
+    display: inline-block;
+    padding: 8px 18px;
+    border: 1px solid var(--gold-warm);
+    border-radius: 999px;
+    color: var(--gold-warm);
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 24px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
 
-        .article-hero-content h1 {
-            font-size: 72px;
-            line-height: 1.05;
-            font-weight: 800;
-            color: white;
-            margin-bottom: 28px;
-        }
+.article-hero-content h1 {
+    font-size: 72px;
+    line-height: 1.05;
+    font-weight: 800;
+    color: white;
+    margin-bottom: 28px;
+}
 
-        .article-hero-content p {
-            font-size: 18px;
-            line-height: 1.9;
-            color: rgba(var(--white-rgb), 0.8);
-            max-width: 700px;
-        }
+.article-hero-content p {
+    font-size: 18px;
+    line-height: 1.9;
+    color: rgba(var(--white-rgb), 0.8);
+    max-width: 700px;
+}
 
-        /* VIDEO SECTION */
+/* VIDEO SECTION */
 
-        .article-video {
-            flex: 1;
-            min-width: 320px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
+.article-video {
+    flex: 1;
+    min-width: 320px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 
-        .article-video iframe {
-            width: 100%;
-            max-width: 560px;
-            aspect-ratio: 16 / 9;
-            border-radius: 20px;
-            border: none;
-            box-shadow: 0 10px 40px rgba(var(--black-rgb), 0.4);
-        }
+.article-video iframe {
+    width: 100%;
+    max-width: 560px;
+    aspect-ratio: 16 / 9;
+    border-radius: 20px;
+    border: none;
+    box-shadow: 0 10px 40px rgba(var(--black-rgb), 0.4);
+}
 
-        /* MOBILE RESPONSIVE */
+/* MOBILE RESPONSIVE */
 
-        @media (max-width: 992px) {
+@media (max-width: 992px) {
 
-            .article-hero {
-                flex-direction: column;
-                align-items: flex-start;
-                padding: 80px 24px;
-            }
+    .article-hero {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 80px 24px;
+    }
 
-            .article-hero-content h1 {
-                font-size: 52px;
-            }
+    .article-hero-content h1 {
+        font-size: 52px;
+    }
 
-            .article-video {
-                width: 100%;
-            }
+    .article-video {
+        width: 100%;
+    }
 
-            .article-video iframe {
-                max-width: 100%;
-            }
-        }
+    .article-video iframe {
+        max-width: 100%;
+    }
+}
 
-        @media (max-width: 600px) {
+@media (max-width: 600px) {
 
-            .article-hero-content h1 {
-                font-size: 42px;
-            }
+    .article-hero-content h1 {
+        font-size: 42px;
+    }
 
-            .article-hero-content p {
-                font-size: 16px;
-                line-height: 1.8;
-            }
-        }
+    .article-hero-content p {
+        font-size: 16px;
+        line-height: 1.8;
+    }
+}
+
+/* Temporary admin navbar width fix */
+.navbar-inner {
+    gap: 18px;
+}
+
+.nav-menu {
+    gap: 22px;
+    flex-wrap: nowrap;
+}
+
+.nav-link {
+    white-space: nowrap;
+}
+
+.logo-text {
+    white-space: nowrap;
+}
+
+.nav-actions {
+    flex-shrink: 0;
+}
+
+.nav-user-greeting {
+    white-space: nowrap;
+}
+
+@media (max-width: 1200px) {
+    .nav-menu {
+        gap: 14px;
+    }
+
+    .nav-link {
+        font-size: 0.9rem;
+    }
+
+    .logo-text {
+        font-size: 1.3rem;
+    }
+}
+
+/* ================================
+   ADMIN DASHBOARD STYLE
+================================ */
+
+.admin-dashboard {
+    background:
+        radial-gradient(circle at top left, rgba(212, 175, 55, 0.08), transparent 35%),
+        linear-gradient(180deg, #080808, var(--admin-bg-dark));
+}
+
+.admin-header h1 {
+    color: var(--gold);
+    font-size: clamp(2rem, 4vw, 3.2rem);
+}
+
+.admin-header p {
+    color: var(--light-gray);
+}
+
+.admin-card {
+    border: 1px solid var(--admin-border-gold);
+    background: var(--admin-bg-panel);
+    box-shadow: 0 0 28px var(--admin-shadow-gold);
+}
+
+.admin-card h2 {
+    color: var(--gold);
+    font-size: 1.25rem;
+}
+
+.admin-card p {
+    color: var(--light-gray);
+}
+
+.admin-card:hover {
+    border-color: rgba(212, 175, 55, 0.45);
+    box-shadow: 0 0 34px rgba(212, 175, 55, 0.14);
+    filter: brightness(1.05);
+}
+
+.manager-panel {
+    border: 1px solid var(--admin-border-gold);
+    border-radius: 18px;
+    background: var(--admin-bg-panel);
+    box-shadow: 0 0 28px var(--admin-shadow-gold);
+    color: var(--light-gray);
+}
+
+#toast-container {
+    color: var(--gold);
+}
+
+/* ================================
+   ADMIN MANAGER STYLE
+================================ */
+
+.admin-manager {
+    background:
+        radial-gradient(circle at top left, rgba(212, 175, 55, 0.10), transparent 36%),
+        radial-gradient(circle at bottom right, rgba(212, 175, 55, 0.06), transparent 32%),
+        linear-gradient(180deg, var(--admin-bg-soft), var(--admin-bg-main));
+}
+
+.admin-manager-header h1 {
+    color: var(--gold);
+    font-size: clamp(2rem, 4vw, 3.3rem);
+    letter-spacing: 0.5px;
+    text-shadow: 0 0 24px rgba(212, 175, 55, 0.22);
+}
+
+.admin-manager-header p {
+    color: var(--light-gray);
+}
+
+.admin-form {
+    border: 1px solid var(--admin-border);
+    background:
+        linear-gradient(145deg, var(--admin-panel-bg-strong), var(--admin-panel-bg)),
+        rgba(5, 5, 5, 0.88);
+}
+
+.admin-form label {
+    color: var(--gold);
+    font-weight: 700;
+    letter-spacing: 0.3px;
+}
+
+.admin-form input,
+.admin-form select,
+.admin-form textarea {
+    border: 1px solid var(--admin-input-border);
+    background: var(--admin-input-bg);
+    color: var(--text-white);
+    font-family: inherit;
+    transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease,
+        background 0.2s ease;
+}
+
+.admin-form input::placeholder,
+.admin-form textarea::placeholder {
+    color: rgba(255, 255, 255, 0.42);
+}
+
+.admin-form input:focus,
+.admin-form select:focus,
+.admin-form textarea:focus {
+    border-color: var(--admin-input-border-focus);
+    box-shadow: var(--admin-shadow-focus);
+    background: #0d0d0d;
+}
+
+.admin-form select option {
+    background: #080808;
+    color: #ffffff;
+}
+
+.admin-actions .btn-gold,
+.admin-actions .btn-outline {
+    min-width: 150px;
+}
+
+/* Admin nav button */
+.admin-nav-link {
+    border-color: rgba(212, 175, 55, 0.8);
+    color: var(--gold);
+    box-shadow: 0 0 18px rgba(212, 175, 55, 0.12);
+}
+
+.admin-nav-link:hover {
+    background: var(--gold);
+    box-shadow: 0 0 26px rgba(212, 175, 55, 0.22);
+}
+
+/* ================================
+   ADMIN MCQ MANAGER STYLE
+================================ */
+
+.admin-manager {
+    background:
+        radial-gradient(circle at top left, rgba(212, 175, 55, 0.10), transparent 36%),
+        radial-gradient(circle at bottom right, rgba(212, 175, 55, 0.06), transparent 34%),
+        linear-gradient(180deg, var(--admin-bg-soft), var(--admin-bg-main));
+}
+
+.admin-manager-header h1 {
+    color: var(--gold);
+    font-size: clamp(2.2rem, 5vw, 3.8rem);
+    letter-spacing: 1px;
+    text-shadow: 0 0 26px rgba(212, 175, 55, 0.24);
+}
+
+.admin-manager-header p {
+    color: var(--light-gray);
+}
+
+.admin-panel {
+    border: 1px solid var(--admin-border);
+    background:
+        linear-gradient(145deg, var(--admin-bg-card-strong), var(--admin-bg-card)),
+        rgba(5, 5, 5, 0.9);
+    box-shadow: var(--admin-shadow-soft);
+}
+
+.admin-panel-header h2 {
+    color: var(--gold);
+    font-size: 1.45rem;
+}
+
+.admin-panel-header p {
+    color: var(--light-gray);
+}
+
+.admin-form label {
+    color: var(--gold);
+    font-weight: 800;
+    letter-spacing: 0.4px;
+}
+
+.admin-form input,
+.admin-form select,
+.admin-form textarea {
+    border: 1px solid var(--admin-input-border);
+    background: var(--admin-input-bg);
+    color: var(--text-white);
+    font-family: inherit;
+    font-size: 0.95rem;
+    transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease,
+        background 0.2s ease;
+}
+
+.admin-form input::placeholder,
+.admin-form textarea::placeholder {
+    color: rgba(255, 255, 255, 0.42);
+}
+
+.admin-form input:focus,
+.admin-form select:focus,
+.admin-form textarea:focus {
+    border-color: var(--admin-input-focus);
+    box-shadow: var(--admin-shadow-focus);
+    background: #0b0b0b;
+}
+
+.admin-form select option {
+    background: #080808;
+    color: #ffffff;
+}
+
+.admin-list-card {
+    border: 1px solid var(--admin-border);
+    background: rgba(255, 255, 255, 0.035);
+}
+
+.admin-list-card h3 {
+    color: var(--gold);
+    margin: 0;
+}
+
+.admin-list-card p {
+    color: var(--light-gray);
+    margin: 0;
+    line-height: 1.6;
+}
+
+.admin-empty-text {
+    color: var(--light-gray);
+    opacity: 0.85;
+}
+
+.admin-delete-btn {
+    border: 1px solid rgba(255, 90, 90, 0.55);
+    color: #ff8f8f;
+    background: rgba(255, 90, 90, 0.08);
+}
+
+.admin-delete-btn:hover {
+    background: rgba(255, 90, 90, 0.16);
+    box-shadow: 0 0 20px rgba(255, 90, 90, 0.16);
+}
+
+/* Admin nav link */
+.admin-nav-link {
+    border-color: rgba(212, 175, 55, 0.85);
+    color: var(--gold);
+    background: rgba(212, 175, 55, 0.08);
+}
+
+.admin-nav-link:hover {
+    background: rgba(212, 175, 55, 0.16);
+    box-shadow: 0 0 24px rgba(212, 175, 55, 0.2);
+}
+
+/* Logout should look like a proper nav action */
+.nav-logout-btn {
+    border: 1px solid rgba(212, 175, 55, 0.75);
+    color: var(--gold);
+    background: transparent;
+    min-height: 42px;
+    padding: 10px 22px;
+    border-radius: 999px;
+    font-family: inherit;
+    font-weight: 800;
+    letter-spacing: 0.8px;
+    cursor: pointer;
+}
+
+.nav-logout-btn:hover {
+    background: rgba(212, 175, 55, 0.12);
+    box-shadow: 0 0 22px rgba(212, 175, 55, 0.18);
+}
+
+.nav-user-greeting {
+    color: var(--gold);
+    font-weight: 800;
+    letter-spacing: 0.8px;
+}

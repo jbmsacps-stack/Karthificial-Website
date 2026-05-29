@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="Karthificial is a smart learning and career guidance platform designed for 10th and 12th State Board students.">
+    <title>Karthificial | Admin Dashboard</title>
+
+    <link rel="stylesheet" href="variables.css">
+    <link rel="stylesheet" href="structure.css">
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Science+Gothic:wdth,wght,CTRS@66.9,100..900,32&display=swap"
+        rel="stylesheet">
+    <link rel="icon" type="image/svg+xml" href="assets/images/favi.svg?v=3">
+    <script type="module" src="speed-insights.js"></script>
+</head>
+
+<body class="admin-checking">
+
+    <nav class="navbar">
+        <div class="navbar-inner">
+
+            <a href="index.html" class="logo">
+                <div class="logo-mark"><span class="material-symbols-outlined"><img src="assets/images/Favicon.png"
+                            alt="Favicon" loading="eager" fetchpriority="high"></span></div>
+                <div class="logo-text">Karthi<span>ficial</span></div>
+            </a>
+
+            <input type="checkbox" id="menu-toggle" class="menu-toggle">
+
+            <label for="menu-toggle" class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </label>
+
+            <ul class="nav-menu">
+                <li>
+                    <a href="index.html" class="nav-link">Home</a>
+                </li>
+
+                <li class="dropdown">
+                    <a href="#" class="nav-link">Notes</a>
+
+                    <ul class="dropdown-menu">
+                        <li><a href="notes-10th.html">10th Standard</a></li>
+                        <li><a href="notes-12th.html">12th Standard</a></li>
+                    </ul>
+                </li>
+
+                <li class="dropdown">
+                    <a href="#" class="nav-link">Question Papers</a>
+
+                    <ul class="dropdown-menu">
+                        <li><a href="papers-10th.html">10th Standard</a></li>
+                        <li><a href="papers-12th.html">12th Standard</a></li>
+                    </ul>
+                </li>
+
+                <li>
+                    <a href="career-guidance.html" class="nav-link">Career Guidance</a>
+                </li>
+
+                <li>
+                    <a href="mcq.html" class="nav-link">MCQ</a>
+                </li>
+
+                <li>
+                    <a href="contact.html" class="nav-link">Contact</a>
+                </li>
+
+                <li class="mobile-actions auth-nav-slot"></li>
+            </ul>
+
+            <div class="nav-actions">
+                <a href="login.html" class="btn-outline">Login</a>
+                <a href="signup.html" class="btn-gold">Signup</a>
+            </div>
+
+        </div>
+    </nav>
+
+    <main class="admin-manager">
+        <section class="admin-manager-header">
+            <h1>MCQ Manager</h1>
+            <p>Add MCQ questions here. For now, this page only creates the admin interface. Database connection will come next.</p>
+        </section>
+
+        <form class="admin-form" id="mcqForm">
+
+            <div class="form-row">
+                <div>
+                    <label for="classLevel">Class Level</label>
+                    <select id="classLevel" required>
+                        <option value="">Select class</option>
+                        <option value="10">10th Standard</option>
+                        <option value="12">12th Standard</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label for="subject">Subject</label>
+                    <input type="text" id="subject" placeholder="Example: Maths" required>
+                </div>
+            </div>
+
+            <div>
+                <label for="question">Question</label>
+                <textarea id="question" placeholder="Enter the MCQ question" required></textarea>
+            </div>
+
+            <div class="form-row">
+                <div>
+                    <label for="optionA">Option A</label>
+                    <input type="text" id="optionA" required>
+                </div>
+
+                <div>
+                    <label for="optionB">Option B</label>
+                    <input type="text" id="optionB" required>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div>
+                    <label for="optionC">Option C</label>
+                    <input type="text" id="optionC" required>
+                </div>
+
+                <div>
+                    <label for="optionD">Option D</label>
+                    <input type="text" id="optionD" required>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div>
+                    <label for="correctAnswer">Correct Answer</label>
+                    <select id="correctAnswer" required>
+                        <option value="">Select answer</option>
+                        <option value="A">Option A</option>
+                        <option value="B">Option B</option>
+                        <option value="C">Option C</option>
+                        <option value="D">Option D</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label for="difficulty">Difficulty</label>
+                    <select id="difficulty">
+                        <option value="easy">Easy</option>
+                        <option value="medium">Medium</option>
+                        <option value="hard">Hard</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="admin-actions">
+                <button class="btn-gold" type="submit">Save Question</button>
+                <button class="btn-outline" type="reset">Clear</button>
+            </div>
+
+        </form>
+    </main>
+
+    <script src="script.js" defer></script>
+    <script src="config.js"></script>
+    <script src="clerk-auth.js"></script>
+    <script src="admin.js"></script>
+
+</body>
+
+</html>
