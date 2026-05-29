@@ -34,8 +34,18 @@ async function loadMCQSets() {
         return;
     }
 
-    renderMCQSetOptions(data || []);
-    renderMCQSets(data || []);
+    const sets = data || [];
+
+    renderMCQSetOptions(sets);
+    renderMCQSets(sets);
+
+    const savedSetId = localStorage.getItem("selectedMCQSetId");
+
+    if (savedSetId && sets.some((set) => set.id === savedSetId)) {
+        selectedSetId = savedSetId;
+        questionSetSelect.value = savedSetId;
+        viewQuestions(savedSetId);
+    }
 }
 
 function renderMCQSetOptions(sets) {
@@ -82,12 +92,16 @@ async function createMCQSet(event) {
 
     if (!checkSupabaseReady()) return;
 
+    const thumbnailUrl = document.getElementById("setThumbnailUrl").value.trim();
+    const description = document.getElementById("setDescription").value.trim();
+
     const newSet = {
         title: document.getElementById("setTitle").value.trim(),
         subject: document.getElementById("setSubject").value.trim(),
         class_level: document.getElementById("setClassLevel").value,
-        thumbnail_url: document.getElementById("setThumbnailUrl").value.trim(),
-        description: document.getElementById("setDescription").value.trim(),
+        thumbnail_url: thumbnailUrl || null,
+        gradient_theme: document.getElementById("setGradientTheme").value || "dark-gold",
+        description: description || null,
         is_active: true
     };
 
@@ -150,6 +164,7 @@ async function viewQuestions(setId) {
     if (!checkSupabaseReady()) return;
 
     selectedSetId = setId;
+    localStorage.setItem("selectedMCQSetId", setId);
     questionSetSelect.value = setId;
 
     const { data, error } = await window.supabaseClient
@@ -251,6 +266,7 @@ async function deleteMCQSet(setId) {
 
     if (selectedSetId === setId) {
         selectedSetId = null;
+        localStorage.removeItem("selectedMCQSetId");
         mcqQuestionsList.innerHTML = `<p class="admin-empty-text">Select an MCQ set to view questions.</p>`;
     }
 
@@ -263,6 +279,10 @@ mcqQuestionForm?.addEventListener("submit", addQuestion);
 questionSetSelect?.addEventListener("change", () => {
     if (questionSetSelect.value) {
         viewQuestions(questionSetSelect.value);
+    } else {
+        selectedSetId = null;
+        localStorage.removeItem("selectedMCQSetId");
+        mcqQuestionsList.innerHTML = `<p class="admin-empty-text">Select an MCQ set to view questions.</p>`;
     }
 });
 

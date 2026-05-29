@@ -6689,3 +6689,1221 @@ main,
 .resource-card-info span {
     white-space: nowrap;
 }
+
+/* ================================
+   AUTO MCQ GRADIENT THUMBNAILS
+================================ */
+
+.mcq-gradient-thumb::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+        radial-gradient(circle at 24% 18%, rgba(255, 255, 255, 0.25), transparent 28%),
+        linear-gradient(135deg, rgba(255, 255, 255, 0.12), transparent 48%);
+    pointer-events: none;
+}
+
+.mcq-gradient-thumb::after {
+    content: "MCQ";
+    position: absolute;
+    right: 18px;
+    bottom: 14px;
+    color: rgba(255, 255, 255, 0.18);
+    font-size: 2.4rem;
+    font-weight: 900;
+    letter-spacing: 2px;
+}
+
+/* ================================
+   MCQ GENERATED SUBJECT THUMBNAILS
+================================ */
+
+.resource-thumbnail.mcq-gradient-thumb {
+    height: 200px;
+    min-height: 200px;
+    display: grid;
+    place-items: center;
+    position: relative;
+    overflow: hidden;
+    border-radius: 18px 18px 0 0;
+    isolation: isolate;
+}
+
+.resource-thumbnail.mcq-gradient-thumb::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+        radial-gradient(circle at 22% 20%, rgba(255, 255, 255, 0.22), transparent 28%),
+        radial-gradient(circle at 82% 90%, rgba(212, 175, 55, 0.28), transparent 34%),
+        linear-gradient(135deg, rgba(255, 255, 255, 0.12), transparent 48%);
+    pointer-events: none;
+    z-index: 1;
+}
+
+.resource-thumbnail.mcq-gradient-thumb::after {
+    content: "MCQ";
+    position: absolute;
+    right: 18px;
+    bottom: 12px;
+    color: rgba(255, 255, 255, 0.16);
+    font-size: 2.4rem;
+    font-weight: 900;
+    letter-spacing: 3px;
+    line-height: 1;
+    z-index: 1;
+}
+
+
+.mcq-gradient-content h4 {
+    margin: 8px 0;
+    color: #ffffff;
+    font-size: clamp(1.5rem, 2.4vw, 2.2rem);
+    font-weight: 900;
+    line-height: 1.05;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+.mcq-gradient-kicker,
+.mcq-gradient-tag {
+    color: var(--gold);
+    font-size: 0.78rem;
+    font-weight: 900;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+}
+
+.mcq-gradient-tag {
+    color: rgba(255, 255, 255, 0.82);
+}
+
+/* ================================
+   MCQ GENERATED GRADIENT THUMBNAILS
+================================ */
+
+.admin-optional-text {
+    color: var(--light-gray);
+    font-size: 0.8rem;
+    font-weight: 600;
+    opacity: 0.75;
+}
+
+.resource-thumbnail.mcq-gradient-thumb {
+    height: 200px;
+    min-height: 200px;
+    display: grid;
+    place-items: center;
+    position: relative;
+    overflow: hidden;
+    border-radius: 18px 18px 0 0;
+    isolation: isolate;
+}
+
+.resource-thumbnail.mcq-gradient-thumb::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+        radial-gradient(circle at 22% 20%, rgba(255, 255, 255, 0.22), transparent 28%),
+        radial-gradient(circle at 82% 90%, rgba(212, 175, 55, 0.28), transparent 34%),
+        linear-gradient(135deg, rgba(255, 255, 255, 0.12), transparent 48%);
+    pointer-events: none;
+    z-index: 1;
+}
+
+.resource-thumbnail.mcq-gradient-thumb::after {
+    content: "MCQ";
+    position: absolute;
+    right: 18px;
+    bottom: 12px;
+    color: rgba(255, 255, 255, 0.16);
+    font-size: 2.2rem;
+    font-weight: 900;
+    letter-spacing: 3px;
+    line-height: 1;
+    z-index: 1;
+}
+
+.mcq-gradient-content {
+    position: relative;
+    z-index: 2;
+    width: calc(100% - 42px);
+    min-height: 118px;
+    padding: 22px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border-radius: 18px;
+    background: rgba(0, 0, 0, 0.28);
+    border: 1px solid rgba(212, 175, 55, 0.38);
+    box-shadow:
+        0 0 26px rgba(0, 0, 0, 0.22),
+        inset 0 0 18px rgba(255, 255, 255, 0.06);
+}
+
+.mcq-gradient-content h4 {
+    margin: 8px 0;
+    color: #ffffff;
+    font-size: clamp(1.45rem, 2.2vw, 2rem);
+    font-weight: 900;
+    line-height: 1.05;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    word-break: break-word;
+}
+
+.mcq-gradient-kicker,
+.mcq-gradient-tag {
+    color: var(--gold);
+    font-size: 0.76rem;
+    font-weight: 900;
+    letter-spacing: 1.3px;
+    text-transform: uppercase;
+}
+
+.mcq-gradient-tag {
+    color: rgba(255, 255, 255, 0.82);
+}
+
+/* ================================
+   MCQ CARD THUMBNAIL FIX
+================================ */
+
+.resource-thumbnail {
+    height: 200px;
+    min-height: 200px;
+    overflow: hidden;
+    border-radius: 18px 18px 0 0;
+}
+
+.resource-thumbnail img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+/* Gradient fallback thumbnail */
+.resource-thumbnail.mcq-gradient-thumb {
+    height: 200px;
+    min-height: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 22px;
+    position: relative;
+    overflow: hidden;
+    isolation: isolate;
+}
+
+/* soft shine */
+.resource-thumbnail.mcq-gradient-thumb::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+        radial-gradient(circle at 20% 18%, rgba(255, 255, 255, 0.22), transparent 28%),
+        radial-gradient(circle at 85% 90%, rgba(212, 175, 55, 0.26), transparent 34%),
+        linear-gradient(135deg, rgba(255, 255, 255, 0.10), transparent 48%);
+    z-index: 1;
+    pointer-events: none;
+}
+
+/* small watermark */
+.resource-thumbnail.mcq-gradient-thumb::after {
+    content: "MCQ";
+    position: absolute;
+    right: 18px;
+    bottom: 14px;
+    color: rgba(255, 255, 255, 0.13);
+    font-size: 2rem;
+    font-weight: 900;
+    letter-spacing: 3px;
+    z-index: 1;
+}
+
+/* subject box */
+.mcq-gradient-content {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    min-height: 120px;
+    padding: 20px;
+    border-radius: 16px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background: rgba(0, 0, 0, 0.30);
+    border: 1px solid rgba(212, 175, 55, 0.35);
+    box-shadow:
+        0 0 22px rgba(0, 0, 0, 0.22),
+        inset 0 0 18px rgba(255, 255, 255, 0.05);
+}
+
+.mcq-gradient-kicker,
+.mcq-gradient-tag {
+    color: var(--gold);
+    font-size: 0.72rem;
+    font-weight: 900;
+    letter-spacing: 1.4px;
+    text-transform: uppercase;
+}
+
+.mcq-gradient-tag {
+    color: rgba(255, 255, 255, 0.78);
+}
+
+.mcq-gradient-content h4 {
+    margin: 8px 0;
+    color: #ffffff;
+    font-size: clamp(1.35rem, 2vw, 1.8rem);
+    font-weight: 900;
+    line-height: 1.1;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    word-break: normal;
+    overflow-wrap: break-word;
+}
+
+.resource-box-card .resource-thumbnail img,
+.resource-box-card .mcq-image-thumb img {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
+    object-position: center;
+}
+
+/* ================================
+   MCQ THUMBNAIL FINAL OVERRIDE
+   Image thumbnail first, gradient fallback second
+================================ */
+
+.resource-box-card .resource-thumbnail,
+.resource-box-card .mcq-image-thumb,
+.resource-box-card .mcq-gradient-thumb {
+    width: 100%;
+    height: 200px;
+    min-height: 200px;
+    max-height: 200px;
+    overflow: hidden;
+    position: relative;
+    border-radius: 18px 18px 0 0;
+}
+
+/* Image thumbnail must always fill the box */
+.resource-box-card .mcq-image-thumb img {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
+    object-position: center;
+}
+
+/* Extra protection if old thumbnail image styles affect dynamic cards */
+.resource-box-card .resource-thumbnail img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+}
+
+/* Stop old span wrapper rules from affecting image thumbnails */
+.resource-box-card .mcq-image-thumb span {
+    display: none;
+}
+
+/* Gradient fallback thumbnail */
+.resource-box-card .mcq-gradient-thumb {
+    display: grid;
+    place-items: center;
+    padding: 20px;
+    isolation: isolate;
+}
+
+/* Gradient light texture */
+.resource-box-card .mcq-gradient-thumb::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+        radial-gradient(circle at 20% 18%, rgba(255, 255, 255, 0.22), transparent 28%),
+        radial-gradient(circle at 82% 88%, rgba(212, 175, 55, 0.26), transparent 36%),
+        linear-gradient(135deg, rgba(255, 255, 255, 0.10), transparent 48%);
+    z-index: 1;
+    pointer-events: none;
+}
+
+/* Small MCQ watermark */
+.resource-box-card .mcq-gradient-thumb::after {
+    content: "MCQ";
+    position: absolute;
+    right: 16px;
+    bottom: 12px;
+    color: rgba(255, 255, 255, 0.12);
+    font-size: 1.65rem;
+    font-weight: 900;
+    letter-spacing: 3px;
+    line-height: 1;
+    z-index: 1;
+    pointer-events: none;
+}
+
+/* Subject text box inside fallback thumbnail */
+.resource-box-card .mcq-gradient-content {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    min-height: 115px;
+    padding: 18px;
+    border-radius: 16px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background: rgba(0, 0, 0, 0.32);
+    border: 1px solid rgba(212, 175, 55, 0.35);
+    box-shadow:
+        0 0 20px rgba(0, 0, 0, 0.24),
+        inset 0 0 18px rgba(255, 255, 255, 0.05);
+}
+
+.resource-box-card .mcq-gradient-content h4 {
+    margin: 7px 0;
+    color: #ffffff;
+    font-size: clamp(1.15rem, 1.7vw, 1.55rem);
+    font-weight: 900;
+    line-height: 1.12;
+    letter-spacing: 0.8px;
+    text-transform: uppercase;
+    overflow-wrap: anywhere;
+    word-break: normal;
+}
+
+.resource-box-card .mcq-gradient-kicker,
+.resource-box-card .mcq-gradient-tag {
+    color: var(--gold);
+    font-size: 0.68rem;
+    font-weight: 900;
+    letter-spacing: 1.2px;
+    text-transform: uppercase;
+}
+
+.resource-box-card .mcq-gradient-tag {
+    color: rgba(255, 255, 255, 0.78);
+}
+
+/* ================================
+   MCQ THUMBNAIL SIMPLE FIX
+================================ */
+
+.resource-box-card .resource-thumbnail {
+    width: 100%;
+    height: 200px;
+    min-height: 200px;
+    max-height: 200px;
+    padding: 0;
+    margin: 0;
+    overflow: hidden;
+    position: relative;
+}
+
+/* Image thumbnail should fill the rectangle */
+.resource-box-card .mcq-image-thumb img {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
+    object-position: center;
+}
+
+/* Gradient thumbnail uses the same rectangle */
+.resource-box-card .mcq-gradient-thumb {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+}
+
+/* Simple gradient text */
+.mcq-gradient-simple {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    text-align: center;
+}
+
+.mcq-gradient-simple span {
+    display: block;
+    color: var(--gold);
+    font-size: 0.78rem;
+    font-weight: 900;
+    letter-spacing: 1.8px;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+}
+
+.mcq-gradient-simple strong {
+    display: block;
+    color: #ffffff;
+    font-size: 1.8rem;
+    font-weight: 900;
+    line-height: 1.05;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    overflow-wrap: break-word;
+}
+
+.mcq-gradient-simple small {
+    display: block;
+    color: rgba(255, 255, 255, 0.82);
+    font-size: 0.78rem;
+    font-weight: 900;
+    letter-spacing: 1.8px;
+    text-transform: uppercase;
+    margin-top: 10px;
+}
+
+/* ================================
+   MCQ CARD THUMBNAIL FINAL FIX
+   Keep rectangle shape + force image fit
+================================ */
+
+/* Make the card clip the thumbnail cleanly */
+.resource-card-grid .resource-box-card {
+    overflow: hidden !important;
+}
+
+/* Keep thumbnail as one clean rectangle */
+.resource-card-grid .resource-box-card > .resource-thumbnail {
+    width: 100% !important;
+    height: 220px !important;
+    min-height: 220px !important;
+    max-height: 220px !important;
+
+    margin: 0 !important;
+    padding: 0 !important;
+
+    position: relative !important;
+    overflow: hidden !important;
+
+    border: none !important;
+    outline: none !important;
+    box-shadow: none !important;
+
+    border-radius: 0 !important;
+}
+
+/* Uploaded image thumbnail: fill the rectangle */
+.resource-card-grid .resource-box-card > .mcq-image-thumb img,
+.resource-card-grid .resource-box-card > .resource-thumbnail img {
+    width: 100% !important;
+    height: 100% !important;
+
+    display: block !important;
+
+    object-fit: cover !important;
+    object-position: center center !important;
+
+    border: none !important;
+    outline: none !important;
+    box-shadow: none !important;
+    border-radius: 0 !important;
+}
+
+/* Remove old span wrapper effect if any old card uses span */
+.resource-card-grid .resource-box-card > .resource-thumbnail span {
+    width: 100% !important;
+    height: 100% !important;
+    display: block !important;
+    padding: 0 !important;
+    margin: 0 !important;
+}
+
+/* ================================
+   GRADIENT FALLBACK CLEAN DESIGN
+================================ */
+
+.resource-card-grid .resource-box-card > .mcq-gradient-thumb {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+
+    padding: 22px !important;
+    isolation: isolate !important;
+
+    border: none !important;
+    outline: none !important;
+    box-shadow: none !important;
+}
+
+/* Remove previous noisy MCQ watermark behavior */
+.resource-card-grid .resource-box-card > .mcq-gradient-thumb::after {
+    content: none !important;
+}
+
+/* Clean soft gradient shine only */
+.resource-card-grid .resource-box-card > .mcq-gradient-thumb::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+
+    background:
+        radial-gradient(circle at 18% 18%, rgba(255, 255, 255, 0.16), transparent 30%),
+        radial-gradient(circle at 88% 88%, rgba(212, 175, 55, 0.24), transparent 38%),
+        linear-gradient(135deg, rgba(255, 255, 255, 0.08), transparent 55%);
+}
+
+/* New simple gradient text container */
+.mcq-gradient-simple {
+    position: relative !important;
+    z-index: 2 !important;
+
+    width: 100% !important;
+
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 9px !important;
+
+    text-align: center !important;
+
+    border: none !important;
+    outline: none !important;
+    box-shadow: none !important;
+    background: transparent !important;
+}
+
+/* Class text */
+.mcq-gradient-simple span {
+    color: var(--gold) !important;
+    font-size: 0.78rem !important;
+    font-weight: 900 !important;
+    letter-spacing: 1.8px !important;
+    text-transform: uppercase !important;
+}
+
+/* Subject text */
+.mcq-gradient-simple strong {
+    max-width: 100% !important;
+
+    color: #ffffff !important;
+    font-size: clamp(1.45rem, 2vw, 1.85rem) !important;
+    font-weight: 900 !important;
+    line-height: 1.05 !important;
+    letter-spacing: 0.8px !important;
+    text-transform: uppercase !important;
+
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+}
+
+/* MCQ Practice text */
+.mcq-gradient-simple small {
+    color: rgba(255, 255, 255, 0.82) !important;
+    font-size: 0.78rem !important;
+    font-weight: 900 !important;
+    letter-spacing: 1.8px !important;
+    text-transform: uppercase !important;
+}
+
+/* ================================
+   MCQ THUMBNAIL FINAL CLEAN FIX
+   Keeps old box size + fixes image fit
+================================ */
+
+/* Keep card clipping clean */
+.resource-card-grid .resource-box-card {
+    overflow: hidden !important;
+}
+
+/* Keep the old-style thumbnail rectangle */
+.resource-card-grid .resource-box-card > .resource-thumbnail {
+    width: 100% !important;
+    height: 190px !important;
+    min-height: 190px !important;
+    max-height: 190px !important;
+
+    margin: 0 !important;
+    padding: 0 !important;
+
+    position: relative !important;
+    overflow: hidden !important;
+
+    border: none !important;
+    outline: none !important;
+    box-shadow: none !important;
+
+    border-radius: 0 !important;
+    background: transparent !important;
+}
+
+/* Remove old decorative thumbnail outline */
+.resource-card-grid .resource-box-card > .resource-thumbnail::before,
+.resource-card-grid .resource-box-card > .resource-thumbnail::after {
+    border: none !important;
+    outline: none !important;
+    box-shadow: none !important;
+}
+
+/* Kill old span spacing if any image still uses span */
+.resource-card-grid .resource-box-card > .resource-thumbnail span {
+    width: 100% !important;
+    height: 100% !important;
+
+    display: block !important;
+
+    margin: 0 !important;
+    padding: 0 !important;
+
+    position: absolute !important;
+    inset: 0 !important;
+
+    border: none !important;
+    outline: none !important;
+    box-shadow: none !important;
+}
+
+/* Uploaded thumbnail image must fill the old rectangle */
+.resource-card-grid .resource-box-card > .resource-thumbnail img,
+.resource-card-grid .resource-box-card > .mcq-image-thumb img {
+    width: 100% !important;
+    height: 100% !important;
+
+    display: block !important;
+
+    position: absolute !important;
+    inset: 0 !important;
+
+    object-fit: cover !important;
+    object-position: center center !important;
+
+    margin: 0 !important;
+    padding: 0 !important;
+
+    border: none !important;
+    outline: none !important;
+    box-shadow: none !important;
+    border-radius: 0 !important;
+}
+
+/* Slight crop only for uploaded thumbnails, not gradient */
+.resource-card-grid .resource-box-card > .mcq-image-thumb img {
+    transform: scale(1.04) !important;
+}
+
+/* Gradient fallback: keep selected admin gradient */
+.resource-card-grid .resource-box-card > .mcq-gradient-thumb {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+
+    padding: 20px !important;
+
+    border: none !important;
+    outline: none !important;
+    box-shadow: none !important;
+
+    background-size: cover !important;
+    background-position: center !important;
+}
+
+/* Remove noisy old watermark */
+.resource-card-grid .resource-box-card > .mcq-gradient-thumb::after {
+    content: none !important;
+}
+
+/* Keep only soft shine over the selected gradient */
+.resource-card-grid .resource-box-card > .mcq-gradient-thumb::before {
+    content: "" !important;
+    position: absolute !important;
+    inset: 0 !important;
+    z-index: 1 !important;
+    pointer-events: none !important;
+
+    background:
+        radial-gradient(circle at 18% 18%, rgba(255, 255, 255, 0.14), transparent 32%),
+        radial-gradient(circle at 88% 88%, rgba(212, 175, 55, 0.18), transparent 38%),
+        linear-gradient(135deg, rgba(255, 255, 255, 0.06), transparent 55%) !important;
+
+    border: none !important;
+    outline: none !important;
+    box-shadow: none !important;
+}
+
+/* Simple gradient text */
+.mcq-gradient-simple {
+    position: relative !important;
+    z-index: 2 !important;
+
+    width: 100% !important;
+
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 8px !important;
+
+    text-align: center !important;
+
+    border: none !important;
+    outline: none !important;
+    box-shadow: none !important;
+    background: transparent !important;
+}
+
+.mcq-gradient-simple span {
+    color: var(--gold) !important;
+    font-size: 0.72rem !important;
+    font-weight: 900 !important;
+    letter-spacing: 1.6px !important;
+    text-transform: uppercase !important;
+}
+
+.mcq-gradient-simple strong {
+    max-width: 100% !important;
+
+    color: #ffffff !important;
+    font-size: clamp(1.35rem, 1.8vw, 1.65rem) !important;
+    font-weight: 900 !important;
+    line-height: 1.05 !important;
+    letter-spacing: 0.8px !important;
+    text-transform: uppercase !important;
+
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+}
+
+.mcq-gradient-simple small {
+    color: rgba(255, 255, 255, 0.82) !important;
+    font-size: 0.72rem !important;
+    font-weight: 900 !important;
+    letter-spacing: 1.6px !important;
+    text-transform: uppercase !important;
+}
+
+/* ================================
+   MCQ THUMBNAIL PATCH
+   Replaces old MCQ thumbnail CSS
+================================ */
+
+/* Card should clip thumbnail cleanly */
+.resource-card-grid .resource-box-card {
+    overflow: hidden !important;
+}
+
+/* Keep old thumbnail-like box size */
+.resource-card-grid .resource-box-card > .resource-thumbnail {
+    width: 100% !important;
+    height: 185px !important;
+    min-height: 185px !important;
+    max-height: 185px !important;
+
+    margin: 0 !important;
+    padding: 0 !important;
+
+    position: relative !important;
+    overflow: hidden !important;
+
+    border: none !important;
+    outline: none !important;
+    box-shadow: none !important;
+    border-radius: 0 !important;
+
+    background: transparent !important;
+}
+
+/* Remove old decorative pseudo effects */
+.resource-card-grid .resource-box-card > .resource-thumbnail::after {
+    content: none !important;
+}
+/* Remove weird old span spacing if present */
+.resource-card-grid .resource-box-card > .resource-thumbnail span {
+    width: 100% !important;
+    height: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    display: block !important;
+    position: absolute !important;
+    inset: 0 !important;
+    border: none !important;
+    outline: none !important;
+    box-shadow: none !important;
+}
+
+/* Uploaded image thumbnail should fully fit */
+.resource-card-grid .resource-box-card > .resource-thumbnail img,
+.resource-card-grid .resource-box-card > .mcq-image-thumb img {
+    width: 100% !important;
+    height: 100% !important;
+
+    display: block !important;
+    position: absolute !important;
+    inset: 0 !important;
+
+    object-fit: cover !important;
+    object-position: center center !important;
+
+    margin: 0 !important;
+    padding: 0 !important;
+
+    border: none !important;
+    outline: none !important;
+    box-shadow: none !important;
+    border-radius: 0 !important;
+}
+
+/* Slight crop so weird uploaded images fit better */
+.resource-card-grid .resource-box-card > .mcq-image-thumb img {
+    transform: scale(1.03) !important;
+}
+
+/* Gradient fallback thumbnail */
+.resource-card-grid .resource-box-card > .mcq-gradient-thumb {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+
+    padding: 18px 22px !important;
+    isolation: isolate !important;
+
+    border: none !important;
+    outline: none !important;
+    box-shadow: none !important;
+
+    background-size: cover !important;
+    background-position: center !important;
+}
+
+/* Clean fallback text wrapper */
+.mcq-gradient-simple {
+    position: relative !important;
+    z-index: 2 !important;
+
+    width: 100% !important;
+    max-width: 100% !important;
+
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+
+    text-align: center !important;
+    gap: 8px !important;
+
+    padding: 6px 10px !important;
+
+    background: transparent !important;
+    border: none !important;
+    outline: none !important;
+    box-shadow: none !important;
+}
+
+/* Class level */
+.mcq-gradient-simple span {
+    color: var(--gold) !important;
+    font-size: 0.72rem !important;
+    font-weight: 900 !important;
+    letter-spacing: 1.6px !important;
+    text-transform: uppercase !important;
+    line-height: 1 !important;
+    margin: 0 !important;
+}
+
+/* Subject */
+.mcq-gradient-simple strong {
+    max-width: 100% !important;
+
+    color: #ffffff !important;
+    font-size: clamp(1.2rem, 1.8vw, 1.6rem) !important;
+    font-weight: 900 !important;
+    line-height: 1.02 !important;
+    letter-spacing: 0.5px !important;
+    text-transform: uppercase !important;
+
+    margin: 0 !important;
+
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+}
+
+/* MCQ Practice */
+.mcq-gradient-simple small {
+    color: rgba(255, 255, 255, 0.82) !important;
+    font-size: 0.72rem !important;
+    font-weight: 900 !important;
+    letter-spacing: 1.6px !important;
+    text-transform: uppercase !important;
+    line-height: 1 !important;
+    margin: 0 !important;
+}
+
+/* ================================
+   MCQ THUMBNAIL CLEAN FINAL
+   Image thumbnail clean + gradient only for fallback
+================================ */
+
+.resource-card-grid .resource-box-card {
+    overflow: hidden !important;
+}
+
+/* Shared thumbnail box */
+.resource-card-grid .resource-box-card > .resource-thumbnail {
+    width: 100% !important;
+    height: 185px !important;
+    min-height: 185px !important;
+    max-height: 185px !important;
+
+    margin: 0 !important;
+    padding: 0 !important;
+
+    position: relative !important;
+    overflow: hidden !important;
+
+    border: none !important;
+    outline: none !important;
+    box-shadow: none !important;
+    border-radius: 0 !important;
+
+    background: transparent !important;
+}
+
+/* IMPORTANT: no overlay on normal image thumbnails */
+.resource-card-grid .resource-box-card > .resource-thumbnail::before,
+.resource-card-grid .resource-box-card > .resource-thumbnail::after {
+    content: none !important;
+}
+
+/* Remove old span spacing */
+.resource-card-grid .resource-box-card > .resource-thumbnail span {
+    width: 100% !important;
+    height: 100% !important;
+    display: block !important;
+    position: absolute !important;
+    inset: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+/* Uploaded image must fill the thumbnail cleanly */
+.resource-card-grid .resource-box-card > .mcq-image-thumb img,
+.resource-card-grid .resource-box-card > .resource-thumbnail img {
+    width: 100% !important;
+    height: 100% !important;
+
+    display: block !important;
+    position: absolute !important;
+    inset: 0 !important;
+
+    object-fit: cover !important;
+    object-position: center center !important;
+
+    margin: 0 !important;
+    padding: 0 !important;
+
+    border: none !important;
+    outline: none !important;
+    box-shadow: none !important;
+    border-radius: 0 !important;
+}
+
+/* Slight crop only for uploaded images */
+.resource-card-grid .resource-box-card > .mcq-image-thumb img {
+    transform: scale(1.03) !important;
+}
+
+/* Gradient fallback only */
+.resource-card-grid .resource-box-card > .mcq-gradient-thumb {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+
+    padding: 18px 22px !important;
+    isolation: isolate !important;
+
+    background-size: cover !important;
+    background-position: center !important;
+}
+
+/* Overlay ONLY for gradient fallback */
+.resource-card-grid .resource-box-card > .mcq-gradient-thumb::before {
+    content: "" !important;
+    position: absolute !important;
+    inset: 0 !important;
+    pointer-events: none !important;
+    z-index: 1 !important;
+
+    background:
+        radial-gradient(circle at 18% 18%, rgba(255, 255, 255, 0.10), transparent 32%),
+        radial-gradient(circle at 88% 88%, rgba(212, 175, 55, 0.14), transparent 38%);
+}
+
+/* No watermark */
+.resource-card-grid .resource-box-card > .mcq-gradient-thumb::after {
+    content: none !important;
+}
+
+/* Gradient text */
+.mcq-gradient-simple {
+    position: relative !important;
+    z-index: 2 !important;
+
+    width: 100% !important;
+
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 8px !important;
+
+    text-align: center !important;
+    background: transparent !important;
+    border: none !important;
+    outline: none !important;
+    box-shadow: none !important;
+}
+
+.mcq-gradient-simple span {
+    color: var(--gold) !important;
+    font-size: 0.72rem !important;
+    font-weight: 900 !important;
+    letter-spacing: 1.6px !important;
+    text-transform: uppercase !important;
+}
+
+.mcq-gradient-simple strong {
+    max-width: 100% !important;
+
+    color: #ffffff !important;
+    font-size: clamp(1.25rem, 1.8vw, 1.6rem) !important;
+    font-weight: 900 !important;
+    line-height: 1.05 !important;
+    letter-spacing: 0.5px !important;
+    text-transform: uppercase !important;
+
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+}
+
+.mcq-gradient-simple small {
+    color: rgba(255, 255, 255, 0.82) !important;
+    font-size: 0.72rem !important;
+    font-weight: 900 !important;
+    letter-spacing: 1.6px !important;
+    text-transform: uppercase !important;
+}
+
+/* =====================================
+   MCQ PUBLIC CARD THUMBNAILS
+===================================== */
+
+.resource-card-grid .resource-box-card > .resource-thumbnail,
+.resource-card-grid .resource-box-card > .mcq-image-thumb,
+.resource-card-grid .resource-box-card > .mcq-gradient-thumb {
+    width: 100%;
+    height: 145px;
+    min-height: 145px;
+    max-height: 145px;
+    position: relative;
+    overflow: hidden;
+    margin: 0;
+    padding: 0;
+    background: transparent;
+}
+
+.resource-card-grid .resource-box-card > .mcq-image-thumb img,
+.resource-card-grid .resource-box-card > .resource-thumbnail img {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
+    object-position: center;
+    position: absolute;
+    inset: 0;
+}
+
+.resource-card-grid .resource-box-card > .mcq-image-thumb::before,
+.resource-card-grid .resource-box-card > .mcq-image-thumb::after,
+.resource-card-grid .resource-box-card > .resource-thumbnail::before,
+.resource-card-grid .resource-box-card > .resource-thumbnail::after {
+    content: none;
+}
+
+.resource-card-grid .resource-box-card > .mcq-gradient-thumb {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 18px;
+    position: relative;
+    overflow: hidden;
+}
+
+.resource-card-grid .resource-box-card > .mcq-gradient-thumb::before,
+.resource-card-grid .resource-box-card > .mcq-gradient-thumb::after {
+    content: none;
+}
+
+.mcq-gradient-simple {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    text-align: center;
+    width: 100%;
+    padding: 6px 8px;
+    background: transparent;
+}
+
+.mcq-gradient-simple span {
+    color: var(--gold);
+    font-size: 0.78rem;
+    font-weight: 800;
+    letter-spacing: 1.4px;
+    text-transform: uppercase;
+    margin-top: 6px;
+}
+
+.mcq-gradient-simple strong {
+    color: #ffffff;
+    font-size: 1.25rem;
+    font-weight: 900;
+    line-height: 1.05;
+    letter-spacing: 0.6px;
+    text-transform: uppercase;
+    max-width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.mcq-gradient-simple small {
+    color: rgba(255,255,255,0.85);
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 1.4px;
+    text-transform: uppercase;
+}
+
+@media (max-width: 480px) {
+    .resource-card-grid .resource-box-card > .resource-thumbnail,
+    .resource-card-grid .resource-box-card > .mcq-image-thumb,
+    .resource-card-grid .resource-box-card > .mcq-gradient-thumb {
+        height: 120px;
+        min-height: 120px;
+        max-height: 120px;
+    }
+
+    .mcq-gradient-simple strong {
+        font-size: 1rem;
+        white-space: normal;
+    }
+}

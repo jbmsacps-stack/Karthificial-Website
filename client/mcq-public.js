@@ -21,30 +21,17 @@ function checkSupabaseForMCQPage() {
     return true;
 }
 
-function getFallbackThumbnail(subject = "") {
-    const normalizedSubject = subject.toLowerCase();
+function getMCQGradient(theme = "dark-gold") {
+    const gradients = {
+        "dark-gold": "linear-gradient(135deg, #050505, #15120a, #d4af37)",
+        "royal-gold": "linear-gradient(135deg, #06162f, #1d4ed8, #d4af37)",
+        "crimson-gold": "linear-gradient(135deg, #350606, #b91c1c, #d4af37)",
+        "emerald-gold": "linear-gradient(135deg, #052e1a, #059669, #d4af37)",
+        "violet-gold": "linear-gradient(135deg, #1e1b4b, #7c3aed, #d4af37)",
+        "cyan-gold": "linear-gradient(135deg, #042f3d, #0891b2, #d4af37)"
+    };
 
-    if (normalizedSubject.includes("tamil")) {
-        return "assets/thumbnail/tamil_thumb.png";
-    }
-
-    if (normalizedSubject.includes("english")) {
-        return "assets/thumbnail/english_thumb.png";
-    }
-
-    if (normalizedSubject.includes("science")) {
-        return "assets/thumbnail/sci_thumb.png";
-    }
-
-    if (normalizedSubject.includes("social")) {
-        return "assets/thumbnail/sst_thumb.png";
-    }
-
-    if (normalizedSubject.includes("math")) {
-        return "assets/thumbnail/maths_thumb.png";
-    }
-
-    return "assets/thumbnail/maths_thumb.png";
+    return gradients[theme] || gradients["dark-gold"];
 }
 
 async function getQuestionCount(setId) {
@@ -112,21 +99,33 @@ async function renderPublicMCQSets(sets) {
     const cards = await Promise.all(
         sets.map(async (set) => {
             const questionCount = await getQuestionCount(set.id);
-            const thumbnail = set.thumbnail_url || getFallbackThumbnail(set.subject);
+            const gradient = getMCQGradient(set.gradient_theme);
+            const hasThumbnail = Boolean(set.thumbnail_url && set.thumbnail_url.trim());
+
+            const thumbnailHTML = hasThumbnail
+                ? `
+        <div class="resource-thumbnail mcq-image-thumb">
+            <img
+                src="${set.thumbnail_url.trim()}"
+                alt="${set.title}"
+                loading="lazy"
+                fetchpriority="low"
+            >
+        </div>
+    `
+                : `
+        <div class="resource-thumbnail mcq-gradient-thumb" style="background: ${gradient};">
+            <div class="mcq-gradient-simple">
+                <span>${set.class_level}th Standard</span>
+                <strong>${set.subject || "MCQ"}</strong>
+                <small>MCQ Practice</small>
+            </div>
+        </div>
+    `;
 
             return `
                 <article class="resource-box-card">
-                    <div class="resource-thumbnail">
-                        <span>
-                            <img
-                                src="${thumbnail}"
-                                alt="${set.title}"
-                                class="src"
-                                loading="lazy"
-                                fetchpriority="low"
-                            >
-                        </span>
-                    </div>
+                    ${thumbnailHTML}
 
                     <div class="resource-card-body">
                         <h3>${set.title}</h3>

@@ -92,22 +92,12 @@
                 <div class="form-row">
                     <div>
                         <label for="setTitle">Set Title</label>
-                        <input
-                            type="text"
-                            id="setTitle"
-                            placeholder="Example: Mathematics 10th Standard MCQ"
-                            required
-                        >
+                        <input type="text" id="setTitle" placeholder="Example: Mathematics 10th Standard MCQ" required>
                     </div>
 
                     <div>
                         <label for="setSubject">Subject</label>
-                        <input
-                            type="text"
-                            id="setSubject"
-                            placeholder="Example: Mathematics"
-                            required
-                        >
+                        <input type="text" id="setSubject" placeholder="Example: Mathematics" required>
                     </div>
                 </div>
 
@@ -122,22 +112,27 @@
                     </div>
 
                     <div>
-                        <label for="setThumbnailUrl">Thumbnail URL</label>
-                        <input
-                            type="url"
-                            id="setThumbnailUrl"
-                            placeholder="Paste image URL or leave empty"
-                        >
+                        <label for="setGradientTheme">Gradient Theme</label>
+                        <select id="setGradientTheme">
+                            <option value="dark-gold">Dark Gold</option>
+                            <option value="royal-gold">Royal Blue Gold</option>
+                            <option value="crimson-gold">Crimson Gold</option>
+                            <option value="emerald-gold">Emerald Gold</option>
+                            <option value="violet-gold">Violet Gold</option>
+                            <option value="cyan-gold">Cyan Gold</option>
+                        </select>
                     </div>
                 </div>
 
                 <div>
+                    <label for="setThumbnailUrl">Thumbnail URL <span class="admin-optional-text">Optional</span></label>
+                    <input type="url" id="setThumbnailUrl" placeholder="Paste image URL or leave empty to use gradient">
+                </div>
+
+                <div>
                     <label for="setDescription">Description</label>
-                    <textarea
-                        id="setDescription"
-                        placeholder="Example: Practice important objective questions for Mathematics 10th standard."
-                        required
-                    ></textarea>
+                    <textarea id="setDescription"
+                        placeholder="Example: Practice important objective questions for Mathematics 10th standard."></textarea>
                 </div>
 
                 <div class="admin-actions">
@@ -180,11 +175,7 @@
 
                 <div>
                     <label for="questionText">Question</label>
-                    <textarea
-                        id="questionText"
-                        placeholder="Enter the MCQ question"
-                        required
-                    ></textarea>
+                    <textarea id="questionText" placeholder="Enter the MCQ question" required></textarea>
                 </div>
 
                 <div class="form-row">
