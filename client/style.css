@@ -5974,6 +5974,7 @@ main,
         font-size: 0.76rem;
         letter-spacing: 1.7px;
         line-height: 1.8;
+
     }
 }
 
@@ -6228,3 +6229,106 @@ main,
         padding: 60px 6%;
     }
 }
+
+/* =========================================================
+   AFTER 12TH PAGE RADIAL BG FIX
+========================================================= */
+ .article-hero {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 60px;
+            padding: 100px 60px;
+            flex-wrap: wrap;
+        }
+
+        /* LEFT CONTENT */
+
+        .article-hero-content {
+            flex: 1;
+            min-width: 320px;
+            max-width: 700px;
+        }
+
+        .article-label {
+            display: inline-block;
+            padding: 8px 18px;
+            border: 1px solid var(--gold-warm);
+            border-radius: 999px;
+            color: var(--gold-warm);
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 24px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .article-hero-content h1 {
+            font-size: 72px;
+            line-height: 1.05;
+            font-weight: 800;
+            color: white;
+            margin-bottom: 28px;
+        }
+
+        .article-hero-content p {
+            font-size: 18px;
+            line-height: 1.9;
+            color: rgba(var(--white-rgb), 0.8);
+            max-width: 700px;
+        }
+
+        /* VIDEO SECTION */
+
+        .article-video {
+            flex: 1;
+            min-width: 320px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .article-video iframe {
+            width: 100%;
+            max-width: 560px;
+            aspect-ratio: 16 / 9;
+            border-radius: 20px;
+            border: none;
+            box-shadow: 0 10px 40px rgba(var(--black-rgb), 0.4);
+        }
+
+        /* MOBILE RESPONSIVE */
+
+        @media (max-width: 992px) {
+
+            .article-hero {
+                flex-direction: column;
+                align-items: flex-start;
+                padding: 80px 24px;
+            }
+
+            .article-hero-content h1 {
+                font-size: 52px;
+            }
+
+            .article-video {
+                width: 100%;
+            }
+
+            .article-video iframe {
+                max-width: 100%;
+            }
+        }
+
+        @media (max-width: 600px) {
+
+            .article-hero-content h1 {
+                font-size: 42px;
+            }
+
+            .article-hero-content p {
+                font-size: 16px;
+                line-height: 1.8;
+            }
+        }
