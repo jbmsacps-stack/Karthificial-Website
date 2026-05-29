@@ -282,7 +282,13 @@
             <article class="admin-card">
                 <h2>Manage MCQs</h2>
                 <p>Add, edit, and remove MCQ questions.</p>
-                <button class="btn-gold" type="button">Open MCQ Manager</button>
+                <button
+    class="btn-gold"
+    type="button"
+    onclick="openMCQManager()"
+>
+    Open MCQ Manager
+</button>
             </article>
 
             <article class="admin-card">
@@ -320,6 +326,8 @@
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <script src="supabase-config.js"></script>
+
+<script src="mcq-manager.js"></script>
 
 <script src="admin.js"></script>
 
