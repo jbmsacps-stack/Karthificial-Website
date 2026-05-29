@@ -6653,3 +6653,39 @@ main,
     font-weight: 800;
     letter-spacing: 0.8px;
 }
+
+/* ================================
+   DYNAMIC MCQ SECTION
+================================ */
+
+.mcq-toolbar-subtitle {
+    margin-top: 8px;
+    color: var(--light-gray);
+    line-height: 1.6;
+}
+
+.mcq-loading-card {
+    min-height: 220px;
+    display: flex;
+    align-items: center;
+}
+
+.resource-box-card {
+    overflow: hidden;
+}
+
+.resource-thumbnail img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.resource-card-info {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.resource-card-info span {
+    white-space: nowrap;
+}

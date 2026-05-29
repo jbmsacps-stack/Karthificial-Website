@@ -5,15 +5,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description"
-        content="Karthificial is a smart learning and career guidance platform designed for 10th and 12th State Board students.">
+        content="Karthificial admin dashboard for managing MCQs, notes, question papers, and career guidance content.">
     <title>Karthificial | Admin Dashboard</title>
 
     <link rel="stylesheet" href="variables.css">
     <link rel="stylesheet" href="structure.css">
     <link rel="stylesheet" href="style.css">
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Science+Gothic:wdth,wght,CTRS@66.9,100..900,32&display=swap"
         rel="stylesheet">
+
     <link rel="icon" type="image/svg+xml" href="assets/images/favi.svg?v=3">
     <script type="module" src="speed-insights.js"></script>
 </head>
@@ -41,9 +43,18 @@
             </label>
 
             <ul class="nav-menu">
-                <li><a href="admin.html" class="nav-link">Dashboard</a></li>
-                <li><a href="mcq.html" class="nav-link">MCQ Page</a></li>
-                <li><a href="index.html" class="nav-link">Home</a></li>
+                <li>
+                    <a href="admin.html" class="nav-link">Dashboard</a>
+                </li>
+
+                <li>
+                    <a href="mcq.html" class="nav-link">MCQ Page</a>
+                </li>
+
+                <li>
+                    <a href="index.html" class="nav-link">Home</a>
+                </li>
+
                 <li class="mobile-actions auth-nav-slot"></li>
             </ul>
 
@@ -55,162 +66,83 @@
         </div>
     </nav>
 
-    <main class="admin-manager">
+    <main class="admin-dashboard">
 
-        <section class="admin-manager-header">
-            <h1>MCQ Manager</h1>
-            <p>Create MCQ sets, add multiple questions inside each set, and manage/delete them from one place.</p>
+        <section class="admin-header">
+            <p class="admin-eyebrow">Admin Control Panel</p>
+            <h1>Admin Dashboard</h1>
+            <p>
+                Manage Karthificial website content from one place. Choose a section below to create,
+                update, or organize platform content.
+            </p>
         </section>
 
-        <!-- CREATE MCQ SET -->
-        <section class="admin-panel">
-            <div class="admin-panel-header">
-                <h2>Create MCQ Set</h2>
-                <p>This creates one MCQ card/page like Tamil 10th Standard MCQ or Maths 12th Standard MCQ.</p>
-            </div>
+        <section class="admin-grid">
 
-            <form class="admin-form" id="mcqSetForm">
-
-                <div class="form-row">
-                    <div>
-                        <label for="setTitle">Set Title</label>
-                        <input type="text" id="setTitle" placeholder="Example: Mathematics 10th Standard MCQ" required>
-                    </div>
-
-                    <div>
-                        <label for="setSubject">Subject</label>
-                        <input type="text" id="setSubject" placeholder="Example: Mathematics" required>
-                    </div>
+            <article class="admin-card">
+                <div class="admin-card-top">
+                    <span class="admin-card-badge">01</span>
+                    <span class="admin-card-label">MCQ</span>
                 </div>
 
-                <div class="form-row">
-                    <div>
-                        <label for="setClassLevel">Class Level</label>
-                        <select id="setClassLevel" required>
-                            <option value="">Select class</option>
-                            <option value="10">10th Standard</option>
-                            <option value="12">12th Standard</option>
-                        </select>
-                    </div>
+                <h2>Manage MCQs</h2>
+                <p>
+                    Create MCQ sets, add multiple questions inside each set, and delete unwanted questions.
+                </p>
 
-                    <div>
-                        <label for="setThumbnailUrl">Thumbnail URL</label>
-                        <input type="url" id="setThumbnailUrl" placeholder="Paste image URL">
-                    </div>
+                <button class="btn-gold" type="button" onclick="window.location.href='admin-mcq.html'">
+                    Open MCQ Manager
+                </button>
+            </article>
+
+            <article class="admin-card">
+                <div class="admin-card-top">
+                    <span class="admin-card-badge">02</span>
+                    <span class="admin-card-label">Career</span>
                 </div>
 
-                <div>
-                    <label for="setDescription">Description</label>
-                    <textarea id="setDescription"
-                        placeholder="Example: Practice important objective questions for Mathematics 10th standard."
-                        required></textarea>
+                <h2>Career Guidance</h2>
+                <p>
+                    Add and update career guidance cards, articles, student resources, and page links.
+                </p>
+
+                <button class="btn-gold" type="button" onclick="window.location.href='admin-career.html'">
+                    Open Career Manager
+                </button>
+            </article>
+
+            <article class="admin-card">
+                <div class="admin-card-top">
+                    <span class="admin-card-badge">03</span>
+                    <span class="admin-card-label">Papers</span>
                 </div>
 
-                <div class="admin-actions">
-                    <button class="btn-gold" type="submit">Create MCQ Set</button>
-                    <button class="btn-outline" type="reset">Clear</button>
+                <h2>Question Papers</h2>
+                <p>
+                    Manage 10th and 12th standard question paper links, PDFs, subjects, and years.
+                </p>
+
+                <button class="btn-gold" type="button" onclick="window.location.href='admin-papers.html'">
+                    Open Paper Manager
+                </button>
+            </article>
+
+            <article class="admin-card">
+                <div class="admin-card-top">
+                    <span class="admin-card-badge">04</span>
+                    <span class="admin-card-label">Notes</span>
                 </div>
 
-            </form>
-        </section>
+                <h2>Notes</h2>
+                <p>
+                    Add, edit, organize, and remove study notes for 10th and 12th standard students.
+                </p>
 
-        <!-- ADD QUESTION TO SET -->
-        <section class="admin-panel">
-            <div class="admin-panel-header">
-                <h2>Add Question to MCQ Set</h2>
-                <p>Select an MCQ set first, then add multiple questions inside that set.</p>
-            </div>
+                <button class="btn-gold" type="button" onclick="window.location.href='admin-notes.html'">
+                    Open Notes Manager
+                </button>
+            </article>
 
-            <form class="admin-form" id="mcqQuestionForm">
-
-                <div class="form-row">
-                    <div>
-                        <label for="questionSet">Select MCQ Set</label>
-                        <select id="questionSet" required>
-                            <option value="">Select MCQ set</option>
-                        </select>
-                    </div>
-
-                    <div>
-                        <label for="difficulty">Difficulty</label>
-                        <select id="difficulty" required>
-                            <option value="easy">Easy</option>
-                            <option value="medium">Medium</option>
-                            <option value="hard">Hard</option>
-                        </select>
-                    </div>
-                </div>
-
-                <div>
-                    <label for="questionText">Question</label>
-                    <textarea id="questionText" placeholder="Enter the MCQ question" required></textarea>
-                </div>
-
-                <div class="form-row">
-                    <div>
-                        <label for="optionA">Option A</label>
-                        <input type="text" id="optionA" required>
-                    </div>
-
-                    <div>
-                        <label for="optionB">Option B</label>
-                        <input type="text" id="optionB" required>
-                    </div>
-                </div>
-
-                <div class="form-row">
-                    <div>
-                        <label for="optionC">Option C</label>
-                        <input type="text" id="optionC" required>
-                    </div>
-
-                    <div>
-                        <label for="optionD">Option D</label>
-                        <input type="text" id="optionD" required>
-                    </div>
-                </div>
-
-                <div>
-                    <label for="correctAnswer">Correct Answer</label>
-                    <select id="correctAnswer" required>
-                        <option value="">Select correct answer</option>
-                        <option value="A">Option A</option>
-                        <option value="B">Option B</option>
-                        <option value="C">Option C</option>
-                        <option value="D">Option D</option>
-                    </select>
-                </div>
-
-                <div class="admin-actions">
-                    <button class="btn-gold" type="submit">Add Question</button>
-                    <button class="btn-outline" type="reset">Clear</button>
-                </div>
-
-            </form>
-        </section>
-
-        <!-- EXISTING SETS -->
-        <section class="admin-panel">
-            <div class="admin-panel-header">
-                <h2>Existing MCQ Sets</h2>
-                <p>View, manage, and delete MCQ sets created by admin.</p>
-            </div>
-
-            <div id="mcqSetsList" class="admin-list">
-                <p class="admin-empty-text">No MCQ sets loaded yet.</p>
-            </div>
-        </section>
-
-        <!-- QUESTIONS INSIDE SELECTED SET -->
-        <section class="admin-panel">
-            <div class="admin-panel-header">
-                <h2>Questions in Selected Set</h2>
-                <p>When you select/view an MCQ set, its questions will appear here with delete options.</p>
-            </div>
-
-            <div id="mcqQuestionsList" class="admin-list">
-                <p class="admin-empty-text">Select an MCQ set to view questions.</p>
-            </div>
         </section>
 
     </main>
@@ -218,12 +150,7 @@
     <script src="script.js" defer></script>
     <script src="config.js"></script>
     <script src="clerk-auth.js"></script>
-
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-    <script src="supabase-config.js"></script>
-
     <script src="admin.js"></script>
-    <script src="admin-mcq-manager.js"></script>
 
 </body>
 
