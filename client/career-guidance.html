@@ -10,7 +10,7 @@
 
     <title>Karthificial | Career Guidance</title>
 
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="variables.css">\r\n    <link rel="stylesheet" href="structure.css">\r\n    <link rel="stylesheet" href="style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -24,8 +24,8 @@
         .career-path-section {
             padding: 70px 8%;
             background:
-                radial-gradient(circle at top left, rgba(212, 175, 55, 0.08), transparent 35%),
-                linear-gradient(180deg, #080808, #050505);
+                radial-gradient(circle at top left, rgba(var(--gold-rgb), 0.08), transparent 35%),
+                linear-gradient(180deg, var(--black-dark), var(--black-darker));
         }
 
         .career-path-section .section-heading {
@@ -47,12 +47,12 @@
         .career-path-section .section-heading p {
             max-width: 720px;
             margin: 0 auto;
-            color: #cfcfcf;
+            color: var(--text-muted-2);
             line-height: 1.7;
         }
 
         .featured-image {
-            background: #121212;
+            background: var(--surface-alt);
             overflow: hidden;
         }
 
@@ -64,7 +64,7 @@
             object-fit: contain;
             object-position: center bottom;
 
-            background: #000;
+            background: var(--black-true);
             padding-top: 26px;
             padding-bottom: 0;
 
@@ -93,16 +93,16 @@
             overflow: hidden;
             min-height: 100%;
 
-            background: linear-gradient(180deg, #141414, #090909);
-            border: 1px solid rgba(212, 175, 55, 0.25);
+            background: linear-gradient(180deg, var(--surface-alt-2), var(--surface-panel));
+            border: 1px solid rgba(var(--gold-rgb), 0.25);
             border-radius: 22px;
 
             text-decoration: none;
             color: inherit;
 
             box-shadow:
-                0 18px 45px rgba(0, 0, 0, 0.45),
-                inset 0 0 35px rgba(212, 175, 55, 0.02);
+                0 18px 45px rgba(var(--black-rgb), 0.45),
+                inset 0 0 35px rgba(var(--gold-rgb), 0.02);
 
             transition:
                 border-color 0.35s ease,
@@ -112,13 +112,13 @@
 
         .career-blog-card:hover {
             border-color: var(--gold);
-            background: linear-gradient(180deg, #1a1a1a, #080808);
+            background: linear-gradient(180deg, var(--surface-alt-4), var(--black-dark));
 
             box-shadow:
-                0 0 0 1px rgba(212, 175, 55, 0.28),
-                0 0 32px rgba(212, 175, 55, 0.16),
-                0 24px 60px rgba(0, 0, 0, 0.65),
-                inset 0 0 42px rgba(212, 175, 55, 0.04);
+                0 0 0 1px rgba(var(--gold-rgb), 0.28),
+                0 0 32px rgba(var(--gold-rgb), 0.16),
+                0 24px 60px rgba(var(--black-rgb), 0.65),
+                inset 0 0 42px rgba(var(--gold-rgb), 0.04);
         }
 
         .career-blog-card img {
@@ -129,7 +129,7 @@
             object-fit: contain;
             object-position: center bottom;
 
-            background: #000;
+            background: var(--black-true);
             padding-top: 26px;
             padding-bottom: 0;
 
@@ -153,11 +153,11 @@
             margin-bottom: 12px;
             padding: 6px 11px;
 
-            border: 1px solid rgba(212, 175, 55, 0.35);
+            border: 1px solid rgba(var(--gold-rgb), 0.35);
             border-radius: 999px;
 
             color: var(--gold);
-            background: rgba(212, 175, 55, 0.08);
+            background: rgba(var(--gold-rgb), 0.08);
 
             font-size: 0.76rem;
             font-weight: 800;
@@ -166,14 +166,14 @@
         }
 
         .career-blog-content h3 {
-            color: #ffffff;
+            color: var(--white);
             font-size: 1.25rem;
             line-height: 1.35;
             margin-bottom: 12px;
         }
 
         .career-blog-content p {
-            color: #c9c9c9;
+            color: var(--text-muted-2);
             font-size: 0.95rem;
             line-height: 1.7;
             margin-bottom: 18px;
@@ -188,8 +188,8 @@
         }
 
         .career-blog-card:hover .read-more {
-            color: #f2cf5b;
-            text-shadow: 0 0 14px rgba(212, 175, 55, 0.45);
+            color: var(--gold-light);
+            text-shadow: 0 0 14px rgba(var(--gold-rgb), 0.45);
         }
 
         .career-final-note {
@@ -199,15 +199,15 @@
             text-align: center;
 
             background:
-                radial-gradient(circle at top, rgba(212, 175, 55, 0.13), transparent 45%),
-                linear-gradient(180deg, #141414, #080808);
+                radial-gradient(circle at top, rgba(var(--gold-rgb), 0.13), transparent 45%),
+                linear-gradient(180deg, var(--surface-alt-2), var(--black-dark));
 
-            border: 1px solid rgba(212, 175, 55, 0.35);
+            border: 1px solid rgba(var(--gold-rgb), 0.35);
             border-radius: 24px;
 
             box-shadow:
-                0 24px 60px rgba(0, 0, 0, 0.55),
-                inset 0 0 40px rgba(212, 175, 55, 0.035);
+                0 24px 60px rgba(var(--black-rgb), 0.55),
+                inset 0 0 40px rgba(var(--gold-rgb), 0.035);
         }
 
         .career-final-note h2 {
@@ -219,7 +219,7 @@
         .career-final-note p {
             max-width: 760px;
             margin: 0 auto;
-            color: #d0d0d0;
+            color: var(--text-muted-3);
             line-height: 1.8;
         }
 
@@ -279,7 +279,7 @@
         }
 
         .featured-image {
-            background: #000;
+            background: var(--black-true);
         }
 
         .featured-image img {
@@ -290,7 +290,7 @@
             object-fit: contain;
             object-position: center;
 
-            background: #000;
+            background: var(--black-true);
             padding: 24px 0;
 
             transform: none !important;
@@ -306,7 +306,7 @@
             object-fit: contain;
             object-position: center;
 
-            background: #000;
+            background: var(--black-true);
             padding: 20px 0;
 
             transform: none !important;
@@ -352,7 +352,7 @@
             }
 
             .featured-image {
-                background: #000;
+                background: var(--black-true);
             }
 
             .featured-image img {
@@ -363,7 +363,7 @@
                 object-fit: contain;
                 object-position: center;
 
-                background: #000;
+                background: var(--black-true);
                 padding: 16px 0;
 
                 transform: none !important;
@@ -379,7 +379,7 @@
                 object-fit: contain;
                 object-position: center;
 
-                background: #000;
+                background: var(--black-true);
                 padding: 14px 0;
 
                 transform: none !important;
@@ -428,8 +428,8 @@
                 gap: 0;
                 overflow: hidden;
                 border-radius: 24px;
-                background: linear-gradient(180deg, #151515, #070707);
-                border: 1px solid rgba(212, 175, 55, 0.28);
+                background: linear-gradient(180deg, var(--surface-alt-3), var(--black-very-dark));
+                border: 1px solid rgba(var(--gold-rgb), 0.28);
             }
 
             .featured-content {
@@ -462,7 +462,7 @@
                 width: 100%;
                 height: auto;
                 order: 1;
-                background: #000;
+                background: var(--black-true);
                 overflow: hidden;
                 border-radius: 0;
             }
@@ -475,7 +475,7 @@
                 object-fit: contain;
                 object-position: center;
 
-                background: #000;
+                background: var(--black-true);
                 padding: 14px 0;
 
                 transform: none !important;
@@ -579,10 +579,10 @@
         body {
             background:
                 radial-gradient(circle at top left,
-                    rgba(212, 175, 55, 0.18) 0%,
-                    rgba(212, 175, 55, 0.07) 24%,
+                    rgba(var(--gold-rgb), 0.18) 0%,
+                    rgba(var(--gold-rgb), 0.07) 24%,
                     transparent 48%),
-                linear-gradient(180deg, #050505 0%, #080808 48%, #020202 100%) !important;
+                linear-gradient(180deg, var(--black-darker) 0%, var(--black-dark) 48%, var(--black-true) 100%) !important;
             background-attachment: fixed;
         }
 
@@ -597,7 +597,7 @@
         .career-hero {
             padding: 90px 8% 55px !important;
             text-align: center;
-            border-bottom: 1px solid rgba(212, 175, 55, 0.12);
+            border-bottom: 1px solid rgba(var(--gold-rgb), 0.12);
         }
 
         .career-hero h1 {
@@ -611,7 +611,7 @@
         .career-hero p {
             max-width: 900px;
             margin: 0 auto;
-            color: #e5e5e5;
+            color: var(--text-light);
             font-size: 1.05rem;
             line-height: 1.75;
         }
@@ -630,16 +630,16 @@
             min-height: auto !important;
 
             background:
-                radial-gradient(circle at top left, rgba(212, 175, 55, 0.10), transparent 38%),
-                linear-gradient(180deg, rgba(18, 18, 18, 0.98), rgba(5, 5, 5, 0.99)) !important;
+                radial-gradient(circle at top left, rgba(var(--gold-rgb), 0.10), transparent 38%),
+                linear-gradient(180deg, rgba(var(--black-rgb), 0.98), rgba(var(--black-rgb), 0.99)) !important;
 
-            border: 1px solid rgba(212, 175, 55, 0.35);
+            border: 1px solid rgba(var(--gold-rgb), 0.35);
             border-radius: 26px;
 
             box-shadow:
-                0 24px 70px rgba(0, 0, 0, 0.68),
-                0 0 32px rgba(212, 175, 55, 0.06),
-                inset 0 0 38px rgba(212, 175, 55, 0.025);
+                0 24px 70px rgba(var(--black-rgb), 0.68),
+                0 0 32px rgba(var(--gold-rgb), 0.06),
+                inset 0 0 38px rgba(var(--gold-rgb), 0.025);
         }
 
         /* Featured text only, not blog card text */
@@ -665,8 +665,8 @@
             width: 100%;
             border-radius: 22px;
             overflow: hidden;
-            background: #000;
-            border: 1px solid rgba(212, 175, 55, 0.24);
+            background: var(--black-true);
+            border: 1px solid rgba(var(--gold-rgb), 0.24);
         }
 
         .featured-image img {
@@ -677,7 +677,7 @@
             object-fit: contain;
             object-position: center;
 
-            background: #000;
+            background: var(--black-true);
             padding: 22px 0;
 
             transform: none !important;
@@ -1085,3 +1085,5 @@
 </body>
 
 </html>
+
+

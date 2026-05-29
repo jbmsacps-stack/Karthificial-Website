@@ -10,7 +10,7 @@
 
     <title>Karthificial | After 12th</title>
 
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="variables.css">\r\n    <link rel="stylesheet" href="structure.css">\r\n    <link rel="stylesheet" href="style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -44,9 +44,9 @@
 .article-label {
     display: inline-block;
     padding: 8px 18px;
-    border: 1px solid #c89b3c;
+    border: 1px solid var(--gold-warm);
     border-radius: 999px;
-    color: #c89b3c;
+    color: var(--gold-warm);
     font-size: 14px;
     font-weight: 600;
     margin-bottom: 24px;
@@ -65,7 +65,7 @@
 .article-hero-content p {
     font-size: 18px;
     line-height: 1.9;
-    color: rgba(255,255,255,0.8);
+    color: rgba(var(--white-rgb),0.8);
     max-width: 700px;
 }
 
@@ -85,7 +85,7 @@
     aspect-ratio: 16 / 9;
     border-radius: 20px;
     border: none;
-    box-shadow: 0 10px 40px rgba(0,0,0,0.4);
+    box-shadow: 0 10px 40px rgba(var(--black-rgb),0.4);
 }
 
 /* MOBILE RESPONSIVE */
@@ -359,3 +359,5 @@
 </body>
 
 </html>
+
+
