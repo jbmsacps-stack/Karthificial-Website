@@ -10,7 +10,9 @@
 
     <title>Karthificial | Profile Setup</title>
 
-    <link rel="stylesheet" href="variables.css">\r\n    <link rel="stylesheet" href="structure.css">\r\n    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="variables.css">
+    <link rel="stylesheet" href="structure.css">
+    <link rel="stylesheet" href="style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Science+Gothic:wdth,wght,CTRS@66.9,100..900,32&display=swap"
@@ -89,14 +91,15 @@
     <main class="auth-page">
         <section class="auth-card" style="text-align: left;">
             <h1 style="color: var(--gold); text-align: center; margin-bottom: 8px;">Complete Profile</h1>
-            <p style="text-align: center; color: var(--light-gray); margin-bottom: 28px; font-size: 0.95rem;">Please provide your details to personalize your student experience.</p>
-            
+            <p style="text-align: center; color: var(--light-gray); margin-bottom: 28px; font-size: 0.95rem;">Please
+                provide your details to personalize your student experience.</p>
+
             <form id="profile-setup-form">
                 <div class="form-group">
                     <label for="full-name">Full Name</label>
                     <input type="text" id="full-name" placeholder="Enter your full name" required>
                 </div>
-                
+
                 <div class="form-group">
                     <label for="class-standard">Class / Standard</label>
                     <select id="class-standard" required>
@@ -106,7 +109,7 @@
                         <option value="Other">Other</option>
                     </select>
                 </div>
-                
+
                 <div class="form-group">
                     <label for="education-board">Board of Education</label>
                     <select id="education-board" required>
@@ -116,7 +119,7 @@
                         <option value="Other">Other</option>
                     </select>
                 </div>
-                
+
                 <button type="submit" class="submit-btn" style="margin-top: 16px;">Save & Continue</button>
             </form>
         </section>
@@ -167,19 +170,19 @@
 
     <script src="script.js" defer></script>
     <script>
-        document.getElementById('profile-setup-form').addEventListener('submit', function(e) {
+        document.getElementById('profile-setup-form').addEventListener('submit', function (e) {
             e.preventDefault();
             const fullName = document.getElementById('full-name').value;
             const classStandard = document.getElementById('class-standard').value;
             const educationBoard = document.getElementById('education-board').value;
-            
+
             const profileData = {
                 fullName: fullName,
                 classStandard: classStandard,
                 educationBoard: educationBoard,
                 updatedAt: new Date().toISOString()
             };
-            
+
             localStorage.setItem('karthificial_profile', JSON.stringify(profileData));
             window.location.href = 'index.html';
         });
@@ -187,6 +190,3 @@
 </body>
 
 </html>
-
-
-
