@@ -429,8 +429,7 @@ img {
 }
 
 .home-hero {
-    background:
-        radial-gradient(circle at top, rgba(var(--gold-rgb), 0.16), transparent 35%),
+    background: transparent 35%),
         linear-gradient(180deg, var(--black), var(--black-darker));
     text-align: center;
 }
@@ -464,8 +463,7 @@ img {
 
 .slider-section {
     padding: 55px 0 35px;
-    background:
-        radial-gradient(circle at top, rgba(var(--gold-rgb), 0.08), transparent 38%),
+    background: transparent 38%),
         linear-gradient(180deg, var(--black-darker), var(--black));
 }
 
@@ -475,8 +473,7 @@ img {
     overflow: hidden;
     border-radius: 26px;
     border: 1px solid rgba(var(--gold-rgb), 0.34);
-    background:
-        linear-gradient(135deg, rgba(var(--gold-rgb), 0.08), transparent 32%),
+    background: linear-gradient(135deg, rgba(var(--gold-rgb), 0.08), transparent 32%),
         var(--black-dark);
     box-shadow:
         0 22px 55px rgba(var(--black-rgb), 0.58),
@@ -508,8 +505,7 @@ img {
     content: "";
     position: absolute;
     inset: 0;
-    background:
-        linear-gradient(90deg, rgba(var(--black-rgb), 0.42), transparent 38%, rgba(var(--black-rgb), 0.20)),
+    background: linear-gradient(90deg, rgba(var(--black-rgb), 0.42), transparent 38%, rgba(var(--black-rgb), 0.20)),
         linear-gradient(180deg, transparent 62%, rgba(var(--black-rgb), 0.42));
     pointer-events: none;
 }
@@ -691,8 +687,7 @@ img {
 
 .stats-section {
     padding: 80px 0 30px;
-    background:
-        linear-gradient(180deg, transparent, rgba(var(--gold-rgb), 0.04), transparent);
+    background: linear-gradient(180deg, transparent, rgba(var(--gold-rgb), 0.04), transparent);
 }
 
 .stats-grid {
@@ -785,8 +780,7 @@ img {
     align-items: center;
     justify-content: center;
     padding: 30px 20px;
-    background:
-        radial-gradient(circle at top, rgba(var(--gold-rgb), 0.14), transparent 35%),
+    background: transparent 35%),
         linear-gradient(180deg, var(--black), var(--black-darker));
 }
 
@@ -1087,38 +1081,32 @@ img {
 }
 
 .tamil-bg {
-    background:
-        radial-gradient(circle at top left, var(--rgba-255-183-77-0_22), transparent 35%),
+    background: transparent 35%),
         linear-gradient(135deg, var(--accent-red-deep) 0%, var(--accent-red-dark) 45%, var(--accent-red) 100%);
 }
 
 .english-bg {
-    background:
-        radial-gradient(circle at top left, rgba(var(--white-rgb), 0.18), transparent 35%),
+    background: transparent 35%),
         linear-gradient(135deg, var(--surface)827 0%, var(--color-334155) 48%, var(--color-94a3b8) 100%);
 }
 
 .maths-bg {
-    background:
-        radial-gradient(circle at top left, var(--rgba-56-189-248-0_25), transparent 35%),
+    background: transparent 35%),
         linear-gradient(135deg, var(--black-deep) 0%, var(--accent-blue-dark) 48%, var(--accent-blue) 100%);
 }
 
 .science-bg {
-    background:
-        radial-gradient(circle at top left, var(--rgba-132-204-22-0_22), transparent 35%),
+    background: transparent 35%),
         linear-gradient(135deg, var(--color-031b12) 0%, var(--accent-teal-dark) 48%, var(--accent-teal) 100%);
 }
 
 .social-bg {
-    background:
-        radial-gradient(circle at top left, var(--rgba-251-191-36-0_24), transparent 35%),
+    background: transparent 35%),
         linear-gradient(135deg, var(--color-1c0f05) 0%, var(--color-7c2d12) 48%, var(--color-b45309) 100%);
 }
 
 .general-knowledge-bg {
-    background:
-        radial-gradient(circle at top left, var(--rgba-250-204-21-0_22), transparent 35%),
+    background: transparent 35%),
         linear-gradient(135deg, var(--color-0f1028) 0%, var(--accent-indigo) 48%, var(--color-7c3aed) 100%);
 }
 
@@ -1289,8 +1277,7 @@ img {
     position: fixed;
     inset: 0;
     z-index: 999999;
-    background:
-        radial-gradient(circle at center, rgba(var(--gold-rgb), 0.12), transparent 36%),
+    background: transparent 36%),
         rgba(var(--black-rgb), 0.84);
     backdrop-filter: blur(14px);
     display: grid;
@@ -1301,8 +1288,7 @@ img {
 .mcq-modal {
     width: min(500px, 94%);
     max-width: 500px;
-    background:
-        radial-gradient(circle at top, rgba(var(--gold-rgb), 0.18), transparent 42%),
+    background: transparent 42%),
         linear-gradient(180deg, var(--surface-darker), var(--black-very-dark));
     border: 1px solid rgba(var(--gold-rgb), 0.48);
     border-radius: 30px;
@@ -1373,8 +1359,7 @@ img {
     color: var(--white);
     font-size: 2.35rem;
     font-weight: 900;
-    background:
-        radial-gradient(circle, rgba(var(--gold-rgb), 0.24), rgba(var(--gold-rgb), 0.08) 46%, var(--surface-deep) 72%);
+    background: rgba(var(--gold-rgb), 0.08) 46%, var(--surface-deep) 72%);
     border: 2px solid var(--gold);
     box-shadow:
         0 0 0 8px rgba(var(--gold-rgb), 0.035),
@@ -1398,8 +1383,7 @@ img {
 }
 
 .mcq-stat-box {
-    background:
-        linear-gradient(180deg, rgba(var(--white-rgb), 0.055), rgba(var(--white-rgb), 0.018)),
+    background: linear-gradient(180deg, rgba(var(--white-rgb), 0.055), rgba(var(--white-rgb), 0.018)),
         var(--surface)111;
     border: 1px solid rgba(var(--gold-rgb), 0.24);
     border-radius: 18px;
@@ -1697,8 +1681,7 @@ img {
     grid-template-columns: 1.1fr 0.9fr;
     gap: 32px;
     align-items: center;
-    background:
-        linear-gradient(135deg, rgba(var(--gold-rgb), 0.08), transparent 35%),
+    background: linear-gradient(135deg, rgba(var(--gold-rgb), 0.08), transparent 35%),
         linear-gradient(180deg, var(--surface-alt-3), var(--black-dark));
     border: 1px solid rgba(var(--gold-rgb), 0.35);
     border-radius: 26px;
@@ -1764,8 +1747,7 @@ img {
     width: 100%;
     margin: 0;
     padding-bottom: 90px;
-    background:
-        radial-gradient(circle at top left, rgba(var(--gold-rgb), 0.10), transparent 32%),
+    background: transparent 32%),
         linear-gradient(180deg, var(--black-dark), var(--black-darker));
 }
 
@@ -1773,8 +1755,7 @@ img {
     width: 100%;
     padding: 90px 8% 70px;
     border-bottom: 1px solid rgba(var(--gold-rgb), 0.25);
-    background:
-        linear-gradient(90deg, rgba(var(--gold-rgb), 0.10), transparent 45%),
+    background: linear-gradient(90deg, rgba(var(--gold-rgb), 0.10), transparent 45%),
         linear-gradient(180deg, var(--surface-alt-3), var(--black-dark));
 }
 
@@ -1868,8 +1849,7 @@ img {
     padding: 26px 28px;
     border-left: 4px solid var(--gold);
     border-radius: 18px;
-    background:
-        linear-gradient(90deg, rgba(var(--gold-rgb), 0.13), rgba(var(--gold-rgb), 0.03));
+    background: linear-gradient(90deg, rgba(var(--gold-rgb), 0.13), rgba(var(--gold-rgb), 0.03));
     box-shadow: inset 0 0 35px rgba(var(--gold-rgb), 0.025);
 }
 
@@ -1907,15 +1887,13 @@ img {
     min-height: 150px;
     border-radius: 20px;
     border: 1px solid rgba(var(--gold-rgb), 0.25);
-    background:
-        linear-gradient(180deg, var(--surface-alt-2), var(--black-dark));
+    background: linear-gradient(180deg, var(--surface-alt-2), var(--black-dark));
     box-shadow: 0 18px 45px rgba(var(--black-rgb), 0.42);
 }
 
 .related-card:hover {
     border-color: var(--gold);
-    background:
-        linear-gradient(180deg, var(--surface-alt-4), var(--black-dark));
+    background: linear-gradient(180deg, var(--surface-alt-4), var(--black-dark));
     box-shadow:
         0 0 0 1px rgba(var(--gold-rgb), 0.25),
         0 0 30px rgba(var(--gold-rgb), 0.16),
@@ -2445,9 +2423,8 @@ img {
     display: grid !important;
     place-items: center !important;
     padding: 16px !important;
-    background:
-        radial-gradient(circle at top, rgba(var(--gold-rgb), 0.16), transparent 36%),
-        radial-gradient(circle at bottom, var(--rgba-80-200-255-0_08), transparent 38%),
+    background: transparent 36%),
+         transparent 38%),
         rgba(var(--black-rgb), 0.88) !important;
     backdrop-filter: blur(14px) brightness(0.8) !important;
 }
@@ -2462,10 +2439,9 @@ img {
     text-align: center !important;
     position: relative !important;
 
-    background:
-        linear-gradient(180deg, rgba(var(--white-rgb), 0.055), rgba(var(--white-rgb), 0.012)),
-        radial-gradient(circle at top left, rgba(var(--gold-rgb), 0.20), transparent 34%),
-        radial-gradient(circle at bottom right, var(--rgba-74-222-128-0_08), transparent 34%),
+    background: linear-gradient(180deg, rgba(var(--white-rgb), 0.055), rgba(var(--white-rgb), 0.012)),
+         transparent 34%),
+         transparent 34%),
         var(--surface-panel) !important;
 
     border: 1px solid rgba(var(--gold-rgb), 0.52) !important;
@@ -2557,8 +2533,7 @@ img {
     font-size: 2rem !important;
     font-weight: 950 !important;
 
-    background:
-        radial-gradient(circle, rgba(var(--gold-rgb), 0.32), rgba(var(--gold-rgb), 0.08) 48%, var(--surface-panel-darker) 72%) !important;
+    background: rgba(var(--gold-rgb), 0.08) 48%, var(--surface-panel-darker) 72%) !important;
     border: 2px solid var(--rgba-242-207-91-0_9) !important;
     box-shadow:
         0 0 0 8px rgba(var(--gold-rgb), 0.035),
@@ -2586,8 +2561,7 @@ img {
 .mcq-stat-box {
     padding: 14px 10px !important;
     border-radius: 17px !important;
-    background:
-        linear-gradient(180deg, rgba(var(--white-rgb), 0.06), rgba(var(--white-rgb), 0.018)),
+    background: linear-gradient(180deg, rgba(var(--white-rgb), 0.06), rgba(var(--white-rgb), 0.018)),
         var(--surface)111 !important;
     border: 1px solid rgba(var(--gold-rgb), 0.22) !important;
     box-shadow:
@@ -2616,8 +2590,7 @@ img {
 .mcq-ranking-text,
 #mcqBenchmark {
     color: var(--color-dfffe8) !important;
-    background:
-        linear-gradient(90deg, var(--rgba-74-222-128-0_12), rgba(var(--gold-rgb), 0.07)) !important;
+    background: linear-gradient(90deg, var(--rgba-74-222-128-0_12), rgba(var(--gold-rgb), 0.07)) !important;
     border: 1px solid var(--rgba-74-222-128-0_22) !important;
     border-radius: 16px !important;
     padding: 12px 14px !important;
@@ -2662,8 +2635,7 @@ img {
 
 .mcq-modal-actions .btn-gold,
 .mcq-modal-actions button {
-    background:
-        linear-gradient(135deg, var(--gold-light), var(--gold), var(--dark-gold)) !important;
+    background: linear-gradient(135deg, var(--gold-light), var(--gold), var(--dark-gold)) !important;
     color: var(--surface-panel) !important;
     border: 1px solid var(--rgba-242-207-91-0_8) !important;
     box-shadow: 0 0 22px rgba(var(--gold-rgb), 0.16) !important;
@@ -2781,9 +2753,8 @@ img {
     display: grid !important;
     place-items: center !important;
     padding: 18px !important;
-    background:
-        radial-gradient(circle at top, rgba(var(--gold-rgb), 0.14), transparent 34%),
-        radial-gradient(circle at bottom right, rgba(var(--gold-rgb), 0.07), transparent 36%),
+    background: transparent 34%),
+         transparent 36%),
         rgba(var(--black-rgb), 0.86) !important;
     backdrop-filter: blur(13px) !important;
 }
@@ -2797,8 +2768,7 @@ img {
     padding: 30px 26px 24px !important;
     border-radius: 28px !important;
 
-    background:
-        radial-gradient(circle at top, rgba(var(--gold-rgb), 0.16), transparent 40%),
+    background: transparent 40%),
         linear-gradient(180deg, var(--surface-alt-3), var(--black-very-dark)) !important;
 
     border: 1px solid rgba(var(--gold-rgb), 0.46) !important;
@@ -2885,8 +2855,7 @@ img {
     font-size: 2rem !important;
     font-weight: 900 !important;
 
-    background:
-        radial-gradient(circle, rgba(var(--gold-rgb), 0.22), rgba(var(--gold-rgb), 0.07) 48%, var(--surface-deep) 74%) !important;
+    background: rgba(var(--gold-rgb), 0.07) 48%, var(--surface-deep) 74%) !important;
 
     border: 2px solid rgba(var(--gold-rgb), 0.92) !important;
     box-shadow:
@@ -2915,8 +2884,7 @@ img {
 .mcq-stat-box {
     padding: 14px 10px !important;
     border-radius: 16px !important;
-    background:
-        linear-gradient(180deg, rgba(var(--white-rgb), 0.05), rgba(var(--white-rgb), 0.015)),
+    background: linear-gradient(180deg, rgba(var(--white-rgb), 0.05), rgba(var(--white-rgb), 0.015)),
         var(--surface)111 !important;
     border: 1px solid rgba(var(--gold-rgb), 0.22) !important;
     box-shadow:
@@ -3452,9 +3420,8 @@ section,
     content: "";
     position: absolute;
     inset: 0;
-    background:
-        linear-gradient(180deg, rgba(var(--black-rgb), 0.04), rgba(var(--black-rgb), 0.22)),
-        radial-gradient(circle at top, rgba(var(--white-rgb), 0.10), transparent 52%);
+    background: linear-gradient(180deg, rgba(var(--black-rgb), 0.04), rgba(var(--black-rgb), 0.22)),
+         transparent 52%);
     pointer-events: none;
 }
 
@@ -3579,166 +3546,139 @@ section,
 
 .tamil-bg,
 .tamil-card-bg {
-    background:
-        radial-gradient(circle at top left, var(--rgba-255-205-150-0_24), transparent 38%),
+    background: transparent 38%),
         linear-gradient(135deg, var(--color-5a1717) 0%, var(--color-b4533b) 52%, var(--color-7c2d12) 100%);
 }
 
 .english-bg,
 .english-card-bg {
-    background:
-        radial-gradient(circle at top left, rgba(var(--white-rgb), 0.22), transparent 38%),
+    background: transparent 38%),
         linear-gradient(135deg, var(--color-1e293b) 0%, var(--color-64748b) 52%, var(--color-334155) 100%);
 }
 
 .maths-bg,
 .mathematics-card-bg {
-    background:
-        radial-gradient(circle at top left, var(--rgba-191-219-254-0_28), transparent 38%),
+    background: transparent 38%),
         linear-gradient(135deg, var(--color-1e3a8a) 0%, var(--color-3b82f6) 52%, var(--color-1d4ed8) 100%);
 }
 
 .science-bg {
-    background:
-        radial-gradient(circle at top left, var(--rgba-187-247-208-0_25), transparent 38%),
+    background: transparent 38%),
         linear-gradient(135deg, var(--color-166534) 0%, var(--success) 52%, var(--color-15803d) 100%);
 }
 
 .social-bg {
-    background:
-        radial-gradient(circle at top left, var(--rgba-254-215-170-0_26), transparent 38%),
+    background: transparent 38%),
         linear-gradient(135deg, var(--color-7c2d12) 0%, var(--color-d97706) 52%, var(--color-92400e) 100%);
 }
 
 .general-knowledge-bg {
-    background:
-        radial-gradient(circle at top left, var(--rgba-221-214-254-0_26), transparent 38%),
+    background: transparent 38%),
         linear-gradient(135deg, var(--accent-indigo) 0%, var(--color-7c3aed) 52%, var(--accent-violet) 100%);
 }
 
 .physics-card-bg {
-    background:
-        radial-gradient(circle at top left, var(--rgba-186-230-253-0_28), transparent 38%),
+    background: transparent 38%),
         linear-gradient(135deg, var(--color-075985) 0%, var(--info) 52%, var(--color-0c4a6e) 100%);
 }
 
 .chemistry-card-bg {
-    background:
-        radial-gradient(circle at top left, var(--rgba-221-214-254-0_28), transparent 38%),
+    background: transparent 38%),
         linear-gradient(135deg, var(--accent-violet) 0%, var(--accent-purple) 52%, var(--color-581c87) 100%);
 }
 
 .biology-card-bg {
-    background:
-        radial-gradient(circle at top left, var(--rgba-187-247-208-0_27), transparent 38%),
+    background: transparent 38%),
         linear-gradient(135deg, var(--color-14532d) 0%, var(--success) 52%, var(--color-166534) 100%);
 }
 
 .computer-science-card-bg {
-    background:
-        radial-gradient(circle at top left, var(--rgba-153-246-228-0_28), transparent 38%),
+    background: transparent 38%),
         linear-gradient(135deg, var(--color-115e59) 0%, var(--color-14b8a6) 52%, var(--color-134e4a) 100%);
 }
 
 .commerce-card-bg {
-    background:
-        radial-gradient(circle at top left, var(--rgba-254-240-138-0_28), transparent 38%),
+    background: transparent 38%),
         linear-gradient(135deg, var(--color-854d0e) 0%, var(--color-eab308) 52%, var(--color-713f12) 100%);
 }
 
 .accountancy-card-bg {
-    background:
-        radial-gradient(circle at top left, var(--rgba-186-230-253-0_28), transparent 38%),
+    background: transparent 38%),
         linear-gradient(135deg, var(--color-0c4a6e) 0%, var(--color-0ea5e9) 52%, var(--color-075985) 100%);
 }
 
 .economics-card-bg {
-    background:
-        radial-gradient(circle at top left, var(--rgba-254-215-170-0_28), transparent 38%),
+    background: transparent 38%),
         linear-gradient(135deg, var(--color-9a3412) 0%, var(--color-fb923c) 52%, var(--color-7c2d12) 100%);
 }
 
 .business-maths-card-bg {
-    background:
-        radial-gradient(circle at top left, var(--rgba-253-224-71-0_26), transparent 38%),
+    background: transparent 38%),
         linear-gradient(135deg, var(--color-92400e) 0%, var(--gold-muted) 52%, var(--color-78350f) 100%);
 }
 
 .paper-tamil-bg {
-    background:
-        radial-gradient(circle at top left, var(--rgba-235-180-170-0_22), transparent 38%),
+    background: transparent 38%),
         linear-gradient(135deg, var(--color-4a1f24) 0%, var(--color-9b4d57) 52%, var(--color-6a3038) 100%);
 }
 
 .paper-english-bg {
-    background:
-        radial-gradient(circle at top left, var(--rgba-210-220-225-0_22), transparent 38%),
+    background: transparent 38%),
         linear-gradient(135deg, var(--color-2a3138) 0%, var(--color-6f7f8d) 52%, var(--color-43505c) 100%);
 }
 
 .paper-maths-bg {
-    background:
-        radial-gradient(circle at top left, var(--rgba-196-214-230-0_24), transparent 38%),
+    background: transparent 38%),
         linear-gradient(135deg, var(--color-2c3446) 0%, var(--color-5f7ca0) 52%, var(--color-3c4f70) 100%);
 }
 
 .paper-science-bg {
-    background:
-        radial-gradient(circle at top left, var(--rgba-205-225-205-0_22), transparent 38%),
+    background: transparent 38%),
         linear-gradient(135deg, var(--color-2f3d33) 0%, var(--color-6f9276) 52%, var(--color-465c4a) 100%);
 }
 
 .paper-social-bg {
-    background:
-        radial-gradient(circle at top left, var(--rgba-230-210-185-0_24), transparent 38%),
+    background: transparent 38%),
         linear-gradient(135deg, var(--color-4b3422) 0%, var(--color-9c7553) 52%, var(--color-6d4f36) 100%);
 }
 
 .paper-physics-bg {
-    background:
-        radial-gradient(circle at top left, var(--rgba-185-225-235-0_24), transparent 38%),
+    background: transparent 38%),
         linear-gradient(135deg, var(--color-1f3b46) 0%, var(--color-4f95a7) 52%, var(--color-2d5d69) 100%);
 }
 
 .paper-chemistry-bg {
-    background:
-        radial-gradient(circle at top left, var(--rgba-220-200-235-0_24), transparent 38%),
+    background: transparent 38%),
         linear-gradient(135deg, var(--color-3b2948) 0%, var(--color-7f5ca0) 52%, var(--color-533a69) 100%);
 }
 
 .paper-biology-bg {
-    background:
-        radial-gradient(circle at top left, var(--rgba-205-230-185-0_24), transparent 38%),
+    background: transparent 38%),
         linear-gradient(135deg, var(--color-31452c) 0%, var(--color-6d9d5c) 52%, var(--color-4b693f) 100%);
 }
 
 .paper-cs-bg {
-    background:
-        radial-gradient(circle at top left, var(--rgba-185-228-222-0_24), transparent 38%),
+    background: transparent 38%),
         linear-gradient(135deg, var(--color-21403d) 0%, var(--color-4aa29a) 52%, var(--color-2e6862) 100%);
 }
 
 .paper-commerce-bg {
-    background:
-        radial-gradient(circle at top left, var(--rgba-235-225-175-0_24), transparent 38%),
+    background: transparent 38%),
         linear-gradient(135deg, var(--color-4b4320) 0%, var(--color-9a914f) 52%, var(--color-6d6732) 100%);
 }
 
 .paper-accountancy-bg {
-    background:
-        radial-gradient(circle at top left, var(--rgba-190-220-235-0_24), transparent 38%),
+    background: transparent 38%),
         linear-gradient(135deg, var(--color-243847) 0%, var(--color-5a89a7) 52%, var(--color-35566c) 100%);
 }
 
 .paper-economics-bg {
-    background:
-        radial-gradient(circle at top left, var(--rgba-235-205-180-0_24), transparent 38%),
+    background: transparent 38%),
         linear-gradient(135deg, var(--color-4b2d24) 0%, var(--color-a06a56) 52%, var(--color-6c4336) 100%);
 }
 
 .paper-business-maths-bg {
-    background:
-        radial-gradient(circle at top left, var(--rgba-230-215-185-0_24), transparent 38%),
+    background: transparent 38%),
         linear-gradient(135deg, var(--color-4b3826) 0%, var(--color-9d7b58) 52%, var(--color-6d563d) 100%);
 }
 
@@ -4501,8 +4441,7 @@ label {
 }
 
 body {
-    background:
-        radial-gradient(circle at top left, rgba(var(--gold-rgb), 0.34), rgba(var(--gold-rgb), 0.12) 24%, transparent 52%),
+    background: rgba(var(--gold-rgb), 0.12) 24%, transparent 52%),
         linear-gradient(135deg, rgba(var(--gold-rgb), 0.07), transparent 34%),
         linear-gradient(180deg, var(--surface-deep) 0%, var(--black-very-dark) 52%, var(--black-true) 100%);
     background-attachment: fixed;
@@ -4604,8 +4543,7 @@ main,
 ================================ */
 
 .navbar {
-    background:
-        linear-gradient(180deg,
+    background: linear-gradient(180deg,
             var(--rgba-18-16-9-0_96) 0%,
             var(--rgba-12-11-7-0_95) 55%,
             var(--rgba-8-8-6-0_96) 100%) !important;
@@ -4646,8 +4584,7 @@ html {
 }
 
 body {
-    background:
-        linear-gradient(180deg,
+    background: linear-gradient(180deg,
             rgba(var(--gold-rgb), 0.035) 0%,
             rgba(var(--gold-rgb), 0.018) 38%,
             rgba(var(--gold-rgb), 0.012) 70%,
@@ -4671,8 +4608,7 @@ body {
 .stats-section,
 .career-hero,
 .career-path-section {
-    background:
-        linear-gradient(180deg,
+    background: linear-gradient(180deg,
             var(--rgba-8-8-8-0_82),
             rgba(var(--black-rgb), 0.88)) !important;
 }
@@ -4685,8 +4621,7 @@ body {
     margin-top: 40px !important;
     padding: 42px 0 18px !important;
 
-    background:
-        linear-gradient(180deg,
+    background: linear-gradient(180deg,
             var(--rgba-10-10-10-0_96),
             var(--rgba-4-4-4-0_98)) !important;
 
@@ -4760,8 +4695,7 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    background:
-        radial-gradient(circle at top, rgba(var(--gold-rgb), 0.12), transparent 45%),
+    background: transparent 45%),
         linear-gradient(180deg, var(--black-darker), var(--black-dark)) !important;
 }
 
@@ -4769,8 +4703,7 @@ body {
     width: 100%;
     max-width: 480px !important;
     padding: 40px 30px !important;
-    background:
-        radial-gradient(circle at top, rgba(var(--gold-rgb), 0.06), transparent 45%),
+    background: transparent 45%),
         linear-gradient(145deg, var(--surface-panel), var(--color-0e0e0e)) !important;
     border: 1px solid rgba(var(--gold-rgb), 0.35) !important;
     border-radius: 24px !important;
@@ -5373,9 +5306,7 @@ main,
     left: -180px;
     width: 680px;
     height: 620px;
-    background:
-        radial-gradient(ellipse at left top,
-            rgba(212, 175, 55, 0.45) 0%,
+    background: 0%,
             rgba(212, 175, 55, 0.25) 24%,
             rgba(212, 175, 55, 0.10) 48%,
             transparent 76%);
@@ -5391,10 +5322,7 @@ main,
     bottom: -220px;
     width: 560px;
     height: 560px;
-    background:
-        radial-gradient(circle,
-            rgba(212, 175, 55, 0.10),
-            transparent 68%);
+    background: transparent 68%);
     filter: blur(12px);
     z-index: -1;
     pointer-events: none;
@@ -5425,8 +5353,7 @@ main,
 
 .karthik-badge {
     border: 1px solid rgba(212, 175, 55, 0.42);
-    background:
-        linear-gradient(135deg, rgba(212, 175, 55, 0.12), rgba(0, 0, 0, 0.45));
+    background: linear-gradient(135deg, rgba(212, 175, 55, 0.12), rgba(0, 0, 0, 0.45));
     color: #f9e8a8;
     padding: 9px 16px;
     border-radius: 999px;
@@ -5541,8 +5468,7 @@ main,
     border: 1px solid rgba(212, 175, 55, 0.24);
     border-radius: 30px;
     padding: clamp(24px, 4vw, 48px);
-    background:
-        linear-gradient(135deg, rgba(212, 175, 55, 0.11), rgba(0, 0, 0, 0.16) 38%),
+    background: linear-gradient(135deg, rgba(212, 175, 55, 0.11), rgba(0, 0, 0, 0.16) 38%),
         rgba(8, 8, 8, 0.78);
     box-shadow:
         0 26px 74px rgba(0, 0, 0, 0.58),
@@ -5586,8 +5512,7 @@ main,
 
 .identity-card {
     border: 1px solid rgba(212, 175, 55, 0.18);
-    background:
-        linear-gradient(135deg, rgba(212, 175, 55, 0.06), rgba(0, 0, 0, 0.50));
+    background: linear-gradient(135deg, rgba(212, 175, 55, 0.06), rgba(0, 0, 0, 0.50));
     border-radius: 18px;
     padding: 18px 20px;
     transition:
@@ -5619,8 +5544,7 @@ main,
 .service-card,
 .stat-box {
     border: 1px solid rgba(212, 175, 55, 0.18);
-    background:
-        linear-gradient(145deg, rgba(212, 175, 55, 0.075), rgba(0, 0, 0, 0.58));
+    background: linear-gradient(145deg, rgba(212, 175, 55, 0.075), rgba(0, 0, 0, 0.58));
     box-shadow:
         0 18px 48px rgba(0, 0, 0, 0.58),
         0 0 28px rgba(212, 175, 55, 0.09),
@@ -5662,8 +5586,7 @@ main,
     padding: 36px;
     border-radius: 26px;
     border: 1px solid rgba(212, 175, 55, 0.24);
-    background:
-        radial-gradient(circle at left, rgba(212, 175, 55, 0.15), transparent 42%),
+    background: transparent 42%),
         linear-gradient(135deg, rgba(212, 175, 55, 0.055), rgba(0, 0, 0, 0.55));
     text-align: center;
     box-shadow:
@@ -5686,8 +5609,7 @@ main,
 
 /* Footer polish */
 .footer {
-    background:
-        radial-gradient(circle at center, rgba(212, 175, 55, 0.075), transparent 60%),
+    background: transparent 60%),
         linear-gradient(180deg, rgba(6, 6, 6, 0.88), rgba(3, 3, 3, 0.98)) !important;
 }
 
@@ -5785,9 +5707,8 @@ main,
 ========================================================= */
 
 body {
-    background:
-        radial-gradient(circle at 18% 10%, rgba(212, 175, 55, 0.16), transparent 28%),
-        radial-gradient(circle at 88% 35%, rgba(212, 175, 55, 0.10), transparent 34%),
+    background: transparent 28%),
+         transparent 34%),
         linear-gradient(180deg,
             #080806 0%,
             #070706 38%,
@@ -5893,8 +5814,7 @@ main,
     padding: 9px 15px;
     border-radius: 999px;
     border: 1px solid rgba(212, 175, 55, 0.34);
-    background:
-        linear-gradient(135deg, rgba(212, 175, 55, 0.12), rgba(0, 0, 0, 0.45));
+    background: linear-gradient(135deg, rgba(212, 175, 55, 0.12), rgba(0, 0, 0, 0.45));
     color: #f5dc8a;
     font-size: 0.86rem;
     letter-spacing: 0.4px;
@@ -6019,10 +5939,7 @@ main,
 }
 
 .footer {
-    background:
-        radial-gradient(circle at center,
-            rgba(var(--gold-rgb), 0.075),
-            transparent 60%),
+    background: transparent 60%),
         linear-gradient(180deg,
             rgba(var(--black-rgb), 0.88),
             var(--rgba-3-3-3-0_98)) !important;
@@ -6114,8 +6031,7 @@ main,
     border: 1px solid rgba(212, 175, 55, 0.24);
     border-radius: 28px;
     padding: clamp(24px, 4vw, 46px);
-    background:
-        linear-gradient(135deg, rgba(212, 175, 55, 0.10), rgba(0, 0, 0, 0.12) 36%),
+    background: linear-gradient(135deg, rgba(212, 175, 55, 0.10), rgba(0, 0, 0, 0.12) 36%),
         rgba(8, 8, 8, 0.78);
     box-shadow:
         0 24px 70px rgba(0, 0, 0, 0.55),
@@ -6197,8 +6113,7 @@ main,
     padding: 34px;
     border-radius: 24px;
     border: 1px solid rgba(212, 175, 55, 0.22);
-    background:
-        radial-gradient(circle at left, rgba(212, 175, 55, 0.14), transparent 42%),
+    background: transparent 42%),
         rgba(0, 0, 0, 0.45);
     text-align: center;
 }
@@ -6378,8 +6293,7 @@ main,
 ================================ */
 
 .admin-dashboard {
-    background:
-        radial-gradient(circle at top left, rgba(212, 175, 55, 0.08), transparent 35%),
+    background: transparent 35%),
         linear-gradient(180deg, #080808, var(--admin-bg-dark));
 }
 
@@ -6430,9 +6344,8 @@ main,
 ================================ */
 
 .admin-manager {
-    background:
-        radial-gradient(circle at top left, rgba(212, 175, 55, 0.10), transparent 36%),
-        radial-gradient(circle at bottom right, rgba(212, 175, 55, 0.06), transparent 32%),
+    background: transparent 36%),
+         transparent 32%),
         linear-gradient(180deg, var(--admin-bg-soft), var(--admin-bg-main));
 }
 
@@ -6449,8 +6362,7 @@ main,
 
 .admin-form {
     border: 1px solid var(--admin-border);
-    background:
-        linear-gradient(145deg, var(--admin-panel-bg-strong), var(--admin-panel-bg)),
+    background: linear-gradient(145deg, var(--admin-panel-bg-strong), var(--admin-panel-bg)),
         rgba(5, 5, 5, 0.88);
 }
 
@@ -6513,9 +6425,8 @@ main,
 ================================ */
 
 .admin-manager {
-    background:
-        radial-gradient(circle at top left, rgba(212, 175, 55, 0.10), transparent 36%),
-        radial-gradient(circle at bottom right, rgba(212, 175, 55, 0.06), transparent 34%),
+    background: transparent 36%),
+         transparent 34%),
         linear-gradient(180deg, var(--admin-bg-soft), var(--admin-bg-main));
 }
 
@@ -6532,8 +6443,7 @@ main,
 
 .admin-panel {
     border: 1px solid var(--admin-border);
-    background:
-        linear-gradient(145deg, var(--admin-bg-card-strong), var(--admin-bg-card)),
+    background: linear-gradient(145deg, var(--admin-bg-card-strong), var(--admin-bg-card)),
         rgba(5, 5, 5, 0.9);
     box-shadow: var(--admin-shadow-soft);
 }
@@ -6698,8 +6608,7 @@ main,
     content: "";
     position: absolute;
     inset: 0;
-    background:
-        radial-gradient(circle at 24% 18%, rgba(255, 255, 255, 0.25), transparent 28%),
+    background: transparent 28%),
         linear-gradient(135deg, rgba(255, 255, 255, 0.12), transparent 48%);
     pointer-events: none;
 }
@@ -6734,9 +6643,8 @@ main,
     content: "";
     position: absolute;
     inset: 0;
-    background:
-        radial-gradient(circle at 22% 20%, rgba(255, 255, 255, 0.22), transparent 28%),
-        radial-gradient(circle at 82% 90%, rgba(212, 175, 55, 0.28), transparent 34%),
+    background: transparent 28%),
+         transparent 34%),
         linear-gradient(135deg, rgba(255, 255, 255, 0.12), transparent 48%);
     pointer-events: none;
     z-index: 1;
@@ -6805,9 +6713,8 @@ main,
     content: "";
     position: absolute;
     inset: 0;
-    background:
-        radial-gradient(circle at 22% 20%, rgba(255, 255, 255, 0.22), transparent 28%),
-        radial-gradient(circle at 82% 90%, rgba(212, 175, 55, 0.28), transparent 34%),
+    background: transparent 28%),
+         transparent 34%),
         linear-gradient(135deg, rgba(255, 255, 255, 0.12), transparent 48%);
     pointer-events: none;
     z-index: 1;
@@ -6903,9 +6810,8 @@ main,
     content: "";
     position: absolute;
     inset: 0;
-    background:
-        radial-gradient(circle at 20% 18%, rgba(255, 255, 255, 0.22), transparent 28%),
-        radial-gradient(circle at 85% 90%, rgba(212, 175, 55, 0.26), transparent 34%),
+    background: transparent 28%),
+         transparent 34%),
         linear-gradient(135deg, rgba(255, 255, 255, 0.10), transparent 48%);
     z-index: 1;
     pointer-events: none;
@@ -7028,9 +6934,8 @@ main,
     content: "";
     position: absolute;
     inset: 0;
-    background:
-        radial-gradient(circle at 20% 18%, rgba(255, 255, 255, 0.22), transparent 28%),
-        radial-gradient(circle at 82% 88%, rgba(212, 175, 55, 0.26), transparent 36%),
+    background: transparent 28%),
+         transparent 36%),
         linear-gradient(135deg, rgba(255, 255, 255, 0.10), transparent 48%);
     z-index: 1;
     pointer-events: none;
@@ -7222,39 +7127,37 @@ main,
 }
 
 /* ================================
-   GRADIENT FALLBACK CLEAN DESIGN
+   MCQ GRADIENT FALLBACK CLEAN DESIGN
 ================================ */
 
+.resource-thumbnail.mcq-gradient-thumb,
 .resource-card-grid .resource-box-card > .mcq-gradient-thumb {
-    display: flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-
+    display: grid !important;
+    place-items: center !important;
     padding: 22px !important;
     isolation: isolate !important;
-
-    border: none !important;
-    outline: none !important;
-    box-shadow: none !important;
+    position: relative !important;
+    overflow: hidden !important;
+    background: linear-gradient(145deg, #030303 0%, #090909 42%, #111111 72%, #181407 100%) !important;
+    background-blend-mode: normal !important;
 }
 
-/* Remove previous noisy MCQ watermark behavior */
+.resource-thumbnail.mcq-gradient-thumb::before,
+.resource-thumbnail.mcq-gradient-thumb::after,
+.resource-card-grid .resource-box-card > .mcq-gradient-thumb::before,
 .resource-card-grid .resource-box-card > .mcq-gradient-thumb::after {
     content: none !important;
+    display: none !important;
+    background: none !important;
 }
 
-/* Clean soft gradient shine only */
-.resource-card-grid .resource-box-card > .mcq-gradient-thumb::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    z-index: 1;
-    pointer-events: none;
-
-    background:
-        radial-gradient(circle at 18% 18%, rgba(255, 255, 255, 0.16), transparent 30%),
-        radial-gradient(circle at 88% 88%, rgba(212, 175, 55, 0.24), transparent 38%),
-        linear-gradient(135deg, rgba(255, 255, 255, 0.08), transparent 55%);
+.resource-card-grid .resource-box-card > .mcq-image-thumb img,
+.resource-card-grid .resource-box-card > .resource-thumbnail img,
+.resource-thumbnail img {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+    object-position: center center !important;
 }
 
 /* New simple gradient text container */
@@ -7426,9 +7329,8 @@ main,
     z-index: 1 !important;
     pointer-events: none !important;
 
-    background:
-        radial-gradient(circle at 18% 18%, rgba(255, 255, 255, 0.14), transparent 32%),
-        radial-gradient(circle at 88% 88%, rgba(212, 175, 55, 0.18), transparent 38%),
+    background: transparent 32%),
+         transparent 38%),
         linear-gradient(135deg, rgba(255, 255, 255, 0.06), transparent 55%) !important;
 
     border: none !important;
@@ -7740,9 +7642,8 @@ main,
     pointer-events: none !important;
     z-index: 1 !important;
 
-    background:
-        radial-gradient(circle at 18% 18%, rgba(255, 255, 255, 0.10), transparent 32%),
-        radial-gradient(circle at 88% 88%, rgba(212, 175, 55, 0.14), transparent 38%);
+    background: transparent 32%),
+         transparent 38%);
 }
 
 /* No watermark */
@@ -7920,8 +7821,7 @@ main,
     margin-bottom: 34px;
     border-radius: 26px;
     border: 1px solid rgba(var(--gold-rgb), 0.32);
-    background:
-        radial-gradient(circle at top left, rgba(var(--gold-rgb), 0.12), transparent 36%),
+    background: transparent 36%),
         linear-gradient(135deg, rgba(var(--white-rgb), 0.045), rgba(var(--white-rgb), 0.015)),
         var(--surface);
     box-shadow:
@@ -7996,8 +7896,7 @@ main,
     padding: 26px;
     border-radius: 22px;
     border: 1px solid rgba(var(--gold-rgb), 0.24);
-    background:
-        linear-gradient(145deg, rgba(var(--white-rgb), 0.045), rgba(var(--white-rgb), 0.015)),
+    background: linear-gradient(145deg, rgba(var(--white-rgb), 0.045), rgba(var(--white-rgb), 0.015)),
         var(--surface);
     box-shadow:
         0 16px 42px rgba(var(--black-rgb), 0.34),
@@ -8102,8 +8001,7 @@ main,
     border-radius: 22px;
     text-align: center;
     border: 1px solid rgba(var(--gold-rgb), 0.36);
-    background:
-        radial-gradient(circle at top, rgba(var(--gold-rgb), 0.14), transparent 42%),
+    background: transparent 42%),
         linear-gradient(145deg, rgba(var(--white-rgb), 0.045), rgba(var(--white-rgb), 0.015)),
         var(--surface);
     box-shadow: 0 18px 45px rgba(var(--black-rgb), 0.38);
@@ -8350,8 +8248,7 @@ body.mcq-result-open {
     display: grid;
     place-items: center;
     padding: 22px;
-    background:
-        radial-gradient(circle at top, rgba(var(--gold-rgb), 0.16), transparent 34%),
+    background: transparent 34%),
         rgba(var(--black-rgb), 0.86);
     backdrop-filter: blur(14px);
 }
@@ -8364,8 +8261,7 @@ body.mcq-result-open {
     padding: 34px;
     border-radius: 30px;
     border: 1px solid rgba(var(--gold-rgb), 0.46);
-    background:
-        radial-gradient(circle at top left, rgba(var(--gold-rgb), 0.16), transparent 34%),
+    background: transparent 34%),
         linear-gradient(180deg, rgba(var(--white-rgb), 0.055), rgba(var(--white-rgb), 0.018)),
         var(--surface);
     box-shadow:
@@ -8436,8 +8332,7 @@ body.mcq-result-open {
     place-items: center;
     border-radius: 50%;
     border: 2px solid var(--gold);
-    background:
-        radial-gradient(circle, rgba(var(--gold-rgb), 0.24), rgba(var(--gold-rgb), 0.08) 48%, var(--surface) 74%);
+    background: rgba(var(--gold-rgb), 0.08) 48%, var(--surface) 74%);
     box-shadow:
         0 0 0 8px rgba(var(--gold-rgb), 0.035),
         0 0 36px rgba(var(--gold-rgb), 0.22),
@@ -8469,8 +8364,7 @@ body.mcq-result-open {
     padding: 16px 12px;
     border-radius: 18px;
     border: 1px solid rgba(var(--gold-rgb), 0.22);
-    background:
-        linear-gradient(180deg, rgba(var(--white-rgb), 0.055), rgba(var(--white-rgb), 0.018)),
+    background: linear-gradient(180deg, rgba(var(--white-rgb), 0.055), rgba(var(--white-rgb), 0.018)),
         rgba(var(--black-rgb), 0.22);
     text-align: center;
 }
@@ -8592,8 +8486,7 @@ body.mcq-result-open {
     display: grid;
     place-items: center;
     padding: 24px;
-    background:
-        radial-gradient(circle at top, rgba(var(--gold-rgb), 0.12), transparent 34%),
+    background: transparent 34%),
         rgba(var(--black-rgb), 0.88);
     backdrop-filter: blur(16px) brightness(0.78);
 }
@@ -8606,8 +8499,7 @@ body.mcq-result-open {
     padding: 40px 36px 32px;
     border-radius: 34px;
     border: 1px solid rgba(var(--gold-rgb), 0.42);
-    background:
-        radial-gradient(circle at top left, rgba(var(--gold-rgb), 0.14), transparent 34%),
+    background: transparent 34%),
         linear-gradient(180deg, rgba(var(--white-rgb), 0.045), rgba(var(--white-rgb), 0.015)),
         var(--surface);
     box-shadow:
@@ -8704,8 +8596,7 @@ body.mcq-result-open {
     padding: 24px 22px;
     border-radius: 24px;
     border: 1px solid rgba(var(--gold-rgb), 0.22);
-    background:
-        radial-gradient(circle at top left, rgba(var(--gold-rgb), 0.08), transparent 34%),
+    background: transparent 34%),
         rgba(var(--black-rgb), 0.22);
 }
 
@@ -8725,8 +8616,7 @@ body.mcq-result-open {
     height: 18px;
     overflow: visible;
     border-radius: 999px;
-    background:
-        linear-gradient(90deg, rgba(34, 211, 238, 0.22), rgba(139, 92, 246, 0.22));
+    background: linear-gradient(90deg, rgba(34, 211, 238, 0.22), rgba(139, 92, 246, 0.22));
     border: 1px solid rgba(255, 255, 255, 0.16);
 }
 
@@ -8790,8 +8680,7 @@ body.mcq-result-open {
     place-items: center;
     border-radius: 50%;
     border: 2px solid var(--gold);
-    background:
-        radial-gradient(circle, rgba(var(--gold-rgb), 0.20), rgba(var(--gold-rgb), 0.05) 52%, var(--surface) 74%);
+    background: rgba(var(--gold-rgb), 0.05) 52%, var(--surface) 74%);
     box-shadow:
         0 0 0 10px rgba(var(--gold-rgb), 0.03),
         0 0 40px rgba(var(--gold-rgb), 0.18),
@@ -8830,8 +8719,7 @@ body.mcq-result-open {
     padding: 14px 12px;
     border-radius: 18px;
     border: 1px solid rgba(var(--gold-rgb), 0.18);
-    background:
-        linear-gradient(180deg, rgba(var(--white-rgb), 0.04), rgba(var(--white-rgb), 0.012)),
+    background: linear-gradient(180deg, rgba(var(--white-rgb), 0.04), rgba(var(--white-rgb), 0.012)),
         rgba(var(--black-rgb), 0.18);
     text-align: center;
     display: flex;
@@ -8990,8 +8878,7 @@ body.mcq-result-open {
     padding: 18px;
     border-radius: 16px;
     border: 1px solid rgba(var(--gold-rgb), 0.26);
-    background:
-        linear-gradient(145deg, rgba(var(--white-rgb), 0.045), rgba(var(--white-rgb), 0.015)),
+    background: linear-gradient(145deg, rgba(var(--white-rgb), 0.045), rgba(var(--white-rgb), 0.015)),
         rgba(var(--black-rgb), 0.22);
     cursor: pointer;
 }
@@ -9109,8 +8996,7 @@ body.mcq-result-open {
     padding: 20px;
     border-radius: 22px;
     border: 1px solid rgba(var(--gold-rgb), 0.2);
-    background:
-        linear-gradient(180deg, rgba(var(--white-rgb), 0.04), rgba(var(--white-rgb), 0.012)),
+    background: linear-gradient(180deg, rgba(var(--white-rgb), 0.04), rgba(var(--white-rgb), 0.012)),
         rgba(var(--black-rgb), 0.2);
 }
 
@@ -9294,8 +9180,7 @@ body.mcq-result-open {
     padding: 18px;
     border-radius: 18px;
     border: 1px solid rgba(var(--gold-rgb), 0.22);
-    background:
-        linear-gradient(145deg, rgba(var(--white-rgb), 0.045), rgba(var(--white-rgb), 0.015)),
+    background: linear-gradient(145deg, rgba(var(--white-rgb), 0.045), rgba(var(--white-rgb), 0.015)),
         rgba(var(--black-rgb), 0.22);
 }
 
@@ -9347,8 +9232,7 @@ body.mcq-result-open {
 
 .admin-student-performance-card {
     border-color: rgba(var(--gold-rgb), 0.28);
-    background:
-        linear-gradient(145deg, rgba(var(--gold-rgb), 0.045), rgba(var(--white-rgb), 0.018)),
+    background: linear-gradient(145deg, rgba(var(--gold-rgb), 0.045), rgba(var(--white-rgb), 0.018)),
         rgba(var(--black-rgb), 0.24);
 }
 
@@ -9382,8 +9266,7 @@ body.mcq-result-open {
     padding: 18px;
     border-radius: 18px;
     border: 1px solid rgba(var(--gold-rgb), 0.22);
-    background:
-        linear-gradient(145deg, rgba(var(--white-rgb), 0.045), rgba(var(--white-rgb), 0.015)),
+    background: linear-gradient(145deg, rgba(var(--white-rgb), 0.045), rgba(var(--white-rgb), 0.015)),
         rgba(var(--black-rgb), 0.22);
 }
 
@@ -9527,8 +9410,7 @@ body.mcq-result-open {
 
     padding: 28px;
 
-    background:
-        radial-gradient(circle at top, rgba(var(--gold-rgb), 0.12), transparent 36%),
+    background: transparent 36%),
         rgba(0, 0, 0, 0.78);
 
     backdrop-filter: blur(14px);
@@ -9546,8 +9428,7 @@ body.mcq-result-open {
 
     border: 1px solid rgba(var(--gold-rgb), 0.34);
 
-    background:
-        radial-gradient(circle at top left, rgba(var(--gold-rgb), 0.12), transparent 34%),
+    background: transparent 34%),
         linear-gradient(180deg, var(--surface-darker), var(--black-very-dark));
 
     box-shadow:
@@ -9703,15 +9584,13 @@ body.mcq-result-open {
 }
 
 .admin-performance-modal::-webkit-scrollbar-track {
-    background:
-        linear-gradient(180deg, rgba(var(--white-rgb), 0.035), rgba(var(--black-rgb), 0.22));
+    background: linear-gradient(180deg, rgba(var(--white-rgb), 0.035), rgba(var(--black-rgb), 0.22));
     border-radius: 999px;
 }
 
 .admin-performance-modal::-webkit-scrollbar-thumb {
     border-radius: 999px;
-    background:
-        linear-gradient(180deg, var(--gold-light), var(--gold), var(--gold-dark));
+    background: linear-gradient(180deg, var(--gold-light), var(--gold), var(--gold-dark));
     border: 2px solid rgba(var(--black-rgb), 0.85);
     box-shadow:
         0 0 10px rgba(var(--gold-rgb), 0.22),
@@ -9719,8 +9598,7 @@ body.mcq-result-open {
 }
 
 .admin-performance-modal::-webkit-scrollbar-thumb:hover {
-    background:
-        linear-gradient(180deg, var(--gold-soft), var(--gold-light), var(--gold));
+    background: linear-gradient(180deg, var(--gold-soft), var(--gold-light), var(--gold));
     box-shadow:
         0 0 16px rgba(var(--gold-rgb), 0.34),
         inset 0 0 10px rgba(var(--white-rgb), 0.22);
@@ -9786,8 +9664,7 @@ body.mcq-result-open {
     border-radius: 22px;
 
     border: 1px solid rgba(var(--gold-rgb), 0.2);
-    background:
-        linear-gradient(145deg, rgba(var(--white-rgb), 0.04), rgba(var(--white-rgb), 0.012)),
+    background: linear-gradient(145deg, rgba(var(--white-rgb), 0.04), rgba(var(--white-rgb), 0.012)),
         rgba(var(--black-rgb), 0.22);
 }
 
@@ -9874,8 +9751,7 @@ body.mcq-result-open {
 
     padding: 28px;
 
-    background:
-        radial-gradient(circle at top, rgba(var(--gold-rgb), 0.12), transparent 36%),
+    background: transparent 36%),
         rgba(0, 0, 0, 0.78);
 
     backdrop-filter: blur(14px);
@@ -9893,8 +9769,7 @@ body.mcq-result-open {
 
     border: 1px solid rgba(var(--gold-rgb), 0.34);
 
-    background:
-        radial-gradient(circle at top left, rgba(var(--gold-rgb), 0.12), transparent 34%),
+    background: transparent 34%),
         linear-gradient(180deg, var(--surface-darker), var(--black-very-dark));
 
     box-shadow:
@@ -9987,15 +9862,13 @@ body.mcq-result-open {
 }
 
 .admin-popup::-webkit-scrollbar-track {
-    background:
-        linear-gradient(180deg, rgba(var(--white-rgb), 0.035), rgba(var(--black-rgb), 0.22));
+    background: linear-gradient(180deg, rgba(var(--white-rgb), 0.035), rgba(var(--black-rgb), 0.22));
     border-radius: 999px;
 }
 
 .admin-popup::-webkit-scrollbar-thumb {
     border-radius: 999px;
-    background:
-        linear-gradient(180deg, var(--gold-light), var(--gold), var(--gold-dark));
+    background: linear-gradient(180deg, var(--gold-light), var(--gold), var(--gold-dark));
     border: 2px solid rgba(var(--black-rgb), 0.85);
     box-shadow:
         0 0 10px rgba(var(--gold-rgb), 0.22),
@@ -10003,8 +9876,7 @@ body.mcq-result-open {
 }
 
 .admin-popup::-webkit-scrollbar-thumb:hover {
-    background:
-        linear-gradient(180deg, var(--gold-soft), var(--gold-light), var(--gold));
+    background: linear-gradient(180deg, var(--gold-soft), var(--gold-light), var(--gold));
 }
 
 /* Mobile */
