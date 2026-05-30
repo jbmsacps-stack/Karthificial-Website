@@ -6469,11 +6469,11 @@ main,
 .admin-nav-link {
     border-color: rgba(212, 175, 55, 0.85);
     color: var(--gold);
-    background: rgba(212, 175, 55, 0.08);
 }
 
 .admin-nav-link:hover {
-    background: rgba(212, 175, 55, 0.16);
+    background: var(--gold);
+    color: rgba(0, 0, 0, 0);
     box-shadow: 0 0 24px rgba(212, 175, 55, 0.2);
 }
 
@@ -6492,7 +6492,8 @@ main,
 }
 
 .nav-logout-btn:hover {
-    background: rgba(212, 175, 55, 0.12);
+    background: var(--gold);
+    color:rgba(0, 0, 0, 0);
     box-shadow: 0 0 22px rgba(212, 175, 55, 0.18);
 }
 
@@ -7010,7 +7011,7 @@ main,
 }
 
 /* Keep thumbnail as one clean rectangle */
-.resource-card-grid .resource-box-card > .resource-thumbnail {
+.resource-card-grid .resource-box-card>.resource-thumbnail {
     width: 100% !important;
     height: 220px !important;
     min-height: 220px !important;
@@ -7030,8 +7031,8 @@ main,
 }
 
 /* Uploaded image thumbnail: fill the rectangle */
-.resource-card-grid .resource-box-card > .mcq-image-thumb img,
-.resource-card-grid .resource-box-card > .resource-thumbnail img {
+.resource-card-grid .resource-box-card>.mcq-image-thumb img,
+.resource-card-grid .resource-box-card>.resource-thumbnail img {
     width: 100% !important;
     height: 100% !important;
 
@@ -7047,7 +7048,7 @@ main,
 }
 
 /* Remove old span wrapper effect if any old card uses span */
-.resource-card-grid .resource-box-card > .resource-thumbnail span {
+.resource-card-grid .resource-box-card>.resource-thumbnail span {
     width: 100% !important;
     height: 100% !important;
     display: block !important;
@@ -7060,7 +7061,7 @@ main,
 ================================ */
 
 .resource-thumbnail.mcq-gradient-thumb,
-.resource-card-grid .resource-box-card > .mcq-gradient-thumb {
+.resource-card-grid .resource-box-card>.mcq-gradient-thumb {
     display: grid !important;
     place-items: center !important;
     padding: 22px !important;
@@ -7073,15 +7074,15 @@ main,
 
 .resource-thumbnail.mcq-gradient-thumb::before,
 .resource-thumbnail.mcq-gradient-thumb::after,
-.resource-card-grid .resource-box-card > .mcq-gradient-thumb::before,
-.resource-card-grid .resource-box-card > .mcq-gradient-thumb::after {
+.resource-card-grid .resource-box-card>.mcq-gradient-thumb::before,
+.resource-card-grid .resource-box-card>.mcq-gradient-thumb::after {
     content: none !important;
     display: none !important;
     background: none !important;
 }
 
-.resource-card-grid .resource-box-card > .mcq-image-thumb img,
-.resource-card-grid .resource-box-card > .resource-thumbnail img,
+.resource-card-grid .resource-box-card>.mcq-image-thumb img,
+.resource-card-grid .resource-box-card>.resource-thumbnail img,
 .resource-thumbnail img {
     width: 100% !important;
     height: 100% !important;
@@ -7155,7 +7156,7 @@ main,
 }
 
 /* Keep the old-style thumbnail rectangle */
-.resource-card-grid .resource-box-card > .resource-thumbnail {
+.resource-card-grid .resource-box-card>.resource-thumbnail {
     width: 100% !important;
     height: 190px !important;
     min-height: 190px !important;
@@ -7176,15 +7177,15 @@ main,
 }
 
 /* Remove old decorative thumbnail outline */
-.resource-card-grid .resource-box-card > .resource-thumbnail::before,
-.resource-card-grid .resource-box-card > .resource-thumbnail::after {
+.resource-card-grid .resource-box-card>.resource-thumbnail::before,
+.resource-card-grid .resource-box-card>.resource-thumbnail::after {
     border: none !important;
     outline: none !important;
     box-shadow: none !important;
 }
 
 /* Kill old span spacing if any image still uses span */
-.resource-card-grid .resource-box-card > .resource-thumbnail span {
+.resource-card-grid .resource-box-card>.resource-thumbnail span {
     width: 100% !important;
     height: 100% !important;
 
@@ -7202,8 +7203,8 @@ main,
 }
 
 /* Uploaded thumbnail image must fill the old rectangle */
-.resource-card-grid .resource-box-card > .resource-thumbnail img,
-.resource-card-grid .resource-box-card > .mcq-image-thumb img {
+.resource-card-grid .resource-box-card>.resource-thumbnail img,
+.resource-card-grid .resource-box-card>.mcq-image-thumb img {
     width: 100% !important;
     height: 100% !important;
 
@@ -7225,12 +7226,12 @@ main,
 }
 
 /* Slight crop only for uploaded thumbnails, not gradient */
-.resource-card-grid .resource-box-card > .mcq-image-thumb img {
+.resource-card-grid .resource-box-card>.mcq-image-thumb img {
     transform: scale(1.04) !important;
 }
 
 /* Gradient fallback: keep selected admin gradient */
-.resource-card-grid .resource-box-card > .mcq-gradient-thumb {
+.resource-card-grid .resource-box-card>.mcq-gradient-thumb {
     display: flex !important;
     align-items: center !important;
     justify-content: center !important;
@@ -7246,12 +7247,12 @@ main,
 }
 
 /* Remove noisy old watermark */
-.resource-card-grid .resource-box-card > .mcq-gradient-thumb::after {
+.resource-card-grid .resource-box-card>.mcq-gradient-thumb::after {
     content: none !important;
 }
 
 /* Keep only soft shine over the selected gradient */
-.resource-card-grid .resource-box-card > .mcq-gradient-thumb::before {
+.resource-card-grid .resource-box-card>.mcq-gradient-thumb::before {
     content: "" !important;
     position: absolute !important;
     inset: 0 !important;
@@ -7328,7 +7329,7 @@ main,
 }
 
 /* Keep old thumbnail-like box size */
-.resource-card-grid .resource-box-card > .resource-thumbnail {
+.resource-card-grid .resource-box-card>.resource-thumbnail {
     width: 100% !important;
     height: 185px !important;
     min-height: 185px !important;
@@ -7349,11 +7350,12 @@ main,
 }
 
 /* Remove old decorative pseudo effects */
-.resource-card-grid .resource-box-card > .resource-thumbnail::after {
+.resource-card-grid .resource-box-card>.resource-thumbnail::after {
     content: none !important;
 }
+
 /* Remove weird old span spacing if present */
-.resource-card-grid .resource-box-card > .resource-thumbnail span {
+.resource-card-grid .resource-box-card>.resource-thumbnail span {
     width: 100% !important;
     height: 100% !important;
     margin: 0 !important;
@@ -7367,8 +7369,8 @@ main,
 }
 
 /* Uploaded image thumbnail should fully fit */
-.resource-card-grid .resource-box-card > .resource-thumbnail img,
-.resource-card-grid .resource-box-card > .mcq-image-thumb img {
+.resource-card-grid .resource-box-card>.resource-thumbnail img,
+.resource-card-grid .resource-box-card>.mcq-image-thumb img {
     width: 100% !important;
     height: 100% !important;
 
@@ -7389,12 +7391,12 @@ main,
 }
 
 /* Slight crop so weird uploaded images fit better */
-.resource-card-grid .resource-box-card > .mcq-image-thumb img {
+.resource-card-grid .resource-box-card>.mcq-image-thumb img {
     transform: scale(1.03) !important;
 }
 
 /* Gradient fallback thumbnail */
-.resource-card-grid .resource-box-card > .mcq-gradient-thumb {
+.resource-card-grid .resource-box-card>.mcq-gradient-thumb {
     display: flex !important;
     align-items: center !important;
     justify-content: center !important;
@@ -7484,7 +7486,7 @@ main,
 }
 
 /* Shared thumbnail box */
-.resource-card-grid .resource-box-card > .resource-thumbnail {
+.resource-card-grid .resource-box-card>.resource-thumbnail {
     width: 100% !important;
     height: 185px !important;
     min-height: 185px !important;
@@ -7505,13 +7507,13 @@ main,
 }
 
 /* IMPORTANT: no overlay on normal image thumbnails */
-.resource-card-grid .resource-box-card > .resource-thumbnail::before,
-.resource-card-grid .resource-box-card > .resource-thumbnail::after {
+.resource-card-grid .resource-box-card>.resource-thumbnail::before,
+.resource-card-grid .resource-box-card>.resource-thumbnail::after {
     content: none !important;
 }
 
 /* Remove old span spacing */
-.resource-card-grid .resource-box-card > .resource-thumbnail span {
+.resource-card-grid .resource-box-card>.resource-thumbnail span {
     width: 100% !important;
     height: 100% !important;
     display: block !important;
@@ -7522,8 +7524,8 @@ main,
 }
 
 /* Uploaded image must fill the thumbnail cleanly */
-.resource-card-grid .resource-box-card > .mcq-image-thumb img,
-.resource-card-grid .resource-box-card > .resource-thumbnail img {
+.resource-card-grid .resource-box-card>.mcq-image-thumb img,
+.resource-card-grid .resource-box-card>.resource-thumbnail img {
     width: 100% !important;
     height: 100% !important;
 
@@ -7544,12 +7546,12 @@ main,
 }
 
 /* Slight crop only for uploaded images */
-.resource-card-grid .resource-box-card > .mcq-image-thumb img {
+.resource-card-grid .resource-box-card>.mcq-image-thumb img {
     transform: scale(1.03) !important;
 }
 
 /* Gradient fallback only */
-.resource-card-grid .resource-box-card > .mcq-gradient-thumb {
+.resource-card-grid .resource-box-card>.mcq-gradient-thumb {
     display: flex !important;
     align-items: center !important;
     justify-content: center !important;
@@ -7562,7 +7564,7 @@ main,
 }
 
 /* Overlay ONLY for gradient fallback */
-.resource-card-grid .resource-box-card > .mcq-gradient-thumb::before {
+.resource-card-grid .resource-box-card>.mcq-gradient-thumb::before {
     content: "" !important;
     position: absolute !important;
     inset: 0 !important;
@@ -7573,7 +7575,7 @@ main,
 }
 
 /* No watermark */
-.resource-card-grid .resource-box-card > .mcq-gradient-thumb::after {
+.resource-card-grid .resource-box-card>.mcq-gradient-thumb::after {
     content: none !important;
 }
 
@@ -7637,7 +7639,7 @@ main,
     overflow: hidden;
 }
 
-#dynamicMcqSets.resource-card-grid .resource-box-card > .resource-thumbnail {
+#dynamicMcqSets.resource-card-grid .resource-box-card>.resource-thumbnail {
     width: 100%;
     height: 145px;
     min-height: 145px;
@@ -7650,13 +7652,13 @@ main,
 }
 
 /* Remove overlays only from uploaded MCQ image thumbnails */
-#dynamicMcqSets.resource-card-grid .resource-box-card > .mcq-image-thumb::before,
-#dynamicMcqSets.resource-card-grid .resource-box-card > .mcq-image-thumb::after {
+#dynamicMcqSets.resource-card-grid .resource-box-card>.mcq-image-thumb::before,
+#dynamicMcqSets.resource-card-grid .resource-box-card>.mcq-image-thumb::after {
     content: none;
 }
 
 /* Uploaded MCQ image thumbnails should fill their box */
-#dynamicMcqSets.resource-card-grid .resource-box-card > .mcq-image-thumb img {
+#dynamicMcqSets.resource-card-grid .resource-box-card>.mcq-image-thumb img {
     width: 100%;
     height: 100%;
     display: block;
@@ -7665,7 +7667,7 @@ main,
 }
 
 /* Gradient fallback only for MCQ cards without image URL */
-#dynamicMcqSets.resource-card-grid .resource-box-card > .mcq-gradient-thumb {
+#dynamicMcqSets.resource-card-grid .resource-box-card>.mcq-gradient-thumb {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -7675,8 +7677,8 @@ main,
 }
 
 /* No extra overlay/watermark on MCQ gradient fallback */
-#dynamicMcqSets.resource-card-grid .resource-box-card > .mcq-gradient-thumb::before,
-#dynamicMcqSets.resource-card-grid .resource-box-card > .mcq-gradient-thumb::after {
+#dynamicMcqSets.resource-card-grid .resource-box-card>.mcq-gradient-thumb::before,
+#dynamicMcqSets.resource-card-grid .resource-box-card>.mcq-gradient-thumb::after {
     content: none;
 }
 
@@ -7719,7 +7721,7 @@ main,
 }
 
 @media (max-width: 480px) {
-    #dynamicMcqSets.resource-card-grid .resource-box-card > .resource-thumbnail {
+    #dynamicMcqSets.resource-card-grid .resource-box-card>.resource-thumbnail {
         height: 120px;
         min-height: 120px;
         max-height: 120px;
@@ -9169,7 +9171,7 @@ body.mcq-result-open {
 }
 
 /* Better spacing for student detail page */
-.admin-section-title + .admin-performance-summary {
+.admin-section-title+.admin-performance-summary {
     margin-top: 20px;
 }
 
@@ -9486,6 +9488,7 @@ body.mcq-result-open {
         font-size: 1.35rem;
     }
 }
+
 /* ================================
    ADMIN PERFORMANCE MODAL SCROLLBAR
 ================================ */
@@ -9852,8 +9855,4 @@ select option {
 select option:checked {
     background: #d4af37;
     color: #050505;
-}
-
-.admin-card {
-    margin:40px;
 }
