@@ -6,21 +6,18 @@
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description"
-        content="Karthificial provides Tamil Nadu State Board notes, question papers, MCQs, and career guidance for 10th and 12th students.">
+        content="Practice Karthificial MCQ questions from selected subject-wise MCQ sets.">
 
-    <title>Karthificial | MCQ</title>
+    <title>Karthificial | MCQ Set</title>
 
     <link rel="stylesheet" href="variables.css">
     <link rel="stylesheet" href="structure.css">
     <link rel="stylesheet" href="style.css">
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Science+Gothic:wdth,wght,CTRS@66.9,100..900,32&display=swap"
         rel="stylesheet">
-    <link rel="stylesheet"
-        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&icon_names=chess" />
+
     <link rel="icon" type="image/svg+xml" href="assets/images/favi.svg?v=3">
     <script type="module" src="speed-insights.js"></script>
 </head>
@@ -31,8 +28,11 @@
         <div class="navbar-inner">
 
             <a href="index.html" class="logo">
-                <div class="logo-mark"><span class="material-symbols-outlined"><img src="assets/images/Favicon.png"
-                            alt="Favicon" loading="eager" fetchpriority="high" d></span></div>
+                <div class="logo-mark">
+                    <span class="material-symbols-outlined">
+                        <img src="assets/images/Favicon.png" alt="Favicon" loading="eager" fetchpriority="high">
+                    </span>
+                </div>
                 <div class="logo-text">Karthi<span>ficial</span></div>
             </a>
 
@@ -45,9 +45,7 @@
             </label>
 
             <ul class="nav-menu">
-                <li>
-                    <a href="index.html" class="nav-link">Home</a>
-                </li>
+                <li><a href="index.html" class="nav-link">Home</a></li>
 
                 <li class="dropdown">
                     <a href="#" class="nav-link">Notes</a>
@@ -67,17 +65,9 @@
                     </ul>
                 </li>
 
-                <li>
-                    <a href="career-guidance.html" class="nav-link">Career Guidance</a>
-                </li>
-
-                <li>
-                    <a href="mcq.html" class="nav-link">MCQ</a>
-                </li>
-
-                <li>
-                    <a href="contact.html" class="nav-link">Contact</a>
-                </li>
+                <li><a href="career-guidance.html" class="nav-link">Career Guidance</a></li>
+                <li><a href="mcq.html" class="nav-link">MCQ</a></li>
+                <li><a href="contact.html" class="nav-link">Contact</a></li>
 
                 <li class="mobile-actions auth-nav-slot"></li>
             </ul>
@@ -90,20 +80,32 @@
         </div>
     </nav>
 
-    <main>
-        <div class="mcq-container">
+    <main class="mcq-set-main">
 
-            <h1 class="mcq-title">MCQ Section</h1>
+        <section class="mcq-set-hero">
+            <a href="mcq.html" class="mcq-back-link">← Back to MCQ Sets</a>
 
-            <div id="mcqQuestions"></div>
+            <span class="resource-badge">MCQ Practice</span>
 
-            <button class="submit-btn" onclick="submitMCQ()">
-                Submit Test
-            </button>
+            <h1 id="mcqSetTitle">Loading MCQ Set...</h1>
 
-            <div id="result"></div>
+            <p id="mcqSetDescription">
+                Please wait while the questions are loaded.
+            </p>
 
-        </div>
+            <div class="mcq-set-meta">
+                <span id="mcqSetClass">Class</span>
+                <span id="mcqSetSubject">Subject</span>
+                <span id="mcqSetCount">0 Questions</span>
+            </div>
+        </section>
+
+        <section id="mcqQuestionContainer" class="mcq-question-container">
+            <article class="mcq-question-card">
+                <h2>Loading questions...</h2>
+                <p>Please wait.</p>
+            </article>
+        </section>
 
     </main>
 
@@ -144,16 +146,17 @@
         </div>
 
         <div class="container footer-bottom">
-            <p>
-                © 2026 Karthificial. All rights reserved.
-            </p>
+            <p>© 2026 Karthificial. All rights reserved.</p>
         </div>
     </footer>
 
     <script src="script.js" defer></script>
-    <script src="config.js" defer></script>
-    <script src="clerk-auth.js" defer></script>
-    <script src="mcq-ta10.js" defer></script>
+    <script src="config.js"></script>
+    <script src="clerk-auth.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="supabase-config.js"></script>
+    <script src="mcq-set.js"></script>
 
 </body>
 

@@ -1,237 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="Karthificial admin dashboard for managing MCQs, notes, question papers, and career guidance content.">
     <title>Karthificial | Admin Dashboard</title>
 
-    <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="variables.css">
     <link rel="stylesheet" href="structure.css">
+    <link rel="stylesheet" href="style.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Science+Gothic:wdth,wght,CTRS@66.9,100..900,32&display=swap"
+        rel="stylesheet">
+
     <link rel="icon" type="image/svg+xml" href="assets/images/favi.svg?v=3">
-
-    <style>
-        body.admin-checking main {
-            display: none;
-        }
-
-        .admin-dashboard {
-            min-height: 80vh;
-            padding: 90px 8%;
-            background:
-                radial-gradient(circle at top left, rgba(212, 175, 55, 0.08), transparent 35%),
-                linear-gradient(180deg, #080808, #050505);
-        }
-
-        .admin-header {
-            max-width: 900px;
-            margin: 0 auto 40px;
-            text-align: center;
-        }
-
-        .admin-header h1 {
-            color: var(--gold);
-            font-size: clamp(2rem, 4vw, 3.2rem);
-            margin-bottom: 12px;
-        }
-
-        .admin-header p {
-            color: var(--light-gray);
-        }
-
-        .admin-grid {
-            max-width: 1100px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-            gap: 22px;
-        }
-
-        .admin-card {
-            padding: 26px;
-            border: 1px solid rgba(212, 175, 55, 0.25);
-            border-radius: 18px;
-            background: rgba(255, 255, 255, 0.035);
-            box-shadow: 0 0 28px rgba(212, 175, 55, 0.08);
-        }
-
-        .admin-card h2 {
-            color: var(--gold);
-            margin-bottom: 10px;
-            font-size: 1.25rem;
-        }
-
-        .admin-card p {
-            color: var(--light-gray);
-            margin-bottom: 18px;
-            line-height: 1.6;
-        }
-
-        .admin-card button {
-            cursor: pointer;
-        }
-
-        .admin-denied {
-            min-height: 70vh;
-            display: grid;
-            place-items: center;
-            text-align: center;
-            padding: 40px;
-        }
-
-        .admin-denied h1 {
-            color: var(--gold);
-            margin-bottom: 12px;
-        }
-
-        .admin-denied p {
-            color: var(--light-gray);
-        }
-        .manager-panel {
-    margin-top: 40px;
-    padding: 28px;
-    border-radius: 20px;
-
-    border: 1px solid rgba(212,175,55,0.2);
-
-    background: rgba(255,255,255,0.03);
-}
-
-.hidden {
-    display: none;
-}
-
-.manager-header {
-    display: flex;
-
-    justify-content: space-between;
-
-    align-items: center;
-
-    margin-bottom: 25px;
-}
-
-.manager-header h2 {
-    color: var(--gold);
-}
-
-.manager-form {
-    display: grid;
-
-    gap: 14px;
-
-    margin-bottom: 30px;
-}
-
-.manager-form input,
-.manager-form textarea {
-
-    width: 100%;
-
-    padding: 14px;
-
-    border-radius: 12px;
-
-    border: 1px solid rgba(212,175,55,0.25);
-
-    background: rgba(255,255,255,0.04);
-
-    color: white;
-
-    outline: none;
-}
-
-.manager-form textarea {
-    min-height: 120px;
-
-    resize: vertical;
-}
-
-.records-grid {
-    display: grid;
-
-    gap: 18px;
-}
-
-.record-card {
-
-    padding: 20px;
-
-    border-radius: 16px;
-
-    border: 1px solid rgba(212,175,55,0.2);
-
-    background: rgba(255,255,255,0.03);
-}
-
-.record-card h3 {
-
-    color: var(--gold);
-
-    margin-bottom: 10px;
-}
-
-.record-card p {
-
-    color: var(--light-gray);
-
-    margin-bottom: 8px;
-}
-
-.record-actions {
-
-    display: flex;
-
-    gap: 10px;
-
-    margin-top: 15px;
-}
-
-.loading-text {
-
-    text-align: center;
-
-    color: var(--light-gray);
-
-    padding: 30px;
-}
-
-#toast-container {
-
-    position: fixed;
-
-    top: 20px;
-
-    right: 20px;
-
-    display: flex;
-
-    flex-direction: column;
-
-    gap: 12px;
-
-    z-index: 9999;
-}
-
-.toast {
-
-    padding: 14px 18px;
-
-    border-radius: 12px;
-
-    color: white;
-
-    font-weight: 600;
-}
-
-.toast.success {
-    background: rgba(34,197,94,0.95);
-}
-
-.toast.error {
-    background: rgba(239,68,68,0.95);
-}
-    </style>
+    <script type="module" src="speed-insights.js"></script>
 </head>
 
 <body class="admin-checking">
@@ -257,10 +43,18 @@
             </label>
 
             <ul class="nav-menu">
-                <li><a href="index.html" class="nav-link">Home</a></li>
-                <li><a href="career-guidance.html" class="nav-link">Career Guidance</a></li>
-                <li><a href="mcq.html" class="nav-link">MCQ</a></li>
-                <li><a href="contact.html" class="nav-link">Contact</a></li>
+                <li>
+                    <a href="admin.html" class="nav-link">Dashboard</a>
+                </li>
+
+                <li>
+                    <a href="mcq.html" class="nav-link">MCQ Page</a>
+                </li>
+
+                <li>
+                    <a href="index.html" class="nav-link">Home</a>
+                </li>
+
                 <li class="mobile-actions auth-nav-slot"></li>
             </ul>
 
@@ -273,63 +67,90 @@
     </nav>
 
     <main class="admin-dashboard">
+
         <section class="admin-header">
+            <p class="admin-eyebrow">Admin Control Panel</p>
             <h1>Admin Dashboard</h1>
-            <p>Manage Karthificial website content from one place.</p>
+            <p>
+                Manage Karthificial website content from one place. Choose a section below to create,
+                update, or organize platform content.
+            </p>
         </section>
 
         <section class="admin-grid">
+
             <article class="admin-card">
+                <div class="admin-card-top">
+                    <span class="admin-card-badge">01</span>
+                    <span class="admin-card-label">MCQ</span>
+                </div>
+
                 <h2>Manage MCQs</h2>
-                <p>Add, edit, and remove MCQ questions.</p>
-                <button
-    class="btn-gold"
-    type="button"
-    onclick="openMCQManager()"
->
-    Open MCQ Manager
-</button>
+                <p>
+                    Create MCQ sets, add multiple questions inside each set, and delete unwanted questions.
+                </p>
+
+                <button class="btn-gold" type="button" onclick="window.location.href='admin-mcq.html'">
+                    Open MCQ Manager
+                </button>
             </article>
 
             <article class="admin-card">
+                <div class="admin-card-top">
+                    <span class="admin-card-badge">02</span>
+                    <span class="admin-card-label">Career</span>
+                </div>
+
                 <h2>Career Guidance</h2>
-                <p>Update career guidance content and resources.</p>
-                <button class="btn-gold" type="button">Open Career Manager</button>
+                <p>
+                    Add and update career guidance cards, articles, student resources, and page links.
+                </p>
+
+                <button class="btn-gold" type="button" onclick="window.location.href='admin-career.html'">
+                    Open Career Manager
+                </button>
             </article>
 
             <article class="admin-card">
+                <div class="admin-card-top">
+                    <span class="admin-card-badge">03</span>
+                    <span class="admin-card-label">Papers</span>
+                </div>
+
                 <h2>Question Papers</h2>
-                <p>Manage uploaded question paper links and files.</p>
-                <button class="btn-gold" type="button">Open Paper Manager</button>
+                <p>
+                    Manage 10th and 12th standard question paper links, PDFs, subjects, and years.
+                </p>
+
+                <button class="btn-gold" type="button" onclick="window.location.href='admin-papers.html'">
+                    Open Paper Manager
+                </button>
             </article>
 
             <article class="admin-card">
-                <h2>Notes</h2>
-                <p>Manage notes section content and links.</p>
-                <button class="btn-gold" type="button">Open Notes Manager</button>
-            </article>
-        </section>
-        <section
-    id="manager-panel"
-    class="manager-panel hidden"></section>
+                <div class="admin-card-top">
+                    <span class="admin-card-badge">04</span>
+                    <span class="admin-card-label">Notes</span>
+                </div>
 
-<div id="toast-container"></div>
+                <h2>Notes</h2>
+                <p>
+                    Add, edit, organize, and remove study notes for 10th and 12th standard students.
+                </p>
+
+                <button class="btn-gold" type="button" onclick="window.location.href='admin-notes.html'">
+                    Open Notes Manager
+                </button>
+            </article>
+
+        </section>
 
     </main>
 
-   <script src="script.js" defer></script>
-
-<script src="config.js"></script>
-
-<script src="clerk-auth.js"></script>
-
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-
-<script src="supabase-config.js"></script>
-
-<script src="mcq-manager.js"></script>
-
-<script src="admin.js"></script>
+    <script src="script.js" defer></script>
+    <script src="config.js"></script>
+    <script src="clerk-auth.js"></script>
+    <script src="admin.js"></script>
 
 </body>
 

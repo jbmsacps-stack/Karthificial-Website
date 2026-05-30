@@ -98,148 +98,26 @@
             <h1>MCQ Section</h1>
 
             <p>
-                Choose an MCQ set and start practicing with subject-wise questions.
+                Choose an MCQ set created by the admin and start practicing with subject-wise questions.
             </p>
         </section>
 
         <section class="resource-toolbar">
-            <h2>Available MCQ Sets</h2>
+            <div>
+                <h2>Available MCQ Sets</h2>
+                <p class="mcq-toolbar-subtitle">
+                    These MCQ sets are loaded from the Karthificial admin dashboard.
+                </p>
+            </div>
         </section>
 
-        <section class="resource-card-grid">
-
-            <article class="resource-box-card">
-                <div class="resource-thumbnail tamil-bg">
-                    <span><img src="assets/thumbnail/tamil_thumb.png" alt="Tamil 10th Standard MCQ" class="src"
-                            loading="lazy" fetchpriority="low"></span>
-                </div>
-
+        <section id="dynamicMcqSets" class="resource-card-grid">
+            <article class="resource-box-card mcq-loading-card">
                 <div class="resource-card-body">
-                    <h3>Tamil 10th Standard MCQ</h3>
-
-                    <p>
-                        Practice important objective questions for Tamil 10th standard subjects.
-                    </p>
-
-                    <div class="resource-card-info">
-                        <span>10 Questions</span>
-                        <span>Practice</span>
-                    </div>
-
-                    <a href="mcq-ta10.html" class="resource-card-btn">Open</a>
+                    <h3>Loading MCQ Sets...</h3>
+                    <p>Please wait while the latest MCQ sets are loaded.</p>
                 </div>
             </article>
-
-            <article class="resource-box-card">
-                <div class="resource-thumbnail english-bg">
-                    <span><img src="assets/thumbnail/english_thumb.png" alt="English 10th Standard MCQ" class="src"
-                            loading="lazy" fetchpriority="low"></span>
-                </div>
-
-                <div class="resource-card-body">
-                    <h3>English 10th Standard MCQ</h3>
-
-                    <p>
-                        Practice important objective questions for English 10th standard subjects.
-                    </p>
-
-                    <div class="resource-card-info">
-                        <span>10 Questions</span>
-                        <span>Practice</span>
-                    </div>
-
-                    <a href="mcq-eng10.html" class="resource-card-btn">Open</a>
-                </div>
-            </article>
-
-            <article class="resource-box-card">
-                <div class="resource-thumbnail maths-bg">
-                    <span><img src="assets/thumbnail/maths_thumb.png" alt="Mathematics 10th Standard MCQ" class="src"
-                            loading="lazy" fetchpriority="low"></span>
-                </div>
-
-                <div class="resource-card-body">
-                    <h3>Mathematics 10th Standard MCQ</h3>
-
-                    <p>
-                        Practice important objective questions for Mathematics 10th standard subjects.
-                    </p>
-
-                    <div class="resource-card-info">
-                        <span>10 Questions</span>
-                        <span>Practice</span>
-                    </div>
-
-                    <a href="mcq-m10.html" class="resource-card-btn">Open</a>
-                </div>
-            </article>
-
-            <article class="resource-box-card">
-                <div class="resource-thumbnail science-bg">
-                    <span><img src="assets/thumbnail/sci_thumb.png" alt="Science 10th Standard MCQ" class="src"
-                            loading="lazy" fetchpriority="low"></span>
-                </div>
-
-                <div class="resource-card-body">
-                    <h3>Science 10th Standard MCQ</h3>
-
-                    <p>
-                        Practice important objective questions for Science 10th standard subjects.
-                    </p>
-
-                    <div class="resource-card-info">
-                        <span>10 Questions</span>
-                        <span>Practice</span>
-                    </div>
-
-                    <a href="mcq-sci10.html" class="resource-card-btn">Open</a>
-                </div>
-            </article>
-
-            <article class="resource-box-card">
-                <div class="resource-thumbnail social-bg">
-                    <span><img src="assets/thumbnail/sst_thumb.png" alt="Social Science 10th Standard MCQ" class="src"
-                            loading="lazy" fetchpriority="low"></span>
-                </div>
-
-                <div class="resource-card-body">
-                    <h3>Social Science 10th Standard MCQ</h3>
-
-                    <p>
-                        Practice important objective questions for social science 10th standard subjects.
-                    </p>
-
-                    <div class="resource-card-info">
-                        <span>10 Questions</span>
-                        <span>Practice</span>
-                    </div>
-
-                    <a href="mcq-ss10.html" class="resource-card-btn">Open</a>
-                </div>
-            </article>
-
-            <article class="resource-box-card">
-                <div class="resource-thumbnail maths-bg">
-                    <span><img src="assets/thumbnail/maths_thumb.png" alt="Mathematics 12th Standard MCQ" class="src"
-                            loading="lazy" fetchpriority="low"></span>
-                </div>
-
-                <div class="resource-card-body">
-                    <h3>Mathematics 12th Standard MCQ</h3>
-
-                    <p>
-                        Practice important objective questions for Mathematics 12th standard subjects.
-                    </p>
-
-                    <div class="resource-card-info">
-                        <span>10 Questions</span>
-                        <span>Practice</span>
-                    </div>
-
-                    <a href="mcq-m12.html" class="resource-card-btn">Open</a>
-                </div>
-            </article>
-
         </section>
 
     </main>
@@ -290,8 +168,12 @@
     </footer>
 
     <script src="script.js" defer></script>
-    <script src="config.js" defer></script>
-    <script src="clerk-auth.js" defer></script>
+    <script src="config.js"></script>
+    <script src="clerk-auth.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="supabase-config.js"></script>
+    <script src="mcq-public.js"></script>
 
 </body>
 

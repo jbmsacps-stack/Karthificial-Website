@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="Karthificial MCQ manager for creating MCQ sets and adding multiple questions under each set.">
+    <title>Karthificial | MCQ Manager</title>
+
+    <link rel="stylesheet" href="variables.css">
+    <link rel="stylesheet" href="structure.css">
+    <link rel="stylesheet" href="style.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Science+Gothic:wdth,wght,CTRS@66.9,100..900,32&display=swap"
+        rel="stylesheet">
+
+    <link rel="icon" type="image/svg+xml" href="assets/images/favi.svg?v=3">
+    <script type="module" src="speed-insights.js"></script>
+</head>
+
+<body class="admin-checking">
+
+    <nav class="navbar">
+        <div class="navbar-inner">
+
+            <a href="index.html" class="logo">
+                <div class="logo-mark">
+                    <span class="material-symbols-outlined">
+                        <img src="assets/images/Favicon.png" alt="Favicon" loading="eager" fetchpriority="high">
+                    </span>
+                </div>
+                <div class="logo-text">Karthi<span>ficial</span></div>
+            </a>
+
+            <input type="checkbox" id="menu-toggle" class="menu-toggle">
+
+            <label for="menu-toggle" class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </label>
+
+            <ul class="nav-menu">
+                <li>
+                    <a href="admin.html" class="nav-link">Dashboard</a>
+                </li>
+
+                <li>
+                    <a href="mcq.html" class="nav-link">MCQ Page</a>
+                </li>
+
+                <li>
+                    <a href="index.html" class="nav-link">Home</a>
+                </li>
+
+                <li class="mobile-actions auth-nav-slot"></li>
+            </ul>
+
+            <div class="nav-actions">
+                <a href="login.html" class="btn-outline">Login</a>
+                <a href="signup.html" class="btn-gold">Signup</a>
+            </div>
+
+        </div>
+    </nav>
+
+    <main class="admin-manager">
+
+        <section class="admin-manager-header">
+            <p class="admin-eyebrow">MCQ Control Panel</p>
+            <h1>MCQ Manager</h1>
+            <p>
+                Create MCQ sets, add multiple questions inside each set, view questions,
+                and delete unwanted content from one place.
+            </p>
+        </section>
+
+        <!-- CREATE MCQ SET -->
+        <section class="admin-panel">
+            <div class="admin-panel-header">
+                <h2>Create MCQ Set</h2>
+                <p>
+                    This creates one MCQ card/page, like Tamil 10th Standard MCQ,
+                    Maths 10th Standard MCQ, or Science 12th Standard MCQ.
+                </p>
+            </div>
+
+            <form class="admin-form" id="mcqSetForm">
+
+                <div class="form-row">
+                    <div>
+                        <label for="setTitle">Set Title</label>
+                        <input type="text" id="setTitle" placeholder="Example: Mathematics 10th Standard MCQ" required>
+                    </div>
+
+                    <div>
+                        <label for="setSubject">Subject</label>
+                        <input type="text" id="setSubject" placeholder="Example: Mathematics" required>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div>
+                        <label for="setClassLevel">Class Level</label>
+                        <select id="setClassLevel" required>
+                            <option value="">Select class</option>
+                            <option value="10">10th Standard</option>
+                            <option value="12">12th Standard</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label for="setGradientTheme">Gradient Theme</label>
+                        <select id="setGradientTheme">
+                            <option value="dark-gold">Dark Gold</option>
+                            <option value="royal-gold">Royal Blue Gold</option>
+                            <option value="crimson-gold">Crimson Gold</option>
+                            <option value="emerald-gold">Emerald Gold</option>
+                            <option value="violet-gold">Violet Gold</option>
+                            <option value="cyan-gold">Cyan Gold</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="admin-toggle-grid">
+                    <label class="admin-toggle-card" for="setShuffleQuestions">
+                        <div>
+                            <strong>Shuffle Questions</strong>
+                            <span>Randomize question order for students.</span>
+                        </div>
+
+                        <input type="checkbox" id="setShuffleQuestions" checked>
+                    </label>
+
+                    <label class="admin-toggle-card" for="setShuffleOptions">
+                        <div>
+                            <strong>Shuffle Answer Options</strong>
+                            <span>Randomize A/B/C/D option order safely.</span>
+                        </div>
+
+                        <input type="checkbox" id="setShuffleOptions" checked>
+                    </label>
+                </div>
+
+                <div>
+                    <label for="setThumbnailUrl">Thumbnail URL <span class="admin-optional-text">Optional</span></label>
+                    <input type="url" id="setThumbnailUrl" placeholder="Paste image URL or leave empty to use gradient">
+                </div>
+
+                <div>
+                    <label for="setDescription">Description</label>
+                    <textarea id="setDescription"
+                        placeholder="Example: Practice important objective questions for Mathematics 10th standard."></textarea>
+                </div>
+
+                <div class="admin-actions">
+                    <button class="btn-gold" type="submit">Create MCQ Set</button>
+                    <button class="btn-outline" type="reset">Clear</button>
+                </div>
+
+            </form>
+        </section>
+
+        <!-- ADD QUESTION TO SET -->
+        <section class="admin-panel">
+            <div class="admin-panel-header">
+                <h2>Add Question to MCQ Set</h2>
+                <p>
+                    Select an MCQ set first. Then add questions inside that set.
+                    One set can contain many questions.
+                </p>
+            </div>
+
+            <form class="admin-form" id="mcqQuestionForm">
+
+                <div class="form-row">
+                    <div>
+                        <label for="questionSet">Select MCQ Set</label>
+                        <select id="questionSet" required>
+                            <option value="">Select MCQ set</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label for="difficulty">Difficulty</label>
+                        <select id="difficulty" required>
+                            <option value="easy">Easy</option>
+                            <option value="medium">Medium</option>
+                            <option value="hard">Hard</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div>
+                    <label for="questionText">Question</label>
+                    <textarea id="questionText" placeholder="Enter the MCQ question" required></textarea>
+                </div>
+
+                <div class="form-row">
+                    <div>
+                        <label for="optionA">Option A</label>
+                        <input type="text" id="optionA" required>
+                    </div>
+
+                    <div>
+                        <label for="optionB">Option B</label>
+                        <input type="text" id="optionB" required>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div>
+                        <label for="optionC">Option C</label>
+                        <input type="text" id="optionC" required>
+                    </div>
+
+                    <div>
+                        <label for="optionD">Option D</label>
+                        <input type="text" id="optionD" required>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div>
+                        <label for="correctAnswer">Correct Answer</label>
+                        <select id="correctAnswer" required>
+                            <option value="">Select correct answer</option>
+                            <option value="A">Option A</option>
+                            <option value="B">Option B</option>
+                            <option value="C">Option C</option>
+                            <option value="D">Option D</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label for="questionStatus">Question Status</label>
+                        <select id="questionStatus">
+                            <option value="true">Active</option>
+                            <option value="false">Hidden</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="admin-actions">
+                    <button class="btn-gold" type="submit">Add Question</button>
+                    <button class="btn-outline" type="reset">Clear</button>
+                </div>
+
+            </form>
+        </section>
+
+        <!-- EXISTING MCQ SETS -->
+        <section class="admin-panel">
+            <div class="admin-panel-header">
+                <h2>Existing MCQ Sets</h2>
+                <p>
+                    View created MCQ sets, open their questions, or delete the full set.
+                </p>
+            </div>
+
+            <div id="mcqSetsList" class="admin-list">
+                <p class="admin-empty-text">No MCQ sets loaded yet.</p>
+            </div>
+        </section>
+
+        <!-- QUESTIONS INSIDE SELECTED SET -->
+        <section class="admin-panel">
+            <div class="admin-panel-header">
+                <h2>Questions in Selected Set</h2>
+                <p>
+                    Select or view an MCQ set to see all questions inside it.
+                    Admin can delete individual questions here.
+                </p>
+            </div>
+
+            <div id="mcqQuestionsList" class="admin-list">
+                <p class="admin-empty-text">Select an MCQ set to view questions.</p>
+            </div>
+        </section>
+
+    </main>
+
+    <script src="script.js" defer></script>
+    <script src="config.js"></script>
+    <script src="clerk-auth.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="supabase-config.js"></script>
+
+    <script src="admin.js"></script>
+    <script src="admin-mcq-manager.js"></script>
+
+</body>
+
+</html>
