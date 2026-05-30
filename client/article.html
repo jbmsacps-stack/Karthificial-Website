@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Karthificial | Career Article</title>
+
+    <link rel="stylesheet" href="variables.css">
+    <link rel="stylesheet" href="structure.css">
+    <link rel="stylesheet" href="style.css">
+
+    <link rel="icon" type="image/svg+xml" href="assets/images/favi.svg?v=3">
+
+    <style>
+        body {
+            background:
+                linear-gradient(180deg, var(--black-darker) 0%, var(--black-dark) 48%, var(--black-true) 100%) !important;
+            background-attachment: fixed;
+        }
+
+        .article-page {
+            width: min(980px, 92%);
+            margin: 0 auto;
+            padding: 90px 0 80px;
+        }
+
+        .article-back-link {
+            display: inline-flex;
+            margin-bottom: 28px;
+
+            color: var(--gold);
+            font-weight: 900;
+            text-decoration: none;
+
+            transition: color 0.25s ease, text-shadow 0.25s ease;
+        }
+
+        .article-back-link:hover {
+            color: var(--gold-light);
+            text-shadow: 0 0 14px rgba(var(--gold-rgb), 0.4);
+        }
+
+        .article-view {
+            overflow: hidden;
+
+            background:
+                radial-gradient(circle at top right, rgba(var(--gold-rgb), 0.08), transparent 35%),
+                linear-gradient(180deg, var(--surface-alt-2), var(--black-dark));
+
+            border: 1px solid rgba(var(--gold-rgb), 0.24);
+            border-radius: 28px;
+
+            box-shadow:
+                0 28px 80px rgba(var(--black-rgb), 0.68),
+                inset 0 0 42px rgba(var(--gold-rgb), 0.025);
+        }
+
+        .article-hero-image {
+            width: 100%;
+            min-height: 260px;
+            background: var(--black-true);
+            border-bottom: 1px solid rgba(var(--gold-rgb), 0.16);
+        }
+
+        .article-hero-image img {
+            width: 100%;
+            height: 430px;
+            display: block;
+
+            object-fit: contain;
+            object-position: center;
+
+            background: var(--black-true);
+            padding: 24px 0;
+        }
+
+        .article-main-content {
+            padding: 38px;
+        }
+
+        .article-category {
+            display: inline-flex;
+            margin-bottom: 16px;
+            padding: 7px 12px;
+
+            border: 1px solid rgba(var(--gold-rgb), 0.35);
+            border-radius: 999px;
+
+            background: rgba(var(--gold-rgb), 0.08);
+            color: var(--gold);
+
+            font-size: 0.76rem;
+            font-weight: 900;
+            letter-spacing: 0.7px;
+            text-transform: uppercase;
+        }
+
+        .article-title {
+            margin-bottom: 12px;
+
+            color: var(--gold);
+            font-size: clamp(2rem, 5vw, 3.6rem);
+            line-height: 1.12;
+            font-weight: 900;
+        }
+
+        .article-date {
+            margin-bottom: 30px;
+            color: var(--text-muted-3);
+            font-size: 0.95rem;
+            font-weight: 700;
+        }
+
+        .article-video {
+            overflow: hidden;
+            margin: 32px 0;
+
+            border: 1px solid rgba(var(--gold-rgb), 0.22);
+            border-radius: 22px;
+
+            background: var(--black-true);
+            box-shadow: 0 18px 45px rgba(var(--black-rgb), 0.45);
+        }
+
+        .article-video iframe {
+            width: 100%;
+            aspect-ratio: 16 / 9;
+            display: block;
+            border: none;
+        }
+
+        .article-body {
+            color: var(--text-light);
+            font-size: 1.04rem;
+            line-height: 1.9;
+        }
+
+        .article-body h2,
+        .article-body h3 {
+            color: var(--gold);
+            margin: 32px 0 14px;
+            line-height: 1.25;
+        }
+
+        .article-body h2 {
+            font-size: 1.75rem;
+        }
+
+        .article-body h3 {
+            font-size: 1.35rem;
+        }
+
+        .article-body p {
+            margin-bottom: 18px;
+            color: var(--text-muted-2);
+        }
+
+        .article-body ul,
+        .article-body ol {
+            margin: 18px 0 22px 22px;
+            color: var(--text-muted-2);
+        }
+
+        .article-body li {
+            margin-bottom: 10px;
+        }
+
+        .article-body strong {
+            color: var(--white);
+        }
+
+        .article-body a {
+            color: var(--gold);
+            font-weight: 800;
+        }
+
+        .related-articles {
+            margin-top: 54px;
+        }
+
+        .related-articles h2 {
+            margin-bottom: 22px;
+            color: var(--gold);
+            font-size: clamp(1.5rem, 4vw, 2.2rem);
+            font-weight: 900;
+        }
+
+        .related-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 20px;
+        }
+
+        .related-card {
+            overflow: hidden;
+
+            background:
+                linear-gradient(180deg, var(--surface-alt-2), var(--surface-panel));
+
+            border: 1px solid rgba(var(--gold-rgb), 0.2);
+            border-radius: 20px;
+
+            text-decoration: none;
+            color: inherit;
+
+            transition:
+                border-color 0.25s ease,
+                box-shadow 0.25s ease,
+                filter 0.25s ease;
+        }
+
+        .related-card:hover {
+            border-color: var(--gold);
+            box-shadow:
+                0 0 24px rgba(var(--gold-rgb), 0.12),
+                0 18px 45px rgba(var(--black-rgb), 0.5);
+            filter: brightness(1.04);
+        }
+
+        .related-card img {
+            width: 100%;
+            height: 145px;
+            display: block;
+
+            object-fit: contain;
+            object-position: center;
+
+            background: var(--black-true);
+            padding: 12px 0;
+        }
+
+        .related-card-content {
+            padding: 16px;
+        }
+
+        .related-card span {
+            display: inline-flex;
+            margin-bottom: 9px;
+
+            color: var(--gold);
+            font-size: 0.7rem;
+            font-weight: 900;
+            letter-spacing: 0.7px;
+            text-transform: uppercase;
+        }
+
+        .related-card h3 {
+            color: var(--white);
+            font-size: 0.98rem;
+            line-height: 1.4;
+        }
+
+        .article-loading,
+        .article-error {
+            padding: 36px;
+
+            border: 1px dashed rgba(var(--gold-rgb), 0.28);
+            border-radius: 24px;
+
+            color: var(--text-muted-2);
+            text-align: center;
+            line-height: 1.7;
+
+            background: rgba(var(--black-rgb), 0.32);
+        }
+
+        @media (max-width: 800px) {
+            .article-page {
+                padding-top: 70px;
+            }
+
+            .article-main-content {
+                padding: 28px 22px;
+            }
+
+            .article-hero-image img {
+                height: 300px;
+                padding: 18px 0;
+            }
+
+            .related-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .related-card img {
+                height: 190px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .article-view {
+                border-radius: 22px;
+            }
+
+            .article-hero-image img {
+                height: 230px;
+                padding: 14px 0;
+            }
+
+            .article-body {
+                font-size: 0.98rem;
+                line-height: 1.8;
+            }
+        }
+    </style>
+
+    <script type="module" src="speed-insights.js"></script>
+</head>
+
+<body>
+
+    <nav class="navbar">
+        <div class="navbar-inner">
+
+            <a href="index.html" class="logo">
+                <div class="logo-mark">
+                    <span class="material-symbols-outlined">
+                        <img src="assets/images/Favicon.png" alt="Favicon" loading="eager" fetchpriority="high">
+                    </span>
+                </div>
+                <div class="logo-text">Karthi<span>ficial</span></div>
+            </a>
+
+            <input type="checkbox" id="menu-toggle" class="menu-toggle">
+
+            <label for="menu-toggle" class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </label>
+
+            <ul class="nav-menu">
+                <li><a href="index.html" class="nav-link">Home</a></li>
+                <li><a href="career-guidance.html" class="nav-link">Career Guidance</a></li>
+                <li><a href="mcq.html" class="nav-link">MCQ</a></li>
+                <li><a href="contact.html" class="nav-link">Contact</a></li>
+                <li class="mobile-actions auth-nav-slot"></li>
+            </ul>
+
+            <div class="nav-actions">
+                <a href="login.html" class="btn-outline">Login</a>
+                <a href="signup.html" class="btn-gold">Signup</a>
+            </div>
+
+        </div>
+    </nav>
+
+    <main class="article-page">
+
+        <a href="career-guidance.html" class="article-back-link">
+            ← Back to Career Guidance
+        </a>
+
+        <div id="articleContainer">
+            <div class="article-loading">
+                Loading article...
+            </div>
+        </div>
+
+    </main>
+
+    <footer class="footer">
+        <div class="container footer-grid">
+
+            <div class="footer-brand">
+                <h2>Karthificial</h2>
+                <p>
+                    Excellence in Tamil Nadu State Board Education.
+                    Premium notes, question papers, and career guidance for
+                    10th and 12th standard students.
+                </p>
+            </div>
+
+            <div class="footer-column">
+                <h3>Quick Links</h3>
+
+                <ul class="footer-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="notes-10th.html">10th Notes</a></li>
+                    <li><a href="notes-12th.html">12th Notes</a></li>
+                    <li><a href="career-guidance.html">Career Guidance</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-column footer-contact">
+                <h3>Contact Info</h3>
+
+                <p>Email: support@karthificial.com</p>
+                <p>Location: Tamil Nadu, India</p>
+                <p>For: 10th & 12th State Board Students</p>
+            </div>
+
+        </div>
+
+        <div class="container footer-bottom">
+            <p>© 2026 Karthificial. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="script.js" defer></script>
+    <script src="config.js" defer></script>
+    <script src="clerk-auth.js" defer></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="supabase-config.js"></script>
+    <script src="article.js"></script>
+
+</body>
+
+</html>

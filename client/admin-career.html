@@ -89,18 +89,27 @@
 
                     <div class="career-admin-field">
                         <label for="careerTitle">Title</label>
-                        <input type="text" id="careerTitle" placeholder="Example: What Should I Choose After 10th?" required>
+                        <input type="text" id="careerTitle" placeholder="Example: What Should I Choose After 10th?"
+                            required>
                     </div>
 
                     <div class="career-admin-field">
-                        <label for="careerCategory">Category</label>
-                        <select id="careerCategory" required>
-                            <option value="After 10th">After 10th</option>
-                            <option value="After 12th">After 12th</option>
-                            <option value="Group Selection">Group Selection</option>
-                            <option value="Mindset">Mindset</option>
-                            <option value="Mistakes to Avoid">Mistakes to Avoid</option>
-                        </select>
+                        <label for="careerCategory">Category / Tag</label>
+
+                        <input type="text" id="careerCategory" list="careerCategoryOptions"
+                            placeholder="Example: After 10th, Science, Commerce, Mindset" required>
+
+                        <datalist id="careerCategoryOptions">
+                            <option value="After 10th">
+                            <option value="After 12th">
+                            <option value="Group Selection">
+                            <option value="Mindset">
+                            <option value="Mistakes to Avoid">
+                            <option value="Science">
+                            <option value="Commerce">
+                            <option value="Arts">
+                            <option value="Career Planning">
+                        </datalist>
                     </div>
 
                     <div class="career-admin-field">
@@ -110,12 +119,15 @@
 
                     <div class="career-admin-field">
                         <label for="careerExcerpt">Short Excerpt</label>
-                        <textarea id="careerExcerpt" placeholder="Short summary shown on the article card..." required></textarea>
+                        <textarea id="careerExcerpt" placeholder="Short summary shown on the article card..."
+                            required></textarea>
                     </div>
 
                     <div class="career-admin-field">
                         <label for="careerBody">Article Content</label>
-                        <textarea class="article-body-input" id="careerBody" placeholder="Write the full article content here. You can use simple HTML like <h2>, <p>, <ul>, <li>." required></textarea>
+                        <textarea class="article-body-input" id="careerBody"
+                            placeholder="Write the full article content here. You can use simple HTML like <h2>, <p>, <ul>, <li>."
+                            required></textarea>
                     </div>
 
                     <div class="career-admin-field">
@@ -125,7 +137,12 @@
 
                     <div class="career-admin-field">
                         <label for="careerPublishedDate">Published Date</label>
+
                         <input type="date" id="careerPublishedDate" required>
+
+                        <small>
+                            Automatically set to today. You can edit it manually when needed.
+                        </small>
                     </div>
 
                     <div class="career-admin-actions">
