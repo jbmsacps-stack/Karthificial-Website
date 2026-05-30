@@ -14,6 +14,12 @@ function escapeCareerHTML(value = "") {
         .replaceAll("'", "&#039;");
 }
 
+function stripHTML(value = "") {
+    const temp = document.createElement("div");
+    temp.innerHTML = value;
+    return temp.textContent || temp.innerText || "";
+}
+
 function checkCareerArticleSupabase() {
     if (!window.supabaseClient) {
         console.error("Supabase client missing. Check supabase-config.js");
@@ -38,21 +44,19 @@ function getFilteredCareerArticles() {
         : "";
 
     return careerArticles.filter((article) => {
-        const title = (article.title || "").toLowerCase();
-        const category = (article.category || "").toLowerCase();
-        const excerpt = (article.excerpt || "").toLowerCase();
-        const body = (article.body_content || "").toLowerCase();
+        const title = String(article.title || "").toLowerCase();
+        const category = String(article.category || "").toLowerCase();
+        const excerpt = String(article.excerpt || "").toLowerCase();
+        const body = stripHTML(article.body_content || "").toLowerCase();
+
+        const searchableText = `${title} ${category} ${excerpt} ${body}`;
 
         const matchesSearch =
-            !searchValue ||
-            title.includes(searchValue) ||
-            category.includes(searchValue) ||
-            excerpt.includes(searchValue) ||
-            body.includes(searchValue);
+            searchValue === "" || searchableText.includes(searchValue);
 
         const matchesCategory =
             activeCareerCategory === "All" ||
-            article.category === activeCareerCategory;
+            String(article.category || "").trim().toLowerCase() === activeCareerCategory.toLowerCase();
 
         return matchesSearch && matchesCategory;
     });
@@ -135,25 +139,30 @@ async function loadCareerArticleCards() {
     renderCareerArticleCards();
 }
 
-if (careerArticleSearch) {
-    careerArticleSearch.addEventListener("input", renderCareerArticleCards);
-}
-
-if (careerCategoryFilters) {
-    careerCategoryFilters.addEventListener("click", (event) => {
-        const button = event.target.closest(".career-filter-btn");
-        if (!button) return;
-
-        activeCareerCategory = button.dataset.category || "All";
-
-        document.querySelectorAll(".career-filter-btn").forEach((btn) => {
-            btn.classList.remove("active");
+document.addEventListener("DOMContentLoaded", () => {
+    if (careerArticleSearch) {
+        careerArticleSearch.addEventListener("input", () => {
+            renderCareerArticleCards();
         });
+    }
 
-        button.classList.add("active");
+    if (careerCategoryFilters) {
+        careerCategoryFilters.addEventListener("click", (event) => {
+            const button = event.target.closest(".career-filter-btn");
 
-        renderCareerArticleCards();
-    });
-}
+            if (!button) return;
 
-document.addEventListener("DOMContentLoaded", loadCareerArticleCards);
+            activeCareerCategory = button.dataset.category || "All";
+
+            document.querySelectorAll(".career-filter-btn").forEach((btn) => {
+                btn.classList.remove("active");
+            });
+
+            button.classList.add("active");
+
+            renderCareerArticleCards();
+        });
+    }
+
+    loadCareerArticleCards();
+});

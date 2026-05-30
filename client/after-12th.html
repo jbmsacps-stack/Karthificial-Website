@@ -1,0 +1,941 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="Karthificial provides Tamil Nadu State Board notes, question papers, MCQs, and career guidance for 10th and 12th students.">
+
+    <title>Karthificial | After 12th</title>
+
+    <link rel="stylesheet" href="variables.css">
+    <link rel="stylesheet" href="structure.css">
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Science+Gothic:wdth,wght,CTRS@66.9,100..900,32&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&icon_names=chess" />
+    <link rel="icon" type="image/svg+xml" href="assets/images/favi.svg?v=3">
+    <script type="module" src="speed-insights.js"></script>
+
+    <style>
+        /* =====================================================
+   STATIC ARTICLE PAGE FIX
+   Make after-12th.html match dynamic article.html
+===================================================== */
+
+        /* Stop old static article CSS from interfering */
+        .article-main,
+        .article-hero,
+        .article-hero-content,
+        .article-content {
+            all: unset;
+        }
+
+        /* Restore layout behavior after unset */
+        .article-page,
+        .article-layout,
+        .article-left,
+        .article-view,
+        .article-main-content,
+        .article-sidebar,
+        .article-side-box,
+        .related-articles-full {
+            box-sizing: border-box;
+        }
+
+        /* Match article.html page width and spacing */
+        .article-page {
+            width: min(1280px, 92%);
+            margin: 0 auto;
+            padding: 95px 0 90px;
+        }
+
+        /* Back link */
+        .article-back-link {
+            display: inline-flex;
+            margin-bottom: 28px;
+            color: var(--gold);
+            font-weight: 900;
+            text-decoration: none;
+        }
+
+        .article-back-link:hover {
+            color: var(--gold-light);
+            text-shadow: 0 0 14px rgba(var(--gold-rgb), 0.38);
+        }
+
+        /* Main yellow + green layout */
+        .article-layout {
+            display: grid;
+            grid-template-columns: minmax(0, 1fr) 330px;
+            gap: 28px;
+            align-items: start;
+        }
+
+        .article-left {
+            min-width: 0;
+        }
+
+        /* Main article card */
+        .article-view {
+            width: 100%;
+            overflow: hidden;
+
+            background:
+                radial-gradient(circle at top left, rgba(var(--gold-rgb), 0.075), transparent 34%),
+                radial-gradient(circle at bottom right, rgba(var(--gold-rgb), 0.045), transparent 38%),
+                linear-gradient(180deg, var(--surface-alt-2), var(--black-dark));
+
+            border: 1px solid rgba(var(--gold-rgb), 0.26);
+            border-radius: 30px;
+
+            box-shadow:
+                0 26px 80px rgba(var(--black-rgb), 0.7),
+                0 0 34px rgba(var(--gold-rgb), 0.045),
+                inset 0 0 45px rgba(var(--gold-rgb), 0.025);
+        }
+
+        .article-main-content {
+            display: block;
+            min-height: 620px;
+            padding: 46px 52px;
+        }
+
+        /* Article meta */
+        .article-category {
+            display: inline-flex;
+            width: fit-content;
+
+            margin-bottom: 18px;
+            padding: 7px 13px;
+
+            border: 1px solid rgba(var(--gold-rgb), 0.36);
+            border-radius: 999px;
+
+            background: rgba(var(--gold-rgb), 0.085);
+            color: var(--gold);
+
+            font-size: 0.74rem;
+            font-weight: 900;
+            letter-spacing: 0.75px;
+            text-transform: uppercase;
+        }
+
+        .article-title {
+            margin-bottom: 14px;
+
+            color: var(--gold);
+            font-size: clamp(2.1rem, 5vw, 3.8rem);
+            line-height: 1.12;
+            font-weight: 900;
+            letter-spacing: -0.8px;
+        }
+
+        .article-date {
+            margin-bottom: 32px;
+
+            color: var(--text-muted-3);
+            font-size: 0.95rem;
+            font-weight: 700;
+        }
+
+        /* Article body same as dynamic article */
+        .article-body {
+            max-width: 820px;
+            width: 100%;
+
+            color: var(--text-muted-2);
+            font-size: 1.06rem;
+            line-height: 1.9;
+            letter-spacing: 0.1px;
+        }
+
+        .article-body p {
+            margin: 0 0 22px;
+            color: var(--text-muted-2);
+            font-size: 1.04rem;
+            line-height: 1.9;
+        }
+
+        .article-body h1,
+        .article-body h2,
+        .article-body h3,
+        .article-body h4 {
+            color: var(--gold);
+            font-weight: 900;
+            line-height: 1.25;
+        }
+
+        .article-body h2 {
+            margin: 42px 0 18px;
+            font-size: clamp(1.55rem, 3vw, 2.15rem);
+        }
+
+        .article-body h3 {
+            margin: 34px 0 16px;
+            font-size: clamp(1.25rem, 2.5vw, 1.6rem);
+        }
+
+        .article-body h4 {
+            margin: 28px 0 14px;
+            color: var(--gold-light);
+            font-size: 1rem;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+        }
+
+        .article-body ul,
+        .article-body ol {
+            margin: 20px 0 30px 28px;
+            padding-left: 18px;
+            color: var(--text-muted-2);
+        }
+
+        .article-body li {
+            margin-bottom: 14px;
+            padding-left: 6px;
+            line-height: 1.85;
+        }
+
+        .article-body li::marker {
+            color: var(--gold);
+            font-weight: 900;
+        }
+
+        .article-body strong {
+            color: var(--white);
+            font-weight: 900;
+        }
+
+        .article-body blockquote {
+            margin: 34px 0;
+            padding: 24px 26px;
+
+            background:
+                linear-gradient(135deg, rgba(var(--gold-rgb), 0.09), rgba(var(--gold-rgb), 0.025)),
+                rgba(var(--black-rgb), 0.35);
+
+            border-left: 4px solid var(--gold);
+            border-radius: 18px;
+
+            color: var(--text-light);
+
+            box-shadow:
+                inset 0 0 28px rgba(var(--gold-rgb), 0.025),
+                0 16px 38px rgba(var(--black-rgb), 0.32);
+        }
+
+        .article-body blockquote p {
+            margin-bottom: 0;
+            color: var(--text-light);
+        }
+
+        /* Right sidebar */
+        .article-sidebar {
+            min-width: 0;
+        }
+
+        .article-side-box {
+            position: sticky;
+            top: 95px;
+
+            min-height: 560px;
+            padding: 24px;
+
+            background:
+                radial-gradient(circle at top right, rgba(var(--gold-rgb), 0.1), transparent 38%),
+                linear-gradient(180deg, var(--surface-alt-2), var(--black-dark));
+
+            border: 1px solid rgba(var(--gold-rgb), 0.26);
+            border-radius: 26px;
+
+            box-shadow:
+                0 22px 60px rgba(var(--black-rgb), 0.58),
+                inset 0 0 35px rgba(var(--gold-rgb), 0.025);
+        }
+
+        .article-side-box>span {
+            display: inline-flex;
+            margin-bottom: 10px;
+
+            color: var(--gold);
+            font-size: 0.72rem;
+            font-weight: 900;
+            letter-spacing: 0.16em;
+            text-transform: uppercase;
+        }
+
+        .article-side-box h3 {
+            margin-bottom: 18px;
+
+            color: var(--white);
+            font-size: 1.35rem;
+            font-weight: 900;
+        }
+
+        .article-side-box a {
+            display: block;
+            padding: 15px 0;
+
+            border-top: 1px solid rgba(var(--gold-rgb), 0.14);
+
+            color: inherit;
+            text-decoration: none;
+        }
+
+        .article-side-box a:hover {
+            padding-left: 8px;
+            border-color: rgba(var(--gold-rgb), 0.38);
+            filter: brightness(1.08);
+        }
+
+        .article-side-box strong {
+            display: block;
+
+            color: var(--gold);
+            font-size: 0.96rem;
+            font-weight: 900;
+            line-height: 1.4;
+        }
+
+        .article-side-box small {
+            display: block;
+            margin-top: 5px;
+
+            color: var(--text-muted-2);
+            font-size: 0.82rem;
+            line-height: 1.55;
+        }
+
+        /* Future ad space */
+        .future-ad-slot {
+            min-height: 220px;
+
+            margin-top: 22px;
+            padding: 20px;
+
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+
+            border: 1px dashed rgba(var(--gold-rgb), 0.28);
+            border-radius: 20px;
+
+            background:
+                radial-gradient(circle at center, rgba(var(--gold-rgb), 0.07), transparent 42%),
+                rgba(var(--black-rgb), 0.34);
+
+            text-align: center;
+        }
+
+        .future-ad-slot span {
+            display: block;
+
+            color: var(--gold);
+            font-size: 0.72rem;
+            font-weight: 900;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+        }
+
+        .future-ad-slot p {
+            margin-top: 10px;
+
+            color: var(--text-muted-2);
+            font-size: 0.82rem;
+            line-height: 1.6;
+        }
+
+        /* Related section */
+        .related-articles-full {
+            margin-top: 28px;
+            padding: 34px;
+
+            background:
+                radial-gradient(circle at top left, rgba(var(--gold-rgb), 0.08), transparent 36%),
+                linear-gradient(180deg, var(--surface-alt-2), var(--black-dark));
+
+            border: 1px solid rgba(var(--gold-rgb), 0.24);
+            border-radius: 28px;
+
+            box-shadow:
+                0 24px 70px rgba(var(--black-rgb), 0.58),
+                inset 0 0 40px rgba(var(--gold-rgb), 0.025);
+        }
+
+        .related-articles-full h2 {
+            margin-bottom: 24px;
+
+            color: var(--gold);
+            font-size: clamp(1.7rem, 4vw, 2.4rem);
+            font-weight: 900;
+        }
+
+        .related-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 22px;
+        }
+
+        /* Responsive */
+        @media (max-width: 1050px) {
+            .article-layout {
+                grid-template-columns: 1fr;
+            }
+
+            .article-side-box {
+                position: static;
+                min-height: auto;
+            }
+        }
+
+        @media (max-width: 700px) {
+            .article-page {
+                width: 94%;
+                padding: 65px 0 70px;
+            }
+
+            .article-main-content {
+                min-height: auto;
+                padding: 28px 22px;
+            }
+
+            .article-title {
+                font-size: clamp(1.85rem, 9vw, 2.55rem);
+            }
+
+            .article-body {
+                max-width: 100%;
+                font-size: 0.98rem;
+                line-height: 1.82;
+            }
+
+            .article-body p {
+                font-size: 0.98rem;
+                line-height: 1.82;
+            }
+
+            .article-body h2 {
+                margin-top: 34px;
+                font-size: 1.45rem;
+            }
+
+            .article-body h3 {
+                font-size: 1.2rem;
+            }
+
+            .article-video {
+                border-radius: 18px;
+            }
+
+            .related-articles-full {
+                padding: 22px;
+                border-radius: 22px;
+            }
+
+            .related-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .article-video {
+            margin: 30px;
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <nav class="navbar">
+        <div class="navbar-inner">
+
+            <!-- Logo -->
+            <a href="index.html" class="logo">
+                <div class="logo-mark"><span class="material-symbols-outlined"><img src="assets/images/Favicon.png"
+                            alt="Favicon" loading="eager" fetchpriority="high" d></span></div>
+                <div class="logo-text">Karthi<span>ficial</span></div>
+            </a>
+
+            <!-- Mobile Toggle -->
+            <input type="checkbox" id="menu-toggle" class="menu-toggle">
+
+            <!-- Hamburger Icon -->
+            <label for="menu-toggle" class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </label>
+
+            <!-- Navigation Links -->
+            <ul class="nav-menu">
+                <li>
+                    <a href="index.html" class="nav-link">Home</a>
+                </li>
+
+                <li class="dropdown">
+                    <a href="#" class="nav-link">Notes</a>
+
+                    <ul class="dropdown-menu">
+                        <li><a href="notes-10th.html">10th Standard</a></li>
+                        <li><a href="notes-12th.html">12th Standard</a></li>
+                    </ul>
+                </li>
+
+                <li class="dropdown">
+                    <a href="#" class="nav-link">Question Papers</a>
+
+                    <ul class="dropdown-menu">
+                        <li><a href="papers-10th.html">10th Standard</a></li>
+                        <li><a href="papers-12th.html">12th Standard</a></li>
+                    </ul>
+                </li>
+
+                <li>
+                    <a href="career-guidance.html" class="nav-link">Career Guidance</a>
+                </li>
+
+                <li>
+                    <a href="mcq.html" class="nav-link">MCQ</a>
+                </li>
+
+                <li>
+                    <a href="contact.html" class="nav-link">Contact</a>
+                </li>
+
+
+                <!-- Mobile Login Buttons -->
+                <li class="mobile-actions">
+                    <a href="login.html" class="btn-outline">Login</a>
+                    <a href="signup.html" class="btn-gold">Signup</a>
+                </li>
+            </ul>
+
+            <!-- Desktop Login Buttons -->
+            <div class="nav-actions">
+                <a href="login.html" class="btn-outline">Login</a>
+                <a href="signup.html" class="btn-gold">Signup</a>
+            </div>
+
+        </div>
+    </nav>
+
+    <main class="article-page static-demo">
+
+        <a href="career-guidance.html" class="article-back-link">
+            ← Back to Career Guidance
+        </a>
+
+        <div class="article-layout">
+
+            <!-- Main Article Area -->
+            <section class="article-left">
+
+                <article class="article-view">
+
+                    <div class="article-main-content">
+
+                        <span class="article-category">
+                            After 12th Guidance
+                        </span>
+
+                        <h1 class="article-title">
+                            What Should I Study After 12th?
+                        </h1>
+
+                        <p class="article-date">
+                            Student Career Guide
+                        </p>
+
+                        <div class="article-video">
+                            <iframe src="https://www.youtube.com/embed/riWHinBsNL4?si=zA95XFtXlK6VEqRd"
+                                title="YouTube video player" frameborder="0"
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                referrerpolicy="strict-origin-when-cross-origin" allowfullscreen>
+                            </iframe>
+                        </div>
+
+                        <div class="article-body">
+
+                            <p>
+                                After 12th, students usually feel pressure because this choice feels bigger than before.
+                                The right degree should not be selected only because of friends, family pressure, or
+                                trend.
+                                Choose based on your interest, ability, financial situation, career goal, and the skills
+                                you are ready to build.
+                            </p>
+
+                            <h2>Your Degree Gives Direction</h2>
+
+                            <p>
+                                A degree is more than just a certificate.
+                                It helps you build knowledge, discover career opportunities, and prepare for your
+                                future.
+                                But real success comes from improving your skills, confidence, communication, and
+                                consistency
+                                alongside your studies.
+                            </p>
+
+                            <h2>Choose Based on Your Goal, Not Popularity</h2>
+
+                            <p>
+                                Do not select a course only because others are choosing it or because it is trending.
+                                The right course is the one that matches your interest, ability, and future goals.
+                                When your passion and effort connect with the right path, your career becomes meaningful
+                                and
+                                successful.
+                            </p>
+
+                            <blockquote>
+                                <p>
+                                    <strong>Simple Rule:</strong> Do not ask only “Which course is best?” Ask “Which
+                                    course is best for my goal?”
+                                </p>
+                            </blockquote>
+
+                            <h2>For Students Interested in Computers and Technology</h2>
+
+                            <p>
+                                If you enjoy coding, creating websites, building apps, working with software,
+                                cybersecurity, AI,
+                                or data-related technologies, computer-based degrees can open many career opportunities
+                                in the
+                                digital world.
+                            </p>
+
+                            <h3>Skills Matter More Than Just the Degree</h3>
+
+                            <p>
+                                Technology careers grow through practice and continuous learning.
+                                Along with your degree, focus on programming, real-time projects, databases,
+                                problem-solving,
+                                and modern tools to build strong industry-ready skills.
+                            </p>
+
+                            <h4>Useful Degree Options</h4>
+
+                            <ul>
+                                <li>BCA</li>
+                                <li>B.Sc Computer Science</li>
+                                <li>B.Sc Information Technology</li>
+                                <li>B.Sc Artificial Intelligence</li>
+                                <li>B.Sc Data Science</li>
+                                <li>B.E / B.Tech Computer Science</li>
+                                <li>B.E / B.Tech Information Technology</li>
+                                <li>B.E / B.Tech AI & Data Science</li>
+                                <li>Cybersecurity Courses</li>
+                            </ul>
+
+                            <p>
+                                But remember, computer-related careers need practice. You should learn programming,
+                                build small projects, understand databases, and improve problem-solving.
+                            </p>
+
+                            <h2>For Students Interested in Business and Finance</h2>
+
+                            <p>
+                                If you are interested in accounting, banking, finance, management, marketing, or
+                                entrepreneurship,
+                                commerce and business-related degrees can provide strong career opportunities.
+                            </p>
+
+                            <h3>Business Skills Create Career Growth</h3>
+
+                            <p>
+                                Success in business fields requires communication, leadership, financial knowledge,
+                                decision-making ability, and consistency in learning practical concepts.
+                            </p>
+
+                            <h4>Useful Degree Options</h4>
+
+                            <ul>
+                                <li>B.Com</li>
+                                <li>B.Com Accounting & Finance</li>
+                                <li>B.Com Corporate Secretaryship</li>
+                                <li>BBA</li>
+                                <li>BBM</li>
+                                <li>CA Foundation</li>
+                                <li>CMA Foundation</li>
+                                <li>CS Foundation</li>
+                                <li>MBA Higher Studies</li>
+                            </ul>
+
+                            <h2>For Students Interested in Science and Research</h2>
+
+                            <p>
+                                Students interested in medicine, engineering, pharmacy, biotechnology, or scientific
+                                research
+                                can choose science-based careers with strong future demand.
+                            </p>
+
+                            <h3>Science Careers Require Strong Foundations</h3>
+
+                            <p>
+                                Science-related careers require analytical thinking, practical understanding,
+                                subject knowledge, and continuous preparation for higher studies or entrance exams.
+                            </p>
+
+                            <h4>Useful Degree Options</h4>
+
+                            <ul>
+                                <li>MBBS</li>
+                                <li>BDS</li>
+                                <li>B.Pharm</li>
+                                <li>B.Sc Physics</li>
+                                <li>B.Sc Chemistry</li>
+                                <li>B.Sc Mathematics</li>
+                                <li>Biotechnology</li>
+                                <li>Biomedical Engineering</li>
+                                <li>B.E / B.Tech</li>
+                                <li>Nursing</li>
+                            </ul>
+
+                            <h2>For Students Interested in Arts and Humanities</h2>
+
+                            <p>
+                                Arts and humanities are suitable for students interested in literature, media,
+                                psychology, history, languages, public service, or communication-based careers.
+                            </p>
+
+                            <h3>Creativity and Communication Matter</h3>
+
+                            <p>
+                                Arts-related careers require strong communication, creativity, critical thinking,
+                                and understanding of society, culture, and people.
+                            </p>
+
+                            <h4>Useful Degree Options</h4>
+
+                            <ul>
+                                <li>B.A English</li>
+                                <li>B.A Tamil</li>
+                                <li>B.A History</li>
+                                <li>B.A Economics</li>
+                                <li>B.A Political Science</li>
+                                <li>B.A Journalism</li>
+                                <li>B.A Psychology</li>
+                                <li>Visual Communication</li>
+                            </ul>
+
+                            <h2>For Students Interested in Design and Creative Fields</h2>
+
+                            <p>
+                                Students passionate about creativity, editing, animation, design, photography,
+                                filmmaking, or UI/UX can build modern skill-based careers.
+                            </p>
+
+                            <h3>Portfolio and Practical Skills Are Important</h3>
+
+                            <p>
+                                Creative careers grow through projects, portfolios, software skills,
+                                consistency, and real-world creative experience.
+                            </p>
+
+                            <h4>Useful Degree Options</h4>
+
+                            <ul>
+                                <li>B.Des</li>
+                                <li>Animation & Multimedia</li>
+                                <li>Graphic Design</li>
+                                <li>UI/UX Design</li>
+                                <li>Fashion Designing</li>
+                                <li>Film Making</li>
+                                <li>Visual Communication</li>
+                                <li>Digital Marketing</li>
+                            </ul>
+
+                            <h2>For Students Interested in Government Jobs</h2>
+
+                            <p>
+                                Government careers require discipline, preparation, aptitude skills,
+                                and consistency along with a recognized degree.
+                            </p>
+
+                            <h3>Preparation Is the Key to Success</h3>
+
+                            <p>
+                                Competitive exams require strong general knowledge, reasoning,
+                                communication skills, and regular practice from an early stage.
+                            </p>
+
+                            <h4>Useful Degree Options</h4>
+
+                            <ul>
+                                <li>B.A</li>
+                                <li>B.Com</li>
+                                <li>B.Sc</li>
+                                <li>BCA</li>
+                                <li>Political Science</li>
+                                <li>Public Administration</li>
+                                <li>Law Courses</li>
+                            </ul>
+
+                            <h2>For Students Interested in Law</h2>
+
+                            <p>
+                                Law careers are suitable for students interested in justice,
+                                legal systems, advocacy, leadership, and public speaking.
+                            </p>
+
+                            <h3>Legal Knowledge Builds Responsibility</h3>
+
+                            <p>
+                                Law professionals require analytical thinking, communication,
+                                confidence, and strong understanding of legal systems.
+                            </p>
+
+                            <h4>Useful Degree Options</h4>
+
+                            <ul>
+                                <li>BA LLB</li>
+                                <li>BBA LLB</li>
+                                <li>B.Com LLB</li>
+                                <li>LLB</li>
+                            </ul>
+
+                            <h2>For Students Interested in Agriculture and Environment</h2>
+
+                            <p>
+                                Agriculture and environmental careers are ideal for students interested in
+                                farming technology, food production, sustainability, and environmental science.
+                            </p>
+
+                            <h3>Modern Agriculture Needs Innovation</h3>
+
+                            <p>
+                                Agriculture today combines science, technology, research,
+                                and sustainability to improve food systems and environmental balance.
+                            </p>
+
+                            <h4>Useful Degree Options</h4>
+
+                            <ul>
+                                <li>B.Sc Agriculture</li>
+                                <li>B.Sc Forestry</li>
+                                <li>Environmental Science</li>
+                                <li>Horticulture</li>
+                                <li>Food Technology</li>
+                                <li>Dairy Technology</li>
+                            </ul>
+
+                        </div>
+
+                    </div>
+
+                </article>
+
+            </section>
+
+            <!-- Right Side Feature Box -->
+            <aside class="article-sidebar">
+                <div class="article-side-box">
+                    <span>Karthificial Tools</span>
+                    <h3>Continue Learning</h3>
+
+                    <a href="mcq.html">
+                        <strong>Practice MCQs</strong>
+                        <small>Test your knowledge with subject-wise questions.</small>
+                    </a>
+
+                    <a href="notes-12th.html">
+                        <strong>12th Notes</strong>
+                        <small>Prepare with organized notes for your subjects.</small>
+                    </a>
+
+                    <a href="papers-12th.html">
+                        <strong>Question Papers</strong>
+                        <small>Practice previous and model question papers.</small>
+                    </a>
+
+                    <a href="career-guidance.html">
+                        <strong>More Career Guides</strong>
+                        <small>Explore more student career resources.</small>
+                    </a>
+
+                    <a href="contact.html">
+                        <strong>Need Help?</strong>
+                        <small>Contact Karthificial for support.</small>
+                    </a>
+
+                    <div class="future-ad-slot">
+                        <span>Future Ad Space</span>
+                        <p>Reserved for future learning promotions or announcements.</p>
+                    </div>
+                </div>
+            </aside>
+
+        </div>
+
+        <section class="related-articles-full">
+            <h2>Related Articles</h2>
+
+            <div class="related-grid" id="staticRelatedArticles">
+                <div class="article-loading">
+                    Loading related articles...
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="footer">
+        <div class="container footer-grid">
+
+            <div class="footer-brand">
+                <h2>Karthificial</h2>
+                <p>
+                    Excellence in Tamil Nadu State Board Education.
+                    Premium notes, question papers, and career guidance for
+                    10th and 12th standard students.
+                </p>
+            </div>
+
+            <div class="footer-column">
+                <h3>Quick Links</h3>
+
+                <ul class="footer-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="notes-10th.html">10th Notes</a></li>
+                    <li><a href="notes-12th.html">12th Notes</a></li>
+                    <li><a href="papers-10th.html">10th Question Papers</a></li>
+                    <li><a href="papers-12th.html">12th Question Papers</a></li>
+                    <li><a href="career-guidance.html">Career Guidance</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-column footer-contact">
+                <h3>Contact Info</h3>
+
+                <p>Email: support@karthificial.com</p>
+                <p>Location: Tamil Nadu, India</p>
+                <p>For: 10th & 12th State Board Students</p>
+            </div>
+
+        </div>
+
+        <div class="container footer-bottom">
+            <p>
+                © 2026 Karthificial. All rights reserved.
+            </p>
+        </div>
+    </footer>
+
+    <script src="script.js" defer></script>
+    <script src="config.js" defer></script>
+    <script src="clerk-auth.js" defer></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="supabase-config.js"></script>
+    <script src="static-related-articles.js"></script>
+
+</body>
+
+</html>

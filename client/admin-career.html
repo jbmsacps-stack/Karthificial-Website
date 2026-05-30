@@ -12,6 +12,8 @@
     <link rel="stylesheet" href="style.css">
 
     <link rel="icon" type="image/svg+xml" href="assets/images/favi.svg?v=3">
+    <link href="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.snow.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.js"></script>
 
     <script type="module" src="speed-insights.js"></script>
 </head>
@@ -124,10 +126,17 @@
                     </div>
 
                     <div class="career-admin-field">
-                        <label for="careerBody">Article Content</label>
-                        <textarea class="article-body-input" id="careerBody"
-                            placeholder="Write the full article content here. You can use simple HTML like <h2>, <p>, <ul>, <li>."
-                            required></textarea>
+                        <label for="careerEditor">Article Content</label>
+
+                        <div class="career-editor-wrap">
+                            <div id="careerEditor"></div>
+                        </div>
+
+                        <input type="hidden" id="careerBody" required>
+
+                        <small>
+                            Use the editor buttons to add headings, bold text, lists, quotes, and links.
+                        </small>
                     </div>
 
                     <div class="career-admin-field">

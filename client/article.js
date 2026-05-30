@@ -46,42 +46,10 @@ function renderArticleError(message) {
 
 function renderArticle(article, relatedArticles = []) {
     const embedUrl = getYouTubeEmbedUrl(article.youtube_url);
-
-    const relatedHTML = relatedArticles.length
-        ? `
-            <section class="related-articles">
-                <h2>Related Articles</h2>
-
-                <div class="related-grid">
-                    ${relatedArticles.map((item) => `
-                        <a class="related-card" href="article.html?slug=${encodeURIComponent(item.slug)}">
-                            <img 
-                                src="${escapeArticleHTML(item.thumbnail_url)}" 
-                                alt="${escapeArticleHTML(item.title)}"
-                                onerror="this.src='assets/cg_thumb/career_guidance_banner.webp'"
-                            >
-
-                            <div class="related-card-content">
-                                <span>${escapeArticleHTML(item.category)}</span>
-                                <h3>${escapeArticleHTML(item.title)}</h3>
-                            </div>
-                        </a>
-                    `).join("")}
-                </div>
-            </section>
-        `
-        : "";
+    const relatedArticlesContainer = document.getElementById("relatedArticlesContainer");
 
     articleContainer.innerHTML = `
         <article class="article-view">
-
-            <div class="article-hero-image">
-                <img 
-                    src="${escapeArticleHTML(article.thumbnail_url)}" 
-                    alt="${escapeArticleHTML(article.title)}"
-                    onerror="this.src='assets/cg_thumb/career_guidance_banner.webp'"
-                >
-            </div>
 
             <div class="article-main-content">
                 <span class="article-category">
@@ -109,12 +77,37 @@ function renderArticle(article, relatedArticles = []) {
                 <div class="article-body">
                     ${article.body_content}
                 </div>
-
-                ${relatedHTML}
             </div>
 
         </article>
     `;
+
+    if (relatedArticlesContainer) {
+        if (!relatedArticles.length) {
+            relatedArticlesContainer.innerHTML = "";
+        } else {
+            relatedArticlesContainer.innerHTML = `
+                <h2>Related Articles</h2>
+
+                <div class="related-grid">
+                    ${relatedArticles.map((item) => `
+                        <a class="related-card" href="article.html?slug=${encodeURIComponent(item.slug)}">
+                            <img 
+                                src="${escapeArticleHTML(item.thumbnail_url)}" 
+                                alt="${escapeArticleHTML(item.title)}"
+                                onerror="this.src='assets/cg_thumb/career_guidance_banner.webp'"
+                            >
+
+                            <div class="related-card-content">
+                                <span>${escapeArticleHTML(item.category)}</span>
+                                <h3>${escapeArticleHTML(item.title)}</h3>
+                            </div>
+                        </a>
+                    `).join("")}
+                </div>
+            `;
+        }
+    }
 
     document.title = `Karthificial | ${article.title}`;
 }
@@ -144,18 +137,47 @@ async function loadArticlePage() {
         return;
     }
 
-    const { data: relatedData, error: relatedError } = await window.supabaseClient
+    let finalRelatedArticles = [];
+
+    const { data: sameCategoryRelated, error: sameCategoryError } = await window.supabaseClient
         .from("career_articles")
         .select("*")
         .eq("category", article.category)
         .neq("id", article.id)
         .limit(3);
 
-    if (relatedError) {
-        console.warn("Related article load error:", relatedError);
+    if (sameCategoryError) {
+        console.warn("Same category related article load error:", sameCategoryError);
     }
 
-    renderArticle(article, relatedData || []);
+    finalRelatedArticles = sameCategoryRelated || [];
+
+    if (finalRelatedArticles.length < 3) {
+        const neededCount = 3 - finalRelatedArticles.length;
+
+        const alreadyUsedIds = [
+            article.id,
+            ...finalRelatedArticles.map((item) => item.id)
+        ];
+
+        const { data: extraRelated, error: extraRelatedError } = await window.supabaseClient
+            .from("career_articles")
+            .select("*")
+            .not("id", "in", `(${alreadyUsedIds.join(",")})`)
+            .order("published_date", { ascending: false })
+            .limit(neededCount);
+
+        if (extraRelatedError) {
+            console.warn("Extra related article load error:", extraRelatedError);
+        }
+
+        finalRelatedArticles = [
+            ...finalRelatedArticles,
+            ...(extraRelated || [])
+        ];
+    }
+
+    renderArticle(article, finalRelatedArticles);
 }
 
 document.addEventListener("DOMContentLoaded", loadArticlePage);

@@ -16,6 +16,7 @@ const careerResetBtn = document.getElementById("careerResetBtn");
 const careerAdminStatus = document.getElementById("careerAdminStatus");
 
 let allCareerArticles = [];
+let careerQuillEditor = null;
 
 function getTodayDate() {
     return new Date().toISOString().split("T")[0];
@@ -67,6 +68,12 @@ function resetCareerForm() {
     careerArticleId.value = "";
     careerPublishedDate.value = getTodayDate();
 
+    if (careerBody) {
+        careerBody.value = "";
+    }
+
+    setEditorHTML("");
+
     careerFormTitle.textContent = "Create New Article";
     careerSaveBtn.textContent = "Publish Article";
 
@@ -80,6 +87,53 @@ function escapeHTML(value = "") {
         .replaceAll(">", "&gt;")
         .replaceAll('"', "&quot;")
         .replaceAll("'", "&#039;");
+}
+
+function getEditorHTML() {
+    if (!careerQuillEditor) return "";
+
+    const html = careerQuillEditor.root.innerHTML.trim();
+
+    if (html === "<p><br></p>") {
+        return "";
+    }
+
+    return html;
+}
+
+function setEditorHTML(html = "") {
+    if (!careerQuillEditor) return;
+
+    careerQuillEditor.root.innerHTML = html || "";
+}
+
+function initCareerEditor() {
+    const editorElement = document.getElementById("careerEditor");
+
+    if (!editorElement) {
+        console.error("careerEditor element missing in admin-career.html");
+        return;
+    }
+
+    if (!window.Quill) {
+        console.error("Quill is not loaded. Check Quill CDN links in admin-career.html.");
+        setCareerStatus("Text editor failed to load. Check Quill CDN links.", "error");
+        return;
+    }
+
+    careerQuillEditor = new Quill("#careerEditor", {
+        theme: "snow",
+        placeholder: "Write the article content here...",
+        modules: {
+            toolbar: [
+                [{ header: [1, 2, 3, false] }],
+                ["bold", "italic", "underline"],
+                [{ list: "ordered" }, { list: "bullet" }],
+                ["blockquote", "link"],
+                ["clean"]
+            ]
+        }
+    });
 }
 
 function renderCareerArticles() {
@@ -174,7 +228,8 @@ async function saveCareerArticle(event) {
     const category = careerCategory.value.trim();
     const thumbnailUrl = careerThumbnailUrl.value.trim();
     const excerpt = careerExcerpt.value.trim();
-    const bodyContent = careerBody.value.trim();
+    const bodyContent = getEditorHTML();
+    careerBody.value = bodyContent;
     const youtubeUrl = careerYoutubeUrl.value.trim();
     const publishedDate = careerPublishedDate.value || getTodayDate();
 
@@ -184,7 +239,10 @@ async function saveCareerArticle(event) {
     }
 
     const baseSlug = createSlug(title);
-    const finalSlug = id ? baseSlug : `${baseSlug}-${Date.now()}`;
+
+    const finalSlug = id
+        ? `${baseSlug}-${id.slice(0, 8)}`
+        : `${baseSlug}-${Date.now()}`;
 
     const payload = {
         title,
@@ -244,6 +302,7 @@ window.editCareerArticle = function (id) {
     careerThumbnailUrl.value = article.thumbnail_url || "";
     careerExcerpt.value = article.excerpt || "";
     careerBody.value = article.body_content || "";
+    setEditorHTML(article.body_content || "");
     careerYoutubeUrl.value = article.youtube_url || "";
     careerPublishedDate.value = article.published_date || getTodayDate();
 
@@ -281,6 +340,8 @@ window.deleteCareerArticle = async function (id) {
 };
 
 document.addEventListener("DOMContentLoaded", () => {
+    initCareerEditor();
+
     if (careerPublishedDate) {
         careerPublishedDate.value = getTodayDate();
     }

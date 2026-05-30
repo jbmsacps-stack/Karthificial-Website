@@ -62,15 +62,22 @@ function renderMCQSets(sets) {
             <h3>MCQ Management</h3>
             <p>Manage MCQ sets, questions, shuffle controls, and student performance.</p>
 
-            <button class="btn-gold" type="button" onclick="viewOverallStudentPerformance()">
-                View Whole Student Performance
-            </button>
+            <div class="admin-list-card-actions">
+                <button class="btn-gold" type="button" onclick="viewOverallStudentPerformance()">
+                    View Whole Student Performance
+                </button>
+
+                <button class="btn-outline" type="button" onclick="viewWeakQuestionsReportAll()">
+                    Weak Questions Report
+                </button>
+            </div>
         </div>
     `;
 
     const setCardsHTML = sets.map((set) => {
         const shuffleQuestions = set.shuffle_questions ?? true;
         const shuffleOptions = set.shuffle_options ?? true;
+        const safeTitle = String(set.title || "MCQ Set").replace(/'/g, "\\'");
 
         return `
             <article class="admin-list-card">
@@ -110,18 +117,22 @@ function renderMCQSets(sets) {
                 <p>${set.description || "No description added."}</p>
 
                 <div class="admin-list-card-actions">
-    <button class="btn-outline" type="button" onclick="viewQuestions('${set.id}')">
-        View Questions
-    </button>
+                    <button class="btn-outline" type="button" onclick="viewQuestions('${set.id}')">
+                        View Questions
+                    </button>
 
-    <button class="btn-outline" type="button" onclick="viewMCQAttempts('${set.id}', '${set.title.replace(/'/g, "\\'")}')">
-        View Performance
-    </button>
+                    <button class="btn-outline" type="button" onclick="viewMCQAttempts('${set.id}', '${safeTitle}')">
+                        View Performance
+                    </button>
 
-    <button class="admin-delete-btn" type="button" onclick="deleteMCQSet('${set.id}')">
-        Delete Set
-    </button>
-</div>
+                    <button class="btn-outline" type="button" onclick="viewWeakQuestionsReport('${set.id}', '${safeTitle}')">
+                        Weak Questions
+                    </button>
+
+                    <button class="admin-delete-btn" type="button" onclick="deleteMCQSet('${set.id}')">
+                        Delete Set
+                    </button>
+                </div>
             </article>
         `;
     }).join("");
@@ -718,7 +729,148 @@ function getAverageValue(items, field) {
     return Math.round(total / items.length);
 }
 
-async function viewQuestionAnalysis(setId, setTitle) {
+async function viewWeakQuestionsReportAll() {
+    if (!checkSupabaseReady()) return;
+
+    openAdminPopup(
+        "Weak Questions Report",
+        "Loading weak questions across all MCQ sets...",
+        `<p class="admin-empty-text">Loading weak questions report...</p>`,
+        "large"
+    );
+
+    const { data: sets, error: setsError } = await window.supabaseClient
+        .from("mcq_sets")
+        .select("id, title, subject, class_level");
+
+    if (setsError) {
+        console.error(setsError);
+
+        openAdminPopup(
+            "Weak Questions Report",
+            "Could not load MCQ sets.",
+            `<p class="admin-empty-text">Failed to load MCQ sets.</p>`,
+            "large"
+        );
+
+        return;
+    }
+
+    const { data: questions, error: questionsError } = await window.supabaseClient
+        .from("mcq_questions")
+        .select("*");
+
+    if (questionsError) {
+        console.error(questionsError);
+
+        openAdminPopup(
+            "Weak Questions Report",
+            "Could not load MCQ questions.",
+            `<p class="admin-empty-text">Failed to load MCQ questions.</p>`,
+            "large"
+        );
+
+        return;
+    }
+
+    const { data: answers, error: answersError } = await window.supabaseClient
+        .from("mcq_attempt_answers")
+        .select("*");
+
+    if (answersError) {
+        console.error(answersError);
+
+        openAdminPopup(
+            "Weak Questions Report",
+            "Could not load MCQ answer records.",
+            `<p class="admin-empty-text">Failed to load answer records.</p>`,
+            "large"
+        );
+
+        return;
+    }
+
+    const setMap = new Map();
+
+    (sets || []).forEach((set) => {
+        setMap.set(String(set.id), set);
+    });
+
+    const reportItems = (questions || []).map((question) => {
+        const rows = (answers || []).filter((answer) => {
+            return String(answer.question_id) === String(question.id);
+        });
+
+        const totalAnswers = rows.length;
+        const correctAnswers = rows.filter((answer) => answer.is_correct).length;
+        const wrongAnswers = rows.filter((answer) => {
+            return !answer.is_correct && !answer.is_unanswered;
+        }).length;
+
+        const wrongPercent = totalAnswers
+            ? Math.round((wrongAnswers / totalAnswers) * 100)
+            : 0;
+
+        const setInfo = setMap.get(String(question.set_id));
+
+        return {
+            question,
+            setInfo,
+            totalAnswers,
+            correctAnswers,
+            wrongAnswers,
+            wrongPercent
+        };
+    })
+        .filter((item) => item.totalAnswers > 0)
+        .sort((a, b) => {
+            if (b.wrongPercent !== a.wrongPercent) {
+                return b.wrongPercent - a.wrongPercent;
+            }
+
+            return b.wrongAnswers - a.wrongAnswers;
+        });
+
+    const contentHTML = reportItems.length
+        ? `
+            <div class="admin-performance-modal-list">
+                ${reportItems.map((item, index) => {
+            return `
+                        <article class="admin-list-card admin-analysis-card">
+                            <h3>${index + 1}. ${item.question.question}</h3>
+
+                            <p><strong>MCQ Set:</strong> ${item.setInfo?.title || "Unknown Set"}</p>
+                            <p><strong>Class:</strong> ${item.setInfo?.class_level || "N/A"}th Standard</p>
+                            <p><strong>Subject:</strong> ${item.setInfo?.subject || "N/A"}</p>
+                            <p><strong>Correct Answer:</strong> ${item.question.correct_answer}</p>
+                            <p><strong>Difficulty:</strong> ${item.question.difficulty || "easy"}</p>
+
+                            <p><strong>Total Answers:</strong> ${item.totalAnswers}</p>
+                            <p><strong>Wrong Answers:</strong> ${item.wrongAnswers}</p>
+                            <p><strong>Correct Answers:</strong> ${item.correctAnswers}</p>
+                            <p><strong>Wrong Rate:</strong> ${item.wrongPercent}%</p>
+
+                            <div class="admin-list-card-actions">
+                                <button class="btn-outline" type="button" onclick="viewQuestions('${item.question.set_id}')">
+                                    View This Set
+                                </button>
+                            </div>
+                        </article>
+                    `;
+        }).join("")}
+            </div>
+        `
+        : `<p class="admin-empty-text">No answered MCQ questions found yet.</p>`;
+
+    openAdminPopup(
+        "Weak Questions Report",
+        "Questions ranked by highest wrong-answer rate across all MCQ sets.",
+        contentHTML,
+        "large"
+    );
+}
+
+async function viewWeakQuestionsReport(setId, setTitle) {
     if (!checkSupabaseReady()) return;
 
     openAdminPopup(
@@ -830,6 +982,175 @@ async function viewQuestionAnalysis(setId, setTitle) {
     );
 }
 
+async function viewMostWrongQuestions(setId, setTitle) {
+    if (!checkSupabaseReady()) return;
+
+    openAdminPopup(
+        "Weak Questions Report",
+        `Loading weak questions analysis for ${setTitle}...`,
+        `<p class="admin-empty-text">Loading analysis...</p>`,
+        "large"
+    );
+
+    const { data: questions, error: questionsError } = await supabaseClient
+        .from("mcq_questions")
+        .select("id, question_text, option_a, option_b, option_c, option_d, correct_answer, difficulty")
+        .eq("set_id", setId);
+
+    if (questionsError) {
+        openAdminPopup(
+            "Weak Questions Report",
+            setTitle,
+            `<p class="admin-error-text">Could not load questions.</p>`,
+            "large"
+        );
+        return;
+    }
+
+    const { data: attempts, error: attemptsError } = await supabaseClient
+        .from("mcq_attempts")
+        .select("id")
+        .eq("set_id", setId);
+
+    if (attemptsError) {
+        openAdminPopup(
+            "Weak Questions Report",
+            setTitle,
+            `<p class="admin-error-text">Could not load attempts.</p>`,
+            "large"
+        );
+        return;
+    }
+
+    const attemptIds = (attempts || []).map((attempt) => attempt.id);
+
+    if (!attemptIds.length) {
+        openAdminPopup(
+            "Weak Questions Report",
+            setTitle,
+            `<p class="admin-empty-text">No student attempts found for this MCQ set yet.</p>`,
+            "large"
+        );
+        return;
+    }
+
+    const { data: answers, error: answersError } = await supabaseClient
+        .from("mcq_attempt_answers")
+        .select("question_id, selected_answer, correct_answer, is_correct")
+        .in("attempt_id", attemptIds);
+
+    if (answersError) {
+        openAdminPopup(
+            "Weak Questions Report",
+            setTitle,
+            `<p class="admin-error-text">Could not load answer records.</p>`,
+            "large"
+        );
+        return;
+    }
+
+    const analysis = (questions || []).map((question) => {
+        const questionAnswers = (answers || []).filter((answer) => {
+            return String(answer.question_id) === String(question.id);
+        });
+
+        const totalAttempts = questionAnswers.length;
+
+        const wrongAnswers = questionAnswers.filter((answer) => {
+            return answer.is_correct === false;
+        });
+
+        const wrongCount = wrongAnswers.length;
+        const correctCount = totalAttempts - wrongCount;
+
+        const wrongPercentage = totalAttempts
+            ? Math.round((wrongCount / totalAttempts) * 100)
+            : 0;
+
+        const wrongOptionCounts = {
+            A: 0,
+            B: 0,
+            C: 0,
+            D: 0
+        };
+
+        wrongAnswers.forEach((answer) => {
+            if (wrongOptionCounts[answer.selected_answer] !== undefined) {
+                wrongOptionCounts[answer.selected_answer]++;
+            }
+        });
+
+        const mostSelectedWrongOption = Object.entries(wrongOptionCounts)
+            .sort((a, b) => b[1] - a[1])[0];
+
+        return {
+            ...question,
+            totalAttempts,
+            wrongCount,
+            correctCount,
+            wrongPercentage,
+            mostWrongOption: mostSelectedWrongOption?.[1] > 0
+                ? mostSelectedWrongOption[0]
+                : "None",
+            mostWrongOptionCount: mostSelectedWrongOption?.[1] || 0
+        };
+    });
+
+    const sortedAnalysis = analysis
+        .filter((item) => item.totalAttempts > 0)
+        .sort((a, b) => {
+            if (b.wrongPercentage !== a.wrongPercentage) {
+                return b.wrongPercentage - a.wrongPercentage;
+            }
+
+            return b.wrongCount - a.wrongCount;
+        });
+
+    const contentHTML = sortedAnalysis.length
+        ? `
+            <div class="wrong-question-list">
+                ${sortedAnalysis.map((item, index) => `
+                    <article class="wrong-question-card">
+                        <div class="wrong-question-rank">#${index + 1}</div>
+
+                        <div class="wrong-question-main">
+                            <h3>${escapeHTML(item.question_text)}</h3>
+
+                            <div class="wrong-question-stats">
+                                <span>Total Attempts: <strong>${item.totalAttempts}</strong></span>
+                                <span>Wrong: <strong>${item.wrongCount}</strong></span>
+                                <span>Correct: <strong>${item.correctCount}</strong></span>
+                                <span>Wrong Rate: <strong>${item.wrongPercentage}%</strong></span>
+                            </div>
+
+                            <p class="wrong-question-meta">
+                                Most selected wrong option:
+                                <strong>${item.mostWrongOption}</strong>
+                                ${item.mostWrongOption !== "None" ? `(${item.mostWrongOptionCount} times)` : ""}
+                            </p>
+
+                            <p class="wrong-question-meta">
+                                Correct answer:
+                                <strong>${item.correct_answer}</strong>
+                                |
+                                Difficulty:
+                                <strong>${item.difficulty || "Not set"}</strong>
+                            </p>
+                        </div>
+                    </article>
+                `).join("")}
+            </div>
+        `
+        : `<p class="admin-empty-text">No answered questions found for this MCQ set yet.</p>`;
+
+    openAdminPopup(
+        "Weak Questions Report",
+        `Questions students struggled with most in ${setTitle}.`,
+        contentHTML,
+        "large"
+    );
+}
+
 function renderAnswerDistributionRow(optionLetter, count, total, correctAnswer) {
     const percentage = total
         ? Math.round((count / total) * 100)
@@ -935,10 +1256,86 @@ function renderQuestionsHTML(questions) {
     }).join("");
 }
 
+function confirmAdminDelete({
+    title = "Confirm Delete",
+    message = "Are you sure you want to delete this item? This action cannot be undone.",
+    confirmText = "Delete",
+    cancelText = "Cancel"
+}) {
+    return new Promise((resolve) => {
+        const oldModal = document.querySelector(".admin-confirm-overlay");
+
+        if (oldModal) {
+            oldModal.remove();
+        }
+
+        const modal = document.createElement("div");
+        modal.className = "admin-confirm-overlay";
+
+        modal.innerHTML = `
+            <section class="admin-confirm-box">
+                <div class="admin-confirm-icon">!</div>
+
+                <h2>${title}</h2>
+                <p>${message}</p>
+
+                <div class="admin-confirm-actions">
+                    <button class="admin-confirm-cancel" type="button">
+                        ${cancelText}
+                    </button>
+
+                    <button class="admin-confirm-delete" type="button">
+                        ${confirmText}
+                    </button>
+                </div>
+            </section>
+        `;
+
+        document.body.appendChild(modal);
+
+        const cancelButton = modal.querySelector(".admin-confirm-cancel");
+        const deleteButton = modal.querySelector(".admin-confirm-delete");
+
+        function closeModal(value) {
+            modal.remove();
+            resolve(value);
+        }
+
+        cancelButton.addEventListener("click", () => {
+            closeModal(false);
+        });
+
+        deleteButton.addEventListener("click", () => {
+            closeModal(true);
+        });
+
+        modal.addEventListener("click", (event) => {
+            if (event.target === modal) {
+                closeModal(false);
+            }
+        });
+
+        document.addEventListener(
+            "keydown",
+            function handleEscape(event) {
+                if (event.key === "Escape") {
+                    document.removeEventListener("keydown", handleEscape);
+                    closeModal(false);
+                }
+            }
+        );
+    });
+}
+
 async function deleteQuestion(questionId) {
     if (!checkSupabaseReady()) return;
 
-    const confirmDelete = confirm("Delete this question?");
+    const confirmDelete = await confirmAdminDelete({
+        title: "Delete Question?",
+        message: "This question will be permanently removed from this MCQ set.",
+        confirmText: "Delete Question",
+        cancelText: "Cancel"
+    });
 
     if (!confirmDelete) return;
 
@@ -963,7 +1360,12 @@ async function deleteQuestion(questionId) {
 async function deleteMCQSet(setId) {
     if (!checkSupabaseReady()) return;
 
-    const confirmDelete = confirm("Delete this MCQ set and all its questions?");
+    const confirmDelete = await confirmAdminDelete({
+        title: "Delete MCQ Set?",
+        message: "This will permanently delete the MCQ set and all questions inside it.",
+        confirmText: "Delete Set",
+        cancelText: "Cancel"
+    });
 
     if (!confirmDelete) return;
 
@@ -1014,7 +1416,9 @@ window.deleteQuestion = deleteQuestion;
 window.deleteMCQSet = deleteMCQSet;
 window.updateMCQShuffleSetting = updateMCQShuffleSetting;
 window.viewMCQAttempts = viewMCQAttempts;
-window.viewQuestionAnalysis = viewQuestionAnalysis;
+window.viewQuestionAnalysis = viewWeakQuestionsReport;
+window.viewWeakQuestionsReport = viewWeakQuestionsReport;
+window.viewWeakQuestionsReportAll = viewWeakQuestionsReportAll;
 window.viewOverallStudentPerformance = viewOverallStudentPerformance;
 window.viewSingleStudentPerformance = viewSingleStudentPerformance;
 window.closeOverallPerformanceModal = closeOverallPerformanceModal;
