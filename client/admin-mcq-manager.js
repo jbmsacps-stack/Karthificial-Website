@@ -66,6 +66,9 @@ function renderMCQSets(sets) {
     }
 
     mcqSetsList.innerHTML = sets.map((set) => {
+        const shuffleQuestions = set.shuffle_questions ?? true;
+        const shuffleOptions = set.shuffle_options ?? true;
+
         return `
             <article class="admin-list-card">
                 <h3>${set.title}</h3>
@@ -73,10 +76,33 @@ function renderMCQSets(sets) {
                 <p><strong>Class:</strong> ${set.class_level}th Standard</p>
                 <p><strong>Subject:</strong> ${set.subject}</p>
 
-                <p>
-                    <strong>Shuffle Questions:</strong> ${(set.shuffle_questions ?? true) ? "ON" : "OFF"} |
-                    <strong>Shuffle Options:</strong> ${(set.shuffle_options ?? true) ? "ON" : "OFF"}
-                </p>
+                <div class="admin-inline-toggle-grid">
+                    <label class="admin-inline-toggle">
+                        <span>
+                            <strong>Shuffle Questions</strong>
+                            <small>${shuffleQuestions ? "ON" : "OFF"}</small>
+                        </span>
+
+                        <input
+                            type="checkbox"
+                            ${shuffleQuestions ? "checked" : ""}
+                            onchange="updateMCQShuffleSetting('${set.id}', 'shuffle_questions', this.checked)"
+                        >
+                    </label>
+
+                    <label class="admin-inline-toggle">
+                        <span>
+                            <strong>Shuffle Options</strong>
+                            <small>${shuffleOptions ? "ON" : "OFF"}</small>
+                        </span>
+
+                        <input
+                            type="checkbox"
+                            ${shuffleOptions ? "checked" : ""}
+                            onchange="updateMCQShuffleSetting('${set.id}', 'shuffle_options', this.checked)"
+                        >
+                    </label>
+                </div>
 
                 <p>${set.description || "No description added."}</p>
 
@@ -92,6 +118,34 @@ function renderMCQSets(sets) {
             </article>
         `;
     }).join("");
+}
+
+async function updateMCQShuffleSetting(setId, field, value) {
+    if (!checkSupabaseReady()) return;
+
+    const allowedFields = ["shuffle_questions", "shuffle_options"];
+
+    if (!allowedFields.includes(field)) {
+        console.error("Invalid shuffle field:", field);
+        showAdminMessage("Invalid shuffle setting.");
+        return;
+    }
+
+    const { error } = await window.supabaseClient
+        .from("mcq_sets")
+        .update({
+            [field]: value
+        })
+        .eq("id", setId);
+
+    if (error) {
+        console.error(error);
+        showAdminMessage("Failed to update shuffle setting.");
+        await loadMCQSets();
+        return;
+    }
+
+    await loadMCQSets();
 }
 
 async function createMCQSet(event) {
@@ -308,5 +362,6 @@ questionSetSelect?.addEventListener("change", () => {
 window.viewQuestions = viewQuestions;
 window.deleteQuestion = deleteQuestion;
 window.deleteMCQSet = deleteMCQSet;
+window.updateMCQShuffleSetting = updateMCQShuffleSetting;
 
 document.addEventListener("DOMContentLoaded", loadMCQSets);

@@ -9023,3 +9023,191 @@ body.mcq-result-open {
         grid-template-columns: 1fr;
     }
 }
+
+/* ================================
+   ADMIN INLINE MCQ SHUFFLE CONTROLS
+================================ */
+
+.admin-inline-toggle-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+    margin: 14px 0;
+}
+
+.admin-inline-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 14px;
+    padding: 14px;
+    border-radius: 14px;
+    border: 1px solid rgba(var(--gold-rgb), 0.22);
+    background: rgba(var(--white-rgb), 0.035);
+    cursor: pointer;
+}
+
+.admin-inline-toggle strong {
+    display: block;
+    color: var(--gold);
+    font-size: 0.86rem;
+    margin-bottom: 3px;
+}
+
+.admin-inline-toggle small {
+    display: block;
+    color: var(--text-muted-4);
+    font-size: 0.75rem;
+    font-weight: 800;
+    letter-spacing: 0.8px;
+}
+
+.admin-inline-toggle input {
+    width: 42px;
+    height: 22px;
+    accent-color: var(--gold);
+    cursor: pointer;
+}
+
+@media (max-width: 700px) {
+    .admin-inline-toggle-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* ================================
+   MCQ RADIO LOCK AFTER SUBMIT
+================================ */
+
+.mcq-set-option.mcq-option-locked {
+    cursor: not-allowed;
+    opacity: 0.95;
+}
+
+.mcq-set-option.mcq-option-locked input {
+    cursor: not-allowed;
+}
+
+.mcq-set-option.mcq-option-locked:hover {
+    border-color: rgba(var(--gold-rgb), 0.18);
+    background: rgba(var(--white-rgb), 0.035);
+    box-shadow: none;
+}
+
+/* ================================
+   MCQ RESULT ANALYTICS GRAPHS
+================================ */
+
+.mcq-result-analytics {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 16px;
+    margin-bottom: 26px;
+}
+
+.mcq-analytics-card {
+    padding: 20px;
+    border-radius: 22px;
+    border: 1px solid rgba(var(--gold-rgb), 0.2);
+    background:
+        linear-gradient(180deg, rgba(var(--white-rgb), 0.04), rgba(var(--white-rgb), 0.012)),
+        rgba(var(--black-rgb), 0.2);
+}
+
+.mcq-analytics-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 18px;
+}
+
+.mcq-analytics-head h3 {
+    color: var(--white);
+    font-size: 1rem;
+    font-weight: 900;
+}
+
+.mcq-analytics-head span {
+    color: var(--gold);
+    font-size: 0.78rem;
+    font-weight: 900;
+    letter-spacing: 0.8px;
+    text-transform: uppercase;
+}
+
+.mcq-graph-row {
+    display: grid;
+    grid-template-columns: 92px 1fr 42px;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 13px;
+}
+
+.mcq-graph-row:last-child {
+    margin-bottom: 0;
+}
+
+.mcq-graph-row span {
+    color: var(--text-muted-4);
+    font-size: 0.78rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+}
+
+.mcq-graph-row strong {
+    color: var(--gold);
+    font-size: 0.95rem;
+    font-weight: 950;
+    text-align: right;
+}
+
+.mcq-graph-track {
+    height: 11px;
+    border-radius: 999px;
+    overflow: hidden;
+    background: rgba(var(--white-rgb), 0.075);
+    border: 1px solid rgba(var(--white-rgb), 0.08);
+}
+
+.mcq-graph-fill {
+    display: block;
+    height: 100%;
+    width: 0;
+    border-radius: inherit;
+}
+
+.mcq-graph-fill.correct {
+    background: linear-gradient(90deg, #22c55e, #86efac);
+}
+
+.mcq-graph-fill.wrong {
+    background: linear-gradient(90deg, #ef4444, #fca5a5);
+}
+
+.mcq-graph-fill.unanswered {
+    background: linear-gradient(90deg, #64748b, #cbd5e1);
+}
+
+.mcq-graph-fill.base {
+    background: linear-gradient(90deg, var(--gold), var(--gold-light));
+}
+
+.mcq-graph-fill.difficulty {
+    background: linear-gradient(90deg, #a855f7, #c084fc);
+}
+
+.mcq-graph-fill.speed {
+    background: linear-gradient(90deg, #22d3ee, #67e8f9);
+}
+
+@media (max-width: 800px) {
+    .mcq-result-analytics {
+        grid-template-columns: 1fr;
+    }
+
+    .mcq-graph-row {
+        grid-template-columns: 86px 1fr 36px;
+    }
+}

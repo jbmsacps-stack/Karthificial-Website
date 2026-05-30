@@ -11,6 +11,9 @@ let mcqStartedAt = null;
 let questionFirstSeenTimes = {};
 let questionAnsweredTimes = {};
 
+let hasSubmittedMCQ = false;
+let lastGamifiedResult = null;
+
 function getSetIdFromURL() {
     const params = new URLSearchParams(window.location.search);
     return params.get("id");
@@ -440,14 +443,39 @@ async function getQuestionStruggleInsight(setId, answerRows) {
 /* ================================
    SUBMIT + SAVE ANALYTICS
 ================================ */
+function lockRadioButtonsAfterSubmit() {
+    const allInputs = document.querySelectorAll(".mcq-set-option input");
+
+    allInputs.forEach((input) => {
+        input.disabled = true;
+    });
+
+    const allOptions = document.querySelectorAll(".mcq-set-option");
+
+    allOptions.forEach((option) => {
+        option.classList.add("mcq-option-locked");
+    });
+}
 
 async function handleMCQSubmit(event) {
     event.preventDefault();
+
+    if (hasSubmittedMCQ) {
+        if (lastGamifiedResult) {
+            showGamifiedResult(lastGamifiedResult);
+        } else {
+            alert("Result already submitted. Retry the MCQ for a fresh attempt.");
+        }
+
+        return;
+    }
 
     if (!loadedSet || !loadedQuestions.length) {
         alert("MCQ data is not ready yet.");
         return;
     }
+
+    hasSubmittedMCQ = true;
 
     const submitButton = document.querySelector(".mcq-submit-set-btn");
 
@@ -515,6 +543,8 @@ async function handleMCQSubmit(event) {
 
         markQuestionAnswers(question, selectedOption);
     });
+
+    lockRadioButtonsAfterSubmit();
 
     const totalQuestions = loadedQuestions.length;
 
@@ -595,7 +625,7 @@ async function handleMCQSubmit(event) {
             answerRows
         );
 
-        showGamifiedResult({
+        lastGamifiedResult = {
             score,
             totalQuestions,
             attempted,
@@ -612,9 +642,14 @@ async function handleMCQSubmit(event) {
             finalPoints,
             rankTitle,
             feedback,
-            comparison,
-            struggleInsight
-        });
+            comparison: {
+                betterThanPercentage: 0,
+                comparisonText: "Result saved locally, but benchmark data is unavailable."
+            },
+            struggleInsight: "Admin analytics could not be updated. Check Supabase columns/policies."
+        };
+
+        showGamifiedResult(lastGamifiedResult);
 
     } catch (error) {
         console.error("Failed to save MCQ attempt:", error);
@@ -645,7 +680,7 @@ async function handleMCQSubmit(event) {
     } finally {
         if (submitButton) {
             submitButton.disabled = false;
-            submitButton.textContent = "Submit MCQ";
+            submitButton.textContent = "View Result Again";
         }
     }
 }
@@ -676,6 +711,12 @@ function markQuestionAnswers(question, selectedOption) {
    GAMIFIED RESULT POPUP
 ================================ */
 
+
+function getSafePercent(value, total) {
+    if (!total || total <= 0) return 0;
+    return Math.min(100, Math.round((value / total) * 100));
+}
+
 function showGamifiedResult(result) {
     const oldModal = document.querySelector(".mcq-result-modal-overlay");
 
@@ -684,6 +725,22 @@ function showGamifiedResult(result) {
     const betterThan = result.comparison?.betterThanPercentage ?? 0;
     const comparisonText =
         result.comparison?.comparisonText || "Benchmark data is not available yet.";
+
+    const correctPercent = getSafePercent(result.correctCount, result.totalQuestions);
+    const wrongPercent = getSafePercent(result.wrongCount, result.totalQuestions);
+    const unansweredPercent = getSafePercent(result.unansweredCount, result.totalQuestions);
+
+    const maxPointPart = Math.max(
+        result.basePoints,
+        result.difficultyBonus,
+        result.speedBonus,
+        1
+    );
+
+    const basePointPercent = getSafePercent(result.basePoints, maxPointPart);
+    const difficultyBonusPercent = getSafePercent(result.difficultyBonus, maxPointPart);
+    const speedBonusPercent = getSafePercent(result.speedBonus, maxPointPart);
+
 
     const modal = document.createElement("div");
     modal.className = "mcq-result-modal-overlay";
@@ -723,6 +780,70 @@ function showGamifiedResult(result) {
                 <strong>${result.finalPoints}</strong>
                 <span>Game Points</span>
             </div>
+
+            <div class="mcq-result-analytics">
+    <div class="mcq-analytics-card">
+        <div class="mcq-analytics-head">
+            <h3>Answer Breakdown</h3>
+            <span>${result.percentage}% Score</span>
+        </div>
+
+        <div class="mcq-graph-row">
+            <span>Correct</span>
+            <div class="mcq-graph-track">
+                <i class="mcq-graph-fill correct" style="width: ${correctPercent}%;"></i>
+            </div>
+            <strong>${result.correctCount}</strong>
+        </div>
+
+        <div class="mcq-graph-row">
+            <span>Wrong</span>
+            <div class="mcq-graph-track">
+                <i class="mcq-graph-fill wrong" style="width: ${wrongPercent}%;"></i>
+            </div>
+            <strong>${result.wrongCount}</strong>
+        </div>
+
+        <div class="mcq-graph-row">
+            <span>Unanswered</span>
+            <div class="mcq-graph-track">
+                <i class="mcq-graph-fill unanswered" style="width: ${unansweredPercent}%;"></i>
+            </div>
+            <strong>${result.unansweredCount}</strong>
+        </div>
+    </div>
+
+    <div class="mcq-analytics-card">
+        <div class="mcq-analytics-head">
+            <h3>Point Breakdown</h3>
+            <span>${result.finalPoints} Points</span>
+        </div>
+
+        <div class="mcq-graph-row">
+            <span>Base</span>
+            <div class="mcq-graph-track">
+                <i class="mcq-graph-fill base" style="width: ${basePointPercent}%;"></i>
+            </div>
+            <strong>${result.basePoints}</strong>
+        </div>
+
+        <div class="mcq-graph-row">
+            <span>Difficulty</span>
+            <div class="mcq-graph-track">
+                <i class="mcq-graph-fill difficulty" style="width: ${difficultyBonusPercent}%;"></i>
+            </div>
+            <strong>${result.difficultyBonus}</strong>
+        </div>
+
+        <div class="mcq-graph-row">
+            <span>Speed</span>
+            <div class="mcq-graph-track">
+                <i class="mcq-graph-fill speed" style="width: ${speedBonusPercent}%;"></i>
+            </div>
+            <strong>${result.speedBonus}</strong>
+        </div>
+    </div>
+</div>
 
             <div class="mcq-result-stats">
                 <article>
