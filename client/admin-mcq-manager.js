@@ -2,7 +2,6 @@ const mcqSetForm = document.getElementById("mcqSetForm");
 const mcqQuestionForm = document.getElementById("mcqQuestionForm");
 const questionSetSelect = document.getElementById("questionSet");
 const mcqSetsList = document.getElementById("mcqSetsList");
-const mcqQuestionsList = document.getElementById("mcqQuestionsList");
 
 let selectedSetId = null;
 let latestStudentStats = [];
@@ -74,7 +73,7 @@ function renderMCQSets(sets) {
         const shuffleOptions = set.shuffle_options ?? true;
 
         return `
-            <article class="admin-list-card mcq-student-detail-card">
+            <article class="admin-list-card">
                 <h3>${set.title}</h3>
 
                 <p><strong>Class:</strong> ${set.class_level}th Standard</p>
@@ -243,11 +242,56 @@ async function addQuestion(event) {
     viewQuestions(setId);
 }
 
+function openAdminPopup(title, subtitle, contentHTML, size = "large") {
+    const oldModal = document.querySelector(".admin-popup-overlay");
+
+    if (oldModal) {
+        oldModal.remove();
+    }
+
+    const modal = document.createElement("div");
+    modal.className = "admin-popup-overlay";
+
+    modal.innerHTML = `
+        <section class="admin-popup admin-popup-${size}">
+            <button class="admin-popup-close" type="button" onclick="closeAdminPopup()">
+                ×
+            </button>
+
+            <div class="admin-popup-header">
+                <span>Admin Panel</span>
+                <h2>${title}</h2>
+                <p>${subtitle}</p>
+            </div>
+
+            <div class="admin-popup-body">
+                ${contentHTML}
+            </div>
+        </section>
+    `;
+
+    document.body.appendChild(modal);
+}
+
+function closeAdminPopup() {
+    const modal = document.querySelector(".admin-popup-overlay");
+
+    if (modal) {
+        modal.remove();
+    }
+}
+
 async function viewQuestions(setId) {
     if (!checkSupabaseReady()) return;
 
     selectedSetId = setId;
     questionSetSelect.value = setId;
+
+    openAdminPopup(
+        "Loading Questions",
+        "Please wait while questions are loaded.",
+        `<p class="admin-empty-text">Loading questions...</p>`
+    );
 
     const { data, error } = await window.supabaseClient
         .from("mcq_questions")
@@ -257,19 +301,35 @@ async function viewQuestions(setId) {
 
     if (error) {
         console.error(error);
-        mcqQuestionsList.innerHTML = `<p class="admin-empty-text">Failed to load questions.</p>`;
+
+        openAdminPopup(
+            "Failed to Load Questions",
+            "Check Supabase or console errors.",
+            `<p class="admin-empty-text">Failed to load questions.</p>`
+        );
+
         return;
     }
 
-    renderQuestions(data || []);
+    const questions = data || [];
+
+    const contentHTML = renderQuestionsHTML(questions);
+
+    openAdminPopup(
+        "MCQ Questions",
+        `${questions.length} question${questions.length === 1 ? "" : "s"} found in this set.`,
+        contentHTML
+    );
 }
 
 async function viewMCQAttempts(setId, setTitle) {
     if (!checkSupabaseReady()) return;
 
-    mcqQuestionsList.innerHTML = `
-        <p class="admin-empty-text">Loading performance for ${setTitle}...</p>
-    `;
+    openAdminPopup(
+        "Loading Performance",
+        `Please wait while performance for ${setTitle} is loaded.`,
+        `<p class="admin-empty-text">Loading performance...</p>`
+    );
 
     const { data, error } = await window.supabaseClient
         .from("mcq_attempts")
@@ -279,89 +339,124 @@ async function viewMCQAttempts(setId, setTitle) {
 
     if (error) {
         console.error(error);
-        mcqQuestionsList.innerHTML = `
-            <p class="admin-empty-text">Failed to load MCQ performance.</p>
-        `;
+
+        openAdminPopup(
+            "Failed to Load Performance",
+            "Check Supabase table, policies, or console errors.",
+            `<p class="admin-empty-text">Failed to load MCQ performance.</p>`
+        );
+
         return;
     }
 
     const attempts = data || [];
-    const summary = getAdminPerformanceSummary(attempts);
 
     if (!attempts.length) {
-        mcqQuestionsList.innerHTML = `
-            <p class="admin-empty-text">No students have attempted this MCQ yet.</p>
-        `;
+        openAdminPopup(
+            "No Performance Yet",
+            setTitle,
+            `<p class="admin-empty-text">No students have attempted this MCQ yet.</p>`
+        );
+
         return;
     }
 
-    mcqQuestionsList.innerHTML = `
-        <div class="admin-section-title">
-    <h3>Performance — ${setTitle}</h3>
-    <p>${attempts.length} attempt${attempts.length === 1 ? "" : "s"} recorded.</p>
+    const summary = getAdminPerformanceSummary(attempts);
 
-    <button class="btn-gold" type="button" onclick="viewQuestionAnalysis('${setId}', '${setTitle.replace(/'/g, "\\'")}')">
-        View Question Analysis
-    </button>
-</div>
+    const contentHTML = `
+        <div class="admin-performance-summary admin-performance-modal-summary">
+            <article>
+                <span>Total Attempts</span>
+                <strong>${summary.totalAttempts}</strong>
+            </article>
 
-<div class="admin-performance-summary">
-    <article>
-        <span>Total Attempts</span>
-        <strong>${summary.totalAttempts}</strong>
-    </article>
+            <article>
+                <span>Average Score</span>
+                <strong>${summary.averagePercentage}%</strong>
+            </article>
 
-    <article>
-        <span>Average Score</span>
-        <strong>${summary.averagePercentage}%</strong>
-    </article>
+            <article>
+                <span>Average Accuracy</span>
+                <strong>${summary.averageAccuracy}%</strong>
+            </article>
 
-    <article>
-        <span>Average Accuracy</span>
-        <strong>${summary.averageAccuracy}%</strong>
-    </article>
+            <article>
+                <span>Average Points</span>
+                <strong>${summary.averagePoints}</strong>
+            </article>
 
-    <article>
-        <span>Average Points</span>
-        <strong>${summary.averagePoints}</strong>
-    </article>
+            <article>
+                <span>Best Student</span>
+                <strong>${summary.bestAttempt?.user_name || "N/A"}</strong>
+            </article>
 
-    <article>
-        <span>Best Student</span>
-        <strong>${summary.bestAttempt?.user_name || "N/A"}</strong>
-    </article>
+            <article>
+                <span>Fastest Attempt</span>
+                <strong>${summary.fastestAttempt ? formatAdminTime(summary.fastestAttempt.time_taken_seconds) : "N/A"}</strong>
+            </article>
+        </div>
 
-    <article>
-        <span>Fastest Attempt</span>
-        <strong>${summary.fastestAttempt ? formatAdminTime(summary.fastestAttempt.time_taken_seconds) : "N/A"}</strong>
-    </article>
-</div>
+        <div class="admin-list-card-actions">
+            <button class="btn-gold" type="button" onclick="viewQuestionAnalysis('${setId}', '${setTitle.replace(/'/g, "\\'")}')">
+                View Question Analysis
+            </button>
+        </div>
 
-        ${attempts.map((attempt, index) => {
+        <div class="admin-performance-modal-list">
+            ${attempts.map((attempt, index) => {
         return `
-                <article class="admin-list-card">
-                    <h3>${index + 1}. ${attempt.user_name || "Anonymous Student"}</h3>
+                    <article class="admin-list-card">
+                        <h3>${index + 1}. ${attempt.user_name || "Anonymous Student"}</h3>
 
-                    <p><strong>Email:</strong> ${attempt.user_email || "Not available"}</p>
-                    <p><strong>Score:</strong> ${attempt.correct_count}/${attempt.total_questions}</p>
-                    <p><strong>Percentage:</strong> ${attempt.percentage}%</p>
-                    <p><strong>Accuracy:</strong> ${attempt.accuracy_percentage}%</p>
-                    <p><strong>Time Taken:</strong> ${formatAdminTime(attempt.time_taken_seconds)}</p>
-                    <p><strong>Points:</strong> ${attempt.final_points ?? attempt.points ?? 0}</p>
-                    <p><strong>Rank:</strong> ${attempt.rank_title || "Not ranked"}</p>
-                    <p><strong>Date:</strong> ${new Date(attempt.created_at).toLocaleString()}</p>
-                </article>
-            `;
+                        <p><strong>Email:</strong> ${attempt.user_email || "Not available"}</p>
+                        <p><strong>Score:</strong> ${attempt.correct_count}/${attempt.total_questions}</p>
+                        <p><strong>Percentage:</strong> ${attempt.percentage}%</p>
+                        <p><strong>Accuracy:</strong> ${attempt.accuracy_percentage}%</p>
+                        <p><strong>Time Taken:</strong> ${formatAdminTime(attempt.time_taken_seconds)}</p>
+                        <p><strong>Points:</strong> ${attempt.final_points ?? attempt.points ?? 0}</p>
+                        <p><strong>Rank:</strong> ${attempt.rank_title || "Not ranked"}</p>
+                        <p><strong>Date:</strong> ${new Date(attempt.created_at).toLocaleString()}</p>
+                    </article>
+                `;
     }).join("")}
+        </div>
     `;
+
+    openAdminPopup(
+        `Performance — ${setTitle}`,
+        `${attempts.length} attempt${attempts.length === 1 ? "" : "s"} recorded.`,
+        contentHTML
+    );
 }
 
 async function viewOverallStudentPerformance() {
     if (!checkSupabaseReady()) return;
 
-    mcqQuestionsList.innerHTML = `
-        <p class="admin-empty-text">Loading whole student performance...</p>
+    const oldModal = document.querySelector(".admin-performance-modal-overlay");
+
+    if (oldModal) {
+        oldModal.remove();
+    }
+
+    const modal = document.createElement("div");
+    modal.className = "admin-performance-modal-overlay";
+
+    modal.innerHTML = `
+        <section class="admin-performance-modal">
+            <button class="admin-performance-close" type="button" onclick="closeOverallPerformanceModal()">
+                ×
+            </button>
+
+            <div class="admin-performance-modal-loading">
+                <h2>Loading Whole Student Performance...</h2>
+                <p>Please wait while the latest student data is loaded.</p>
+            </div>
+        </section>
     `;
+
+    document.body.appendChild(modal);
+
+    const modalBox = modal.querySelector(".admin-performance-modal");
 
     const { data, error } = await window.supabaseClient
         .from("mcq_attempts")
@@ -370,31 +465,56 @@ async function viewOverallStudentPerformance() {
 
     if (error) {
         console.error(error);
-        mcqQuestionsList.innerHTML = `
-            <p class="admin-empty-text">Failed to load whole student performance.</p>
+
+        modalBox.innerHTML = `
+            <button class="admin-performance-close" type="button" onclick="closeOverallPerformanceModal()">
+                ×
+            </button>
+
+            <div class="admin-performance-modal-loading">
+                <h2>Failed to Load Performance</h2>
+                <p>Check Supabase table, policies, or console errors.</p>
+            </div>
         `;
+
         return;
     }
 
     const attempts = data || [];
 
     if (!attempts.length) {
-        mcqQuestionsList.innerHTML = `
-            <p class="admin-empty-text">No student attempts recorded yet.</p>
+        modalBox.innerHTML = `
+            <button class="admin-performance-close" type="button" onclick="closeOverallPerformanceModal()">
+                ×
+            </button>
+
+            <div class="admin-performance-modal-loading">
+                <h2>No Student Attempts Yet</h2>
+                <p>Student performance will appear here after MCQ submissions.</p>
+            </div>
         `;
+
         return;
     }
 
     const students = getOverallStudentStats(attempts);
     latestStudentStats = students;
 
-    mcqQuestionsList.innerHTML = `
-        <div class="admin-section-title">
-            <h3>Whole Student Performance</h3>
-            <p>${students.length} student${students.length === 1 ? "" : "s"} found across ${attempts.length} total attempt${attempts.length === 1 ? "" : "s"}.</p>
+    modalBox.innerHTML = `
+        <button class="admin-performance-close" type="button" onclick="closeOverallPerformanceModal()">
+            ×
+        </button>
+
+        <div class="admin-performance-modal-header">
+            <span>MCQ Analytics</span>
+            <h2>Whole Student Performance</h2>
+            <p>
+                ${students.length} student${students.length === 1 ? "" : "s"} found across
+                ${attempts.length} total attempt${attempts.length === 1 ? "" : "s"}.
+            </p>
         </div>
 
-        <div class="admin-performance-summary">
+        <div class="admin-performance-summary admin-performance-modal-summary">
             <article>
                 <span>Total Students</span>
                 <strong>${students.length}</strong>
@@ -428,29 +548,40 @@ async function viewOverallStudentPerformance() {
             </article>
         </div>
 
-        ${students.map((student, index) => {
+        <div class="admin-performance-modal-list">
+            ${students.map((student, index) => {
         return `
-                <article class="admin-list-card admin-student-performance-card">
-                    <h3>${index + 1}. ${student.name}</h3>
+                    <article class="admin-list-card admin-student-performance-card">
+                        <h3>${index + 1}. ${student.name}</h3>
 
-                    <p><strong>Email:</strong> ${student.email}</p>
-                    <p><strong>Total Attempts:</strong> ${student.totalAttempts}</p>
-                    <p><strong>Average Score:</strong> ${student.averageScore}%</p>
-                    <p><strong>Average Accuracy:</strong> ${student.averageAccuracy}%</p>
-                    <p><strong>Total Points:</strong> ${student.totalPoints}</p>
-                    <p><strong>Best Score:</strong> ${student.bestScore}%</p>
-                    <p><strong>Total Correct:</strong> ${student.totalCorrect}/${student.totalQuestions}</p>
-                    <p><strong>Total Time:</strong> ${formatAdminTime(student.totalTime)}</p>
-                    <p><strong>Last Attempt:</strong> ${new Date(student.lastAttempt).toLocaleString()}</p>
-                    <div class="admin-list-card-actions">
-    <button class="btn-outline" type="button" onclick="viewSingleStudentPerformance('${student.key}')">
-        View Student Details
-    </button>
-</div>
-                </article>
-            `;
+                        <p><strong>Email:</strong> ${student.email}</p>
+                        <p><strong>Total Attempts:</strong> ${student.totalAttempts}</p>
+                        <p><strong>Average Score:</strong> ${student.averageScore}%</p>
+                        <p><strong>Average Accuracy:</strong> ${student.averageAccuracy}%</p>
+                        <p><strong>Total Points:</strong> ${student.totalPoints}</p>
+                        <p><strong>Best Score:</strong> ${student.bestScore}%</p>
+                        <p><strong>Total Correct:</strong> ${student.totalCorrect}/${student.totalQuestions}</p>
+                        <p><strong>Total Time:</strong> ${formatAdminTime(student.totalTime)}</p>
+                        <p><strong>Last Attempt:</strong> ${new Date(student.lastAttempt).toLocaleString()}</p>
+
+                        <div class="admin-list-card-actions">
+                            <button class="btn-outline" type="button" onclick="viewSingleStudentPerformance('${student.key}')">
+                                View Student Details
+                            </button>
+                        </div>
+                    </article>
+                `;
     }).join("")}
+        </div>
     `;
+}
+
+function closeOverallPerformanceModal() {
+    const modal = document.querySelector(".admin-performance-modal-overlay");
+
+    if (modal) {
+        modal.remove();
+    }
 }
 
 function viewSingleStudentPerformance(studentKey) {
@@ -461,17 +592,8 @@ function viewSingleStudentPerformance(studentKey) {
         return;
     }
 
-    mcqQuestionsList.innerHTML = `
-        <div class="admin-section-title">
-            <h3>${student.name}</h3>
-            <p>${student.email}</p>
-
-            <button class="btn-outline" type="button" onclick="viewOverallStudentPerformance()">
-                Back to Whole Student Performance
-            </button>
-        </div>
-
-        <div class="admin-performance-summary">
+    const contentHTML = `
+        <div class="admin-performance-summary admin-performance-modal-summary">
             <article>
                 <span>Total Attempts</span>
                 <strong>${student.totalAttempts}</strong>
@@ -503,22 +625,30 @@ function viewSingleStudentPerformance(studentKey) {
             </article>
         </div>
 
-        ${student.attempts.map((attempt, index) => {
-            return `
-                <article class="admin-list-card">
-                    <h3>Attempt ${index + 1}</h3>
+        <div class="admin-performance-modal-list">
+            ${student.attempts.map((attempt, index) => {
+        return `
+                    <article class="admin-list-card mcq-student-detail-card">
+                        <h3>Attempt ${index + 1}</h3>
 
-                    <p><strong>Score:</strong> ${attempt.correct_count}/${attempt.total_questions}</p>
-                    <p><strong>Percentage:</strong> ${attempt.percentage}%</p>
-                    <p><strong>Accuracy:</strong> ${attempt.accuracy_percentage}%</p>
-                    <p><strong>Time Taken:</strong> ${formatAdminTime(attempt.time_taken_seconds)}</p>
-                    <p><strong>Points:</strong> ${attempt.final_points ?? attempt.points ?? 0}</p>
-                    <p><strong>Rank:</strong> ${attempt.rank_title || "Not ranked"}</p>
-                    <p><strong>Date:</strong> ${new Date(attempt.created_at).toLocaleString()}</p>
-                </article>
-            `;
-        }).join("")}
+                        <p><strong>Score:</strong> ${attempt.correct_count}/${attempt.total_questions}</p>
+                        <p><strong>Percentage:</strong> ${attempt.percentage}%</p>
+                        <p><strong>Accuracy:</strong> ${attempt.accuracy_percentage}%</p>
+                        <p><strong>Time Taken:</strong> ${formatAdminTime(attempt.time_taken_seconds)}</p>
+                        <p><strong>Points:</strong> ${attempt.final_points ?? attempt.points ?? 0}</p>
+                        <p><strong>Rank:</strong> ${attempt.rank_title || "Not ranked"}</p>
+                        <p><strong>Date:</strong> ${new Date(attempt.created_at).toLocaleString()}</p>
+                    </article>
+                `;
+    }).join("")}
+        </div>
     `;
+
+    openAdminPopup(
+        student.name,
+        student.email,
+        contentHTML
+    );
 }
 
 function getOverallStudentStats(attempts) {
@@ -591,9 +721,11 @@ function getAverageValue(items, field) {
 async function viewQuestionAnalysis(setId, setTitle) {
     if (!checkSupabaseReady()) return;
 
-    mcqQuestionsList.innerHTML = `
-        <p class="admin-empty-text">Loading question analysis for ${setTitle}...</p>
-    `;
+    openAdminPopup(
+        "Loading Question Analysis",
+        `Please wait while analysis for ${setTitle} is loaded.`,
+        `<p class="admin-empty-text">Loading question analysis...</p>`
+    );
 
     const { data: questions, error: questionError } = await window.supabaseClient
         .from("mcq_questions")
@@ -603,7 +735,13 @@ async function viewQuestionAnalysis(setId, setTitle) {
 
     if (questionError) {
         console.error(questionError);
-        mcqQuestionsList.innerHTML = `<p class="admin-empty-text">Failed to load questions.</p>`;
+
+        openAdminPopup(
+            "Failed to Load Questions",
+            "Check Supabase questions table or console errors.",
+            `<p class="admin-empty-text">Failed to load questions.</p>`
+        );
+
         return;
     }
 
@@ -614,7 +752,13 @@ async function viewQuestionAnalysis(setId, setTitle) {
 
     if (answerError) {
         console.error(answerError);
-        mcqQuestionsList.innerHTML = `<p class="admin-empty-text">Failed to load answer analysis.</p>`;
+
+        openAdminPopup(
+            "Failed to Load Answer Analysis",
+            "Check Supabase attempt answers table or console errors.",
+            `<p class="admin-empty-text">Failed to load answer analysis.</p>`
+        );
+
         return;
     }
 
@@ -622,21 +766,24 @@ async function viewQuestionAnalysis(setId, setTitle) {
     const answerList = answers || [];
 
     if (!questionList.length) {
-        mcqQuestionsList.innerHTML = `<p class="admin-empty-text">No questions found for this MCQ set.</p>`;
+        openAdminPopup(
+            "No Questions Found",
+            setTitle,
+            `<p class="admin-empty-text">No questions found for this MCQ set.</p>`
+        );
+
         return;
     }
 
-    mcqQuestionsList.innerHTML = `
-        <div class="admin-section-title">
-            <h3>Question Analysis — ${setTitle}</h3>
-            <p>Based on ${answerList.length} recorded answer${answerList.length === 1 ? "" : "s"}.</p>
-
+    const contentHTML = `
+        <div class="admin-list-card-actions">
             <button class="btn-outline" type="button" onclick="viewMCQAttempts('${setId}', '${setTitle.replace(/'/g, "\\'")}')">
                 Back to Performance
             </button>
         </div>
 
-        ${questionList.map((question, index) => {
+        <div class="admin-performance-modal-list">
+            ${questionList.map((question, index) => {
         const rows = answerList.filter((answer) => answer.question_id === question.id);
 
         const totalAnswers = rows.length;
@@ -654,26 +801,33 @@ async function viewQuestionAnalysis(setId, setTitle) {
             : 0;
 
         return `
-                <article class="admin-list-card admin-analysis-card">
-                    <h3>${index + 1}. ${question.question}</h3>
+                    <article class="admin-list-card admin-analysis-card">
+                        <h3>${index + 1}. ${question.question}</h3>
 
-                    <p><strong>Correct Answer:</strong> ${question.correct_answer}</p>
-                    <p><strong>Difficulty:</strong> ${question.difficulty || "easy"}</p>
-                    <p><strong>Correct Rate:</strong> ${correctPercent}%</p>
-                    <p><strong>Correct Students:</strong> ${correctAnswers}/${totalAnswers}</p>
-                    <p><strong>Wrong:</strong> ${wrongAnswers}</p>
-                    <p><strong>Unanswered:</strong> ${unanswered}</p>
+                        <p><strong>Correct Answer:</strong> ${question.correct_answer}</p>
+                        <p><strong>Difficulty:</strong> ${question.difficulty || "easy"}</p>
+                        <p><strong>Correct Rate:</strong> ${correctPercent}%</p>
+                        <p><strong>Correct Students:</strong> ${correctAnswers}/${totalAnswers}</p>
+                        <p><strong>Wrong:</strong> ${wrongAnswers}</p>
+                        <p><strong>Unanswered:</strong> ${unanswered}</p>
 
-                    <div class="admin-answer-distribution">
-                        ${renderAnswerDistributionRow("A", optionA, totalAnswers, question.correct_answer)}
-                        ${renderAnswerDistributionRow("B", optionB, totalAnswers, question.correct_answer)}
-                        ${renderAnswerDistributionRow("C", optionC, totalAnswers, question.correct_answer)}
-                        ${renderAnswerDistributionRow("D", optionD, totalAnswers, question.correct_answer)}
-                    </div>
-                </article>
-            `;
+                        <div class="admin-answer-distribution">
+                            ${renderAnswerDistributionRow("A", optionA, totalAnswers, question.correct_answer)}
+                            ${renderAnswerDistributionRow("B", optionB, totalAnswers, question.correct_answer)}
+                            ${renderAnswerDistributionRow("C", optionC, totalAnswers, question.correct_answer)}
+                            ${renderAnswerDistributionRow("D", optionD, totalAnswers, question.correct_answer)}
+                        </div>
+                    </article>
+                `;
     }).join("")}
+        </div>
     `;
+
+    openAdminPopup(
+        `Question Analysis — ${setTitle}`,
+        `Based on ${answerList.length} recorded answer${answerList.length === 1 ? "" : "s"}.`,
+        contentHTML
+    );
 }
 
 function renderAnswerDistributionRow(optionLetter, count, total, correctAnswer) {
@@ -754,13 +908,12 @@ function getAdminPerformanceSummary(attempts) {
     };
 }
 
-function renderQuestions(questions) {
+function renderQuestionsHTML(questions) {
     if (!questions.length) {
-        mcqQuestionsList.innerHTML = `<p class="admin-empty-text">No questions added to this set yet.</p>`;
-        return;
+        return `<p class="admin-empty-text">No questions added to this set yet.</p>`;
     }
 
-    mcqQuestionsList.innerHTML = questions.map((item, index) => {
+    return questions.map((item, index) => {
         return `
             <article class="admin-list-card">
                 <h3>${index + 1}. ${item.question}</h3>
@@ -838,7 +991,7 @@ async function deleteMCQSet(setId) {
 
     if (selectedSetId === setId) {
         selectedSetId = null;
-        mcqQuestionsList.innerHTML = `<p class="admin-empty-text">Select an MCQ set to view questions.</p>`;
+        closeAdminPopup();
     }
 
     showAdminMessage("MCQ set deleted.");
@@ -852,8 +1005,7 @@ questionSetSelect?.addEventListener("change", () => {
         viewQuestions(questionSetSelect.value);
     } else {
         selectedSetId = null;
-        localStorage.removeItem("selectedMCQSetId");
-        mcqQuestionsList.innerHTML = `<p class="admin-empty-text">Select an MCQ set to view questions.</p>`;
+        closeAdminPopup();
     }
 });
 
@@ -865,6 +1017,8 @@ window.viewMCQAttempts = viewMCQAttempts;
 window.viewQuestionAnalysis = viewQuestionAnalysis;
 window.viewOverallStudentPerformance = viewOverallStudentPerformance;
 window.viewSingleStudentPerformance = viewSingleStudentPerformance;
+window.closeOverallPerformanceModal = closeOverallPerformanceModal;
+window.closeAdminPopup = closeAdminPopup;
 
 document.addEventListener("DOMContentLoaded", loadMCQSets);
 
