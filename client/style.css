@@ -9853,3 +9853,7 @@ select option:checked {
     background: #d4af37;
     color: #050505;
 }
+
+.admin-card {
+    margin:40px;
+}
