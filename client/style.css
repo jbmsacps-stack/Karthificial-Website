@@ -9843,3 +9843,13 @@ body.mcq-result-open {
     border-color: rgba(248, 113, 113, 0.95);
     box-shadow: 0 8px 22px rgba(248, 113, 113, 0.12);
 }
+
+select option {
+    background: #050505;
+    color: #f7f3e8;
+}
+
+select option:checked {
+    background: #d4af37;
+    color: #050505;
+}
