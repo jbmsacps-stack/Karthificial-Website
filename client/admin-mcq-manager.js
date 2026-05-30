@@ -2,9 +2,9 @@ const mcqSetForm = document.getElementById("mcqSetForm");
 const mcqQuestionForm = document.getElementById("mcqQuestionForm");
 const questionSetSelect = document.getElementById("questionSet");
 const mcqSetsList = document.getElementById("mcqSetsList");
-const mcqQuestionsList = document.getElementById("mcqQuestionsList");
 
 let selectedSetId = null;
+let latestStudentStats = [];
 
 function showAdminMessage(message) {
     alert(message);
@@ -38,14 +38,6 @@ async function loadMCQSets() {
 
     renderMCQSetOptions(sets);
     renderMCQSets(sets);
-
-    const savedSetId = localStorage.getItem("selectedMCQSetId");
-
-    if (savedSetId && sets.some((set) => set.id === savedSetId)) {
-        selectedSetId = savedSetId;
-        questionSetSelect.value = savedSetId;
-        viewQuestions(savedSetId);
-    }
 }
 
 function renderMCQSetOptions(sets) {
@@ -65,7 +57,18 @@ function renderMCQSets(sets) {
         return;
     }
 
-    mcqSetsList.innerHTML = sets.map((set) => {
+    const overallButtonHTML = `
+        <div class="admin-section-title">
+            <h3>MCQ Management</h3>
+            <p>Manage MCQ sets, questions, shuffle controls, and student performance.</p>
+
+            <button class="btn-gold" type="button" onclick="viewOverallStudentPerformance()">
+                View Whole Student Performance
+            </button>
+        </div>
+    `;
+
+    const setCardsHTML = sets.map((set) => {
         const shuffleQuestions = set.shuffle_questions ?? true;
         const shuffleOptions = set.shuffle_options ?? true;
 
@@ -107,17 +110,23 @@ function renderMCQSets(sets) {
                 <p>${set.description || "No description added."}</p>
 
                 <div class="admin-list-card-actions">
-                    <button class="btn-outline" type="button" onclick="viewQuestions('${set.id}')">
-                        View Questions
-                    </button>
+    <button class="btn-outline" type="button" onclick="viewQuestions('${set.id}')">
+        View Questions
+    </button>
 
-                    <button class="admin-delete-btn" type="button" onclick="deleteMCQSet('${set.id}')">
-                        Delete Set
-                    </button>
-                </div>
+    <button class="btn-outline" type="button" onclick="viewMCQAttempts('${set.id}', '${set.title.replace(/'/g, "\\'")}')">
+        View Performance
+    </button>
+
+    <button class="admin-delete-btn" type="button" onclick="deleteMCQSet('${set.id}')">
+        Delete Set
+    </button>
+</div>
             </article>
         `;
     }).join("");
+
+    mcqSetsList.innerHTML = overallButtonHTML + setCardsHTML;
 }
 
 async function updateMCQShuffleSetting(setId, field, value) {
@@ -233,12 +242,56 @@ async function addQuestion(event) {
     viewQuestions(setId);
 }
 
+function openAdminPopup(title, subtitle, contentHTML, size = "large") {
+    const oldModal = document.querySelector(".admin-popup-overlay");
+
+    if (oldModal) {
+        oldModal.remove();
+    }
+
+    const modal = document.createElement("div");
+    modal.className = "admin-popup-overlay";
+
+    modal.innerHTML = `
+        <section class="admin-popup admin-popup-${size}">
+            <button class="admin-popup-close" type="button" onclick="closeAdminPopup()">
+                ×
+            </button>
+
+            <div class="admin-popup-header">
+                <span>Admin Panel</span>
+                <h2>${title}</h2>
+                <p>${subtitle}</p>
+            </div>
+
+            <div class="admin-popup-body">
+                ${contentHTML}
+            </div>
+        </section>
+    `;
+
+    document.body.appendChild(modal);
+}
+
+function closeAdminPopup() {
+    const modal = document.querySelector(".admin-popup-overlay");
+
+    if (modal) {
+        modal.remove();
+    }
+}
+
 async function viewQuestions(setId) {
     if (!checkSupabaseReady()) return;
 
     selectedSetId = setId;
-    localStorage.setItem("selectedMCQSetId", setId);
     questionSetSelect.value = setId;
+
+    openAdminPopup(
+        "Loading Questions",
+        "Please wait while questions are loaded.",
+        `<p class="admin-empty-text">Loading questions...</p>`
+    );
 
     const { data, error } = await window.supabaseClient
         .from("mcq_questions")
@@ -248,20 +301,619 @@ async function viewQuestions(setId) {
 
     if (error) {
         console.error(error);
-        mcqQuestionsList.innerHTML = `<p class="admin-empty-text">Failed to load questions.</p>`;
+
+        openAdminPopup(
+            "Failed to Load Questions",
+            "Check Supabase or console errors.",
+            `<p class="admin-empty-text">Failed to load questions.</p>`
+        );
+
         return;
     }
 
-    renderQuestions(data || []);
+    const questions = data || [];
+
+    const contentHTML = renderQuestionsHTML(questions);
+
+    openAdminPopup(
+        "MCQ Questions",
+        `${questions.length} question${questions.length === 1 ? "" : "s"} found in this set.`,
+        contentHTML
+    );
 }
 
-function renderQuestions(questions) {
-    if (!questions.length) {
-        mcqQuestionsList.innerHTML = `<p class="admin-empty-text">No questions added to this set yet.</p>`;
+async function viewMCQAttempts(setId, setTitle) {
+    if (!checkSupabaseReady()) return;
+
+    openAdminPopup(
+        "Loading Performance",
+        `Please wait while performance for ${setTitle} is loaded.`,
+        `<p class="admin-empty-text">Loading performance...</p>`
+    );
+
+    const { data, error } = await window.supabaseClient
+        .from("mcq_attempts")
+        .select("*")
+        .eq("set_id", setId)
+        .order("created_at", { ascending: false });
+
+    if (error) {
+        console.error(error);
+
+        openAdminPopup(
+            "Failed to Load Performance",
+            "Check Supabase table, policies, or console errors.",
+            `<p class="admin-empty-text">Failed to load MCQ performance.</p>`
+        );
+
         return;
     }
 
-    mcqQuestionsList.innerHTML = questions.map((item, index) => {
+    const attempts = data || [];
+
+    if (!attempts.length) {
+        openAdminPopup(
+            "No Performance Yet",
+            setTitle,
+            `<p class="admin-empty-text">No students have attempted this MCQ yet.</p>`
+        );
+
+        return;
+    }
+
+    const summary = getAdminPerformanceSummary(attempts);
+
+    const contentHTML = `
+        <div class="admin-performance-summary admin-performance-modal-summary">
+            <article>
+                <span>Total Attempts</span>
+                <strong>${summary.totalAttempts}</strong>
+            </article>
+
+            <article>
+                <span>Average Score</span>
+                <strong>${summary.averagePercentage}%</strong>
+            </article>
+
+            <article>
+                <span>Average Accuracy</span>
+                <strong>${summary.averageAccuracy}%</strong>
+            </article>
+
+            <article>
+                <span>Average Points</span>
+                <strong>${summary.averagePoints}</strong>
+            </article>
+
+            <article>
+                <span>Best Student</span>
+                <strong>${summary.bestAttempt?.user_name || "N/A"}</strong>
+            </article>
+
+            <article>
+                <span>Fastest Attempt</span>
+                <strong>${summary.fastestAttempt ? formatAdminTime(summary.fastestAttempt.time_taken_seconds) : "N/A"}</strong>
+            </article>
+        </div>
+
+        <div class="admin-list-card-actions">
+            <button class="btn-gold" type="button" onclick="viewQuestionAnalysis('${setId}', '${setTitle.replace(/'/g, "\\'")}')">
+                View Question Analysis
+            </button>
+        </div>
+
+        <div class="admin-performance-modal-list">
+            ${attempts.map((attempt, index) => {
+        return `
+                    <article class="admin-list-card">
+                        <h3>${index + 1}. ${attempt.user_name || "Anonymous Student"}</h3>
+
+                        <p><strong>Email:</strong> ${attempt.user_email || "Not available"}</p>
+                        <p><strong>Score:</strong> ${attempt.correct_count}/${attempt.total_questions}</p>
+                        <p><strong>Percentage:</strong> ${attempt.percentage}%</p>
+                        <p><strong>Accuracy:</strong> ${attempt.accuracy_percentage}%</p>
+                        <p><strong>Time Taken:</strong> ${formatAdminTime(attempt.time_taken_seconds)}</p>
+                        <p><strong>Points:</strong> ${attempt.final_points ?? attempt.points ?? 0}</p>
+                        <p><strong>Rank:</strong> ${attempt.rank_title || "Not ranked"}</p>
+                        <p><strong>Date:</strong> ${new Date(attempt.created_at).toLocaleString()}</p>
+                    </article>
+                `;
+    }).join("")}
+        </div>
+    `;
+
+    openAdminPopup(
+        `Performance — ${setTitle}`,
+        `${attempts.length} attempt${attempts.length === 1 ? "" : "s"} recorded.`,
+        contentHTML
+    );
+}
+
+async function viewOverallStudentPerformance() {
+    if (!checkSupabaseReady()) return;
+
+    const oldModal = document.querySelector(".admin-performance-modal-overlay");
+
+    if (oldModal) {
+        oldModal.remove();
+    }
+
+    const modal = document.createElement("div");
+    modal.className = "admin-performance-modal-overlay";
+
+    modal.innerHTML = `
+        <section class="admin-performance-modal">
+            <button class="admin-performance-close" type="button" onclick="closeOverallPerformanceModal()">
+                ×
+            </button>
+
+            <div class="admin-performance-modal-loading">
+                <h2>Loading Whole Student Performance...</h2>
+                <p>Please wait while the latest student data is loaded.</p>
+            </div>
+        </section>
+    `;
+
+    document.body.appendChild(modal);
+
+    const modalBox = modal.querySelector(".admin-performance-modal");
+
+    const { data, error } = await window.supabaseClient
+        .from("mcq_attempts")
+        .select("*")
+        .order("created_at", { ascending: false });
+
+    if (error) {
+        console.error(error);
+
+        modalBox.innerHTML = `
+            <button class="admin-performance-close" type="button" onclick="closeOverallPerformanceModal()">
+                ×
+            </button>
+
+            <div class="admin-performance-modal-loading">
+                <h2>Failed to Load Performance</h2>
+                <p>Check Supabase table, policies, or console errors.</p>
+            </div>
+        `;
+
+        return;
+    }
+
+    const attempts = data || [];
+
+    if (!attempts.length) {
+        modalBox.innerHTML = `
+            <button class="admin-performance-close" type="button" onclick="closeOverallPerformanceModal()">
+                ×
+            </button>
+
+            <div class="admin-performance-modal-loading">
+                <h2>No Student Attempts Yet</h2>
+                <p>Student performance will appear here after MCQ submissions.</p>
+            </div>
+        `;
+
+        return;
+    }
+
+    const students = getOverallStudentStats(attempts);
+    latestStudentStats = students;
+
+    modalBox.innerHTML = `
+        <button class="admin-performance-close" type="button" onclick="closeOverallPerformanceModal()">
+            ×
+        </button>
+
+        <div class="admin-performance-modal-header">
+            <span>MCQ Analytics</span>
+            <h2>Whole Student Performance</h2>
+            <p>
+                ${students.length} student${students.length === 1 ? "" : "s"} found across
+                ${attempts.length} total attempt${attempts.length === 1 ? "" : "s"}.
+            </p>
+        </div>
+
+        <div class="admin-performance-summary admin-performance-modal-summary">
+            <article>
+                <span>Total Students</span>
+                <strong>${students.length}</strong>
+            </article>
+
+            <article>
+                <span>Total Attempts</span>
+                <strong>${attempts.length}</strong>
+            </article>
+
+            <article>
+                <span>Average Score</span>
+                <strong>${getAverageValue(attempts, "percentage")}%</strong>
+            </article>
+
+            <article>
+                <span>Average Accuracy</span>
+                <strong>${getAverageValue(attempts, "accuracy_percentage")}%</strong>
+            </article>
+
+            <article>
+                <span>Total Points</span>
+                <strong>${attempts.reduce((sum, item) => {
+        return sum + Number(item.final_points ?? item.points ?? 0);
+    }, 0)}</strong>
+            </article>
+
+            <article>
+                <span>Best Score</span>
+                <strong>${Math.max(...attempts.map((item) => Number(item.percentage || 0)))}%</strong>
+            </article>
+        </div>
+
+        <div class="admin-performance-modal-list">
+            ${students.map((student, index) => {
+        return `
+                    <article class="admin-list-card admin-student-performance-card">
+                        <h3>${index + 1}. ${student.name}</h3>
+
+                        <p><strong>Email:</strong> ${student.email}</p>
+                        <p><strong>Total Attempts:</strong> ${student.totalAttempts}</p>
+                        <p><strong>Average Score:</strong> ${student.averageScore}%</p>
+                        <p><strong>Average Accuracy:</strong> ${student.averageAccuracy}%</p>
+                        <p><strong>Total Points:</strong> ${student.totalPoints}</p>
+                        <p><strong>Best Score:</strong> ${student.bestScore}%</p>
+                        <p><strong>Total Correct:</strong> ${student.totalCorrect}/${student.totalQuestions}</p>
+                        <p><strong>Total Time:</strong> ${formatAdminTime(student.totalTime)}</p>
+                        <p><strong>Last Attempt:</strong> ${new Date(student.lastAttempt).toLocaleString()}</p>
+
+                        <div class="admin-list-card-actions">
+                            <button class="btn-outline" type="button" onclick="viewSingleStudentPerformance('${student.key}')">
+                                View Student Details
+                            </button>
+                        </div>
+                    </article>
+                `;
+    }).join("")}
+        </div>
+    `;
+}
+
+function closeOverallPerformanceModal() {
+    const modal = document.querySelector(".admin-performance-modal-overlay");
+
+    if (modal) {
+        modal.remove();
+    }
+}
+
+function viewSingleStudentPerformance(studentKey) {
+    const student = latestStudentStats.find((item) => item.key === studentKey);
+
+    if (!student) {
+        showAdminMessage("Student details not found. Open Whole Student Performance again.");
+        return;
+    }
+
+    const contentHTML = `
+        <div class="admin-performance-summary admin-performance-modal-summary">
+            <article>
+                <span>Total Attempts</span>
+                <strong>${student.totalAttempts}</strong>
+            </article>
+
+            <article>
+                <span>Average Score</span>
+                <strong>${student.averageScore}%</strong>
+            </article>
+
+            <article>
+                <span>Average Accuracy</span>
+                <strong>${student.averageAccuracy}%</strong>
+            </article>
+
+            <article>
+                <span>Total Points</span>
+                <strong>${student.totalPoints}</strong>
+            </article>
+
+            <article>
+                <span>Best Score</span>
+                <strong>${student.bestScore}%</strong>
+            </article>
+
+            <article>
+                <span>Total Time</span>
+                <strong>${formatAdminTime(student.totalTime)}</strong>
+            </article>
+        </div>
+
+        <div class="admin-performance-modal-list">
+            ${student.attempts.map((attempt, index) => {
+        return `
+                    <article class="admin-list-card mcq-student-detail-card">
+                        <h3>Attempt ${index + 1}</h3>
+
+                        <p><strong>Score:</strong> ${attempt.correct_count}/${attempt.total_questions}</p>
+                        <p><strong>Percentage:</strong> ${attempt.percentage}%</p>
+                        <p><strong>Accuracy:</strong> ${attempt.accuracy_percentage}%</p>
+                        <p><strong>Time Taken:</strong> ${formatAdminTime(attempt.time_taken_seconds)}</p>
+                        <p><strong>Points:</strong> ${attempt.final_points ?? attempt.points ?? 0}</p>
+                        <p><strong>Rank:</strong> ${attempt.rank_title || "Not ranked"}</p>
+                        <p><strong>Date:</strong> ${new Date(attempt.created_at).toLocaleString()}</p>
+                    </article>
+                `;
+    }).join("")}
+        </div>
+    `;
+
+    openAdminPopup(
+        student.name,
+        student.email,
+        contentHTML
+    );
+}
+
+function getOverallStudentStats(attempts) {
+    const studentMap = new Map();
+
+    attempts.forEach((attempt) => {
+        const studentKey =
+            attempt.clerk_user_id ||
+            attempt.user_email ||
+            `anonymous-${attempt.user_name || "student"}`;
+
+        if (!studentMap.has(studentKey)) {
+            studentMap.set(studentKey, {
+                key: studentKey,
+                name: attempt.user_name || "Anonymous Student",
+                email: attempt.user_email || "Not available",
+                attempts: [],
+                totalAttempts: 0,
+                totalScore: 0,
+                totalAccuracy: 0,
+                totalPoints: 0,
+                bestScore: 0,
+                totalCorrect: 0,
+                totalQuestions: 0,
+                totalTime: 0,
+                lastAttempt: attempt.created_at
+            });
+        }
+
+        const student = studentMap.get(studentKey);
+
+        student.attempts.push(attempt);
+        student.totalAttempts += 1;
+        student.totalScore += Number(attempt.percentage || 0);
+        student.totalAccuracy += Number(attempt.accuracy_percentage || 0);
+        student.totalPoints += Number(attempt.final_points ?? attempt.points ?? 0);
+        student.bestScore = Math.max(student.bestScore, Number(attempt.percentage || 0));
+        student.totalCorrect += Number(attempt.correct_count || 0);
+        student.totalQuestions += Number(attempt.total_questions || 0);
+        student.totalTime += Number(attempt.time_taken_seconds || 0);
+
+        if (new Date(attempt.created_at) > new Date(student.lastAttempt)) {
+            student.lastAttempt = attempt.created_at;
+        }
+    });
+
+    return [...studentMap.values()]
+        .map((student) => {
+            return {
+                ...student,
+                averageScore: Math.round(student.totalScore / student.totalAttempts),
+                averageAccuracy: Math.round(student.totalAccuracy / student.totalAttempts)
+            };
+        })
+        .sort((a, b) => {
+            return b.totalPoints - a.totalPoints;
+        });
+}
+
+function getAverageValue(items, field) {
+    if (!items.length) return 0;
+
+    const total = items.reduce((sum, item) => {
+        return sum + Number(item[field] || 0);
+    }, 0);
+
+    return Math.round(total / items.length);
+}
+
+async function viewQuestionAnalysis(setId, setTitle) {
+    if (!checkSupabaseReady()) return;
+
+    openAdminPopup(
+        "Loading Question Analysis",
+        `Please wait while analysis for ${setTitle} is loaded.`,
+        `<p class="admin-empty-text">Loading question analysis...</p>`
+    );
+
+    const { data: questions, error: questionError } = await window.supabaseClient
+        .from("mcq_questions")
+        .select("*")
+        .eq("set_id", setId)
+        .order("created_at", { ascending: true });
+
+    if (questionError) {
+        console.error(questionError);
+
+        openAdminPopup(
+            "Failed to Load Questions",
+            "Check Supabase questions table or console errors.",
+            `<p class="admin-empty-text">Failed to load questions.</p>`
+        );
+
+        return;
+    }
+
+    const { data: answers, error: answerError } = await window.supabaseClient
+        .from("mcq_attempt_answers")
+        .select("*")
+        .eq("set_id", setId);
+
+    if (answerError) {
+        console.error(answerError);
+
+        openAdminPopup(
+            "Failed to Load Answer Analysis",
+            "Check Supabase attempt answers table or console errors.",
+            `<p class="admin-empty-text">Failed to load answer analysis.</p>`
+        );
+
+        return;
+    }
+
+    const questionList = questions || [];
+    const answerList = answers || [];
+
+    if (!questionList.length) {
+        openAdminPopup(
+            "No Questions Found",
+            setTitle,
+            `<p class="admin-empty-text">No questions found for this MCQ set.</p>`
+        );
+
+        return;
+    }
+
+    const contentHTML = `
+        <div class="admin-list-card-actions">
+            <button class="btn-outline" type="button" onclick="viewMCQAttempts('${setId}', '${setTitle.replace(/'/g, "\\'")}')">
+                Back to Performance
+            </button>
+        </div>
+
+        <div class="admin-performance-modal-list">
+            ${questionList.map((question, index) => {
+        const rows = answerList.filter((answer) => answer.question_id === question.id);
+
+        const totalAnswers = rows.length;
+        const correctAnswers = rows.filter((answer) => answer.is_correct).length;
+        const wrongAnswers = rows.filter((answer) => !answer.is_correct && !answer.is_unanswered).length;
+        const unanswered = rows.filter((answer) => answer.is_unanswered).length;
+
+        const optionA = rows.filter((answer) => answer.selected_answer === "A").length;
+        const optionB = rows.filter((answer) => answer.selected_answer === "B").length;
+        const optionC = rows.filter((answer) => answer.selected_answer === "C").length;
+        const optionD = rows.filter((answer) => answer.selected_answer === "D").length;
+
+        const correctPercent = totalAnswers
+            ? Math.round((correctAnswers / totalAnswers) * 100)
+            : 0;
+
+        return `
+                    <article class="admin-list-card admin-analysis-card">
+                        <h3>${index + 1}. ${question.question}</h3>
+
+                        <p><strong>Correct Answer:</strong> ${question.correct_answer}</p>
+                        <p><strong>Difficulty:</strong> ${question.difficulty || "easy"}</p>
+                        <p><strong>Correct Rate:</strong> ${correctPercent}%</p>
+                        <p><strong>Correct Students:</strong> ${correctAnswers}/${totalAnswers}</p>
+                        <p><strong>Wrong:</strong> ${wrongAnswers}</p>
+                        <p><strong>Unanswered:</strong> ${unanswered}</p>
+
+                        <div class="admin-answer-distribution">
+                            ${renderAnswerDistributionRow("A", optionA, totalAnswers, question.correct_answer)}
+                            ${renderAnswerDistributionRow("B", optionB, totalAnswers, question.correct_answer)}
+                            ${renderAnswerDistributionRow("C", optionC, totalAnswers, question.correct_answer)}
+                            ${renderAnswerDistributionRow("D", optionD, totalAnswers, question.correct_answer)}
+                        </div>
+                    </article>
+                `;
+    }).join("")}
+        </div>
+    `;
+
+    openAdminPopup(
+        `Question Analysis — ${setTitle}`,
+        `Based on ${answerList.length} recorded answer${answerList.length === 1 ? "" : "s"}.`,
+        contentHTML
+    );
+}
+
+function renderAnswerDistributionRow(optionLetter, count, total, correctAnswer) {
+    const percentage = total
+        ? Math.round((count / total) * 100)
+        : 0;
+
+    const isCorrect = optionLetter === correctAnswer;
+
+    return `
+        <div class="admin-distribution-row ${isCorrect ? "correct-option" : ""}">
+            <span>${optionLetter}</span>
+
+            <div class="admin-distribution-track">
+                <i style="width: ${percentage}%;"></i>
+            </div>
+
+            <strong>${count} (${percentage}%)</strong>
+        </div>
+    `;
+}
+
+function formatAdminTime(totalSeconds) {
+    const seconds = Number(totalSeconds) || 0;
+    const minutes = Math.floor(seconds / 60);
+    const remainingSeconds = seconds % 60;
+
+    if (minutes <= 0) {
+        return `${remainingSeconds}s`;
+    }
+
+    return `${minutes}m ${remainingSeconds}s`;
+}
+
+function getAdminPerformanceSummary(attempts) {
+    const totalAttempts = attempts.length;
+
+    const averagePercentage = totalAttempts
+        ? Math.round(
+            attempts.reduce((sum, attempt) => sum + Number(attempt.percentage || 0), 0) / totalAttempts
+        )
+        : 0;
+
+    const averageAccuracy = totalAttempts
+        ? Math.round(
+            attempts.reduce((sum, attempt) => sum + Number(attempt.accuracy_percentage || 0), 0) / totalAttempts
+        )
+        : 0;
+
+    const averagePoints = totalAttempts
+        ? Math.round(
+            attempts.reduce((sum, attempt) => {
+                return sum + Number(attempt.final_points ?? attempt.points ?? 0);
+            }, 0) / totalAttempts
+        )
+        : 0;
+
+    const bestAttempt = [...attempts].sort((a, b) => {
+        const bPoints = Number(b.final_points ?? b.points ?? 0);
+        const aPoints = Number(a.final_points ?? a.points ?? 0);
+
+        return bPoints - aPoints;
+    })[0];
+
+    const fastestAttempt = [...attempts]
+        .filter((attempt) => Number(attempt.time_taken_seconds || 0) > 0)
+        .sort((a, b) => {
+            return Number(a.time_taken_seconds || 0) - Number(b.time_taken_seconds || 0);
+        })[0];
+
+    return {
+        totalAttempts,
+        averagePercentage,
+        averageAccuracy,
+        averagePoints,
+        bestAttempt,
+        fastestAttempt
+    };
+}
+
+function renderQuestionsHTML(questions) {
+    if (!questions.length) {
+        return `<p class="admin-empty-text">No questions added to this set yet.</p>`;
+    }
+
+    return questions.map((item, index) => {
         return `
             <article class="admin-list-card">
                 <h3>${index + 1}. ${item.question}</h3>
@@ -339,8 +991,7 @@ async function deleteMCQSet(setId) {
 
     if (selectedSetId === setId) {
         selectedSetId = null;
-        localStorage.removeItem("selectedMCQSetId");
-        mcqQuestionsList.innerHTML = `<p class="admin-empty-text">Select an MCQ set to view questions.</p>`;
+        closeAdminPopup();
     }
 
     showAdminMessage("MCQ set deleted.");
@@ -354,8 +1005,7 @@ questionSetSelect?.addEventListener("change", () => {
         viewQuestions(questionSetSelect.value);
     } else {
         selectedSetId = null;
-        localStorage.removeItem("selectedMCQSetId");
-        mcqQuestionsList.innerHTML = `<p class="admin-empty-text">Select an MCQ set to view questions.</p>`;
+        closeAdminPopup();
     }
 });
 
@@ -363,5 +1013,12 @@ window.viewQuestions = viewQuestions;
 window.deleteQuestion = deleteQuestion;
 window.deleteMCQSet = deleteMCQSet;
 window.updateMCQShuffleSetting = updateMCQShuffleSetting;
+window.viewMCQAttempts = viewMCQAttempts;
+window.viewQuestionAnalysis = viewQuestionAnalysis;
+window.viewOverallStudentPerformance = viewOverallStudentPerformance;
+window.viewSingleStudentPerformance = viewSingleStudentPerformance;
+window.closeOverallPerformanceModal = closeOverallPerformanceModal;
+window.closeAdminPopup = closeAdminPopup;
 
 document.addEventListener("DOMContentLoaded", loadMCQSets);
+
