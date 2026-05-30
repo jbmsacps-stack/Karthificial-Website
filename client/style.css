@@ -6469,11 +6469,11 @@ main,
 .admin-nav-link {
     border-color: rgba(212, 175, 55, 0.85);
     color: var(--gold);
-    background: rgba(212, 175, 55, 0.08);
 }
 
 .admin-nav-link:hover {
-    background: rgba(212, 175, 55, 0.16);
+    background: var(--gold);
+    color: rgba(0, 0, 0, 0);
     box-shadow: 0 0 24px rgba(212, 175, 55, 0.2);
 }
 
@@ -6492,7 +6492,8 @@ main,
 }
 
 .nav-logout-btn:hover {
-    background: rgba(212, 175, 55, 0.12);
+    background: var(--gold);
+    color:rgba(0, 0, 0, 0);
     box-shadow: 0 0 22px rgba(212, 175, 55, 0.18);
 }
 
@@ -9872,6 +9873,7 @@ select option:checked {
     box-shadow: none !important;
 }
 
+
 /* ================================
        CAREER GUIDANCE PAGE - CLEAN NO GLOW
     ================================= */
@@ -9959,6 +9961,30 @@ main,
     line-height: 1.75;
     margin-bottom: 30px;
 }
+
+/* .featured-btn {
+    display: inline-block;
+    margin-top: 10px;
+    padding: 16px 34px;
+
+    border-radius: 999px;
+    background: var(--gold);
+    color: var(--black-true);
+
+    font-size: 1rem;
+    font-weight: 900;
+    text-decoration: none;
+    letter-spacing: 0.4px;
+
+    box-shadow: none !important;
+    transition: background 0.3s ease, color 0.3s ease;
+} */
+
+/* .featured-btn:hover {
+    background: var(--gold-light);
+    color: var(--black-true);
+    box-shadow: none !important;
+} */
 
 .featured-image {
     width: 100%;
