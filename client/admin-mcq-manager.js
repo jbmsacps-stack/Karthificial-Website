@@ -69,9 +69,16 @@ function renderMCQSets(sets) {
         return `
             <article class="admin-list-card">
                 <h3>${set.title}</h3>
+
                 <p><strong>Class:</strong> ${set.class_level}th Standard</p>
                 <p><strong>Subject:</strong> ${set.subject}</p>
-                <p>${set.description || ""}</p>
+
+                <p>
+                    <strong>Shuffle Questions:</strong> ${(set.shuffle_questions ?? true) ? "ON" : "OFF"} |
+                    <strong>Shuffle Options:</strong> ${(set.shuffle_options ?? true) ? "ON" : "OFF"}
+                </p>
+
+                <p>${set.description || "No description added."}</p>
 
                 <div class="admin-list-card-actions">
                     <button class="btn-outline" type="button" onclick="viewQuestions('${set.id}')">
@@ -99,9 +106,14 @@ async function createMCQSet(event) {
         title: document.getElementById("setTitle").value.trim(),
         subject: document.getElementById("setSubject").value.trim(),
         class_level: document.getElementById("setClassLevel").value,
+
         thumbnail_url: thumbnailUrl || null,
         gradient_theme: document.getElementById("setGradientTheme").value || "dark-gold",
         description: description || null,
+
+        shuffle_questions: document.getElementById("setShuffleQuestions")?.checked ?? true,
+        shuffle_options: document.getElementById("setShuffleOptions")?.checked ?? true,
+
         is_active: true
     };
 
@@ -116,6 +128,13 @@ async function createMCQSet(event) {
     }
 
     mcqSetForm.reset();
+
+    const shuffleQuestionsToggle = document.getElementById("setShuffleQuestions");
+    const shuffleOptionsToggle = document.getElementById("setShuffleOptions");
+
+    if (shuffleQuestionsToggle) shuffleQuestionsToggle.checked = true;
+    if (shuffleOptionsToggle) shuffleOptionsToggle.checked = true;
+
     showAdminMessage("MCQ set created.");
     loadMCQSets();
 }
