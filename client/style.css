@@ -9211,3 +9211,303 @@ body.mcq-result-open {
         grid-template-columns: 86px 1fr 36px;
     }
 }
+
+/* ================================
+   ADMIN QUESTION ANALYSIS
+================================ */
+
+.admin-analysis-card {
+    border-color: rgba(var(--gold-rgb), 0.28);
+}
+
+.admin-answer-distribution {
+    display: grid;
+    gap: 12px;
+    margin-top: 18px;
+}
+
+.admin-distribution-row {
+    display: grid;
+    grid-template-columns: 36px 1fr 90px;
+    align-items: center;
+    gap: 12px;
+}
+
+.admin-distribution-row span {
+    color: var(--text-muted-4);
+    font-weight: 900;
+}
+
+.admin-distribution-row strong {
+    color: var(--text-muted-4);
+    font-size: 0.82rem;
+    text-align: right;
+}
+
+.admin-distribution-row.correct-option span,
+.admin-distribution-row.correct-option strong {
+    color: var(--gold);
+}
+
+.admin-distribution-track {
+    height: 10px;
+    border-radius: 999px;
+    overflow: hidden;
+    background: rgba(var(--white-rgb), 0.08);
+    border: 1px solid rgba(var(--white-rgb), 0.08);
+}
+
+.admin-distribution-track i {
+    display: block;
+    height: 100%;
+    border-radius: inherit;
+    background: var(--gold);
+}
+
+.admin-distribution-row.correct-option .admin-distribution-track i {
+    background: linear-gradient(90deg, var(--gold), var(--gold-light));
+}
+
+@media (max-width: 520px) {
+    .admin-distribution-row {
+        grid-template-columns: 28px 1fr 74px;
+        gap: 8px;
+    }
+
+    .admin-distribution-row strong {
+        font-size: 0.72rem;
+    }
+}
+
+/* ================================
+   ADMIN PERFORMANCE SUMMARY
+================================ */
+
+.admin-performance-summary {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 14px;
+    margin: 22px 0;
+}
+
+.admin-performance-summary article {
+    padding: 18px;
+    border-radius: 18px;
+    border: 1px solid rgba(var(--gold-rgb), 0.22);
+    background:
+        linear-gradient(145deg, rgba(var(--white-rgb), 0.045), rgba(var(--white-rgb), 0.015)),
+        rgba(var(--black-rgb), 0.22);
+}
+
+.admin-performance-summary span {
+    display: block;
+    color: var(--text-muted-4);
+    font-size: 0.78rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 0.7px;
+    margin-bottom: 8px;
+}
+
+.admin-performance-summary strong {
+    display: block;
+    color: var(--gold);
+    font-size: 1.35rem;
+    font-weight: 950;
+    line-height: 1.1;
+}
+
+@media (max-width: 800px) {
+    .admin-performance-summary {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 520px) {
+    .admin-performance-summary {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* ================================
+   ADMIN WHOLE STUDENT PERFORMANCE
+================================ */
+
+.admin-student-performance-card {
+    border-color: rgba(var(--gold-rgb), 0.28);
+}
+
+.admin-student-performance-card h3 {
+    color: var(--gold);
+}
+
+/* ================================
+   ADMIN STUDENT DETAIL VIEW
+================================ */
+
+.admin-student-performance-card {
+    border-color: rgba(var(--gold-rgb), 0.28);
+    background:
+        linear-gradient(145deg, rgba(var(--gold-rgb), 0.045), rgba(var(--white-rgb), 0.018)),
+        rgba(var(--black-rgb), 0.24);
+}
+
+.admin-student-performance-card h3 {
+    color: var(--gold);
+}
+
+.admin-student-performance-card .admin-list-card-actions {
+    margin-top: 16px;
+}
+
+/* Student detail attempt cards */
+.mcq-student-detail-card {
+    border-color: rgba(var(--gold-rgb), 0.24);
+}
+
+/* Better spacing for student detail page */
+.admin-section-title + .admin-performance-summary {
+    margin-top: 20px;
+}
+
+/* Make performance cards cleaner */
+.admin-performance-summary {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 14px;
+    margin: 22px 0;
+}
+
+.admin-performance-summary article {
+    padding: 18px;
+    border-radius: 18px;
+    border: 1px solid rgba(var(--gold-rgb), 0.22);
+    background:
+        linear-gradient(145deg, rgba(var(--white-rgb), 0.045), rgba(var(--white-rgb), 0.015)),
+        rgba(var(--black-rgb), 0.22);
+}
+
+.admin-performance-summary span {
+    display: block;
+    color: var(--text-muted-4);
+    font-size: 0.78rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 0.7px;
+    margin-bottom: 8px;
+}
+
+.admin-performance-summary strong {
+    display: block;
+    color: var(--gold);
+    font-size: 1.35rem;
+    font-weight: 950;
+    line-height: 1.1;
+    word-break: break-word;
+}
+
+/* Student details button alignment */
+.admin-list-card-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 16px;
+}
+
+/* Mobile */
+@media (max-width: 800px) {
+    .admin-performance-summary {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 520px) {
+    .admin-performance-summary {
+        grid-template-columns: 1fr;
+    }
+
+    .admin-performance-summary article {
+        padding: 16px;
+    }
+
+    .admin-performance-summary strong {
+        font-size: 1.15rem;
+    }
+
+    .admin-list-card-actions {
+        flex-direction: column;
+    }
+
+    .admin-list-card-actions .btn-outline,
+    .admin-list-card-actions .btn-gold,
+    .admin-list-card-actions .admin-delete-btn {
+        width: 100%;
+        text-align: center;
+    }
+}
+
+/* ================================
+   ADMIN DELETE BUTTON - RED OUTLINE
+================================ */
+
+.admin-delete-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+
+    min-height: 44px;
+    padding: 12px 18px;
+
+    border: 1px solid rgba(248, 113, 113, 0.55);
+    border-radius: 999px;
+
+    background: transparent;
+    color: #fca5a5;
+
+    font-size: 0.86rem;
+    font-weight: 900;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    text-decoration: none;
+
+    cursor: pointer;
+
+    box-shadow:
+        inset 0 0 0 1px rgba(248, 113, 113, 0.08),
+        0 0 18px rgba(248, 113, 113, 0.08);
+
+    transition:
+        border-color 0.22s ease,
+        color 0.22s ease,
+        background 0.22s ease,
+        box-shadow 0.22s ease,
+        filter 0.22s ease;
+}
+
+.admin-delete-btn:hover {
+    border-color: rgba(248, 113, 113, 0.9);
+    color: rgb(23, 23, 23);
+    background: rgba(248, 113, 113, 0.9);
+    filter: brightness(1.08);
+}
+
+.admin-delete-btn:active {
+    filter: brightness(0.94);
+}
+
+.admin-delete-btn:disabled {
+    opacity: 0.55;
+    cursor: not-allowed;
+    filter: grayscale(0.25);
+    box-shadow: none;
+}
+
+/* Mobile */
+@media (max-width: 520px) {
+    .admin-delete-btn {
+        width: 100%;
+        min-height: 46px;
+        padding: 13px 16px;
+    }
+}
