@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Karthificial | Career Article Manager</title>
+
+    <link rel="stylesheet" href="variables.css">
+    <link rel="stylesheet" href="structure.css">
+    <link rel="stylesheet" href="style.css">
+
+    <link rel="icon" type="image/svg+xml" href="assets/images/favi.svg?v=3">
+
+    <script type="module" src="speed-insights.js"></script>
+</head>
+
+<body class="admin-checking">
+
+    <nav class="navbar">
+        <div class="navbar-inner">
+
+            <a href="index.html" class="logo">
+                <div class="logo-mark">
+                    <span class="material-symbols-outlined">
+                        <img src="assets/images/Favicon.png" alt="Favicon" loading="eager" fetchpriority="high">
+                    </span>
+                </div>
+                <div class="logo-text">Karthi<span>ficial</span></div>
+            </a>
+
+            <input type="checkbox" id="menu-toggle" class="menu-toggle">
+
+            <label for="menu-toggle" class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </label>
+
+            <ul class="nav-menu">
+                <li>
+                    <a href="admin.html" class="nav-link">Dashboard</a>
+                </li>
+
+                <li>
+                    <a href="career-guidance.html" class="nav-link">Career Guidance</a>
+                </li>
+
+                <li>
+                    <a href="index.html" class="nav-link">Home</a>
+                </li>
+
+                <li class="mobile-actions auth-nav-slot"></li>
+            </ul>
+
+            <div class="nav-actions">
+                <a href="login.html" class="btn-outline">Login</a>
+                <a href="signup.html" class="btn-gold">Signup</a>
+            </div>
+
+        </div>
+    </nav>
+
+    <main class="career-admin-page">
+
+        <section class="career-admin-header">
+            <p class="career-admin-eyebrow">Career Resource Control</p>
+            <h1>Career Article Manager</h1>
+            <p>
+                Create, edit, and delete career guidance articles for students. Use a thumbnail image URL,
+                category, article content, optional YouTube link, and published date.
+            </p>
+        </section>
+
+        <section class="career-admin-shell">
+
+            <article class="career-admin-panel">
+                <div class="career-admin-panel-header">
+                    <h2 id="careerFormTitle">Create New Article</h2>
+                    <p>
+                        Thumbnail URL is required. Use article/resource wording in the UI, not blog wording.
+                    </p>
+                </div>
+
+                <form class="career-admin-form" id="careerArticleForm">
+
+                    <input type="hidden" id="careerArticleId">
+
+                    <div class="career-admin-field">
+                        <label for="careerTitle">Title</label>
+                        <input type="text" id="careerTitle" placeholder="Example: What Should I Choose After 10th?" required>
+                    </div>
+
+                    <div class="career-admin-field">
+                        <label for="careerCategory">Category</label>
+                        <select id="careerCategory" required>
+                            <option value="After 10th">After 10th</option>
+                            <option value="After 12th">After 12th</option>
+                            <option value="Group Selection">Group Selection</option>
+                            <option value="Mindset">Mindset</option>
+                            <option value="Mistakes to Avoid">Mistakes to Avoid</option>
+                        </select>
+                    </div>
+
+                    <div class="career-admin-field">
+                        <label for="careerThumbnailUrl">Thumbnail Image URL</label>
+                        <input type="url" id="careerThumbnailUrl" placeholder="https://example.com/image.webp" required>
+                    </div>
+
+                    <div class="career-admin-field">
+                        <label for="careerExcerpt">Short Excerpt</label>
+                        <textarea id="careerExcerpt" placeholder="Short summary shown on the article card..." required></textarea>
+                    </div>
+
+                    <div class="career-admin-field">
+                        <label for="careerBody">Article Content</label>
+                        <textarea class="article-body-input" id="careerBody" placeholder="Write the full article content here. You can use simple HTML like <h2>, <p>, <ul>, <li>." required></textarea>
+                    </div>
+
+                    <div class="career-admin-field">
+                        <label for="careerYoutubeUrl">Optional YouTube URL</label>
+                        <input type="url" id="careerYoutubeUrl" placeholder="https://www.youtube.com/watch?v=...">
+                    </div>
+
+                    <div class="career-admin-field">
+                        <label for="careerPublishedDate">Published Date</label>
+                        <input type="date" id="careerPublishedDate" required>
+                    </div>
+
+                    <div class="career-admin-actions">
+                        <button class="career-admin-btn primary" type="submit" id="careerSaveBtn">
+                            Publish Article
+                        </button>
+
+                        <button class="career-admin-btn secondary" type="button" id="careerResetBtn">
+                            Clear Form
+                        </button>
+                    </div>
+
+                    <p class="career-admin-status" id="careerAdminStatus"></p>
+
+                </form>
+            </article>
+
+            <article class="career-admin-panel">
+                <div class="career-admin-panel-header">
+                    <h2>Existing Articles</h2>
+                    <p>
+                        Edit article details, replace thumbnail URL, or delete outdated resources.
+                    </p>
+                </div>
+
+                <div class="career-admin-list" id="careerArticleList">
+                    <div class="career-admin-empty">Loading articles...</div>
+                </div>
+            </article>
+
+        </section>
+
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="supabase-config.js"></script>
+    <script src="config.js" defer></script>
+    <script src="clerk-auth.js" defer></script>
+    <script src="admin.js" defer></script>
+    <script src="admin-career.js" defer></script>
+
+</body>
+
+</html>
