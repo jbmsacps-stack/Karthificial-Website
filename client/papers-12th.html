@@ -132,7 +132,9 @@
                         <span>PDF</span>
                     </div>
 
-                    <a href="#" class="resource-card-btn">View Papers</a>
+                    <button class="resource-card-btn view-papers-btn" data-standard="12th" data-subject="Tamil">
+                        View Papers
+                    </button>
                 </div>
             </article>
 
@@ -151,7 +153,9 @@
                         <span>PDF</span>
                     </div>
 
-                    <a href="#" class="resource-card-btn">View Papers</a>
+                    <button class="resource-card-btn view-papers-btn" data-standard="12th" data-subject="English">
+                        View Papers
+                    </button>
                 </div>
             </article>
 
@@ -170,7 +174,9 @@
                         <span>PDF</span>
                     </div>
 
-                    <a href="#" class="resource-card-btn">View Papers</a>
+                    <button class="resource-card-btn view-papers-btn" data-standard="12th" data-subject="Mathematics">
+                        View Papers
+                    </button>
                 </div>
             </article>
 
@@ -189,7 +195,9 @@
                         <span>PDF</span>
                     </div>
 
-                    <a href="#" class="resource-card-btn">View Papers</a>
+                    <button class="resource-card-btn view-papers-btn" data-standard="12th" data-subject="Physics">
+                        View Papers
+                    </button>
                 </div>
             </article>
 
@@ -208,7 +216,9 @@
                         <span>PDF</span>
                     </div>
 
-                    <a href="#" class="resource-card-btn">View Papers</a>
+                    <button class="resource-card-btn view-papers-btn" data-standard="12th" data-subject="Chemistry">
+                        View Papers
+                    </button>
                 </div>
             </article>
 
@@ -227,7 +237,9 @@
                         <span>PDF</span>
                     </div>
 
-                    <a href="#" class="resource-card-btn">View Papers</a>
+                    <button class="resource-card-btn view-papers-btn" data-standard="12th" data-subject="Biology">
+                        View Papers
+                    </button>
                 </div>
             </article>
 
@@ -246,7 +258,10 @@
                         <span>PDF</span>
                     </div>
 
-                    <a href="#" class="resource-card-btn">View Papers</a>
+                    <button class="resource-card-btn view-papers-btn" data-standard="12th"
+                        data-subject="Computer Science">
+                        View Papers
+                    </button>
                 </div>
             </article>
 
@@ -265,7 +280,9 @@
                         <span>PDF</span>
                     </div>
 
-                    <a href="#" class="resource-card-btn">View Papers</a>
+                    <button class="resource-card-btn view-papers-btn" data-standard="12th" data-subject="Commerce">
+                        View Papers
+                    </button>
                 </div>
             </article>
 
@@ -284,7 +301,9 @@
                         <span>PDF</span>
                     </div>
 
-                    <a href="#" class="resource-card-btn">View Papers</a>
+                    <button class="resource-card-btn view-papers-btn" data-standard="12th" data-subject="Accountancy">
+                        View Papers
+                    </button>
                 </div>
             </article>
 
@@ -303,7 +322,9 @@
                         <span>PDF</span>
                     </div>
 
-                    <a href="#" class="resource-card-btn">View Papers</a>
+                    <button class="resource-card-btn view-papers-btn" data-standard="12th" data-subject="Economics">
+                        View Papers
+                    </button>
                 </div>
             </article>
 
@@ -322,7 +343,10 @@
                         <span>PDF</span>
                     </div>
 
-                    <a href="#" class="resource-card-btn">View Papers</a>
+                    <button class="resource-card-btn view-papers-btn" data-standard="12th"
+                        data-subject="Business Maths">
+                        View Papers
+                    </button>
                 </div>
             </article>
 
@@ -374,9 +398,13 @@
         </div>
     </footer>
 
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
     <script src="script.js" defer></script>
     <script src="config.js" defer></script>
     <script src="clerk-auth.js" defer></script>
+    <script src="supabase-config.js" defer></script>
+    <script src="papers.js" defer></script>
     <script>
         const filterButtons = document.querySelectorAll(".filter-btn");
         const resourceCards = document.querySelectorAll(".resource-box-card");
@@ -400,7 +428,27 @@
             });
         });
     </script>
+    <div id="papers-modal" class="papers-modal hidden">
 
+        <div class="papers-modal-content">
+
+            <div class="papers-modal-header">
+
+                <h2 id="modal-title">
+                    Question Papers
+                </h2>
+
+                <button id="close-modal">
+                    ✕
+                </button>
+
+            </div>
+
+            <div id="papers-container"></div>
+
+        </div>
+
+    </div>
 </body>
 
 </html>
