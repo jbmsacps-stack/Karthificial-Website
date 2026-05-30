@@ -9906,7 +9906,9 @@ body.mcq-result-open {
 .hidden {
     display: none;
 }
-
+/* ================================
+   PAPER MODEL
+================================ */
 .papers-modal-content {
     background: #111;
     width: 100%;
