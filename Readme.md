@@ -5,7 +5,7 @@
 # Karthificial Website
 
 **A full-stack academic platform built for smarter student learning.**  
-Notes, question papers, MCQ practice, career guidance, authentication, database integration, and analytics — all in one structured education platform.
+Notes, question papers, MCQ practice, career guidance, admin content management, authentication, cloud storage, and analytics — all in one structured education platform for Tamil Nadu State Board students.
 
 <br>
 
@@ -31,25 +31,25 @@ Notes, question papers, MCQ practice, career guidance, authentication, database 
       <strong>Hosting</strong>
     </td>
     <td align="center">
-      <a href="https://replit.com/" target="_blank" rel="noopener noreferrer">
-        <img src="https://img.shields.io/badge/Backend-Replit-F26207?style=for-the-badge&logo=replit&logoColor=white" alt="Replit" />
+      <a href="https://clerk.com/" target="_blank" rel="noopener noreferrer">
+        <img src="https://img.shields.io/badge/Auth-Clerk-6C47FF?style=for-the-badge&logo=clerk&logoColor=white" alt="Clerk" />
       </a>
       <br>
-      <strong>Runtime</strong>
+      <strong>Authentication</strong>
     </td>
     <td align="center">
       <a href="https://supabase.com/" target="_blank" rel="noopener noreferrer">
         <img src="https://img.shields.io/badge/Database-Supabase-3ECF8E?style=for-the-badge&logo=supabase&logoColor=white" alt="Supabase" />
       </a>
       <br>
-      <strong>Storage</strong>
+      <strong>Database</strong>
     </td>
     <td align="center">
-      <a href="https://posthog.com/" target="_blank" rel="noopener noreferrer">
-        <img src="https://img.shields.io/badge/Analytics-PostHog-F54E00?style=for-the-badge&logo=posthog&logoColor=white" alt="PostHog" />
+      <a href="https://cloudinary.com/" target="_blank" rel="noopener noreferrer">
+        <img src="https://img.shields.io/badge/Media-Cloudinary-3448C5?style=for-the-badge&logo=cloudinary&logoColor=white" alt="Cloudinary" />
       </a>
       <br>
-      <strong>Insights</strong>
+      <strong>Media</strong>
     </td>
   </tr>
 </table>
@@ -68,6 +68,13 @@ Notes, question papers, MCQ practice, career guidance, authentication, database 
 [![CSS3](https://img.shields.io/badge/CSS3-Interface-1572B6?style=for-the-badge&logo=css3&logoColor=white)](https://developer.mozilla.org/en-US/docs/Web/CSS)
 [![JavaScript](https://img.shields.io/badge/JavaScript-Logic-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
 
+### Services & Infrastructure
+
+[![Clerk](https://img.shields.io/badge/Clerk-Auth-6C47FF?style=for-the-badge&logo=clerk&logoColor=white)](https://clerk.com/)
+[![Supabase](https://img.shields.io/badge/Supabase-Database-3ECF8E?style=for-the-badge&logo=supabase&logoColor=white)](https://supabase.com/)
+[![Cloudinary](https://img.shields.io/badge/Cloudinary-Media-3448C5?style=for-the-badge&logo=cloudinary&logoColor=white)](https://cloudinary.com/)
+[![Vercel](https://img.shields.io/badge/Vercel-Hosting-000000?style=for-the-badge&logo=vercel&logoColor=white)](https://vercel.com/)
+
 ### Backend
 
 [![Java](https://img.shields.io/badge/Java-Server-ED8B00?style=for-the-badge&logo=openjdk&logoColor=white)](https://www.java.com/)
@@ -76,24 +83,21 @@ Notes, question papers, MCQ practice, career guidance, authentication, database 
 
 ### Architecture
 
-`REST API` · `JPA` · `Hibernate` · `JWT` · `DTO` · `Repository` · `Service Layer` · `CORS` · `Environment Config`
-
-</div>
-
+`REST API` · `JPA` · `Hibernate` · `Clerk Auth` · `DTO` · `Repository` · `Service Layer` · `CORS` · `Environment Config`
 
 </div>
 
 ---
 
+</div>
+
 ## About
 
-**Karthificial Website** is a full-stack academic platform designed to support students with structured academic resources, MCQ practice, career guidance, secure authentication, student profile management, and analytics-based improvement.
+**Karthificial Website** is a full-stack academic platform designed to support Tamil Nadu State Board students (10th and 12th standard) with structured academic resources, MCQ practice, career guidance, secure authentication, an admin content management dashboard, cloud media uploads, and deployment analytics.
 
-The platform follows a separated full-stack architecture. The frontend is built with **HTML, CSS, and JavaScript**, while the backend is powered by **Java Spring Boot**. It uses **Supabase PostgreSQL** for database storage, **Vercel** for frontend deployment, **Replit** for backend hosting, and **PostHog** for analytics.
+The platform follows a separated full-stack architecture. The frontend is built with **HTML, CSS, and JavaScript**. Authentication is handled by **Clerk**, database storage by **Supabase PostgreSQL**, media uploads by **Cloudinary**, and the entire frontend is deployed on **Vercel**. A **Java Spring Boot** backend handles MCQ attempt storage and additional server-side logic.
 
-Developed by a **3-developer team**, this project includes frontend development, backend architecture, database integration, deployment setup, debugging, analytics integration, and documentation.
-
-Karthificial is designed as more than a static education website. It is a scalable academic platform prepared for future expansion into student dashboards, performance tracking, admin tools, and institution-level learning support.
+Developed by a **3-developer team** over 10 days of active development (8+ hours per day), this project covers frontend development, backend architecture, database integration, admin tooling, deployment, debugging, and documentation.
 
 ---
 
@@ -103,11 +107,11 @@ Karthificial was created to provide students with a centralized digital learning
 
 The platform focuses on:
 
-- Making study resources easier to access
-- Supporting subject-wise MCQ practice
+- Making study resources easier to access for 10th and 12th State Board students
+- Supporting subject-wise MCQ practice with shuffle and scoring
 - Helping students make informed academic and career decisions
-- Building a secure student-focused system with backend support
-- Creating a foundation for future dashboards, analytics, and admin tools
+- Building a secure, admin-managed content system
+- Creating a foundation for future dashboards, analytics, and institutional tools
 
 ---
 
@@ -115,29 +119,25 @@ The platform focuses on:
 
 ### Academic Resources
 
-Karthificial provides structured academic resources for students.
-
 - 10th standard notes
 - 12th standard notes
 - 10th standard question papers
 - 12th standard question papers
-- Subject-based resource pages
+- Subject-based resource pages with thumbnail cards
 - Organized content navigation
 
 ### MCQ Practice System
 
-The MCQ system is designed to make learning more active and measurable.
+- Subject-wise MCQ sets
+- Interactive question practice with timer
+- Shuffle mode per set
+- Score calculation and results display
+- MCQ attempt submission to Supabase
+- Admin-controlled MCQ set and question management
+- Per-student performance tracking in the admin dashboard
+- Weak question detection and answer distribution analysis
 
-- Subject-wise MCQ pages
-- Interactive question practice
-- Score calculation
-- Attempt submission support
-- Backend-ready MCQ tracking
-- Foundation for future performance analytics
-
-### Career Guidance
-
-The career guidance section helps students understand academic paths and avoid common decision-making mistakes.
+### Career Guidance & Articles
 
 - After 10th guidance
 - After 12th guidance
@@ -145,143 +145,69 @@ The career guidance section helps students understand academic paths and avoid c
 - Degree selection guidance
 - Common career mistakes
 - Student mindset and future planning
+- Dynamic career articles with slug-based routing
+- Related article suggestions per article page
+- Admin article editor with rich text and YouTube embed support
 
-### Authentication
+### Admin Dashboard
 
-The authentication system provides the foundation for student accounts and secure access.
+The admin panel is protected by Clerk-based role authentication and provides full content control.
 
-- Signup flow
-- Login flow
-- Forgot password structure
-- Reset password structure
-- JWT-based backend authentication
-- Password encryption support
-- User validation flow
+- MCQ set creation, editing, and deletion
+- Question management per set
+- Student performance viewer with per-student breakdown
+- Weak questions report and answer distribution analysis
+- Notes management panel
+- Question papers management panel
+- Career article editor (create, edit, delete)
+- Cloudinary-powered media uploader for article thumbnails and assets
 
-### User Profile System
+### Authentication (Clerk)
 
-The profile system prepares the platform for personalized student experiences.
+Authentication is fully handled by **Clerk**, replacing the previous custom JWT approach.
 
-- Student profile setup
-- Frontend-to-backend profile syncing
-- Backend profile storage
-- Foundation for future student dashboards
+- Clerk-powered signup and login
+- Signed-in navbar with user display name
+- Admin role detection via Clerk metadata
+- Navbar state cached via local storage to eliminate auth flash
+- Protected admin routes via Clerk session verification
+- Logout support across all pages
+
+### Cloud Media (Cloudinary)
+
+- Admin image uploads via Cloudinary Upload Widget
+- Media used for article thumbnails and academic resource assets
+- Cloudinary handles storage, transformation, and delivery
 
 ### Analytics
 
-PostHog analytics helps improve the platform based on real user behavior.
-
-- Page visit tracking
-- Navigation insights
-- Student engagement analysis
-- MCQ usage insights
-- Career guidance usage tracking
-- Data-based product improvement
+- Vercel Speed Insights for frontend performance monitoring
+- Page visit and navigation tracking
+- Student engagement insights
+- MCQ usage and career guidance usage data
 
 ---
 
-## Spring Boot Backend
+## Tech Stack
 
-The backend of Karthificial is developed using **Java Spring Boot**. It provides the server-side foundation for authentication, MCQ handling, user profile syncing, password reset structure, and database communication.
-
-Spring Boot was selected because it supports clean backend architecture through controllers, services, DTOs, models, repositories, and configuration layers. This structure improves maintainability, scalability, and long-term project quality.
-
-### Backend Responsibilities
-
-The backend handles:
-
-- User signup and login
-- JWT token generation
-- Password encryption and validation
-- Student profile syncing
-- MCQ submission handling
-- MCQ attempt storage
-- Password reset token structure
-- Email service structure
-- Supabase PostgreSQL database communication
-- Frontend-backend API communication
-- CORS configuration
-- Environment-based configuration
-
-### Backend Architecture
-
-```txt
-Spring Boot Backend
-│
-├── Controllers
-│   └── Receive frontend API requests
-│
-├── Services
-│   └── Process business logic
-│
-├── DTOs
-│   └── Handle request and response data
-│
-├── Models
-│   └── Represent database entities
-│
-├── Repositories
-│   └── Communicate with Supabase PostgreSQL
-│
-└── Configuration
-    └── Manage CORS and environment settings
-````
-
-### Spring Boot Concepts Used
-
-| Concept               | Usage                                                       |
-| --------------------- | ----------------------------------------------------------- |
-| REST Controllers      | API endpoints for authentication, MCQ, and profile features |
-| Service Layer         | Separates business logic from controllers                   |
-| Repository Layer      | Handles database operations through Spring Data JPA         |
-| DTO Pattern           | Manages request and response data cleanly                   |
-| JPA / Hibernate       | Maps Java models to database tables                         |
-| CORS Configuration    | Enables frontend-backend communication                      |
-| Environment Variables | Protects database credentials and secrets                   |
-| Maven                 | Handles dependency management and backend execution         |
-| JWT                   | Supports token-based authentication                         |
+| Layer              | Technology                         |
+| ------------------ | ---------------------------------- |
+| Frontend           | HTML5, CSS3, JavaScript            |
+| Authentication     | Clerk                              |
+| Database           | Supabase PostgreSQL                |
+| Media Storage      | Cloudinary                         |
+| Backend            | Java, Spring Boot, Maven           |
+| API Architecture   | REST API                           |
+| ORM                | Spring Data JPA, Hibernate         |
+| Performance        | Vercel Speed Insights              |
+| Frontend Hosting   | Vercel                             |
+| Backend Hosting    | Replit                             |
+| Version Control    | Git, GitHub                        |
+| Development Tools  | VS Code, Browser DevTools          |
 
 ---
 
-## Database: Supabase PostgreSQL
-
-Karthificial uses **Supabase PostgreSQL** as its cloud database. The Spring Boot backend connects to Supabase to store and manage structured application data.
-
-Supabase was selected because it provides a reliable PostgreSQL database, cloud accessibility, simple connection management, and a development-friendly setup for full-stack applications.
-
-### Data Stored in Supabase
-
-| Data Type              | Purpose                                       |
-| ---------------------- | --------------------------------------------- |
-| User Accounts          | Stores registered student account data        |
-| Encrypted Credentials  | Supports secure login verification            |
-| Student Profiles       | Stores profile-related information            |
-| MCQ Attempts           | Records student MCQ activity                  |
-| MCQ Scores             | Supports performance tracking                 |
-| Password Reset Tokens  | Supports account recovery flow                |
-| Authentication Records | Maintains backend authentication-related data |
-
-### Database Configuration
-
-The backend connects to Supabase using environment variables.
-
-```properties
-spring.datasource.url=${DB_URL}
-spring.datasource.username=${DB_USERNAME}
-spring.datasource.password=${DB_PASSWORD}
-spring.datasource.driver-class-name=org.postgresql.Driver
-
-spring.jpa.hibernate.ddl-auto=update
-spring.jpa.show-sql=true
-```
-
-This prevents sensitive database credentials from being hardcoded directly inside the source code.
-
----
-
-## Deployment Architecture
-
-Karthificial follows a separated deployment model where each layer is deployed and managed independently.
+## Architecture Overview
 
 ```txt
 User
@@ -290,107 +216,22 @@ User
 Frontend on Vercel
 HTML / CSS / JavaScript
  │
- │ API Requests
- ▼
-Backend on Replit
-Java Spring Boot REST API
+ ├── Auth: Clerk (signup, login, session, admin role)
  │
- │ Database Queries
- ▼
-Supabase PostgreSQL
+ ├── Database: Supabase (MCQ sets, questions, attempts, articles, papers)
  │
- ▼
-Stored Users, Profiles, MCQ Attempts, Tokens
+ ├── Media: Cloudinary (article images, resource assets)
+ │
+ └── API Requests
+      ▼
+   Backend on Replit
+   Java Spring Boot REST API
+      │
+      └── MCQ attempt storage, additional server logic
 
-Analytics Layer:
-PostHog tracks user activity and product usage.
+Performance Layer:
+Vercel Speed Insights tracks frontend load metrics.
 ```
-
-This architecture improves maintainability, debugging, deployment flexibility, and future scalability.
-
----
-
-## Frontend Deployment: Vercel
-
-The frontend is deployed on **Vercel**, which hosts the client-side HTML, CSS, JavaScript, images, and static assets.
-
-### Why Vercel Was Used
-
-* Static hosting for HTML, CSS, and JavaScript files
-* GitHub-based deployment workflow
-* Fast frontend delivery
-* Preview deployments for testing
-* Simple production deployment process
-
-### Vercel Handles
-
-* Landing page hosting
-* Notes and question paper pages
-* MCQ pages
-* Career guidance pages
-* Login and signup pages
-* Static assets
-* CSS and JavaScript delivery
-* Public frontend access
-
----
-
-## Backend Deployment: Replit
-
-The backend is deployed on **Replit**, where the Spring Boot server runs publicly and handles API communication from the frontend.
-
-### Why Replit Was Used
-
-* Java backend execution
-* Public backend URL
-* Environment variable support
-* Easier debugging during active development
-* Student-friendly backend hosting setup
-
-### Replit Handles
-
-* Spring Boot server execution
-* REST API hosting
-* Supabase database connection
-* Authentication requests
-* MCQ submissions
-* Profile sync requests
-* Backend environment configuration
-
----
-
-## Analytics: PostHog
-
-**PostHog** is used to understand how users interact with the platform. It helps the team make better improvement decisions based on actual usage behavior.
-
-### PostHog Helps Track
-
-* Page visits
-* Navigation flow
-* Student engagement
-* MCQ usage
-* Career guidance usage
-* Product improvement insights
-
-This makes the platform more professional because future improvements can be guided by analytics instead of assumptions.
-
----
-
-## Tech Stack
-
-| Layer             | Technology                 |
-| ----------------- | -------------------------- |
-| Frontend          | HTML5, CSS3, JavaScript    |
-| Backend           | Java, Spring Boot, Maven   |
-| API Architecture  | REST API                   |
-| Database          | Supabase PostgreSQL        |
-| ORM               | Spring Data JPA, Hibernate |
-| Authentication    | JWT, Password Encryption   |
-| Analytics         | PostHog                    |
-| Frontend Hosting  | Vercel                     |
-| Backend Hosting   | Replit                     |
-| Version Control   | Git, GitHub                |
-| Development Tools | VS Code, Browser DevTools  |
 
 ---
 
@@ -401,15 +242,18 @@ Karthificial-Website/
 │
 ├── client/
 │   ├── assets/
+│   │   ├── cg_thumb/       (career guidance thumbnails)
+│   │   ├── contacts/       (social icons)
+│   │   ├── images/         (logo, favicon)
+│   │   ├── slides/         (homepage slider images)
+│   │   └── thumbnail/      (subject thumbnails)
+│   │
 │   ├── index.html
 │   ├── career-guidance.html
-│   ├── after-10th.html
 │   ├── after-12th.html
-│   ├── group-selection.html
-│   ├── degree-selection.html
-│   ├── career-mistakes.html
-│   ├── student-mindset.html
+│   ├── article.html
 │   ├── mcq.html
+│   ├── mcq-set.html
 │   ├── notes-10th.html
 │   ├── notes-12th.html
 │   ├── papers-10th.html
@@ -420,8 +264,36 @@ Karthificial-Website/
 │   ├── reset-password.html
 │   ├── profile-setup.html
 │   ├── contact.html
-│   ├── script.js
-│   └── style.css
+│   ├── student-mindset.html
+│   │
+│   ├── admin.html                  (admin dashboard)
+│   ├── admin-mcq.html              (MCQ manager)
+│   ├── admin-career.html           (career articles editor)
+│   ├── admin-notes.html            (notes manager)
+│   ├── admin-papers.html           (papers manager)
+│   │
+│   ├── clerk-auth.js               (Clerk integration, navbar auth state)
+│   ├── auth.js                     (auth helpers, session logic)
+│   ├── admin.js                    (admin page protection)
+│   ├── supabase-config.js          (Supabase client setup)
+│   ├── cloudinary-upload.js        (Cloudinary upload widget)
+│   ├── config.js                   (API and environment config)
+│   ├── mcq-public.js               (public MCQ loader)
+│   ├── mcq-set.js                  (MCQ practice session logic)
+│   ├── mcq-manager.js              (MCQ CRUD from frontend)
+│   ├── admin-mcq-manager.js        (admin MCQ analytics and management)
+│   ├── admin-career.js             (career article admin editor)
+│   ├── admin-papers.js             (papers admin manager)
+│   ├── career-articles.js          (public career article cards)
+│   ├── article.js                  (single article page renderer)
+│   ├── static-related-articles.js  (related article suggestions)
+│   ├── papers.js                   (question papers modal)
+│   ├── script.js                   (global scripts)
+│   ├── speed-insights.js           (Vercel Speed Insights)
+│   ├── style.css
+│   ├── structure.css
+│   ├── variables.css
+│   └── package.json
 │
 ├── server/
 │   └── backend/
@@ -433,15 +305,11 @@ Karthificial-Website/
 │       │   ├── repository/
 │       │   ├── service/
 │       │   └── BackendApplication.java
-│       │
 │       ├── src/main/resources/
 │       │   └── application.properties
-│       │
-│       ├── pom.xml
-│       ├── mvnw
-│       └── mvnw.cmd
+│       └── pom.xml
 │
-├── documentation/
+├── documentation/     (10-day dev log)
 ├── LICENSE
 ├── .gitignore
 └── README.md
@@ -451,27 +319,30 @@ Karthificial-Website/
 
 ## Main Pages
 
-| Page                    | Purpose                       |
-| ----------------------- | ----------------------------- |
-| `index.html`            | Main landing page             |
-| `career-guidance.html`  | Career guidance hub           |
-| `after-10th.html`       | Guidance after 10th           |
-| `after-12th.html`       | Guidance after 12th           |
-| `group-selection.html`  | Group selection guidance      |
-| `degree-selection.html` | Degree selection guidance     |
-| `career-mistakes.html`  | Career mistake awareness      |
-| `student-mindset.html`  | Student mindset and planning  |
-| `mcq.html`              | MCQ selection page            |
-| `notes-10th.html`       | 10th standard notes           |
-| `notes-12th.html`       | 12th standard notes           |
-| `papers-10th.html`      | 10th standard question papers |
-| `papers-12th.html`      | 12th standard question papers |
-| `login.html`            | Student login                 |
-| `signup.html`           | Student signup                |
-| `forgot-password.html`  | Forgot password flow          |
-| `reset-password.html`   | Password reset flow           |
-| `profile-setup.html`    | Student profile setup         |
-| `contact.html`          | Contact and social links      |
+| Page                    | Purpose                                     |
+| ----------------------- | ------------------------------------------- |
+| `index.html`            | Main landing page                           |
+| `career-guidance.html`  | Career guidance hub                         |
+| `after-12th.html`       | Guidance after 12th standard                |
+| `article.html`          | Dynamic career article (slug-based routing) |
+| `student-mindset.html`  | Student mindset and planning                |
+| `mcq.html`              | MCQ set selection page                      |
+| `mcq-set.html`          | Active MCQ practice session                 |
+| `notes-10th.html`       | 10th standard notes                         |
+| `notes-12th.html`       | 12th standard notes                         |
+| `papers-10th.html`      | 10th standard question papers               |
+| `papers-12th.html`      | 12th standard question papers               |
+| `login.html`            | Student login (Clerk)                       |
+| `signup.html`           | Student signup (Clerk)                      |
+| `forgot-password.html`  | Forgot password (Clerk-handled)             |
+| `reset-password.html`   | Password reset (Clerk-handled)              |
+| `profile-setup.html`    | Student profile setup                       |
+| `contact.html`          | Contact and social links                    |
+| `admin.html`            | Admin dashboard (Clerk-protected)           |
+| `admin-mcq.html`        | MCQ and question manager                    |
+| `admin-career.html`     | Career article editor                       |
+| `admin-notes.html`      | Notes content manager                       |
+| `admin-papers.html`     | Question papers content manager             |
 
 ---
 
@@ -481,14 +352,11 @@ Karthificial-Website/
 | ------------------------------ | --------------------------------------- |
 | `AuthController`               | Authentication API routes               |
 | `McqController`                | MCQ submission and stats APIs           |
-| `UserProfileController`        | Student profile sync APIs               |
 | `AuthService`                  | Signup, login, and authentication logic |
 | `JwtService`                   | JWT token generation                    |
 | `PasswordResetService`         | Password reset logic                    |
 | `EmailService`                 | Email-related backend logic             |
-| `ResendEmailService`           | Resend-based email service structure    |
 | `UserRepository`               | User database operations                |
-| `UserProfileRepository`        | User profile database operations        |
 | `McqAttemptRepository`         | MCQ attempt data operations             |
 | `PasswordResetTokenRepository` | Password reset token data operations    |
 
@@ -511,51 +379,21 @@ Karthificial-Website/
 | `POST` | `/api/mcq/submit` | Submit MCQ attempt data          |
 | `GET`  | `/api/mcq/stats`  | Fetch MCQ performance statistics |
 
-### User Profile APIs
-
-| Method | Endpoint            | Description                             |
-| ------ | ------------------- | --------------------------------------- |
-| `POST` | `/api/user/sync`    | Sync frontend user profile with backend |
-| `GET`  | `/api/user/profile` | Fetch saved user profile data           |
-
 > API routes may change as the project continues to improve.
 
 ---
 
-## Production Workflow
+## Supabase Database Tables
 
-```txt
-1. User opens the frontend hosted on Vercel.
-2. The frontend loads static pages, assets, styles, and scripts.
-3. The user interacts with login, signup, MCQ, profile, or content pages.
-4. JavaScript sends API requests to the Replit-hosted Spring Boot backend.
-5. Spring Boot receives requests through REST controllers.
-6. Service classes process the required business logic.
-7. Repository classes communicate with Supabase PostgreSQL.
-8. The backend sends structured responses to the frontend.
-9. The frontend updates the interface based on the response.
-10. PostHog records product analytics for future improvement.
-```
-
----
-
-## Development Effort
-
-This project required work across multiple areas of full-stack development.
-
-The 3-developer team contributed to:
-
-| Area          | Work Completed                                                    |
-| ------------- | ----------------------------------------------------------------- |
-| Frontend      | UI pages, responsive layouts, styling, JavaScript logic           |
-| Backend       | Spring Boot APIs, authentication, MCQ logic, service architecture |
-| Database      | Supabase PostgreSQL connection and data modeling                  |
-| Deployment    | Vercel frontend deployment and Replit backend hosting             |
-| Analytics     | PostHog setup for product usage insights                          |
-| Debugging     | CORS, environment variables, API communication, deployment errors |
-| Documentation | README structure, project explanation, and usage guidance         |
-
-This project reflects practical software engineering experience, teamwork, debugging discipline, and full-stack implementation from frontend to deployment.
+| Table                   | Purpose                                              |
+| ----------------------- | ---------------------------------------------------- |
+| Users / Profiles        | Student account and profile data                     |
+| MCQ Sets                | MCQ set metadata (title, subject, shuffle settings)  |
+| MCQ Questions           | Questions, options, and correct answers per set      |
+| MCQ Attempts            | Student attempt records with scores and timing       |
+| Career Articles         | Article content, slugs, thumbnails, and publish date |
+| Notes / Papers          | Academic resource metadata and links                 |
+| Password Reset Tokens   | Account recovery token records                       |
 
 ---
 
@@ -563,16 +401,16 @@ This project reflects practical software engineering experience, teamwork, debug
 
 ### Prerequisites
 
-| Requirement           | Purpose                           |
-| --------------------- | --------------------------------- |
-| Java 17+              | Run the Spring Boot backend       |
-| Maven / Maven Wrapper | Build and execute the backend     |
-| Git                   | Clone and manage the project      |
-| Supabase Account      | Configure the PostgreSQL database |
-| Replit Account        | Run the backend deployment        |
-| Vercel Account        | Deploy the frontend               |
-| PostHog Account       | Enable product analytics          |
-| Modern Browser        | Test and use the frontend         |
+| Requirement         | Purpose                              |
+| ------------------- | ------------------------------------ |
+| Java 17+            | Run the Spring Boot backend          |
+| Maven / Wrapper     | Build and execute the backend        |
+| Git                 | Clone and manage the project         |
+| Clerk Account       | Configure frontend authentication    |
+| Supabase Account    | Configure the PostgreSQL database    |
+| Cloudinary Account  | Configure media upload widget        |
+| Vercel Account      | Deploy the frontend                  |
+| Modern Browser      | Test and use the frontend            |
 
 ### 1. Clone the Repository
 
@@ -581,9 +419,18 @@ git clone https://github.com/jbmsacps-stack/Karthificial-Website.git
 cd Karthificial-Website
 ```
 
-### 2. Configure Backend Environment Variables
+### 2. Configure Frontend Environment
 
-Create or configure the required environment variables for the backend.
+Set your service keys inside `client/config.js` or via environment variables:
+
+```env
+CLERK_PUBLISHABLE_KEY=your_clerk_publishable_key
+SUPABASE_URL=your_supabase_project_url
+SUPABASE_ANON_KEY=your_supabase_anon_key
+CLOUDINARY_CLOUD_NAME=your_cloudinary_cloud_name
+```
+
+### 3. Configure Backend Environment Variables
 
 ```env
 DB_URL=your_supabase_database_url
@@ -594,7 +441,7 @@ FRONTEND_URL=your_frontend_url
 RESEND_API_KEY=your_resend_api_key
 ```
 
-### 3. Run the Backend Locally
+### 4. Run the Backend Locally
 
 ```bash
 cd server/backend
@@ -608,104 +455,101 @@ cd server/backend
 .\mvnw spring-boot:run
 ```
 
-### 4. Run the Frontend Locally
-
-Open the `client` folder using a static server.
+### 5. Run the Frontend Locally
 
 ```bash
 cd client
 npx serve
 ```
 
-Or open `client/index.html` directly in a browser for a basic static preview.
+Or open `client/index.html` directly in a browser for a static preview.
 
 ---
 
 ## Deployment Process
 
-### Frontend Deployment on Vercel
+### Frontend on Vercel
 
 ```txt
-1. Push frontend code to GitHub.
-2. Import the GitHub repository into Vercel.
-3. Select the frontend/client directory if required.
-4. Configure frontend environment variables if needed.
-5. Deploy the project.
-6. Vercel generates a public frontend URL.
-7. Update frontend API configuration to point to the Replit backend URL.
+1. Push the repository to GitHub.
+2. Import the repository into Vercel.
+3. Set the root directory to client/ if required.
+4. Add environment variables (Clerk key, Supabase URL/key, Cloudinary config).
+5. Deploy. Vercel generates a public URL.
+6. Vercel Speed Insights activates automatically on deployment.
 ```
 
-### Backend Deployment on Replit
+### Backend on Replit
 
 ```txt
 1. Import the backend project into Replit.
-2. Confirm Java and Maven support.
-3. Configure backend environment variables in Replit Secrets.
-4. Run the Spring Boot application using Maven.
-5. Test the health API.
-6. Copy the public Replit backend URL.
-7. Connect the Vercel frontend to the Replit backend URL.
+2. Configure environment variables in Replit Secrets.
+3. Run the Spring Boot application using Maven.
+4. Test the health API endpoint.
+5. Copy the public Replit URL and connect it in config.js.
 ```
 
-### Database Setup on Supabase
+### Supabase Setup
 
 ```txt
 1. Create a Supabase project.
-2. Get the PostgreSQL connection string.
-3. Add database credentials to backend environment variables.
-4. Configure Spring Boot datasource properties.
-5. Run the backend.
-6. Hibernate/JPA creates or updates tables based on models.
-7. Backend starts storing user, profile, MCQ, and token data.
+2. Set up the required tables (MCQ sets, questions, attempts, articles, etc.).
+3. Copy the project URL and anon key into the frontend config.
+4. Add the PostgreSQL connection string to backend environment variables.
+5. Supabase handles all real-time database operations directly from the frontend.
 ```
 
-### Analytics Setup with PostHog
+### Clerk Setup
 
 ```txt
-1. Create a PostHog project.
-2. Add the PostHog script or integration to the frontend.
-3. Configure the project API key.
-4. Deploy the frontend.
-5. Track visits, navigation, and engagement.
-6. Use analytics insights to improve the platform.
+1. Create a Clerk application.
+2. Copy the publishable key into the frontend config.
+3. Configure allowed redirect URLs to match your Vercel deployment.
+4. Set admin role metadata on admin user accounts via the Clerk dashboard.
+5. Clerk handles all signup, login, session, and logout flows.
+```
+
+### Cloudinary Setup
+
+```txt
+1. Create a Cloudinary account.
+2. Note the cloud name.
+3. Configure an unsigned upload preset for the admin upload widget.
+4. Add the cloud name and preset to cloudinary-upload.js.
+5. Admins can upload article thumbnails and media directly from the admin panel.
 ```
 
 ---
 
 ## Roadmap
 
-* [ ] Add more MCQ sets
-* [ ] Add admin dashboard
-* [ ] Add student dashboard
-* [ ] Add advanced MCQ analytics
-* [ ] Add role-based access control
-* [ ] Add content management system
-* [ ] Improve password reset email flow
-* [ ] Add protected frontend routes
-* [ ] Improve backend security configuration
-* [ ] Add better production monitoring
-* [ ] Add more career guidance modules
+* [ ] Add more MCQ subject sets
+* [ ] Add student dashboard with personal performance history
+* [ ] Add advanced MCQ analytics per student
+* [ ] Add role-based access control improvements
 * [ ] Add downloadable notes and papers
+* [ ] Add more career guidance article modules
 * [ ] Improve SEO and page performance
-* [ ] Add more analytics events through PostHog
+* [ ] Add better production monitoring
+* [ ] Improve mobile responsiveness across all pages
 
 ---
 
 ## Team
 
-This project was developed by a 3-developer team.
+This project was developed by a 3-developer team over 10 days of active development (8+ hours per day).
 
-| Role                     | Contribution                                                                             |
-| ------------------------ | ---------------------------------------------------------------------------------------- |
-| Frontend Development     | UI pages, responsive design, styling, JavaScript logic                                   |
-| Backend Development      | Spring Boot APIs, authentication, MCQ handling, database connection                      |
-| Deployment & Integration | Vercel frontend deployment, Replit backend deployment, Supabase setup, PostHog analytics |
+| Name              | Role                                                                                                       |
+| ----------------- | ---------------------------------------------------------------------------------------------------------- |
+| Joshua Baskar PG  | Project Manager · Frontend Developer · Integration Coordinator · Deployment Lead · Debugging               |
+| Hariharan S       | Backend Developer · Database Developer · Authentication · Analytics & SEO · Backend Debugging              |
+| Sivaraj S         | UI/UX Designer · Frontend Contributor · Documentation Support · Visual Bug Testing                        |
 
 ---
 
 ## Author
 
-**Joshua Baskar**
+**Joshua Baskar**  
 BCA Student · Aspiring Full-Stack Developer
 
 🔗 [GitHub](https://github.com/jbmsacps-stack)
@@ -733,20 +577,18 @@ The following require explicit written permission from the project owners:
 * Claiming authorship or ownership of any part of this project
 * Using the project for commercial or institutional deployment without permission
 
-Commercial use, institutional deployment, and licensing arrangements may be discussed with the project owners.
-
 ### Usage Summary
 
-| Use Case                              | Status                 |
-| ------------------------------------- | ---------------------- |
-| Personal learning and study           | ✅ Permitted            |
-| Private forking and experimentation   | ✅ Permitted            |
-| Sharing with attribution              | ✅ Permitted            |
-| Academic reference with credit        | ✅ Permitted            |
-| Public publishing                     | ⚠️ Permission required |
-| Commercial or monetized use           | ⚠️ Permission required |
-| Redistribution under a different name | ❌ Not permitted        |
-| Claiming ownership                    | ❌ Not permitted        |
+| Use Case                              | Status                  |
+| ------------------------------------- | ----------------------- |
+| Personal learning and study           | ✅ Permitted             |
+| Private forking and experimentation   | ✅ Permitted             |
+| Sharing with attribution              | ✅ Permitted             |
+| Academic reference with credit        | ✅ Permitted             |
+| Public publishing                     | ⚠️ Permission required  |
+| Commercial or monetized use           | ⚠️ Permission required  |
+| Redistribution under a different name | ❌ Not permitted         |
+| Claiming ownership                    | ❌ Not permitted         |
 
 Unauthorized use may be subject to applicable intellectual property and copyright law.
 
@@ -754,7 +596,7 @@ Unauthorized use may be subject to applicable intellectual property and copyrigh
 
 <div align="center">
 
-*Last updated: May 2026 · Built by a 3-developer team*
+*Last updated: May 2026 · Built by a 3-developer team · 10 days · 8+ hours/day*
 
 ⭐ If this project is useful, a star is appreciated.
 

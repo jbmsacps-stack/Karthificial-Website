@@ -23,63 +23,64 @@
 <body class="admin-checking">
 
     <nav class="navbar admin-navbar">
-    <div class="navbar-inner">
+        <div class="navbar-inner">
 
-        <a href="admin.html" class="logo">
-            <div class="logo-mark">
-                <span class="material-symbols-outlined">
-                    <img src="assets/images/Favicon.png" alt="Karthificial Favicon" loading="eager" fetchpriority="high">
-                </span>
+            <a href="admin.html" class="logo">
+                <div class="logo-mark">
+                    <span class="material-symbols-outlined">
+                        <img src="assets/images/Favicon.png" alt="Karthificial Favicon" loading="eager"
+                            fetchpriority="high">
+                    </span>
+                </div>
+
+                <div class="logo-text">
+                    Karthi<span>ficial</span>
+                </div>
+            </a>
+
+            <input type="checkbox" id="menu-toggle" class="menu-toggle">
+
+            <label for="menu-toggle" class="hamburger" aria-label="Open admin menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </label>
+
+            <ul class="nav-menu admin-nav-menu">
+                <li>
+                    <a href="admin.html" class="nav-link">Dashboard</a>
+                </li>
+
+                <li>
+                    <a href="admin-mcq.html" class="nav-link">MCQ Manager</a>
+                </li>
+
+                <li>
+                    <a href="admin-career.html" class="nav-link">Articles</a>
+                </li>
+
+                <li>
+                    <a href="admin-papers.html" class="nav-link">Papers</a>
+                </li>
+
+                <li>
+                    <a href="admin-notes.html" class="nav-link active">Notes</a>
+                </li>
+
+                <li>
+                    <a href="index.html" class="nav-link">View Site</a>
+                </li>
+
+                <li class="mobile-actions mobile-auth-nav-slot"></li>
+            </ul>
+
+            <div class="nav-actions auth-nav-slot">
+                <a href="index.html" class="btn-outline">View Site</a>
+                <a href="admin-notes.html" class="btn-gold">Notes</a>
             </div>
 
-            <div class="logo-text">
-                Karthi<span>ficial</span>
-            </div>
-        </a>
-
-        <input type="checkbox" id="menu-toggle" class="menu-toggle">
-
-        <label for="menu-toggle" class="hamburger" aria-label="Open admin menu">
-            <span></span>
-            <span></span>
-            <span></span>
-        </label>
-
-        <ul class="nav-menu admin-nav-menu">
-            <li>
-                <a href="admin.html" class="nav-link">Dashboard</a>
-            </li>
-
-            <li>
-                <a href="admin-mcq.html" class="nav-link">MCQ Manager</a>
-            </li>
-
-            <li>
-                <a href="admin-career.html" class="nav-link">Articles</a>
-            </li>
-
-            <li>
-                <a href="admin-papers.html" class="nav-link">Papers</a>
-            </li>
-
-            <li>
-                <a href="admin-notes.html" class="nav-link active">Notes</a>
-            </li>
-
-            <li>
-                <a href="index.html" class="nav-link">View Site</a>
-            </li>
-
-            <li class="mobile-actions mobile-auth-nav-slot"></li>
-        </ul>
-
-        <div class="nav-actions auth-nav-slot">
-            <a href="index.html" class="btn-outline">View Site</a>
-            <a href="admin-notes.html" class="btn-gold">Notes</a>
         </div>
-
-    </div>
-</nav>
+    </nav>
 
     <main class="admin-dashboard">
 
@@ -150,7 +151,7 @@
 
                 <h2>Notes</h2>
                 <p>
-                    Add, edit, organize, and remove study notes for 10th and 12th standard students.
+                    Add, edit, organize, and remove study notes for 10th and 12th standard students with a few clicks.
                 </p>
 
                 <button class="btn-gold" type="button" onclick="window.location.href='admin-notes.html'">
