@@ -11727,3 +11727,60 @@ body.admin-checking main {
     filter:
         drop-shadow(0 0 34px rgba(212, 175, 55, 0.32)) drop-shadow(0 22px 42px rgba(0, 0, 0, 0.78));
 }
+
+/* MCQ thumbnail upload button spacing */
+#setThumbnailUrl + button,
+#setThumbnailUrl + .btn-outline {
+    margin-top: 12px;
+    width: fit-content;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* .admin-header{
+    margin:0px !important;
+} */
+
+/* ================================
+   FIX LARGE GAP BELOW NAVBAR
+================================ */
+
+main {
+    padding-top: 0;
+}
+
+main > section:first-child,
+main > .admin-dashboard:first-child,
+main > .career-admin-header:first-child,
+main > .resource-main:first-child {
+    margin-top: 0;
+}
+
+/* Admin dashboard spacing fix */
+.admin-dashboard {
+    padding-top: 55px;
+}
+
+/* Admin pages spacing fix */
+.career-admin-page,
+.admin-page,
+.admin-main {
+    padding-top: 45px;
+}
+
+/* Resource pages spacing fix */
+.resource-main {
+    margin-top: 32px;
+}
+
+/* Contact page spacing fix */
+.contact-wheel-main {
+    padding-top: 38px;
+}
+
+/* Home page hero spacing fix */
+.home-hero {
+    padding-top: 45px;
+}
+
