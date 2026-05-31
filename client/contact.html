@@ -10,7 +10,9 @@
 
     <title>Karthificial | Contact Us</title>
 
-    <link rel="stylesheet" href="variables.css">    <link rel="stylesheet" href="structure.css">    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="variables.css">
+    <link rel="stylesheet" href="structure.css">
+    <link rel="stylesheet" href="style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -88,9 +90,11 @@
         </div>
     </nav>
 
+
     <main class="contact-wheel-main">
 
-        <section class="contact-wheel-layout">
+        <!-- DESKTOP / PC CONTACT WHEEL -->
+        <section class="contact-wheel-layout contact-desktop-experience">
 
             <div class="wheel-intro">
                 <span>Contact Hub</span>
@@ -173,6 +177,89 @@
 
         </section>
 
+        <!-- MOBILE / TABLET SIMPLE CONTACT -->
+        <section class="contact-simple-mobile">
+
+            <div class="simple-contact-header">
+                <span>Contact Hub</span>
+                <h1>Contact Karthificial</h1>
+                <p>
+                    Choose a contact option below. This simple layout is made for mobile and tablet users.
+                </p>
+            </div>
+
+            <div class="simple-contact-list">
+
+                <a href="mailto:yourmail@example.com" class="simple-contact-card">
+                    <span class="simple-contact-icon">
+                        <img src="assets/contacts/mail.png" alt="Email icon">
+                    </span>
+
+                    <div>
+                        <strong>Email</strong>
+                        <small>yourmail@example.com</small>
+                    </div>
+                </a>
+
+                <a href="https://wa.me/0000000000" class="simple-contact-card">
+                    <span class="simple-contact-icon">
+                        <img src="assets/contacts/whatsapp.png" alt="WhatsApp icon">
+                    </span>
+
+                    <div>
+                        <strong>WhatsApp</strong>
+                        <small>+91 00000 00000</small>
+                    </div>
+                </a>
+
+                <a href="https://t.me/username" class="simple-contact-card">
+                    <span class="simple-contact-icon">
+                        <img src="assets/contacts/telegram.png" alt="Telegram icon">
+                    </span>
+
+                    <div>
+                        <strong>Telegram</strong>
+                        <small>@username</small>
+                    </div>
+                </a>
+
+                <a href="https://youtube.com/@channelname" class="simple-contact-card">
+                    <span class="simple-contact-icon">
+                        <img src="assets/contacts/yt.png" alt="YouTube icon">
+                    </span>
+
+                    <div>
+                        <strong>YouTube</strong>
+                        <small>@channelname</small>
+                    </div>
+                </a>
+
+                <a href="https://instagram.com/profile_name" class="simple-contact-card">
+                    <span class="simple-contact-icon">
+                        <img src="assets/contacts/insta.png" alt="Instagram icon">
+                    </span>
+
+                    <div>
+                        <strong>Instagram</strong>
+                        <small>@profile_name</small>
+                    </div>
+                </a>
+
+                <a href="https://linkedin.com/in/username" class="simple-contact-card">
+                    <span class="simple-contact-icon">
+                        <img src="assets/contacts/linkedin.png" alt="LinkedIn icon">
+                    </span>
+
+                    <div>
+                        <strong>LinkedIn</strong>
+                        <small>linkedin.com/in/username</small>
+                    </div>
+                </a>
+
+            </div>
+
+        </section>
+
     </main>
 
     <footer class="footer">
@@ -218,9 +305,9 @@
         </div>
     </footer>
 
-    <script src="script.js"defer></script>
-    <script src="config.js"defer></script>
-    <script src="clerk-auth.js"defer></script>
+    <script src="script.js" defer></script>
+    <script src="config.js" defer></script>
+    <script src="clerk-auth.js" defer></script>
     <script>
         const wheelItems = document.querySelectorAll(".wheel-item");
 
@@ -264,13 +351,8 @@
             item.addEventListener("mouseleave", resetCenter);
             item.addEventListener("blur", resetCenter);
         });
-        if (window.innerWidth <= 768) {
-    window.location.href = "index.html";
-}
     </script>
 
 </body>
 
 </html>
-
-

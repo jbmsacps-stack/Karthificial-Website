@@ -2182,7 +2182,7 @@ img {
     transform: scale(1.08);
 }
 
-@media (max-width: 850px) {
+/* @media (max-width: 850px) {
     .contact-wheel-main {
         min-height: auto;
         overflow: visible;
@@ -2301,9 +2301,9 @@ img {
         font-size: 0.82rem;
         color: var(--white);
     }
-}
+} */
 
-@media (max-width: 420px) {
+/* @media (max-width: 420px) {
     .contact-wheel-main {
         padding: 28px 4% 50px;
     }
@@ -2333,7 +2333,7 @@ img {
         height: 46px;
         font-size: 1.3rem;
     }
-}
+} */
 
 @media (max-width: 768px) {
     .footer {
@@ -11256,7 +11256,7 @@ body.admin-checking main {
 }
 
 .career-filter-btn.active {
-    background: linear-gradient(135deg, var(--gold-light), var(--gold), var(--gold-dark));
+    background: var(--gold);
     border-color: var(--gold);
     color: var(--black-true);
 
@@ -11589,10 +11589,9 @@ body.admin-checking main {
 }
 
 .admin-confirm-delete {
-    border: 2px solid rgba(239, 68, 68, 0.6);
-    background: rgba(23, 23, 23, 0);
-    color: #fff;
-    box-shadow: 0 0 18px rgba(239, 68, 68, 0.25);
+    border: 1px solid rgba(239, 68, 68, 0.7);
+    background: rgba(185, 28, 28, 0.75);
+    color: #ffffff;
 }
 
 .admin-confirm-cancel:hover {
@@ -12299,4 +12298,820 @@ main>.resource-main:first-child {
 .admin-message-success .admin-message-label {
     background: rgba(34, 197, 94, 0.12);
     color: #bbf7d0;
+}
+
+/* =====================================================
+   CAREER ADMIN DELETE CONFIRM MODAL
+===================================================== */
+
+.career-confirm-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 99999;
+    display: grid;
+    place-items: center;
+    padding: 20px;
+    background: rgba(0, 0, 0, 0.72);
+    backdrop-filter: blur(10px);
+}
+
+.career-confirm-box {
+    width: min(460px, 100%);
+    position: relative;
+    padding: 30px;
+    border: 1px solid rgba(239, 68, 68, 0.45);
+    border-radius: 24px;
+    background:
+        radial-gradient(circle at top, rgba(239, 68, 68, 0.16), transparent 36%),
+        linear-gradient(145deg, rgba(20, 20, 24, 0.98), rgba(6, 6, 8, 0.98));
+    box-shadow:
+        0 30px 80px rgba(0, 0, 0, 0.65),
+        0 0 28px rgba(239, 68, 68, 0.14);
+    text-align: center;
+}
+
+.career-confirm-close {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    width: 36px;
+    height: 36px;
+    border: 1px solid rgba(239, 68, 68, 0.38);
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.05);
+    color: #fecaca;
+    font-size: 1.35rem;
+    font-weight: 900;
+    cursor: pointer;
+}
+
+.career-confirm-icon {
+    width: 62px;
+    height: 62px;
+    margin: 0 auto 16px;
+    display: grid;
+    place-items: center;
+    border-radius: 50%;
+    border: 1px solid rgba(239, 68, 68, 0.7);
+    background: rgba(127, 29, 29, 0.34);
+    color: #fecaca;
+    font-size: 2rem;
+    font-weight: 900;
+}
+
+.career-confirm-label {
+    display: inline-flex;
+    margin-bottom: 10px;
+    padding: 6px 12px;
+    border-radius: 999px;
+    background: rgba(239, 68, 68, 0.14);
+    color: #fecaca;
+    font-size: 0.75rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+.career-confirm-box h2 {
+    margin: 0 0 12px;
+    color: #ffffff;
+    font-size: clamp(1.35rem, 4vw, 1.9rem);
+}
+
+.career-confirm-box p {
+    margin: 0 auto 22px;
+    max-width: 370px;
+    color: var(--text-muted);
+    line-height: 1.7;
+}
+
+.career-confirm-actions {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+}
+
+.career-confirm-cancel,
+.career-confirm-delete {
+    min-height: 44px;
+    padding: 0 20px;
+    border-radius: 999px;
+    font-weight: 900;
+    cursor: pointer;
+}
+
+.career-confirm-cancel {
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    background: rgba(255, 255, 255, 0.06);
+    color: #ffffff;
+}
+
+.career-confirm-delete {
+    border: 1px solid rgba(239, 68, 68, 0.7);
+    background: rgba(185, 28, 28, 0.75);
+    color: #ffffff;
+}
+
+.career-confirm-delete:hover {
+    color: rgb(13, 17, 28);
+    filter: brightness(1.12);
+    background: var(--error-border);
+    box-shadow: 0 0 24px rgba(239, 68, 68, 0.38);
+}
+
+@media (max-width: 600px) {
+    .career-confirm-box {
+        padding: 26px 20px;
+    }
+
+    .career-confirm-actions {
+        flex-direction: column;
+    }
+
+    .career-confirm-cancel,
+    .career-confirm-delete {
+        width: 100%;
+    }
+}
+
+/* =====================================================
+   MOBILE AUTH BUTTON ALIGNMENT
+===================================================== */
+
+@media (max-width: 900px) {
+    .nav-menu .mobile-actions {
+        width: 100%;
+        display: flex !important;
+        align-items: center;
+        justify-content: space-between;
+        gap: 14px;
+        padding: 18px 24px;
+    }
+
+    .nav-menu .mobile-actions .admin-nav-link {
+        margin-right: auto;
+    }
+
+    .nav-menu .mobile-actions .nav-logout-btn {
+        margin-left: auto;
+    }
+}
+
+/* =====================================================
+   CONTACT RESPONSIVE EXPERIENCE
+   Desktop = wheel, Mobile/Tablet = simple cards
+===================================================== */
+
+.contact-simple-mobile {
+    display: none;
+}
+
+/* Tablet + Mobile */
+@media (max-width: 1024px) {
+    .contact-desktop-experience {
+        display: none !important;
+    }
+
+    .contact-simple-mobile {
+        display: block;
+        width: min(680px, 100%);
+        margin: 0 auto;
+        padding: 90px 20px 60px;
+    }
+
+    .simple-contact-header {
+        text-align: center;
+        margin-bottom: 28px;
+    }
+
+    .simple-contact-header span {
+        display: inline-flex;
+        margin-bottom: 10px;
+        padding: 7px 14px;
+        border: 1px solid rgba(212, 175, 55, 0.28);
+        border-radius: 999px;
+        background: rgba(212, 175, 55, 0.08);
+        color: var(--gold-light, #f2cf63);
+        font-size: 0.75rem;
+        font-weight: 800;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+    }
+
+    .simple-contact-header h1 {
+        margin: 0 0 12px;
+        color: var(--text-main);
+        font-size: clamp(2rem, 7vw, 3rem);
+        line-height: 1.05;
+    }
+
+    .simple-contact-header p {
+        max-width: 520px;
+        margin: 0 auto;
+        color: var(--text-muted);
+        line-height: 1.7;
+    }
+
+    .simple-contact-list {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 14px;
+    }
+
+    .simple-contact-card {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        padding: 16px;
+        border: 1px solid rgba(212, 175, 55, 0.18);
+        border-radius: 18px;
+        background:
+            linear-gradient(135deg, rgba(255, 255, 255, 0.055), rgba(255, 255, 255, 0.015)),
+            rgba(8, 8, 12, 0.78);
+        color: inherit;
+        text-decoration: none;
+        box-shadow: 0 18px 42px rgba(0, 0, 0, 0.28);
+    }
+
+    .simple-contact-card:hover {
+        border-color: rgba(212, 175, 55, 0.5);
+        background:
+            linear-gradient(135deg, rgba(212, 175, 55, 0.12), rgba(255, 255, 255, 0.025)),
+            rgba(8, 8, 12, 0.88);
+        box-shadow:
+            0 18px 42px rgba(0, 0, 0, 0.34),
+            0 0 18px rgba(212, 175, 55, 0.12);
+    }
+
+    .simple-contact-icon {
+        width: 52px;
+        height: 52px;
+        flex: 0 0 52px;
+        display: grid;
+        place-items: center;
+        border: 1px solid rgba(212, 175, 55, 0.22);
+        border-radius: 16px;
+        background: rgba(0, 0, 0, 0.35);
+    }
+
+    .simple-contact-icon img {
+        width: 28px;
+        height: 28px;
+        object-fit: contain;
+    }
+
+    .simple-contact-card strong {
+        display: block;
+        margin-bottom: 4px;
+        color: var(--text-main);
+        font-size: 1rem;
+    }
+
+    .simple-contact-card small {
+        display: block;
+        color: var(--text-muted);
+        font-size: 0.86rem;
+        line-height: 1.4;
+        word-break: break-word;
+    }
+}
+
+/* Small mobile */
+@media (max-width: 520px) {
+    .contact-simple-mobile {
+        padding-top: 76px;
+    }
+
+    .simple-contact-card {
+        padding: 14px;
+        border-radius: 16px;
+    }
+
+    .simple-contact-icon {
+        width: 48px;
+        height: 48px;
+        flex-basis: 48px;
+    }
+
+    .simple-contact-icon img {
+        width: 25px;
+        height: 25px;
+    }
+}
+
+/* =====================================================
+   MOBILE HAMBURGER DROPDOWN + SCROLL FIX
+   Keeps dropdown closed until hover/focus
+===================================================== */
+
+@media (max-width: 900px) {
+
+    .nav-menu {
+        max-height: calc(100vh - 80px);
+        overflow-y: auto;
+        overflow-x: hidden;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .nav-menu .dropdown {
+        width: 100%;
+        position: relative;
+    }
+
+    .nav-menu .dropdown > .nav-link {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    .nav-menu .dropdown-menu {
+        position: static !important;
+        width: 100% !important;
+
+        display: flex !important;
+        flex-direction: column !important;
+
+        max-height: 0;
+        overflow: hidden;
+
+        margin: 0 !important;
+        padding: 0 8px !important;
+
+        opacity: 0;
+        visibility: hidden;
+        pointer-events: none;
+
+        transform: none !important;
+
+        border-radius: 14px;
+        background: rgba(0, 0, 0, 0.28);
+        border: 1px solid rgba(212, 175, 55, 0.12);
+
+        transition:
+            max-height 0.28s ease,
+            opacity 0.22s ease,
+            padding 0.22s ease,
+            margin 0.22s ease;
+    }
+
+    .nav-menu .dropdown:hover .dropdown-menu,
+    .nav-menu .dropdown:focus-within .dropdown-menu,
+    .nav-menu .dropdown.open .dropdown-menu {
+        max-height: 180px;
+        opacity: 1;
+        visibility: visible;
+        pointer-events: auto;
+
+        margin: 8px 0 0 !important;
+        padding: 8px !important;
+    }
+
+    .nav-menu .dropdown-menu li {
+        display: block !important;
+        width: 100% !important;
+    }
+
+    .nav-menu .dropdown-menu a {
+        display: block !important;
+        width: 100% !important;
+        padding: 10px 14px !important;
+        border-radius: 10px;
+        color: var(--text-main) !important;
+        text-decoration: none !important;
+    }
+
+    .nav-menu .dropdown-menu a:hover {
+        background: rgba(212, 175, 55, 0.12);
+        color: var(--gold-light, #f2cf63) !important;
+    }
+}
+
+/* =====================================================
+   MOBILE HAMBURGER DROPDOWN FIX
+   Keeps dropdown closed until tap/hover
+===================================================== */
+
+@media (max-width: 900px) {
+
+    .navbar .nav-menu {
+        max-height: calc(100vh - 78px);
+        overflow-y: auto;
+        overflow-x: hidden;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .navbar .nav-menu > li {
+        width: 100%;
+        flex-shrink: 0;
+    }
+
+    .navbar .nav-menu .dropdown {
+        position: relative;
+        width: 100%;
+    }
+
+    .navbar .nav-menu .dropdown > .nav-link {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    .navbar .nav-menu .dropdown-menu {
+        position: static !important;
+        inset: auto !important;
+
+        width: 100% !important;
+        min-width: 0 !important;
+
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 0 !important;
+
+        max-height: 0;
+        overflow: hidden;
+
+        margin: 0 !important;
+        padding: 0 10px !important;
+
+        opacity: 0;
+        visibility: hidden;
+        pointer-events: none;
+
+        transform: none !important;
+
+        border: 1px solid rgba(212, 175, 55, 0.14);
+        border-radius: 14px;
+        background: rgba(0, 0, 0, 0.34);
+
+        transition:
+            max-height 0.25s ease,
+            opacity 0.2s ease,
+            padding 0.2s ease,
+            margin 0.2s ease;
+    }
+
+    .navbar .nav-menu .dropdown:hover > .dropdown-menu,
+    .navbar .nav-menu .dropdown:focus-within > .dropdown-menu,
+    .navbar .nav-menu .dropdown.open > .dropdown-menu {
+        max-height: 220px;
+        opacity: 1;
+        visibility: visible;
+        pointer-events: auto;
+
+        margin: 10px 0 0 !important;
+        padding: 10px !important;
+    }
+
+    .navbar .nav-menu .dropdown-menu li {
+        display: block !important;
+        width: 100% !important;
+        height: auto !important;
+        margin: 0 !important;
+        padding: 0 !important;
+    }
+
+    .navbar .nav-menu .dropdown-menu a {
+        display: block !important;
+        width: 100% !important;
+        padding: 12px 14px !important;
+        border-radius: 10px;
+
+        color: var(--text-main) !important;
+        text-decoration: none !important;
+        white-space: nowrap;
+    }
+
+    .navbar .nav-menu .dropdown-menu a:hover {
+        background: rgba(212, 175, 55, 0.12);
+        color: var(--gold-light, #f2cf63) !important;
+    }
+}
+
+/* =====================================================
+   CONTACT RESPONSIVE EXPERIENCE
+   Desktop = wheel, Mobile/Tablet = simple cards
+===================================================== */
+
+.contact-simple-mobile {
+    display: none;
+}
+
+/* Desktop */
+@media (min-width: 1025px) {
+    .contact-desktop-experience {
+        display: grid;
+    }
+
+    .contact-simple-mobile {
+        display: none !important;
+    }
+}
+
+/* Tablet + Mobile */
+@media (max-width: 1024px) {
+    .contact-wheel-main {
+        min-height: auto;
+        display: block;
+        padding: 72px 5% 60px;
+        overflow: visible;
+    }
+
+    .contact-desktop-experience {
+        display: none !important;
+    }
+
+    .contact-simple-mobile {
+        display: block !important;
+        width: min(680px, 100%);
+        margin: 0 auto;
+    }
+
+    .simple-contact-header {
+        text-align: center;
+        margin-bottom: 28px;
+    }
+
+    .simple-contact-header span {
+        display: inline-flex;
+        margin-bottom: 10px;
+        padding: 7px 14px;
+        border: 1px solid rgba(212, 175, 55, 0.28);
+        border-radius: 999px;
+        background: rgba(212, 175, 55, 0.08);
+        color: var(--gold-light, #f2cf63);
+        font-size: 0.75rem;
+        font-weight: 800;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+    }
+
+    .simple-contact-header h1 {
+        margin: 0 0 12px;
+        color: var(--text-main);
+        font-size: clamp(2rem, 7vw, 3rem);
+        line-height: 1.05;
+    }
+
+    .simple-contact-header p {
+        max-width: 520px;
+        margin: 0 auto;
+        color: var(--text-muted);
+        line-height: 1.7;
+    }
+
+    .simple-contact-list {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 14px;
+    }
+
+    .simple-contact-card {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        padding: 16px;
+        border: 1px solid rgba(212, 175, 55, 0.18);
+        border-radius: 18px;
+        background:
+            linear-gradient(135deg, rgba(255, 255, 255, 0.055), rgba(255, 255, 255, 0.015)),
+            rgba(8, 8, 12, 0.78);
+        color: inherit;
+        text-decoration: none;
+        box-shadow: 0 18px 42px rgba(0, 0, 0, 0.28);
+    }
+
+    .simple-contact-card:hover {
+        border-color: rgba(212, 175, 55, 0.5);
+        background:
+            linear-gradient(135deg, rgba(212, 175, 55, 0.12), rgba(255, 255, 255, 0.025)),
+            rgba(8, 8, 12, 0.88);
+        box-shadow:
+            0 18px 42px rgba(0, 0, 0, 0.34),
+            0 0 18px rgba(212, 175, 55, 0.12);
+    }
+
+    .simple-contact-icon {
+        width: 52px;
+        height: 52px;
+        flex: 0 0 52px;
+        display: grid;
+        place-items: center;
+        border: 1px solid rgba(212, 175, 55, 0.22);
+        border-radius: 16px;
+        background: rgba(0, 0, 0, 0.35);
+    }
+
+    .simple-contact-icon img {
+        width: 28px;
+        height: 28px;
+        object-fit: contain;
+    }
+
+    .simple-contact-card strong {
+        display: block;
+        margin-bottom: 4px;
+        color: var(--text-main);
+        font-size: 1rem;
+    }
+
+    .simple-contact-card small {
+        display: block;
+        color: var(--text-muted);
+        font-size: 0.86rem;
+        line-height: 1.4;
+        word-break: break-word;
+    }
+}
+
+/* Small mobile */
+@media (max-width: 520px) {
+    .contact-wheel-main {
+        padding: 62px 4% 50px;
+    }
+
+    .simple-contact-card {
+        padding: 14px;
+        border-radius: 16px;
+    }
+
+    .simple-contact-icon {
+        width: 48px;
+        height: 48px;
+        flex-basis: 48px;
+    }
+
+    .simple-contact-icon img {
+        width: 25px;
+        height: 25px;
+    }
+}
+
+/* =====================================================
+   MOBILE NAV FINAL VISIBILITY FIX
+===================================================== */
+
+@media (max-width: 900px) {
+    .navbar .nav-menu {
+        max-height: calc(100vh - 78px) !important;
+        overflow-y: auto !important;
+        overflow-x: hidden !important;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .navbar .nav-menu > li {
+        display: block !important;
+        width: 100% !important;
+        flex-shrink: 0 !important;
+    }
+
+    .navbar .nav-menu a[href="contact.html"] {
+        display: block !important;
+        width: 100% !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+        pointer-events: auto !important;
+    }
+
+    .navbar .nav-menu a[href="index.html"].nav-link {
+        display: block !important;
+        width: 100% !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+        pointer-events: auto !important;
+    }
+}
+
+/* =====================================================
+   CAREER GUIDANCE MOBILE THUMBNAIL FIX ONLY
+===================================================== */
+
+@media (max-width: 768px) {
+    .career-blog-card {
+        overflow: hidden;
+    }
+
+    .career-blog-card img {
+        width: 100% !important;
+        height: auto !important;
+        aspect-ratio: 16 / 9;
+        object-fit: contain !important;
+        object-position: center;
+        background: #050505;
+        padding: 8px;
+        border-bottom: 1px solid rgba(var(--gold-rgb), 0.16);
+    }
+
+    .career-blog-card:hover img {
+        transform: none !important;
+        filter: brightness(0.95);
+    }
+
+    .featured-image {
+        background: #050505;
+    }
+
+    .featured-image img {
+        width: 100% !important;
+        height: auto !important;
+        aspect-ratio: 16 / 9;
+        object-fit: contain !important;
+        object-position: center;
+        padding: 8px;
+    }
+}
+
+/* =====================================================
+   CAREER MOBILE THUMBNAIL FIX
+   Fill card properly. No black frame. No padding.
+===================================================== */
+
+@media (max-width: 768px) {
+
+    /* Normal career article cards */
+    .career-blog-card {
+        overflow: hidden;
+    }
+
+    .career-blog-card img {
+        width: 100% !important;
+        height: auto !important;
+        aspect-ratio: 16 / 9;
+        object-fit: cover !important;
+        object-position: center !important;
+        display: block !important;
+
+        padding: 0 !important;
+        background: transparent !important;
+        border-bottom: 1px solid rgba(var(--gold-rgb), 0.16);
+    }
+
+    .career-blog-card:hover img {
+        transform: none !important;
+        filter: brightness(0.95) !important;
+    }
+
+    /* Featured career guide card */
+    .featured-career-guide {
+        grid-template-columns: 1fr !important;
+        width: min(92%, 520px) !important;
+        margin: 32px auto 55px !important;
+        padding: 14px !important;
+        gap: 0 !important;
+        overflow: hidden !important;
+    }
+
+    .featured-image {
+        width: 100% !important;
+        border-radius: 18px 18px 0 0 !important;
+        overflow: hidden !important;
+        background: transparent !important;
+        border: none !important;
+    }
+
+    .featured-image img {
+        width: 100% !important;
+        height: auto !important;
+        aspect-ratio: 16 / 9;
+        object-fit: cover !important;
+        object-position: center !important;
+        display: block !important;
+
+        padding: 0 !important;
+        background: transparent !important;
+    }
+
+    .featured-career-guide:hover .featured-image img {
+        transform: none !important;
+        filter: brightness(0.95) !important;
+    }
+
+    .featured-content {
+        padding: 24px 14px 10px !important;
+    }
+}
+
+
+
+/* =====================================================
+   CAREER CARD FULL CLICK FEEDBACK
+===================================================== */
+
+.featured-career-guide,
+.career-blog-card,
+.career-article-card {
+    cursor: pointer;
+}
+
+/* =====================================================
+   DYNAMIC CAREER ARTICLE CARD CLICK FEEDBACK
+===================================================== */
+
+.career-article-card {
+    cursor: pointer;
+}
+
+.career-article-card .career-article-link {
+    pointer-events: auto;
 }

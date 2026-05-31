@@ -18,16 +18,24 @@ function getDisplayNameFromClerkUser(user) {
     );
 }
 
-function getSignedInNavbarHTML(displayName, isAdminUser = false) {
+function getSignedInNavbarHTML(displayName, isAdminUser = false, showGreeting = true) {
     const adminLinkHTML = isAdminUser
         ? `<a href="admin.html" class="btn-outline admin-nav-link">Admin</a>`
         : "";
 
+    const greetingHTML = showGreeting
+        ? `<span class="nav-user-greeting">Hi, ${displayName}</span>`
+        : "";
+
     return `
         ${adminLinkHTML}
-        <span class="nav-user-greeting">Hi, ${displayName}</span>
+        ${greetingHTML}
         <button class="btn-outline nav-logout-btn" type="button">Logout</button>
     `;
+}
+
+function isMobileNavbarView() {
+    return window.matchMedia("(max-width: 900px)").matches;
 }
 
 function getSignedOutNavbarHTML() {
@@ -52,19 +60,37 @@ function bindLogoutButtons() {
     });
 }
 
-function renderNavbarHTML(html) {
+function renderNavbarHTML(desktopHTML, mobileHTML = desktopHTML) {
     const navActions = document.querySelector(".nav-actions");
     const mobileActions = document.querySelector(".mobile-actions");
 
     if (navActions) {
-        navActions.innerHTML = html;
+        navActions.innerHTML = desktopHTML;
     }
 
     if (mobileActions) {
-        mobileActions.innerHTML = html;
+        mobileActions.innerHTML = mobileHTML;
     }
 
     bindLogoutButtons();
+}
+
+function renderSignedInNavbar(displayName, isAdminUser) {
+    const showTopGreeting = !isMobileNavbarView();
+
+    const topNavbarHTML = getSignedInNavbarHTML(
+        displayName,
+        isAdminUser,
+        showTopGreeting
+    );
+
+    const mobileMenuHTML = getSignedInNavbarHTML(
+        displayName,
+        isAdminUser,
+        false
+    );
+
+    renderNavbarHTML(topNavbarHTML, mobileMenuHTML);
 }
 
 function renderCachedNavbarInstantly() {
@@ -75,12 +101,11 @@ function renderCachedNavbarInstantly() {
             return;
         }
 
-        const html = getSignedInNavbarHTML(
+        renderSignedInNavbar(
             cachedUser.displayName,
             cachedUser.role === "admin"
         );
 
-        renderNavbarHTML(html);
         document.body.classList.add("auth-greeting-seen");
 
     } catch (error) {
@@ -108,7 +133,7 @@ function updateNavbarAuthState() {
         role: isAdminUser ? "admin" : "student"
     }));
 
-    renderNavbarHTML(getSignedInNavbarHTML(displayName, isAdminUser));
+    renderSignedInNavbar(displayName, isAdminUser);
 
     if (localStorage.getItem("karthificialGreetingAnimated") !== "true") {
         setTimeout(() => {
@@ -304,4 +329,43 @@ document.addEventListener("DOMContentLoaded", async () => {
         console.error("Clerk failed to initialize:", error);
         document.body.classList.remove("auth-checking");
     }
+});
+
+window.addEventListener("resize", () => {
+    try {
+        const cachedUser = JSON.parse(localStorage.getItem("karthificialUser") || "null");
+
+        if (!cachedUser?.displayName) {
+            return;
+        }
+
+        renderSignedInNavbar(
+            cachedUser.displayName,
+            cachedUser.role === "admin"
+        );
+    } catch (error) {
+        console.error("Failed to refresh navbar on resize:", error);
+    }
+});
+
+document.addEventListener("DOMContentLoaded", () => {
+    document.querySelectorAll(".nav-menu .dropdown > .nav-link").forEach((link) => {
+        link.addEventListener("click", (event) => {
+            if (window.innerWidth > 900) {
+                return;
+            }
+
+            event.preventDefault();
+
+            const dropdown = link.closest(".dropdown");
+
+            document.querySelectorAll(".nav-menu .dropdown").forEach((item) => {
+                if (item !== dropdown) {
+                    item.classList.remove("open");
+                }
+            });
+
+            dropdown.classList.toggle("open");
+        });
+    });
 });

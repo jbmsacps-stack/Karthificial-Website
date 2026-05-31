@@ -122,7 +122,9 @@ const observer = new IntersectionObserver(function (entries) {
     threshold: 0.35
 });
 
-observer.observe(statsSection);
+if (statsSection) {
+    observer.observe(statsSection);
+}
 
 /* ================================
    YOUTUBE-STYLE REAL FULLSCREEN SLIDER
@@ -325,29 +327,33 @@ const navbar = document.querySelector(".navbar");
 
 let lastScrollY = window.scrollY;
 
-window.addEventListener("scroll", () => {
-    const currentScrollY = window.scrollY;
+if (navbar) {
+    window.addEventListener("scroll", () => {
+        const currentScrollY = window.scrollY;
 
-    // If scrolling down, hide navbar
-    if (currentScrollY > lastScrollY && currentScrollY > 100) {
-        navbar.classList.add("nav-hidden");
-    } 
-    // If scrolling up, show navbar
-    else {
-        navbar.classList.remove("nav-hidden");
-    }
+        if (currentScrollY > lastScrollY && currentScrollY > 100) {
+            navbar.classList.add("nav-hidden");
+        } else {
+            navbar.classList.remove("nav-hidden");
+        }
 
-    lastScrollY = currentScrollY;
-});
+        lastScrollY = currentScrollY;
+    });
+}
 
 // Smooth Scroll to Sections
 const sectionLinks = document.querySelectorAll('a[href^="#"]');
 
 sectionLinks.forEach(link => {
     link.addEventListener("click", event => {
+        const targetId = link.getAttribute("href");
+
+        if (!targetId || targetId === "#") {
+            return;
+        }
+
         event.preventDefault();
 
-        const targetId = link.getAttribute("href");
         const targetSection = document.querySelector(targetId);
 
         if (targetSection) {
@@ -385,6 +391,188 @@ window.addEventListener("scroll", () => {
             link.classList.add("active");
         }
     });
+});
+
+/* ================================
+   MOBILE NAV DROPDOWN TAP SUPPORT
+================================ */
+
+document.querySelectorAll(".nav-menu .dropdown > .nav-link").forEach((link) => {
+    link.addEventListener("click", (event) => {
+        if (window.innerWidth > 900) {
+            return;
+        }
+
+        event.preventDefault();
+
+        const currentDropdown = link.closest(".dropdown");
+
+        document.querySelectorAll(".nav-menu .dropdown").forEach((dropdown) => {
+            if (dropdown !== currentDropdown) {
+                dropdown.classList.remove("open");
+            }
+        });
+
+        currentDropdown.classList.toggle("open");
+    });
+});
+
+/* ================================
+   GLOBAL NAV PATCH
+   Adds Contact to hamburger/nav if missing
+================================ */
+
+document.addEventListener("DOMContentLoaded", () => {
+    document.querySelectorAll(".nav-menu").forEach((navMenu) => {
+        const hasContact = navMenu.querySelector('a[href="contact.html"]');
+        const mcqLink = navMenu.querySelector('a[href="mcq.html"]');
+        const mobileActions = navMenu.querySelector(".mobile-actions");
+
+        if (!hasContact) {
+            const contactItem = document.createElement("li");
+            contactItem.innerHTML = `
+                <a href="contact.html" class="nav-link">Contact</a>
+            `;
+
+            if (mcqLink && mcqLink.closest("li")) {
+                mcqLink.closest("li").insertAdjacentElement("afterend", contactItem);
+            } else if (mobileActions) {
+                mobileActions.insertAdjacentElement("beforebegin", contactItem);
+            } else {
+                navMenu.appendChild(contactItem);
+            }
+        }
+
+        const isAdminMenu = navMenu.classList.contains("admin-nav-menu");
+        const hasViewSite = navMenu.querySelector('a[href="index.html"].nav-link');
+
+        if (isAdminMenu && !hasViewSite) {
+            const viewSiteItem = document.createElement("li");
+            viewSiteItem.innerHTML = `
+                <a href="index.html" class="nav-link">View Site</a>
+            `;
+
+            if (mobileActions) {
+                mobileActions.insertAdjacentElement("beforebegin", viewSiteItem);
+            } else {
+                navMenu.appendChild(viewSiteItem);
+            }
+        }
+    });
+});/* ================================
+   GLOBAL NAV PATCH
+   Normal pages: add Contact if missing
+   Admin pages: add View Site to hamburger only
+================================ */
+
+document.addEventListener("DOMContentLoaded", () => {
+    document.querySelectorAll(".nav-menu").forEach((navMenu) => {
+        const isAdminMenu = navMenu.classList.contains("admin-nav-menu");
+        const mobileActions = navMenu.querySelector(".mobile-actions");
+
+        /* Normal site pages only */
+        if (!isAdminMenu) {
+            const hasContact = navMenu.querySelector('a[href="contact.html"]');
+            const mcqLink = navMenu.querySelector('a[href="mcq.html"]');
+
+            if (!hasContact) {
+                const contactItem = document.createElement("li");
+                contactItem.innerHTML = `
+                    <a href="contact.html" class="nav-link">Contact</a>
+                `;
+
+                if (mcqLink && mcqLink.closest("li")) {
+                    mcqLink.closest("li").insertAdjacentElement("afterend", contactItem);
+                } else if (mobileActions) {
+                    mobileActions.insertAdjacentElement("beforebegin", contactItem);
+                } else {
+                    navMenu.appendChild(contactItem);
+                }
+            }
+        }
+
+        /* Admin pages only */
+        if (isAdminMenu) {
+            const contactLink = navMenu.querySelector('a[href="contact.html"]');
+
+            if (contactLink && contactLink.closest("li")) {
+                contactLink.closest("li").remove();
+            }
+
+            const hasViewSite = navMenu.querySelector('a[href="index.html"].nav-link');
+
+            if (!hasViewSite) {
+                const viewSiteItem = document.createElement("li");
+                viewSiteItem.innerHTML = `
+                    <a href="index.html" class="nav-link">View Site</a>
+                `;
+
+                if (mobileActions) {
+                    mobileActions.insertAdjacentElement("beforebegin", viewSiteItem);
+                } else {
+                    navMenu.appendChild(viewSiteItem);
+                }
+            }
+        }
+    });
+});
+
+/* ================================
+   CAREER CARD FULL CLICK FIX
+================================ */
+
+document.addEventListener("DOMContentLoaded", () => {
+    const clickableCareerCards = document.querySelectorAll(
+        ".featured-career-guide, .career-blog-card, .career-article-card"
+    );
+
+    clickableCareerCards.forEach((card) => {
+        const link = card.querySelector("a[href]");
+
+        if (!link) {
+            return;
+        }
+
+        card.style.cursor = "pointer";
+
+        card.addEventListener("click", (event) => {
+            const clickedLink = event.target.closest("a");
+            const clickedButton = event.target.closest("button");
+
+            if (clickedLink || clickedButton) {
+                return;
+            }
+
+            window.location.href = link.href;
+        });
+    });
+});
+
+/* ================================
+   DYNAMIC CAREER ARTICLE CARD CLICK FIX
+================================ */
+
+document.addEventListener("click", (event) => {
+    const card = event.target.closest(".career-article-card");
+
+    if (!card) {
+        return;
+    }
+
+    const clickedRealLink = event.target.closest("a");
+    const clickedButton = event.target.closest("button");
+
+    if (clickedRealLink || clickedButton) {
+        return;
+    }
+
+    const articleLink = card.querySelector(".career-article-link");
+
+    if (!articleLink || !articleLink.href) {
+        return;
+    }
+
+    window.location.href = articleLink.href;
 });
 
 document.body.insertAdjacentHTML("afterbegin", '<div class="left-sunshine-glow"></div>');

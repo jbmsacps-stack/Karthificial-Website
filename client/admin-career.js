@@ -317,27 +317,115 @@ window.editCareerArticle = function (id) {
     });
 };
 
-window.deleteCareerArticle = async function (id) {
-    if (!checkCareerSupabaseConnection()) return;
+function confirmCareerDelete({
+    title = "Delete Article?",
+    message = "This article will be permanently removed.",
+    confirmText = "Delete Article",
+    cancelText = "Cancel"
+}) {
+    return new Promise((resolve) => {
+        const oldModal = document.querySelector(".career-confirm-overlay");
 
-    const confirmed = confirm("Are you sure you want to delete this article?");
+        if (oldModal) {
+            oldModal.remove();
+        }
 
-    if (!confirmed) return;
+        const modal = document.createElement("div");
+        modal.className = "career-confirm-overlay";
 
-    const { error } = await window.supabaseClient
+        modal.innerHTML = `
+            <section class="career-confirm-box">
+                <button class="career-confirm-close" type="button">
+                    ×
+                </button>
+
+                <div class="career-confirm-icon">!</div>
+
+                <span class="career-confirm-label">Danger Zone</span>
+
+                <h2>${title}</h2>
+
+                <p>${message}</p>
+
+                <div class="career-confirm-actions">
+                    <button class="career-confirm-cancel" type="button">
+                        ${cancelText}
+                    </button>
+
+                    <button class="career-confirm-delete" type="button">
+                        ${confirmText}
+                    </button>
+                </div>
+            </section>
+        `;
+
+        document.body.appendChild(modal);
+
+        const closeButton = modal.querySelector(".career-confirm-close");
+        const cancelButton = modal.querySelector(".career-confirm-cancel");
+        const deleteButton = modal.querySelector(".career-confirm-delete");
+
+        function closeModal(value) {
+            modal.remove();
+            resolve(value);
+        }
+
+        closeButton.addEventListener("click", () => closeModal(false));
+        cancelButton.addEventListener("click", () => closeModal(false));
+        deleteButton.addEventListener("click", () => closeModal(true));
+
+        modal.addEventListener("click", (event) => {
+            if (event.target === modal) {
+                closeModal(false);
+            }
+        });
+    });
+}
+
+async function deleteCareerArticle(articleId) {
+    if (!checkCareerSupabaseConnection()) {
+        return;
+    }
+
+    const confirmDelete = await confirmCareerDelete({
+        title: "Delete Article?",
+        message: "This article will be permanently removed from Career Guidance. This action cannot be undone.",
+        confirmText: "Delete Article",
+        cancelText: "Cancel"
+    });
+
+    if (!confirmDelete) {
+        return;
+    }
+
+    console.log("Deleting career article ID:", articleId);
+
+    const { data, error } = await window.supabaseClient
         .from("career_articles")
         .delete()
-        .eq("id", id);
+        .eq("id", articleId)
+        .select("id");
 
     if (error) {
-        console.error("Career article delete error:", error);
-        setCareerStatus(error.message, "error");
+        console.error("Career article delete failed:", error);
+        setCareerStatus("Failed to delete article. Check Supabase policies.", "error");
+        return;
+    }
+
+    console.log("Deleted career article rows:", data);
+
+    if (!data || data.length === 0) {
+        setCareerStatus(
+            "No article was deleted. The ID may be wrong or Supabase RLS is blocking delete.",
+            "error"
+        );
         return;
     }
 
     setCareerStatus("Article deleted successfully.", "success");
+
     await loadCareerArticles();
-};
+}
 
 document.addEventListener("DOMContentLoaded", () => {
     initCareerEditor();
