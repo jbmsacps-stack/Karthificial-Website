@@ -6461,7 +6461,7 @@ main,
 }
 
 .admin-delete-btn:hover {
-    background: rgba(255, 90, 90, 0.16);
+    background: rgba(255, 90, 90, 0.55);
     box-shadow: 0 0 20px rgba(255, 90, 90, 0.16);
 }
 
@@ -10564,12 +10564,7 @@ body.admin-checking main {
     opacity: 0.85;
 
     filter:
-        invert(78%)
-        sepia(66%)
-        saturate(562%)
-        hue-rotate(358deg)
-        brightness(98%)
-        contrast(91%);
+        invert(78%) sepia(66%) saturate(562%) hue-rotate(358deg) brightness(98%) contrast(91%);
 }
 
 #careerPublishedDate::-webkit-calendar-picker-indicator:hover {
@@ -10772,12 +10767,7 @@ body.admin-checking main {
 .career-editor-wrap .ql-toolbar button.ql-active svg {
     opacity: 1;
     filter:
-        invert(78%)
-        sepia(66%)
-        saturate(562%)
-        hue-rotate(358deg)
-        brightness(98%)
-        contrast(91%);
+        invert(78%) sepia(66%) saturate(562%) hue-rotate(358deg) brightness(98%) contrast(91%);
 }
 
 /* Dropdown text */
@@ -11362,6 +11352,7 @@ body.admin-checking main {
 
 /* Match mobile widths too */
 @media (max-width: 900px) {
+
     .featured-career-guide,
     .career-article-hub {
         width: min(92%, 620px) !important;
@@ -11373,6 +11364,7 @@ body.admin-checking main {
 }
 
 @media (max-width: 600px) {
+
     .featured-career-guide,
     .career-article-hub {
         width: 94% !important;
@@ -11445,6 +11437,7 @@ body.admin-checking main {
 }
 
 @media (max-width: 700px) {
+
     .static-article-page .article-title,
     .article-page.static-demo .article-title {
         font-size: clamp(2rem, 12vw, 3rem) !important;
@@ -11603,14 +11596,14 @@ body.admin-checking main {
 }
 
 .admin-confirm-cancel:hover {
-    color:rgb(13, 17, 28);
+    color: rgb(13, 17, 28);
     background: var(--gold);
 }
 
 .admin-confirm-delete:hover {
-    color:rgb(13, 17, 28);
+    color: rgb(13, 17, 28);
     filter: brightness(1.12);
-    background:var(--error-border);
+    background: var(--error-border);
     box-shadow: 0 0 24px rgba(239, 68, 68, 0.38);
 }
 
@@ -11729,8 +11722,8 @@ body.admin-checking main {
 }
 
 /* MCQ thumbnail upload button spacing */
-#setThumbnailUrl + button,
-#setThumbnailUrl + .btn-outline {
+#setThumbnailUrl+button,
+#setThumbnailUrl+.btn-outline {
     margin-top: 12px;
     width: fit-content;
     display: inline-flex;
@@ -11750,10 +11743,10 @@ main {
     padding-top: 0;
 }
 
-main > section:first-child,
-main > .admin-dashboard:first-child,
-main > .career-admin-header:first-child,
-main > .resource-main:first-child {
+main>section:first-child,
+main>.admin-dashboard:first-child,
+main>.career-admin-header:first-child,
+main>.resource-main:first-child {
     margin-top: 0;
 }
 
@@ -11784,3 +11777,526 @@ main > .resource-main:first-child {
     padding-top: 45px;
 }
 
+/* =====================================================
+   MCQ ANALYTICS DANGER ZONE
+===================================================== */
+
+.mcq-danger-zone {
+    margin-top: 32px;
+    border: 1px solid rgba(239, 68, 68, 0.35);
+    background:
+        linear-gradient(135deg, rgba(127, 29, 29, 0.22), rgba(8, 8, 8, 0.92)),
+        var(--bg-card);
+    box-shadow: 0 0 28px rgba(239, 68, 68, 0.08);
+}
+
+.mcq-danger-zone .admin-panel-header h2 {
+    color: #fecaca;
+}
+
+.mcq-danger-zone .admin-panel-header p {
+    color: var(--text-muted);
+}
+
+.mcq-danger-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 18px;
+    margin-top: 22px;
+}
+
+.mcq-danger-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 18px;
+    padding: 20px;
+    border: 1px solid rgba(239, 68, 68, 0.28);
+    border-radius: 18px;
+    background: rgba(8, 8, 8, 0.42);
+}
+
+.mcq-danger-card h3 {
+    margin: 0 0 8px;
+    color: #fee2e2;
+    font-size: 1rem;
+}
+
+.mcq-danger-card p {
+    margin: 0;
+    color: var(--text-muted);
+    font-size: 0.92rem;
+    line-height: 1.6;
+}
+
+.danger-btn {
+    border-color: rgba(239, 68, 68, 0.75) !important;
+    color: #fecaca !important;
+    background: rgba(127, 29, 29, 0.18) !important;
+}
+
+.danger-btn:hover {
+    color: #ffffff !important;
+    border-color: rgba(248, 113, 113, 0.95) !important;
+    background: rgba(185, 28, 28, 0.36) !important;
+    box-shadow: 0 0 18px rgba(239, 68, 68, 0.28);
+}
+
+/* Mobile */
+@media (max-width: 900px) {
+    .mcq-danger-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .mcq-danger-card {
+        padding: 18px;
+    }
+}
+
+/* =====================================================
+   MCQ ANALYTICS RESET SELECTION UI
+===================================================== */
+
+.mcq-danger-card .admin-input {
+    width: 100%;
+    min-height: 46px;
+    padding: 0 14px;
+    border: 1px solid rgba(239, 68, 68, 0.38);
+    border-radius: 12px;
+    background: rgba(10, 10, 14, 0.88);
+    color: var(--text-main);
+    font-size: 0.95rem;
+    font-weight: 600;
+    outline: none;
+    cursor: pointer;
+}
+
+.mcq-danger-card .admin-input:focus {
+    border-color: rgba(248, 113, 113, 0.9);
+    box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.16);
+}
+
+.mcq-danger-card .admin-input option {
+    background: #111111;
+    color: #ffffff;
+}
+
+
+/* =====================================================
+   MCQ ANALYTICS RESET CONFIRMATION MODAL
+===================================================== */
+
+.analytics-reset-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 99999;
+    display: grid;
+    place-items: center;
+    padding: 20px;
+    background: rgba(0, 0, 0, 0.76);
+    backdrop-filter: blur(10px);
+}
+
+.analytics-reset-modal {
+    width: min(520px, 100%);
+    padding: 30px;
+    border: 1px solid rgba(239, 68, 68, 0.45);
+    border-radius: 24px;
+    background:
+        radial-gradient(circle at top, rgba(239, 68, 68, 0.18), transparent 36%),
+        linear-gradient(145deg, rgba(20, 20, 24, 0.98), rgba(6, 6, 8, 0.98));
+    box-shadow:
+        0 30px 80px rgba(0, 0, 0, 0.6),
+        0 0 32px rgba(239, 68, 68, 0.16);
+    position: relative;
+    text-align: center;
+}
+
+.analytics-reset-close {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    width: 36px;
+    height: 36px;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.06);
+    color: #ffffff;
+    font-size: 1.3rem;
+    cursor: pointer;
+}
+
+.analytics-reset-close:hover {
+    border-color: rgba(248, 113, 113, 0.8);
+    background: rgba(239, 68, 68, 0.18);
+}
+
+.analytics-reset-icon {
+    width: 62px;
+    height: 62px;
+    margin: 0 auto 16px;
+    display: grid;
+    place-items: center;
+    border-radius: 50%;
+    border: 1px solid rgba(239, 68, 68, 0.7);
+    background: rgba(127, 29, 29, 0.34);
+    color: #fecaca;
+    font-size: 2rem;
+    font-weight: 900;
+    box-shadow: 0 0 24px rgba(239, 68, 68, 0.2);
+}
+
+.analytics-reset-label {
+    display: inline-flex;
+    margin-bottom: 10px;
+    padding: 6px 12px;
+    border-radius: 999px;
+    background: rgba(239, 68, 68, 0.14);
+    color: #fecaca;
+    font-size: 0.75rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+.analytics-reset-modal h2 {
+    margin: 0 0 12px;
+    color: #ffffff;
+    font-size: clamp(1.4rem, 4vw, 2rem);
+}
+
+.analytics-reset-modal p {
+    margin: 0 auto 18px;
+    max-width: 430px;
+    color: var(--text-muted);
+    line-height: 1.7;
+}
+
+.analytics-reset-warning {
+    margin: 18px 0 14px;
+    padding: 14px;
+    border: 1px solid rgba(239, 68, 68, 0.28);
+    border-radius: 14px;
+    background: rgba(127, 29, 29, 0.22);
+    color: #fee2e2;
+    font-size: 0.94rem;
+}
+
+.analytics-reset-warning strong {
+    color: #ffffff;
+    letter-spacing: 0.08em;
+}
+
+.analytics-reset-input {
+    width: 100%;
+    min-height: 48px;
+    padding: 0 14px;
+    border: 1px solid rgba(239, 68, 68, 0.4);
+    border-radius: 14px;
+    background: rgba(0, 0, 0, 0.42);
+    color: #ffffff;
+    font-size: 1rem;
+    outline: none;
+    text-align: center;
+    letter-spacing: 0.05em;
+}
+
+.analytics-reset-input:focus {
+    border-color: rgba(248, 113, 113, 0.95);
+    box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.16);
+}
+
+.analytics-reset-actions {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    margin-top: 22px;
+}
+
+.analytics-reset-cancel,
+.analytics-reset-confirm {
+    min-height: 44px;
+    padding: 0 18px;
+    border-radius: 999px;
+    font-weight: 800;
+    cursor: pointer;
+}
+
+.analytics-reset-cancel {
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    background: rgba(255, 255, 255, 0.06);
+    color: #ffffff;
+}
+
+.analytics-reset-cancel:hover {
+    border-color: rgba(255, 255, 255, 0.28);
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.analytics-reset-confirm {
+    border: 1px solid rgba(239, 68, 68, 0.7);
+    background: rgba(185, 28, 28, 0.75);
+    color: #ffffff;
+}
+
+.analytics-reset-confirm:disabled {
+    cursor: not-allowed;
+    opacity: 0.45;
+    filter: grayscale(1);
+}
+
+.analytics-reset-confirm:not(:disabled):hover {
+    color: rgb(13, 17, 28);
+    filter: brightness(1.12);
+    background: var(--error-border);
+    box-shadow: 0 0 24px rgba(239, 68, 68, 0.38);
+}
+
+@media (max-width: 600px) {
+    .analytics-reset-modal {
+        padding: 26px 20px;
+    }
+
+    .analytics-reset-actions {
+        flex-direction: column;
+    }
+
+    .analytics-reset-cancel,
+    .analytics-reset-confirm {
+        width: 100%;
+    }
+}
+
+/* =====================================================
+   MCQ ANALYTICS RESET SUCCESS MODAL
+===================================================== */
+
+.analytics-success-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 99999;
+    display: grid;
+    place-items: center;
+    padding: 20px;
+    background: rgba(0, 0, 0, 0.72);
+    backdrop-filter: blur(10px);
+}
+
+.analytics-success-modal {
+    width: min(460px, 100%);
+    padding: 30px;
+    border: 1px solid rgba(34, 197, 94, 0.42);
+    border-radius: 24px;
+    background:
+        radial-gradient(circle at top, rgba(34, 197, 94, 0.16), transparent 36%),
+        linear-gradient(145deg, rgba(18, 22, 20, 0.98), rgba(6, 8, 7, 0.98));
+    box-shadow:
+        0 30px 80px rgba(0, 0, 0, 0.6),
+        0 0 30px rgba(34, 197, 94, 0.14);
+    text-align: center;
+}
+
+.analytics-success-icon {
+    width: 62px;
+    height: 62px;
+    margin: 0 auto 16px;
+    display: grid;
+    place-items: center;
+    border-radius: 50%;
+    border: 1px solid rgba(34, 197, 94, 0.72);
+    background: rgba(22, 101, 52, 0.28);
+    color: #bbf7d0;
+    font-size: 2rem;
+    font-weight: 900;
+    box-shadow: 0 0 24px rgba(34, 197, 94, 0.18);
+}
+
+.analytics-success-label {
+    display: inline-flex;
+    margin-bottom: 10px;
+    padding: 6px 12px;
+    border-radius: 999px;
+    background: rgba(34, 197, 94, 0.12);
+    color: #bbf7d0;
+    font-size: 0.75rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+.analytics-success-modal h2 {
+    margin: 0 0 12px;
+    color: #ffffff;
+    font-size: clamp(1.35rem, 4vw, 1.9rem);
+}
+
+.analytics-success-modal p {
+    margin: 0 auto 22px;
+    max-width: 380px;
+    color: var(--text-muted);
+    line-height: 1.7;
+}
+
+.analytics-success-btn {
+    min-height: 44px;
+    padding: 0 24px;
+    border: 1px solid rgba(34, 197, 94, 0.58);
+    border-radius: 999px;
+    background: rgba(22, 101, 52, 0.38);
+    color: #ffffff;
+    font-weight: 800;
+    cursor: pointer;
+}
+
+.analytics-success-btn:hover {
+    background: rgba(22, 163, 74, 0.52);
+    box-shadow: 0 0 18px rgba(34, 197, 94, 0.22);
+}
+
+/* =====================================================
+   ADMIN CUSTOM MESSAGE MODAL
+===================================================== */
+
+.admin-message-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 99999;
+    display: grid;
+    place-items: center;
+    padding: 20px;
+    background: rgba(0, 0, 0, 0.72);
+    backdrop-filter: blur(10px);
+}
+
+.admin-message-modal {
+    width: min(440px, 100%);
+    position: relative;
+    padding: 30px;
+    border: 1px solid rgba(212, 175, 55, 0.38);
+    border-radius: 24px;
+    background:
+        radial-gradient(circle at top, rgba(212, 175, 55, 0.15), transparent 36%),
+        linear-gradient(145deg, rgba(18, 18, 22, 0.98), rgba(5, 5, 7, 0.98));
+    box-shadow:
+        0 30px 80px rgba(0, 0, 0, 0.65),
+        0 0 28px rgba(212, 175, 55, 0.12);
+    text-align: center;
+}
+
+.admin-message-close {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    width: 36px;
+    height: 36px;
+    border: 1px solid rgba(212, 175, 55, 0.28);
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.05);
+    color: var(--gold, #d4af37);
+    font-size: 1.35rem;
+    font-weight: 900;
+    cursor: pointer;
+}
+
+.admin-message-close:hover {
+    border-color: rgba(212, 175, 55, 0.7);
+    background: rgba(212, 175, 55, 0.12);
+    box-shadow: 0 0 14px rgba(212, 175, 55, 0.2);
+}
+
+.admin-message-icon {
+    width: 62px;
+    height: 62px;
+    margin: 0 auto 16px;
+    display: grid;
+    place-items: center;
+    border-radius: 50%;
+    border: 1px solid rgba(212, 175, 55, 0.65);
+    background: rgba(212, 175, 55, 0.12);
+    color: var(--gold, #d4af37);
+    font-size: 2rem;
+    font-weight: 900;
+    box-shadow: 0 0 24px rgba(212, 175, 55, 0.16);
+}
+
+.admin-message-label {
+    display: inline-flex;
+    margin-bottom: 10px;
+    padding: 6px 12px;
+    border-radius: 999px;
+    background: rgba(212, 175, 55, 0.12);
+    color: var(--gold-light, #f2cf63);
+    font-size: 0.75rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+.admin-message-modal h2 {
+    margin: 0 0 12px;
+    color: #ffffff;
+    font-size: clamp(1.35rem, 4vw, 1.85rem);
+}
+
+.admin-message-modal p {
+    margin: 0 auto 22px;
+    max-width: 360px;
+    color: var(--text-muted);
+    line-height: 1.7;
+}
+
+.admin-message-btn {
+    min-height: 44px;
+    padding: 0 24px;
+    border: 1px solid rgba(212, 175, 55, 0.58);
+    border-radius: 999px;
+    background: rgba(212, 175, 55, 0.12);
+    color: var(--gold-light, #f2cf63);
+    font-weight: 900;
+    cursor: pointer;
+}
+
+.admin-message-btn:hover {
+    background: rgba(212, 175, 55, 0.2);
+    box-shadow: 0 0 18px rgba(212, 175, 55, 0.18);
+}
+
+/* Danger variant */
+.admin-message-danger .admin-message-modal {
+    border-color: rgba(239, 68, 68, 0.45);
+    background:
+        radial-gradient(circle at top, rgba(239, 68, 68, 0.16), transparent 36%),
+        linear-gradient(145deg, rgba(20, 20, 24, 0.98), rgba(6, 6, 8, 0.98));
+}
+
+.admin-message-danger .admin-message-icon,
+.admin-message-danger .admin-message-close,
+.admin-message-danger .admin-message-btn {
+    border-color: rgba(239, 68, 68, 0.55);
+    color: #fecaca;
+}
+
+.admin-message-danger .admin-message-label {
+    background: rgba(239, 68, 68, 0.14);
+    color: #fecaca;
+}
+
+/* Success variant */
+.admin-message-success .admin-message-modal {
+    border-color: rgba(34, 197, 94, 0.42);
+    background:
+        radial-gradient(circle at top, rgba(34, 197, 94, 0.14), transparent 36%),
+        linear-gradient(145deg, rgba(18, 22, 20, 0.98), rgba(6, 8, 7, 0.98));
+}
+
+.admin-message-success .admin-message-icon,
+.admin-message-success .admin-message-close,
+.admin-message-success .admin-message-btn {
+    border-color: rgba(34, 197, 94, 0.55);
+    color: #bbf7d0;
+}
+
+.admin-message-success .admin-message-label {
+    background: rgba(34, 197, 94, 0.12);
+    color: #bbf7d0;
+}

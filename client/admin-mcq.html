@@ -284,6 +284,70 @@
             </div>
         </section>
 
+        <section class="admin-panel mcq-danger-zone">
+            <div class="admin-panel-header">
+                <h2>Danger Zone</h2>
+                <p>
+                    Reset MCQ performance analytics history. This will not delete MCQ sets,
+                    MCQ questions, or student accounts.
+                </p>
+            </div>
+
+            <div class="mcq-danger-grid">
+
+                <article class="mcq-danger-card">
+                    <div>
+                        <h3>Reset All Analytics</h3>
+                        <p>
+                            Delete the complete MCQ performance history for all students
+                            and all MCQ sets.
+                        </p>
+                    </div>
+
+                    <button type="button" class="btn-outline danger-btn" data-history-delete="all">
+                        Reset All History
+                    </button>
+                </article>
+
+                <article class="mcq-danger-card">
+                    <div>
+                        <h3>Reset Student Analytics</h3>
+                        <p>
+                            Select a student first, then delete only that student's MCQ
+                            performance history.
+                        </p>
+                    </div>
+
+                    <select id="mcqHistoryStudentSelect" class="admin-input">
+                        <option value="">Select student</option>
+                    </select>
+
+                    <button type="button" class="btn-outline danger-btn" data-history-delete="student">
+                        Reset Selected Student History
+                    </button>
+                </article>
+
+                <article class="mcq-danger-card">
+                    <div>
+                        <h3>Reset MCQ Set Analytics</h3>
+                        <p>
+                            Select an MCQ set first, then delete only that set's analytics
+                            history.
+                        </p>
+                    </div>
+
+                    <select id="mcqHistorySetSelect" class="admin-input">
+                        <option value="">Select MCQ set</option>
+                    </select>
+
+                    <button type="button" class="btn-outline danger-btn" data-history-delete="set">
+                        Reset Selected Set History
+                    </button>
+                </article>
+
+            </div>
+        </section>
+
         <!-- <section class="admin-panel">
             <div class="admin-panel-header">
                 <h2>Questions in Selected Set</h2>

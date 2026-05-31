@@ -6,8 +6,57 @@ const mcqSetsList = document.getElementById("mcqSetsList");
 let selectedSetId = null;
 let latestStudentStats = [];
 
-function showAdminMessage(message) {
-    alert(message);
+function showAdminMessage(message, type = "info") {
+    const oldModal = document.querySelector(".admin-message-overlay");
+
+    if (oldModal) {
+        oldModal.remove();
+    }
+
+    const modal = document.createElement("div");
+    modal.className = `admin-message-overlay admin-message-${type}`;
+
+    modal.innerHTML = `
+        <section class="admin-message-modal">
+            <button class="admin-message-close" type="button">
+                ×
+            </button>
+
+            <div class="admin-message-icon">
+                ${type === "danger" ? "!" : type === "success" ? "✓" : "i"}
+            </div>
+
+            <span class="admin-message-label">
+                ${type === "danger" ? "Action Needed" : type === "success" ? "Success" : "Notice"}
+            </span>
+
+            <h2>${type === "danger" ? "Check Required" : type === "success" ? "Done" : "Message"}</h2>
+
+            <p>${message}</p>
+
+            <button type="button" class="admin-message-btn">
+                OK
+            </button>
+        </section>
+    `;
+
+    document.body.appendChild(modal);
+
+    const closeButton = modal.querySelector(".admin-message-close");
+    const okButton = modal.querySelector(".admin-message-btn");
+
+    function closeModal() {
+        modal.remove();
+    }
+
+    closeButton.addEventListener("click", closeModal);
+    okButton.addEventListener("click", closeModal);
+
+    modal.addEventListener("click", (event) => {
+        if (event.target === modal) {
+            closeModal();
+        }
+    });
 }
 
 function checkSupabaseReady() {
@@ -1400,6 +1449,8 @@ async function deleteMCQSet(setId) {
     loadMCQSets();
 }
 
+
+
 mcqSetForm?.addEventListener("submit", createMCQSet);
 mcqQuestionForm?.addEventListener("submit", addQuestion);
 questionSetSelect?.addEventListener("change", () => {
@@ -1426,3 +1477,487 @@ window.closeAdminPopup = closeAdminPopup;
 
 document.addEventListener("DOMContentLoaded", loadMCQSets);
 
+/* =====================================================
+   MCQ HISTORY RESET DROPDOWN LOADERS
+===================================================== */
+
+async function loadMcqHistoryResetDropdowns() {
+    await loadMcqHistoryStudentOptions();
+    await loadMcqHistorySetOptions();
+}
+
+async function loadMcqHistoryStudentOptions() {
+    if (!mcqHistoryStudentSelect) {
+        return;
+    }
+
+    mcqHistoryStudentSelect.innerHTML = `
+        <option value="">Loading students...</option>
+    `;
+
+    if (!checkSupabaseReady()) {
+        mcqHistoryStudentSelect.innerHTML = `
+            <option value="">Supabase not connected</option>
+        `;
+        return;
+    }
+
+    const { data, error } = await window.supabaseClient
+        .from("mcq_attempts")
+        .select("*")
+        .order("created_at", { ascending: false });
+
+    if (error) {
+        console.error("Failed to load MCQ students:", error);
+
+        mcqHistoryStudentSelect.innerHTML = `
+            <option value="">Failed to load students</option>
+        `;
+        return;
+    }
+
+    const studentMap = new Map();
+
+    (data || []).forEach((attempt) => {
+        const studentKey =
+            attempt.clerk_user_id ||
+            attempt.user_email ||
+            attempt.user_name ||
+            attempt.user_id;
+
+        if (!studentKey) {
+            return;
+        }
+
+        const studentName =
+            attempt.user_name ||
+            "Anonymous Student";
+
+        const studentEmail =
+            attempt.user_email ||
+            "No email";
+
+        const studentLabel =
+            `${studentName} — ${studentEmail}`;
+
+        if (!studentMap.has(studentKey)) {
+            studentMap.set(studentKey, studentLabel);
+        }
+    });
+
+    if (studentMap.size === 0) {
+        mcqHistoryStudentSelect.innerHTML = `
+            <option value="">No student history found</option>
+        `;
+        return;
+    }
+
+    mcqHistoryStudentSelect.innerHTML = `
+        <option value="">Select student</option>
+    `;
+
+    studentMap.forEach((studentLabel, studentKey) => {
+        const option = document.createElement("option");
+
+        option.value = studentKey;
+        option.textContent = studentLabel;
+
+        mcqHistoryStudentSelect.appendChild(option);
+    });
+}
+
+async function loadMcqHistorySetOptions() {
+    if (!mcqHistorySetSelect) {
+        return;
+    }
+
+    mcqHistorySetSelect.innerHTML = `
+        <option value="">Loading MCQ sets...</option>
+    `;
+
+    if (!checkSupabaseReady()) {
+        mcqHistorySetSelect.innerHTML = `
+            <option value="">Supabase not connected</option>
+        `;
+        return;
+    }
+
+    const { data, error } = await window.supabaseClient
+        .from("mcq_sets")
+        .select("id, title")
+        .order("created_at", { ascending: false });
+
+    if (error) {
+        console.error("Failed to load MCQ sets for history reset:", error);
+
+        mcqHistorySetSelect.innerHTML = `
+            <option value="">Failed to load MCQ sets</option>
+        `;
+        return;
+    }
+
+    if (!data || data.length === 0) {
+        mcqHistorySetSelect.innerHTML = `
+            <option value="">No MCQ sets found</option>
+        `;
+        return;
+    }
+
+    mcqHistorySetSelect.innerHTML = `
+        <option value="">Select MCQ set</option>
+    `;
+
+    data.forEach((set) => {
+        const option = document.createElement("option");
+
+        option.value = set.id;
+        option.textContent = set.title || `MCQ Set #${set.id}`;
+
+        mcqHistorySetSelect.appendChild(option);
+    });
+}
+
+/* =====================================================
+   MCQ ANALYTICS HISTORY RESET CONTROLS
+   Reusable confirmation system
+===================================================== */
+
+const mcqHistoryStudentSelect = document.getElementById("mcqHistoryStudentSelect");
+const mcqHistorySetSelect = document.getElementById("mcqHistorySetSelect");
+
+function confirmAnalyticsHistoryReset(historyLabel, resetCallback) {
+    const oldModal = document.querySelector(".analytics-reset-overlay");
+
+    if (oldModal) {
+        oldModal.remove();
+    }
+
+    const modal = document.createElement("div");
+    modal.className = "analytics-reset-overlay";
+
+    modal.innerHTML = `
+        <section class="analytics-reset-modal">
+            <button class="analytics-reset-close" type="button">
+                ×
+            </button>
+
+            <div class="analytics-reset-icon">!</div>
+
+            <span class="analytics-reset-label">Danger Zone</span>
+
+            <h2>Reset ${historyLabel}?</h2>
+
+            <p>
+                This will delete only MCQ performance analytics history.
+                MCQ sets, MCQ questions, and student accounts will not be deleted.
+            </p>
+
+            <div class="analytics-reset-warning">
+                Type <strong>DELETE</strong> below to confirm this action.
+            </div>
+
+            <input
+                type="text"
+                class="analytics-reset-input"
+                placeholder="Type DELETE"
+                autocomplete="off"
+            >
+
+            <div class="analytics-reset-actions">
+                <button type="button" class="analytics-reset-cancel">
+                    Cancel
+                </button>
+
+                <button type="button" class="analytics-reset-confirm" disabled>
+                    Reset History
+                </button>
+            </div>
+        </section>
+    `;
+
+    document.body.appendChild(modal);
+
+    const closeButton = modal.querySelector(".analytics-reset-close");
+    const cancelButton = modal.querySelector(".analytics-reset-cancel");
+    const confirmButton = modal.querySelector(".analytics-reset-confirm");
+    const input = modal.querySelector(".analytics-reset-input");
+
+    function closeModal() {
+        modal.remove();
+    }
+
+    input.addEventListener("input", () => {
+        confirmButton.disabled = input.value.trim() !== "DELETE";
+    });
+
+    closeButton.addEventListener("click", closeModal);
+    cancelButton.addEventListener("click", closeModal);
+
+    confirmButton.addEventListener("click", async () => {
+        if (input.value.trim() !== "DELETE") {
+            return;
+        }
+
+        closeModal();
+        await resetCallback();
+    });
+
+    modal.addEventListener("click", (event) => {
+        if (event.target === modal) {
+            closeModal();
+        }
+    });
+
+    input.focus();
+}
+
+function getSelectedOptionText(selectElement) {
+    if (!selectElement || !selectElement.value) {
+        return "";
+    }
+
+    return selectElement.options[selectElement.selectedIndex].textContent.trim();
+}
+
+function showAnalyticsResetSuccess(message) {
+    const oldModal = document.querySelector(".analytics-success-overlay");
+
+    if (oldModal) {
+        oldModal.remove();
+    }
+
+    const modal = document.createElement("div");
+    modal.className = "analytics-success-overlay";
+
+    modal.innerHTML = `
+        <section class="analytics-success-modal">
+            <div class="analytics-success-icon">✓</div>
+
+            <span class="analytics-success-label">Confirmed</span>
+
+            <h2>Analytics Reset Ready</h2>
+
+            <p>${message}</p>
+
+            <button type="button" class="analytics-success-btn">
+                Done
+            </button>
+        </section>
+    `;
+
+    document.body.appendChild(modal);
+
+    const doneButton = modal.querySelector(".analytics-success-btn");
+
+    doneButton.addEventListener("click", () => {
+        modal.remove();
+    });
+
+    modal.addEventListener("click", (event) => {
+        if (event.target === modal) {
+            modal.remove();
+        }
+    });
+}
+
+/* =====================================================
+   REAL MCQ ANALYTICS DELETE LOGIC
+===================================================== */
+
+async function deleteAttemptsAndAnswers(attemptIds) {
+    if (!attemptIds || attemptIds.length === 0) {
+        showAdminMessage("No analytics history found to delete.", "info");
+        return false;
+    }
+
+    console.log("Deleting attempt IDs:", attemptIds);
+
+    const { data: deletedAnswers, error: answersError } = await window.supabaseClient
+        .from("mcq_attempt_answers")
+        .delete()
+        .in("attempt_id", attemptIds)
+        .select("id");
+
+    if (answersError) {
+        console.error("Failed to delete MCQ attempt answers:", answersError);
+        showAdminMessage("Failed to delete MCQ answer history. Check Supabase policies.", "danger");
+        return false;
+    }
+
+    const { data: deletedAttempts, error: attemptsError } = await window.supabaseClient
+        .from("mcq_attempts")
+        .delete()
+        .in("id", attemptIds)
+        .select("id");
+
+    if (attemptsError) {
+        console.error("Failed to delete MCQ attempts:", attemptsError);
+        showAdminMessage("Failed to delete MCQ attempt history. Check Supabase policies.", "danger");
+        return false;
+    }
+
+    console.log("Deleted answers:", deletedAnswers);
+    console.log("Deleted attempts:", deletedAttempts);
+
+    if (!deletedAttempts || deletedAttempts.length === 0) {
+        showAdminMessage(
+            "No attempt rows were deleted. Supabase RLS/policies are probably blocking delete.",
+            "danger"
+        );
+        return false;
+    }
+
+    return true;
+}
+
+async function refreshMcqAnalyticsAdminUI() {
+    await loadMCQSets();
+    await loadMcqHistoryResetDropdowns();
+
+    const performanceModal = document.querySelector(".admin-performance-modal-overlay");
+
+    if (performanceModal) {
+        performanceModal.remove();
+    }
+
+    closeAdminPopup();
+}
+
+async function resetAllMcqAnalyticsHistory() {
+    if (!checkSupabaseReady()) return;
+
+    const { data: attempts, error } = await window.supabaseClient
+        .from("mcq_attempts")
+        .select("id");
+
+    if (error) {
+        console.error("Failed to load all MCQ attempts:", error);
+        showAdminMessage("Failed to load MCQ analytics history.", "danger");
+        return;
+    }
+
+    const attemptIds = (attempts || []).map((attempt) => attempt.id);
+
+    const deleted = await deleteAttemptsAndAnswers(attemptIds);
+
+    if (!deleted) return;
+
+    showAdminMessage("All MCQ analytics history deleted.", "success");
+
+    await refreshMcqAnalyticsAdminUI();
+}
+
+async function resetStudentMcqAnalyticsHistory() {
+    if (!mcqHistoryStudentSelect || !mcqHistoryStudentSelect.value) {
+        showAdminMessage("Select a student first.", "danger");
+        return;
+    }
+
+    const selectedStudentKey = mcqHistoryStudentSelect.value;
+    const selectedStudentName = getSelectedOptionText(mcqHistoryStudentSelect);
+
+    confirmAnalyticsHistoryReset(
+        `${selectedStudentName}'s Analytics History`,
+        async () => {
+            if (!checkSupabaseReady()) return;
+
+            const { data: attempts, error } = await window.supabaseClient
+                .from("mcq_attempts")
+                .select("*");
+
+            if (error) {
+                console.error("Failed to load student attempts:", error);
+                showAdminMessage("Failed to load selected student analytics history.", "danger");
+                return;
+            }
+
+            const matchedAttempts = (attempts || []).filter((attempt) => {
+                return (
+                    String(attempt.clerk_user_id || "") === String(selectedStudentKey) ||
+                    String(attempt.user_email || "") === String(selectedStudentKey) ||
+                    String(attempt.user_name || "") === String(selectedStudentKey)
+                );
+            });
+
+            const attemptIds = matchedAttempts.map((attempt) => attempt.id);
+
+            const deleted = await deleteAttemptsAndAnswers(attemptIds);
+
+            if (!deleted) return;
+
+            showAdminMessage(
+                `Analytics history deleted for ${selectedStudentName}.`,
+                "success"
+            );
+
+            await refreshMcqAnalyticsAdminUI();
+        }
+    );
+}
+
+async function resetSetMcqAnalyticsHistory() {
+    if (!mcqHistorySetSelect || !mcqHistorySetSelect.value) {
+        showAdminMessage("Select an MCQ set first.", "danger");
+        return;
+    }
+
+    const selectedSetId = mcqHistorySetSelect.value;
+    const selectedSetName = getSelectedOptionText(mcqHistorySetSelect);
+
+    confirmAnalyticsHistoryReset(
+        `${selectedSetName} Analytics History`,
+        async () => {
+            if (!checkSupabaseReady()) return;
+
+            const { data: attempts, error } = await window.supabaseClient
+                .from("mcq_attempts")
+                .select("id, set_id");
+
+            if (error) {
+                console.error("Failed to load MCQ set attempts:", error);
+                showAdminMessage("Failed to load selected MCQ set analytics history.", "danger");
+                return;
+            }
+
+            const matchedAttempts = (attempts || []).filter((attempt) => {
+                return String(attempt.set_id) === String(selectedSetId);
+            });
+
+            const attemptIds = matchedAttempts.map((attempt) => attempt.id);
+
+            const deleted = await deleteAttemptsAndAnswers(attemptIds);
+
+            if (!deleted) return;
+
+            showAdminMessage(
+                `Analytics history deleted for ${selectedSetName}.`,
+                "success"
+            );
+
+            await refreshMcqAnalyticsAdminUI();
+        }
+    );
+}
+
+document.querySelectorAll("[data-history-delete]").forEach((button) => {
+    button.addEventListener("click", () => {
+        const deleteType = button.dataset.historyDelete;
+
+        if (deleteType === "all") {
+            confirmAnalyticsHistoryReset(
+                "All MCQ Analytics History",
+                resetAllMcqAnalyticsHistory
+            );
+        }
+
+        if (deleteType === "student") {
+            resetStudentMcqAnalyticsHistory();
+        }
+
+        if (deleteType === "set") {
+            resetSetMcqAnalyticsHistory();
+        }
+    });
+});
+
+loadMcqHistoryResetDropdowns();

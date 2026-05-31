@@ -12,6 +12,11 @@
 - Continued organizing the project work into daily progress format.
 - Made sure the documentation explains the work clearly without making it sound exaggerated.
 - Continued project cleanup, presentation improvement, and documentation refinement.
+- Planned a reusable admin-controlled delete history option for MCQ performance analytics.
+- The delete history option should appear in the Admin MCQ page and every analytics view, including overall analytics, MCQ-set analytics, student analytics, and individual student performance details.
+- The same confirmation prompt/modal should be reused across all analytics delete actions.
+- Admin must type `DELETE` before analytics history is removed.
+- Deleting analytics history must only remove performance records, not MCQ sets, MCQ questions, or student accounts.
 
 ## Problems Faced
 - The previous documentation sounded too final, even though the project work is still continuing.
