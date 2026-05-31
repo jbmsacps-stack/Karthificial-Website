@@ -67,6 +67,16 @@ async function protectAdminPage() {
     }
 }
 
+document.addEventListener("DOMContentLoaded", () => {
+    const currentPage = window.location.pathname.split("/").pop() || "admin.html";
+
+    document.querySelectorAll(".admin-navbar .nav-link").forEach(link => {
+        const linkPage = link.getAttribute("href");
+
+        link.classList.toggle("active", linkPage === currentPage);
+    });
+});
+
 document.addEventListener("DOMContentLoaded", protectAdminPage);
 
 function setupAdminManagerButtons() {
