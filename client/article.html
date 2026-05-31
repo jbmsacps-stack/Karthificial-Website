@@ -621,6 +621,406 @@
                 grid-template-columns: 1fr;
             }
         }
+
+        /* =====================================================
+   KARTHIFICIAL WEBSITE BLUE COLOR PATCH
+   Add at the bottom of client/style.css
+   Only colors/background/borders/shadows/text.
+===================================================== */
+
+        /* Page background */
+        body {
+            background:
+                radial-gradient(circle at 50% 0%, rgba(22, 76, 135, 0.18), transparent 38%),
+                linear-gradient(180deg, #061526 0%, #071a2d 48%, #030b14 100%) !important;
+            color: #f7f3e8 !important;
+        }
+
+        /* Navbar */
+        .navbar {
+            background: rgba(2, 8, 17, 0.94) !important;
+            border-bottom: 1px solid rgba(212, 175, 55, 0.35) !important;
+            box-shadow: 0 12px 35px rgba(0, 0, 0, 0.35);
+        }
+
+        /* Hero */
+        .home-hero {
+            background:
+                radial-gradient(circle at 50% 18%, rgba(25, 85, 145, 0.28), transparent 34%),
+                radial-gradient(circle at 7% 40%, rgba(21, 73, 132, 0.18), transparent 34%),
+                radial-gradient(circle at 95% 42%, rgba(15, 57, 105, 0.16), transparent 30%),
+                linear-gradient(180deg, #081a2f 0%, #061526 50%, #030b14 100%) !important;
+        }
+
+        /* Remove diagonal streak if old patch created it */
+        .home-hero::after {
+            content: none !important;
+            display: none !important;
+        }
+
+        /* Remove watermark icons if old patch created them */
+        .home-hero .container::before {
+            content: none !important;
+            display: none !important;
+        }
+
+        /* Logo glow */
+        .hero-logo {
+            filter:
+                drop-shadow(0 0 18px rgba(212, 175, 55, 0.28)) drop-shadow(0 0 38px rgba(10, 37, 73, 0.7));
+        }
+
+        /* Hero text */
+        .hero-tagline,
+        .hero-subtitle {
+            color: rgba(247, 243, 232, 0.82) !important;
+        }
+
+        /* Hero role buttons */
+        .hero-role-badges span {
+            color: #f3cf68 !important;
+            border: 1px solid rgba(212, 175, 55, 0.78) !important;
+            background:
+                linear-gradient(180deg, rgba(17, 45, 80, 0.42), rgba(4, 15, 29, 0.62)) !important;
+            box-shadow:
+                inset 0 0 18px rgba(212, 175, 55, 0.06),
+                0 10px 30px rgba(0, 0, 0, 0.28);
+        }
+
+        /* Sections */
+        .slider-section,
+        .about-section,
+        .stats-section,
+        .portfolio-section,
+        .notes-section,
+        .papers-section,
+        .mcq-section,
+        .career-section,
+        .contact-section,
+        .resources-section,
+        .admin-dashboard,
+        .admin-manager,
+        .auth-page {
+            background:
+                radial-gradient(circle at 50% 0%, rgba(22, 76, 135, 0.16), transparent 36%),
+                linear-gradient(180deg, #030b14 0%, #061526 48%, #071a2d 100%) !important;
+        }
+
+        /* General cards */
+        .card,
+        .feature-card,
+        .stat-box,
+        .resource-card,
+        .service-card,
+        .admin-card,
+        .admin-list-card,
+        .manager-panel,
+        .admin-panel,
+        .admin-form,
+        .auth-card,
+        .paper-card,
+        .note-card,
+        .contact-card {
+            background:
+                linear-gradient(180deg, rgba(18, 52, 91, 0.92), rgba(6, 20, 38, 0.96)) !important;
+            border: 1px solid rgba(212, 175, 55, 0.28) !important;
+            box-shadow:
+                0 18px 45px rgba(0, 0, 0, 0.34),
+                inset 0 1px 0 rgba(255, 255, 255, 0.04) !important;
+            color: #f7f3e8 !important;
+        }
+
+        /* Card text */
+        .card h1,
+        .card h2,
+        .card h3,
+        .card h4,
+        .feature-card h3,
+        .stat-box h3,
+        .resource-card h3,
+        .service-card h3,
+        .admin-card h2,
+        .admin-list-card h3,
+        .paper-card h3,
+        .note-card h3,
+        .contact-card h3 {
+            color: #f2cf63 !important;
+        }
+
+        .card p,
+        .feature-card p,
+        .stat-box p,
+        .resource-card p,
+        .service-card p,
+        .admin-card p,
+        .admin-list-card p,
+        .paper-card p,
+        .note-card p,
+        .contact-card p {
+            color: rgba(247, 243, 232, 0.78) !important;
+        }
+
+        /* About / founder strip */
+        .founder-strip,
+        .profile-panel,
+        .resource-hero-box,
+        .featured-career-guide {
+            background:
+                radial-gradient(circle at 0% 0%, rgba(212, 175, 55, 0.07), transparent 30%),
+                radial-gradient(circle at 100% 100%, rgba(31, 94, 177, 0.16), transparent 38%),
+                linear-gradient(135deg, rgba(10, 31, 56, 0.96), rgba(3, 12, 24, 0.98)) !important;
+            border: 1px solid rgba(212, 175, 55, 0.30) !important;
+            box-shadow:
+                0 24px 70px rgba(0, 0, 0, 0.38),
+                inset 0 1px 0 rgba(255, 255, 255, 0.04) !important;
+        }
+
+        /* Identity/platform cards */
+        .identity-card {
+            background:
+                linear-gradient(180deg, rgba(15, 45, 82, 0.88), rgba(4, 15, 29, 0.92)) !important;
+            border: 1px solid rgba(212, 175, 55, 0.26) !important;
+            box-shadow:
+                inset 0 1px 0 rgba(255, 255, 255, 0.035),
+                0 14px 38px rgba(0, 0, 0, 0.26) !important;
+        }
+
+        /* Resource page wrapper fix: no boxed blue rectangle */
+        .resource-main,
+        .resources-section,
+        .resource-list,
+        .resource-card-grid,
+        .subjects-section {
+            background: transparent !important;
+        }
+
+        /* Resource subject cards */
+        .resource-box-card {
+            background:
+                linear-gradient(180deg, rgba(15, 45, 82, 0.94), rgba(4, 15, 29, 0.96)) !important;
+            border: 1px solid rgba(212, 175, 55, 0.30) !important;
+            box-shadow:
+                0 18px 45px rgba(0, 0, 0, 0.34),
+                inset 0 1px 0 rgba(255, 255, 255, 0.035) !important;
+        }
+
+        .resource-card-body {
+            background:
+                linear-gradient(180deg, rgba(10, 31, 56, 0.95), rgba(3, 12, 24, 0.96)) !important;
+        }
+
+        .resource-card-body h3 {
+            color: #fff4bd !important;
+        }
+
+        .resource-card-body p,
+        .resource-card-info span {
+            color: rgba(247, 243, 232, 0.80) !important;
+        }
+
+        .resource-thumbnail {
+            background:
+                radial-gradient(circle at 50% 0%, rgba(212, 175, 55, 0.10), transparent 34%),
+                linear-gradient(180deg, rgba(18, 52, 91, 0.92), rgba(3, 12, 24, 0.96)) !important;
+            border-bottom: 1px solid rgba(212, 175, 55, 0.22) !important;
+        }
+
+        /* Filter buttons */
+        .filter-btn {
+            border: 1px solid rgba(212, 175, 55, 0.42) !important;
+            background:
+                linear-gradient(180deg, rgba(15, 45, 82, 0.92), rgba(4, 15, 29, 0.96)) !important;
+            color: #f2cf63 !important;
+            box-shadow:
+                inset 0 1px 0 rgba(255, 255, 255, 0.035),
+                0 10px 24px rgba(0, 0, 0, 0.22);
+        }
+
+        .filter-btn:hover,
+        .filter-btn.active {
+            background:
+                linear-gradient(135deg, #d4af37, #f2cf63) !important;
+            color: #050910 !important;
+            border-color: rgba(255, 240, 180, 0.55) !important;
+        }
+
+        /* Buttons */
+        .resource-card-btn,
+        .featured-btn,
+        .btn-gold {
+            background:
+                linear-gradient(135deg, #d4af37, #f2cf63) !important;
+            color: #050910 !important;
+            border: 1px solid rgba(255, 240, 180, 0.52) !important;
+        }
+
+        /* Inputs */
+        input,
+        select,
+        textarea {
+            background: rgba(4, 15, 29, 0.88) !important;
+            border: 1px solid rgba(212, 175, 55, 0.28) !important;
+            color: #f7f3e8 !important;
+        }
+
+        input:focus,
+        select:focus,
+        textarea:focus {
+            border-color: rgba(242, 207, 99, 0.72) !important;
+            box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.12) !important;
+            outline: none !important;
+        }
+
+        /* Dropdown */
+        .dropdown-menu {
+            background:
+                linear-gradient(180deg, rgba(10, 31, 56, 0.98), rgba(3, 12, 24, 0.98)) !important;
+            border: 1px solid rgba(212, 175, 55, 0.34) !important;
+            box-shadow:
+                0 22px 55px rgba(0, 0, 0, 0.55),
+                0 0 24px rgba(212, 175, 55, 0.10) !important;
+        }
+
+        .dropdown-menu a:hover {
+            background: rgba(212, 175, 55, 0.12) !important;
+            color: #f2cf63 !important;
+        }
+
+        /* Footer */
+        .footer {
+            background:
+                linear-gradient(180deg, #030b14 0%, #020812 100%) !important;
+            border-top: 1px solid rgba(212, 175, 55, 0.28) !important;
+        }
+
+        .footer a {
+            transition: color 0.25s ease, text-shadow 0.25s ease;
+        }
+
+        .footer a:hover {
+            color: #f2cf63 !important;
+            text-shadow:
+                0 0 10px rgba(212, 175, 55, 0.35),
+                0 0 22px rgba(212, 175, 55, 0.18);
+        }
+
+        /* Career article cards black-only fix */
+        .career-article-card {
+            background:
+                linear-gradient(180deg, #05070b, #02050a) !important;
+            border: 1px solid rgba(212, 175, 55, 0.28) !important;
+            box-shadow:
+                0 18px 45px rgba(0, 0, 0, 0.42),
+                inset 0 1px 0 rgba(255, 255, 255, 0.025) !important;
+        }
+
+        .career-article-card .career-article-content {
+            background:
+                linear-gradient(180deg, #05070b, #02050a) !important;
+        }
+
+        /* MCQ radio fix */
+        .mcq-set-option input[type="radio"] {
+            appearance: auto !important;
+            -webkit-appearance: radio !important;
+
+            width: 18px !important;
+            height: 18px !important;
+            min-width: 18px !important;
+
+            padding: 0 !important;
+            margin: 0 12px 0 0 !important;
+
+            background: transparent !important;
+            border: none !important;
+            border-radius: 50% !important;
+            box-shadow: none !important;
+
+            accent-color: #d4af37 !important;
+            cursor: pointer;
+        }
+
+        .mcq-set-option input[type="radio"]:focus,
+        .mcq-set-option input[type="radio"]:focus-visible {
+            outline: none !important;
+            box-shadow: none !important;
+        }
+
+        /* =====================================================
+   ARTICLE.HTML DARK BLUE BACKGROUND PATCH
+   Only changes backgrounds/borders/shadows.
+   Does NOT touch text colors or typography.
+===================================================== */
+
+body {
+    background:
+        radial-gradient(circle at 50% 0%, rgba(22, 76, 135, 0.20), transparent 38%),
+        linear-gradient(180deg, #07111f 0%, #0b1a2e 48%, #061526 100%) !important;
+    background-attachment: fixed;
+}
+
+.article-page {
+    background: transparent !important;
+}
+
+/* Main article container */
+.article-view {
+    background:
+        linear-gradient(180deg, rgba(11, 26, 46, 0.98), rgba(7, 17, 31, 0.99)) !important;
+    border: 1px solid rgba(212, 175, 55, 0.22) !important;
+    box-shadow:
+        0 24px 70px rgba(0, 0, 0, 0.42),
+        inset 0 1px 0 rgba(255, 255, 255, 0.035) !important;
+}
+
+/* Right sidebar */
+.article-side-box {
+    background:
+        linear-gradient(180deg, rgba(16, 38, 66, 0.96), rgba(8, 20, 36, 0.98)) !important;
+    border: 1px solid rgba(212, 175, 55, 0.22) !important;
+    box-shadow:
+        0 22px 60px rgba(0, 0, 0, 0.38),
+        inset 0 1px 0 rgba(255, 255, 255, 0.035) !important;
+}
+
+/* Future ad slot */
+.future-ad-slot {
+    background:
+        linear-gradient(180deg, rgba(13, 31, 54, 0.96), rgba(7, 17, 31, 0.98)) !important;
+    border: 1px dashed rgba(212, 175, 55, 0.22) !important;
+    box-shadow:
+        0 18px 45px rgba(0, 0, 0, 0.30),
+        inset 0 1px 0 rgba(255, 255, 255, 0.025) !important;
+}
+
+/* Related articles full section */
+.related-articles-full {
+    background:
+        linear-gradient(180deg, rgba(16, 38, 66, 0.96), rgba(8, 20, 36, 0.98)) !important;
+    border: 1px solid rgba(212, 175, 55, 0.22) !important;
+    box-shadow:
+        0 24px 70px rgba(0, 0, 0, 0.40),
+        inset 0 1px 0 rgba(255, 255, 255, 0.035) !important;
+}
+
+/* Related cards */
+.related-card {
+    background:
+        linear-gradient(180deg, rgba(13, 31, 54, 0.96), rgba(7, 17, 31, 0.98)) !important;
+    border: 1px solid rgba(212, 175, 55, 0.18) !important;
+}
+
+/* Category pill background only */
+.article-category {
+    background: rgba(16, 38, 66, 0.92) !important;
+    border: 1px solid rgba(212, 175, 55, 0.24) !important;
+}
+
+/* Video box background only */
+.article-video {
+    background: #07111f !important;
+    border: 1px solid rgba(212, 175, 55, 0.22) !important;
+}
     </style>
 
     <script type="module" src="speed-insights.js"></script>

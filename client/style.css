@@ -970,20 +970,34 @@ img {
     font-size: 1.6rem;
 }
 
+/* =====================================================
+   12TH NOTES / PAPERS FILTER BUTTON THEME FIX
+   Only changes button color. Keeps existing hover behavior.
+===================================================== */
+
 .filter-btn {
-    border: 1px solid rgba(var(--gold-rgb), 0.35);
-    background: var(--surface);
-    color: var(--gold);
+    border: 1px solid rgba(212, 175, 55, 0.42);
+    background:
+        linear-gradient(180deg, rgba(15, 45, 82, 0.92), rgba(4, 15, 29, 0.96));
+    color: #f2cf63;
     padding: 9px 16px;
     border-radius: 999px;
     cursor: pointer;
     transition: 0.25s ease;
+    box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.035),
+        0 10px 24px rgba(0, 0, 0, 0.22);
 }
 
 .filter-btn:hover,
 .filter-btn.active {
-    background: var(--gold);
-    color: var(--surface);
+    background:
+        linear-gradient(135deg, #d4af37, #f2cf63);
+    color: #050910;
+    border-color: rgba(255, 240, 180, 0.55);
+    box-shadow:
+        0 0 18px rgba(212, 175, 55, 0.24),
+        0 12px 28px rgba(0, 0, 0, 0.28);
 }
 
 .resource-card-grid {
@@ -1002,12 +1016,11 @@ img {
     border: 1px solid rgba(var(--gold-rgb), 0.22);
     border-radius: 22px;
     overflow: hidden;
-    transition: 0.3s ease;
     box-shadow: 0 12px 35px rgba(var(--black-rgb), 0.25);
 }
 
 .resource-box-card:hover {
-    transform: scale(1.01);
+    /* outline: 1px solid var(--gold); */
     background: rgba(var(--gold-rgb), 0.067);
     border-color: rgba(var(--gold-rgb), 0.65);
     box-shadow: 0 18px 45px rgba(var(--gold-rgb), 0.13);
@@ -12618,7 +12631,7 @@ main>.resource-main:first-child {
         position: relative;
     }
 
-    .nav-menu .dropdown > .nav-link {
+    .nav-menu .dropdown>.nav-link {
         width: 100%;
         display: flex;
         align-items: center;
@@ -12701,7 +12714,7 @@ main>.resource-main:first-child {
         -webkit-overflow-scrolling: touch;
     }
 
-    .navbar .nav-menu > li {
+    .navbar .nav-menu>li {
         width: 100%;
         flex-shrink: 0;
     }
@@ -12711,7 +12724,7 @@ main>.resource-main:first-child {
         width: 100%;
     }
 
-    .navbar .nav-menu .dropdown > .nav-link {
+    .navbar .nav-menu .dropdown>.nav-link {
         width: 100%;
         display: flex;
         align-items: center;
@@ -12752,9 +12765,9 @@ main>.resource-main:first-child {
             margin 0.2s ease;
     }
 
-    .navbar .nav-menu .dropdown:hover > .dropdown-menu,
-    .navbar .nav-menu .dropdown:focus-within > .dropdown-menu,
-    .navbar .nav-menu .dropdown.open > .dropdown-menu {
+    .navbar .nav-menu .dropdown:hover>.dropdown-menu,
+    .navbar .nav-menu .dropdown:focus-within>.dropdown-menu,
+    .navbar .nav-menu .dropdown.open>.dropdown-menu {
         max-height: 220px;
         opacity: 1;
         visibility: visible;
@@ -12960,7 +12973,7 @@ main>.resource-main:first-child {
         -webkit-overflow-scrolling: touch;
     }
 
-    .navbar .nav-menu > li {
+    .navbar .nav-menu>li {
         display: block !important;
         width: 100% !important;
         flex-shrink: 0 !important;
@@ -13115,3 +13128,1206 @@ main>.resource-main:first-child {
 .career-article-card .career-article-link {
     pointer-events: auto;
 }
+
+/* =========================================================
+   HOME HERO BLUE PREMIUM REDESIGN
+   Matches desired deep academic blue + gold look
+   Add this at the VERY BOTTOM of style.css
+========================================================= */
+
+body {
+    background:
+        radial-gradient(circle at 50% 18%, rgba(32, 92, 158, 0.28), transparent 34%),
+        radial-gradient(circle at 0% 45%, rgba(24, 86, 155, 0.22), transparent 32%),
+        radial-gradient(circle at 100% 48%, rgba(15, 58, 112, 0.22), transparent 30%),
+        linear-gradient(180deg, #06111f 0%, #071a2d 45%, #04101d 100%) !important;
+    color: #f7f3e8;
+}
+
+/* Navbar should stay normal/static, not sticky */
+.navbar {
+    background: rgba(2, 8, 17, 0.92) !important;
+    border-bottom: 1px solid rgba(212, 175, 55, 0.45) !important;
+    box-shadow: 0 12px 35px rgba(0, 0, 0, 0.35);
+}
+
+/* Main hero blue visual base */
+.home-hero {
+    position: relative;
+    overflow: hidden;
+    isolation: isolate;
+    min-height: calc(100vh - 86px);
+    background:
+        radial-gradient(circle at 50% 18%, rgba(25, 85, 145, 0.38), transparent 34%),
+        radial-gradient(circle at 7% 40%, rgba(21, 73, 132, 0.32), transparent 34%),
+        radial-gradient(circle at 95% 42%, rgba(15, 57, 105, 0.26), transparent 30%),
+        linear-gradient(180deg, #081a2f 0%, #061526 50%, #030b14 100%) !important;
+}
+
+/* Dotted academic texture */
+.home-hero::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -3;
+    pointer-events: none;
+    opacity: 0.32;
+    background-image:
+        radial-gradient(circle, rgba(65, 141, 223, 0.38) 1.3px, transparent 1.3px);
+    background-size: 22px 22px;
+    mask-image:
+        linear-gradient(90deg, black 0%, transparent 28%, transparent 72%, black 100%);
+}
+
+/* Diagonal royal-blue/gold streaks */
+.home-hero::after {
+    content: "";
+    position: absolute;
+    inset: auto -10% -18% -10%;
+    height: 58%;
+    z-index: -2;
+    pointer-events: none;
+    background:
+        linear-gradient(32deg, transparent 0 36%, rgba(212, 175, 55, 0.85) 36.2%, transparent 36.7%),
+        linear-gradient(32deg, transparent 0 39%, rgba(41, 118, 215, 0.55) 39.2%, transparent 40.2%),
+        linear-gradient(-34deg, transparent 0 40%, rgba(212, 175, 55, 0.70) 40.2%, transparent 40.7%),
+        linear-gradient(-34deg, transparent 0 43%, rgba(31, 94, 177, 0.55) 43.1%, transparent 44%);
+    opacity: 0.9;
+}
+
+/* Hero content should sit above all effects */
+.hero-content {
+    position: relative;
+    z-index: 2;
+}
+
+/* Subtle premium glow around main logo */
+.hero-logo {
+    filter:
+        drop-shadow(0 0 18px rgba(212, 175, 55, 0.34)) drop-shadow(0 0 38px rgba(10, 37, 73, 0.75));
+}
+
+/* Tagline refinement */
+.hero-kicker,
+.hero-tagline,
+.hero-signature {
+    color: #f1d27a !important;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    text-shadow: 0 0 18px rgba(212, 175, 55, 0.22);
+}
+
+/* Role buttons like desired image */
+.hero-role-badges {
+    gap: 24px;
+}
+
+.hero-role-badges span {
+    color: #f3cf68 !important;
+    border: 1px solid rgba(212, 175, 55, 0.82) !important;
+    background:
+        linear-gradient(180deg, rgba(17, 45, 80, 0.42), rgba(4, 15, 29, 0.62)) !important;
+    box-shadow:
+        inset 0 0 18px rgba(212, 175, 55, 0.06),
+        0 10px 30px rgba(0, 0, 0, 0.28);
+}
+
+.hero-role-badges span:hover {
+    background:
+        linear-gradient(180deg, rgba(212, 175, 55, 0.14), rgba(10, 31, 58, 0.78)) !important;
+    box-shadow:
+        0 0 22px rgba(212, 175, 55, 0.22),
+        0 14px 36px rgba(0, 0, 0, 0.36);
+    transform: scale(1.01);
+}
+
+/* Paragraph like the desired blue screenshot */
+.hero-subtitle {
+    color: rgba(247, 243, 232, 0.82) !important;
+    text-shadow: 0 8px 26px rgba(0, 0, 0, 0.45);
+}
+
+/* Keep sections after hero from breaking the blue flow */
+.slider-section,
+.about-section,
+.portfolio-section,
+.stats-section {
+    background:
+        linear-gradient(180deg, #030b14 0%, #061526 52%, #071a2d 100%) !important;
+}
+
+/* Mobile safety */
+@media (max-width: 768px) {
+    .home-hero {
+        min-height: auto;
+        padding-top: 56px;
+        padding-bottom: 70px;
+    }
+
+    .hero-role-badges {
+        gap: 12px;
+    }
+
+    .hero-role-badges span {
+        width: 100%;
+        justify-content: center;
+    }
+}
+
+.home-hero::after {
+    content: none !important;
+    display: none !important;
+}
+
+/* =========================================================
+   GLOBAL BLUE CARD THEME FIX
+   Converts old black cards/sections into deep blue premium look
+   Add at the VERY BOTTOM of style.css
+========================================================= */
+
+/* Main page sections */
+.slider-section,
+.about-section,
+.stats-section,
+.portfolio-section,
+.notes-section,
+.papers-section,
+.mcq-section,
+.career-section,
+.contact-section,
+.resources-section,
+.admin-dashboard,
+.admin-manager,
+.auth-page {
+    background:
+        radial-gradient(circle at 50% 0%, rgba(22, 76, 135, 0.22), transparent 36%),
+        linear-gradient(180deg, #030b14 0%, #061526 48%, #071a2d 100%) !important;
+}
+
+/* General card fix */
+.card,
+.feature-card,
+.stat-box,
+.resource-card,
+.service-card,
+.admin-card,
+.admin-list-card,
+.manager-panel,
+.admin-panel,
+.admin-form,
+.auth-card,
+.career-article-card,
+.article-card,
+.related-article-card,
+.mcq-loading-card,
+.paper-card,
+.note-card,
+.contact-card {
+    background:
+        linear-gradient(180deg, rgba(18, 52, 91, 0.92), rgba(6, 20, 38, 0.96)) !important;
+    border: 1px solid rgba(212, 175, 55, 0.28) !important;
+    box-shadow:
+        0 18px 45px rgba(0, 0, 0, 0.34),
+        inset 0 1px 0 rgba(255, 255, 255, 0.04) !important;
+    color: #f7f3e8 !important;
+}
+
+/* Card hover: premium glow, no upward movement */
+.card:hover,
+.feature-card:hover,
+.stat-box:hover,
+.resource-card:hover,
+.service-card:hover,
+.admin-card:hover,
+.admin-list-card:hover,
+.career-article-card:hover,
+.article-card:hover,
+.related-article-card:hover,
+.paper-card:hover,
+.note-card:hover,
+.contact-card:hover {
+    border-color: rgba(242, 207, 99, 0.58) !important;
+    box-shadow:
+        0 0 24px rgba(212, 175, 55, 0.16),
+        0 20px 50px rgba(0, 0, 0, 0.42) !important;
+    transform: none !important;
+}
+
+/* Headings inside cards */
+.card h1,
+.card h2,
+.card h3,
+.card h4,
+.feature-card h3,
+.stat-box h3,
+.resource-card h3,
+.service-card h3,
+.admin-card h2,
+.admin-list-card h3,
+.career-article-card h3,
+.article-card h3,
+.related-article-card h3,
+.paper-card h3,
+.note-card h3,
+.contact-card h3 {
+    color: #f2cf63 !important;
+}
+
+/* Paragraphs and secondary text */
+.card p,
+.feature-card p,
+.stat-box p,
+.resource-card p,
+.service-card p,
+.admin-card p,
+.admin-list-card p,
+.career-article-card p,
+.article-card p,
+.related-article-card p,
+.paper-card p,
+.note-card p,
+.contact-card p,
+.resource-card-info span,
+.admin-empty-text,
+.mcq-toolbar-subtitle {
+    color: rgba(247, 243, 232, 0.78) !important;
+}
+
+/* Icons / small badges */
+.feature-icon,
+.resource-icon,
+.contact-icon,
+.admin-card-icon {
+    background:
+        linear-gradient(135deg, rgba(212, 175, 55, 0.18), rgba(16, 56, 102, 0.65)) !important;
+    border: 1px solid rgba(212, 175, 55, 0.42) !important;
+    color: #f2cf63 !important;
+}
+
+/* Slider container black fix */
+.slider {
+    background:
+        linear-gradient(180deg, rgba(12, 38, 70, 0.88), rgba(3, 12, 24, 0.96)) !important;
+    border: 1px solid rgba(212, 175, 55, 0.25) !important;
+    box-shadow: 0 24px 60px rgba(0, 0, 0, 0.42) !important;
+}
+
+/* Forms and inputs */
+input,
+select,
+textarea,
+.admin-form input,
+.admin-form select,
+.admin-form textarea {
+    background: rgba(4, 15, 29, 0.88) !important;
+    border: 1px solid rgba(212, 175, 55, 0.28) !important;
+    color: #f7f3e8 !important;
+}
+
+input:focus,
+select:focus,
+textarea:focus,
+.admin-form input:focus,
+.admin-form select:focus,
+.admin-form textarea:focus {
+    border-color: rgba(242, 207, 99, 0.72) !important;
+    box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.12) !important;
+    outline: none !important;
+}
+
+input::placeholder,
+textarea::placeholder {
+    color: rgba(247, 243, 232, 0.45) !important;
+}
+
+/* Dropdown/menu old black fix */
+.dropdown-menu {
+    background: rgba(4, 15, 29, 0.98) !important;
+    border: 1px solid rgba(212, 175, 55, 0.28) !important;
+    box-shadow: 0 18px 42px rgba(0, 0, 0, 0.45) !important;
+}
+
+.dropdown-menu a:hover {
+    background: rgba(212, 175, 55, 0.12) !important;
+    color: #f2cf63 !important;
+}
+
+/* Footer old black fix */
+.footer {
+    background:
+        linear-gradient(180deg, #030b14 0%, #020812 100%) !important;
+    border-top: 1px solid rgba(212, 175, 55, 0.28) !important;
+}
+
+/* Tables / admin lists if present */
+table,
+.admin-table {
+    background: rgba(8, 26, 48, 0.92) !important;
+    border: 1px solid rgba(212, 175, 55, 0.22) !important;
+    color: #f7f3e8 !important;
+}
+
+th {
+    background: rgba(18, 52, 91, 0.95) !important;
+    color: #f2cf63 !important;
+}
+
+td {
+    border-color: rgba(212, 175, 55, 0.16) !important;
+}
+
+/* =========================================================
+   PROFILE / PLATFORM FEATURES BLUE THEME FIX
+   Only visual colors. Does NOT touch hover/animation.
+========================================================= */
+
+.portfolio-section {
+    background:
+        radial-gradient(circle at 50% 0%, rgba(22, 76, 135, 0.20), transparent 36%),
+        linear-gradient(180deg, #030b14 0%, #061526 52%, #071a2d 100%) !important;
+}
+
+.profile-panel {
+    background:
+        radial-gradient(circle at 0% 0%, rgba(212, 175, 55, 0.08), transparent 32%),
+        radial-gradient(circle at 100% 100%, rgba(31, 94, 177, 0.16), transparent 38%),
+        linear-gradient(135deg, rgba(10, 31, 56, 0.96), rgba(3, 12, 24, 0.98)) !important;
+    border: 1px solid rgba(212, 175, 55, 0.30) !important;
+    box-shadow:
+        0 24px 70px rgba(0, 0, 0, 0.38),
+        inset 0 1px 0 rgba(255, 255, 255, 0.04) !important;
+}
+
+.profile-kicker {
+    color: #f2cf63 !important;
+    text-shadow: 0 0 14px rgba(212, 175, 55, 0.18);
+}
+
+.profile-panel h2 {
+    color: #fff4bd !important;
+    text-shadow: 0 10px 34px rgba(0, 0, 0, 0.42);
+}
+
+.profile-panel p {
+    color: rgba(247, 243, 232, 0.82) !important;
+}
+
+.identity-card {
+    background:
+        linear-gradient(180deg, rgba(15, 45, 82, 0.88), rgba(4, 15, 29, 0.92)) !important;
+    border: 1px solid rgba(212, 175, 55, 0.26) !important;
+    box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.035),
+        0 14px 38px rgba(0, 0, 0, 0.26) !important;
+}
+
+.identity-card h3 {
+    color: #f2cf63 !important;
+}
+
+.identity-card p {
+    color: rgba(247, 243, 232, 0.78) !important;
+}
+
+/* =========================================================
+   FOUNDER STRIP / MANAGED PLATFORM BLUE THEME FIX
+   Only colors/background/border/shadow/text.
+   No hover or animation changes.
+========================================================= */
+
+.founder-strip {
+    background:
+        radial-gradient(circle at 0% 0%, rgba(212, 175, 55, 0.07), transparent 30%),
+        radial-gradient(circle at 100% 100%, rgba(31, 94, 177, 0.16), transparent 38%),
+        linear-gradient(135deg, rgba(10, 31, 56, 0.96), rgba(3, 12, 24, 0.98)) !important;
+    border: 1px solid rgba(212, 175, 55, 0.30) !important;
+    box-shadow:
+        0 24px 70px rgba(0, 0, 0, 0.38),
+        inset 0 1px 0 rgba(255, 255, 255, 0.04) !important;
+}
+
+.founder-strip h2 {
+    color: #fff4bd !important;
+    text-shadow: 0 10px 34px rgba(0, 0, 0, 0.42);
+}
+
+.founder-strip p {
+    color: rgba(247, 243, 232, 0.82) !important;
+}
+
+/* =========================================================
+   FOOTER GOLDEN LINK HOVER EFFECT
+   Only hover color/shadow. No animation override.
+========================================================= */
+
+/* .footer a {
+    transition: color 0.25s ease, text-shadow 0.25s ease;
+} */
+
+.footer a:hover {
+    color: var(--gold) !important;
+    text-shadow:
+        0 0 10px rgba(212, 175, 55, 0.35),
+        0 0 22px rgba(212, 175, 55, 0.18);
+}
+
+/* =========================================================
+   RESOURCE SUBJECT CARDS BLUE COLOR FIX
+   Only colors/background/border/shadow/text.
+   No hover or animation override.
+========================================================= */
+
+.resource-toolbar h2 {
+    color: #f7f3e8 !important;
+}
+
+.resource-card-grid .resource-box-card {
+    background:
+        linear-gradient(180deg, rgba(15, 45, 82, 0.94), rgba(4, 15, 29, 0.96)) !important;
+    border: 1px solid rgba(212, 175, 55, 0.30) !important;
+    box-shadow:
+        0 18px 45px rgba(0, 0, 0, 0.34),
+        inset 0 1px 0 rgba(255, 255, 255, 0.035) !important;
+    color: #f7f3e8 !important;
+}
+
+.resource-card-grid .resource-card-body {
+    background:
+        linear-gradient(180deg, rgba(10, 31, 56, 0.95), rgba(3, 12, 24, 0.96)) !important;
+}
+
+.resource-card-grid .resource-card-body h3 {
+    color: #fff4bd !important;
+}
+
+.resource-card-grid .resource-card-body p {
+    color: rgba(247, 243, 232, 0.80) !important;
+}
+
+.resource-card-grid .resource-card-info span {
+    color: rgba(247, 243, 232, 0.82) !important;
+}
+
+/* Thumbnail area color only — does not fix sizing yet */
+.resource-card-grid .resource-thumbnail {
+    background:
+        radial-gradient(circle at 50% 0%, rgba(212, 175, 55, 0.10), transparent 34%),
+        linear-gradient(180deg, rgba(18, 52, 91, 0.92), rgba(3, 12, 24, 0.96)) !important;
+    border-bottom: 1px solid rgba(212, 175, 55, 0.22) !important;
+}
+
+/* Button color polish */
+.resource-card-grid .resource-card-btn {
+    background: linear-gradient(135deg, #d4af37, #f2cf63) !important;
+    color: #050910 !important;
+    border: 1px solid rgba(255, 240, 180, 0.42) !important;
+}
+
+/* =========================================================
+   RESOURCE HERO BOX BLUE THEME FIX
+   Only colors/background/border/shadow/text.
+   No hover or animation changes.
+========================================================= */
+
+/* =========================================================
+   RESOURCE PAGE BACKGROUND FIX
+   Removes boxed blue rectangle behind cards.
+   Does not touch hover or animation.
+========================================================= */
+
+body:has(.resource-main) {
+    background:
+        radial-gradient(circle at 50% 0%, rgba(22, 76, 135, 0.18), transparent 38%),
+        linear-gradient(180deg, #061526 0%, #071a2d 48%, #030b14 100%) !important;
+}
+
+.resource-main {
+    background: transparent !important;
+}
+
+.resource-hero-box {
+    background:
+        /* radial-gradient(circle at 0% 0%, rgba(212, 175, 55, 0.07), transparent 30%),
+        radial-gradient(circle at 100% 100%, rgba(31, 94, 177, 0.18), transparent 40%), */
+        linear-gradient(135deg, rgba(10, 31, 56, 0.96), rgba(3, 12, 24, 0.98)) !important;
+    border: 1px solid rgba(212, 175, 55, 0.30) !important;
+    box-shadow:
+        0 24px 70px rgba(0, 0, 0, 0.38),
+        inset 0 1px 0 rgba(255, 255, 255, 0.04) !important;
+}
+
+.resource-badge {
+    background:
+        linear-gradient(180deg, rgba(212, 175, 55, 0.13), rgba(10, 31, 56, 0.72)) !important;
+    border: 1px solid rgba(212, 175, 55, 0.45) !important;
+    color: #f2cf63 !important;
+}
+
+.resource-hero-box h1 {
+    text-shadow: 0 10px 34px rgba(0, 0, 0, 0.42);
+}
+
+.resource-hero-box p {
+    color: rgba(247, 243, 232, 0.82) !important;
+}
+
+.resource-box-card:hover {
+    transform: scale(1.01);
+    transition: transform 0.35s ease;
+}
+
+/* =====================================================
+   MCQ SET OPTION RADIO FIX
+   Fixes weird square around radio button.
+   Does not touch hover/animation.
+===================================================== */
+
+/* .mcq-set-option input[type="radio"]:focus {
+    outline: 1px solid rgba(0, 0, 0, 0) !important;
+    outline-offset: 3px !important;
+} */
+
+.mcq-set-option input[type="radio"]:focus,
+.mcq-set-option input[type="radio"]:focus-visible {
+    outline: none !important;
+    box-shadow: none !important;
+}
+
+/* =====================================================
+   CAREER GUIDANCE ARTICLE CARD BLACK FIX
+   Only affects career article cards.
+   Does not touch hover/animation.
+===================================================== */
+
+.career-article-card {
+    background:
+        linear-gradient(180deg, #05070b, #02050a) !important;
+    border: 1px solid rgba(212, 175, 55, 0.28) !important;
+    box-shadow:
+        0 18px 45px rgba(0, 0, 0, 0.42),
+        inset 0 1px 0 rgba(255, 255, 255, 0.025) !important;
+}
+
+.career-article-card .career-article-content {
+    background:
+        linear-gradient(180deg, #05070b, #02050a) !important;
+}
+
+.career-article-card h3,
+.career-article-card .career-article-title {
+    color: #f2cf63 !important;
+}
+
+.career-article-card p,
+.career-article-card .career-article-excerpt {
+    color: rgba(247, 243, 232, 0.78) !important;
+}
+
+.career-article-card .career-article-tag,
+.career-article-card .career-category {
+    color: #f2cf63 !important;
+    border-color: rgba(212, 175, 55, 0.35) !important;
+    background: rgba(212, 175, 55, 0.10) !important;
+}
+
+.career-article-card .read-more,
+.career-article-card .career-article-link {
+    color: #f2cf63 !important;
+}
+
+/* =====================================================
+   CONTACT PAGE GLOW CLEANUP
+   Reduces harsh yellow glow and fits blue-gold theme.
+===================================================== */
+
+.contact-wheel-main {
+    background:
+        radial-gradient(circle at top left, rgba(22, 76, 135, 0.20), transparent 34%),
+        radial-gradient(circle at bottom right, rgba(31, 94, 177, 0.16), transparent 34%),
+        linear-gradient(180deg, #061526 0%, #071a2d 48%, #030b14 100%) !important;
+}
+
+/* Center circle: remove heavy gold glow */
+.wheel-center {
+    background:
+        radial-gradient(circle, rgba(22, 76, 135, 0.22), rgba(10, 31, 56, 0.78) 45%, rgba(3, 12, 24, 0.96) 78%) !important;
+    border: 1px solid rgba(212, 175, 55, 0.24) !important;
+    box-shadow:
+        0 22px 60px rgba(0, 0, 0, 0.48),
+        inset 0 1px 0 rgba(255, 255, 255, 0.035) !important;
+}
+
+/* Outer icons: reduce yellow burn */
+.wheel-item {
+    color: rgba(242, 207, 99, 0.86) !important;
+    background:
+        radial-gradient(circle, rgba(22, 76, 135, 0.20), rgba(10, 31, 56, 0.76) 48%, rgba(3, 12, 24, 0.96) 86%) !important;
+    border: 1px solid rgba(212, 175, 55, 0.24) !important;
+    box-shadow:
+        0 14px 38px rgba(0, 0, 0, 0.40),
+        inset 0 1px 0 rgba(255, 255, 255, 0.025) !important;
+}
+
+/* Icon text */
+.wheel-item span,
+#centerSymbol {
+    color: rgba(242, 207, 99, 0.82) !important;
+    text-shadow:
+        0 0 10px rgba(212, 175, 55, 0.18) !important;
+}
+
+.wheel-item small,
+#centerMini {
+    color: rgba(247, 243, 232, 0.78) !important;
+}
+
+/* Hover: keep premium glow, not radioactive */
+.wheel-item:hover,
+.wheel-item:focus {
+    border-color: rgba(242, 207, 99, 0.45) !important;
+    background:
+        radial-gradient(circle, rgba(212, 175, 55, 0.10), rgba(22, 76, 135, 0.30) 48%, rgba(3, 12, 24, 0.96) 86%) !important;
+    box-shadow:
+        0 0 18px rgba(212, 175, 55, 0.14),
+        0 20px 52px rgba(0, 0, 0, 0.48) !important;
+}
+
+/* Orbit lines: make them subtle */
+.contact-wheel::before,
+.contact-wheel::after {
+    border-color: rgba(212, 175, 55, 0.10) !important;
+    box-shadow: none !important;
+}
+
+/* =====================================================
+   CONTACT PAGE FOOTER GAP FIX
+===================================================== */
+
+.contact-wheel-main {
+    min-height: calc(100vh - 78px) !important;
+    padding: 40px 5% 55px !important;
+}
+
+.footer {
+    margin-top: 0 !important;
+}
+
+/* Only nudge Instagram and Telegram slightly */
+.item-3 {
+    bottom: 112px !important; /* was lower */
+    right: 26px !important;   /* move slightly inward */
+}
+
+.item-5 {
+    bottom: 112px !important; /* was lower */
+    left: 26px !important;    /* move slightly inward */
+}
+
+/* =====================================================
+   MCQ MANAGER CUSTOM SELECT UI
+   Fixes ugly default option dropdown look.
+===================================================== */
+
+.mcq-manager select,
+.admin-mcq-manager select,
+.mcq-form select,
+.admin-form select {
+    appearance: none !important;
+    -webkit-appearance: none !important;
+
+    width: 100%;
+    min-height: 52px;
+
+    padding: 13px 46px 13px 16px;
+
+    background:
+        linear-gradient(180deg, rgba(15, 45, 82, 0.96), rgba(4, 15, 29, 0.98)) !important;
+
+    border: 1px solid rgba(212, 175, 55, 0.42) !important;
+    border-radius: 14px !important;
+
+    color: #f7f3e8 !important;
+    font-size: 0.98rem;
+    font-weight: 700;
+
+    cursor: pointer;
+
+    box-shadow:
+        0 12px 28px rgba(0, 0, 0, 0.28),
+        inset 0 1px 0 rgba(255, 255, 255, 0.04) !important;
+
+    background-image:
+        linear-gradient(45deg, transparent 50%, #f2cf63 50%),
+        linear-gradient(135deg, #f2cf63 50%, transparent 50%),
+        linear-gradient(180deg, rgba(15, 45, 82, 0.96), rgba(4, 15, 29, 0.98)) !important;
+
+    background-position:
+        calc(100% - 22px) 50%,
+        calc(100% - 15px) 50%,
+        0 0 !important;
+
+    background-size:
+        7px 7px,
+        7px 7px,
+        100% 100% !important;
+
+    background-repeat: no-repeat !important;
+}
+
+.mcq-manager select:hover,
+.admin-mcq-manager select:hover,
+.mcq-form select:hover,
+.admin-form select:hover {
+    border-color: rgba(242, 207, 99, 0.68) !important;
+    box-shadow:
+        0 0 18px rgba(212, 175, 55, 0.14),
+        0 12px 30px rgba(0, 0, 0, 0.32) !important;
+}
+
+.mcq-manager select:focus,
+.admin-mcq-manager select:focus,
+.mcq-form select:focus,
+.admin-form select:focus {
+    outline: none !important;
+    border-color: rgba(242, 207, 99, 0.78) !important;
+    box-shadow:
+        0 0 0 3px rgba(212, 175, 55, 0.12),
+        0 0 22px rgba(212, 175, 55, 0.16) !important;
+}
+
+/* Dropdown option colors */
+.mcq-manager select option,
+.admin-mcq-manager select option,
+.mcq-form select option,
+.admin-form select option {
+    background: #061526 !important;
+    color: #f7f3e8 !important;
+    font-weight: 700;
+}
+
+/* Disabled placeholder option */
+.mcq-manager select option:disabled,
+.admin-mcq-manager select option:disabled,
+.mcq-form select option:disabled,
+.admin-form select option:disabled {
+    color: rgba(247, 243, 232, 0.45) !important;
+}
+
+/* =====================================================
+   ADMIN ANALYSIS CARDS - MATCH BLACK PANEL
+   Only color changes. No layout changes.
+===================================================== */
+
+/* Question analysis cards + student performance cards */
+.admin-performance-modal article,
+.admin-performance-modal .admin-list-card,
+.admin-performance-modal .admin-student-performance-card,
+.admin-performance-modal .mcq-question-card,
+.admin-performance-modal .question-card,
+.admin-performance-modal [class*="card"],
+.admin-performance-modal [class*="Card"],
+.admin-performance-modal [id*="List"] > div,
+.admin-performance-modal [id*="list"] > div {
+    background: #0b0b0b !important;
+    background-color: #0b0b0b !important;
+    border: 1px solid rgba(212, 175, 55, 0.24) !important;
+    color: #f7f3e8 !important;
+
+    box-shadow:
+        0 16px 38px rgba(0, 0, 0, 0.38),
+        inset 0 1px 0 rgba(255, 255, 255, 0.025) !important;
+}
+
+/* Remove inner blue backgrounds */
+.admin-performance-modal article *,
+.admin-performance-modal .admin-list-card *,
+.admin-performance-modal .admin-student-performance-card *,
+.admin-performance-modal .mcq-question-card *,
+.admin-performance-modal .question-card * {
+    background-color: transparent;
+}
+
+/* Card titles/questions */
+.admin-performance-modal article h3,
+.admin-performance-modal article h4,
+.admin-performance-modal .admin-list-card h3,
+.admin-performance-modal .admin-student-performance-card h3,
+.admin-performance-modal .mcq-question-card h3,
+.admin-performance-modal .question-card h3 {
+    color: #f2cf63 !important;
+}
+
+/* Normal text */
+.admin-performance-modal article p,
+.admin-performance-modal article span,
+.admin-performance-modal article small,
+.admin-performance-modal .admin-list-card p,
+.admin-performance-modal .admin-list-card span,
+.admin-performance-modal .admin-list-card small,
+.admin-performance-modal .admin-student-performance-card p,
+.admin-performance-modal .admin-student-performance-card span,
+.admin-performance-modal .admin-student-performance-card small,
+.admin-performance-modal .mcq-question-card p,
+.admin-performance-modal .mcq-question-card span,
+.admin-performance-modal .mcq-question-card small,
+.admin-performance-modal .question-card p,
+.admin-performance-modal .question-card span,
+.admin-performance-modal .question-card small {
+    color: rgba(247, 243, 232, 0.76) !important;
+}
+
+/* Important values */
+.admin-performance-modal article strong,
+.admin-performance-modal .admin-list-card strong,
+.admin-performance-modal .admin-student-performance-card strong,
+.admin-performance-modal .mcq-question-card strong,
+.admin-performance-modal .question-card strong {
+    color: #f7f3e8 !important;
+}
+
+/* =====================================================
+   ADMIN PERFORMANCE CARD CLEAN FIX
+   Removes weird wrapper border behind buttons.
+===================================================== */
+
+/* Only actual performance cards */
+.admin-performance-modal .admin-list-card,
+.admin-performance-modal .admin-student-performance-card,
+.admin-performance-modal .mcq-student-detail-card,
+.admin-performance-modal .performance-card,
+.admin-performance-modal article {
+    background: #0b0b0b !important;
+    border: 1px solid rgba(212, 175, 55, 0.24) !important;
+    color: #f7f3e8 !important;
+}
+
+/* Remove accidental borders/backgrounds from inner wrappers */
+.admin-performance-modal .admin-list-card > div,
+.admin-performance-modal .admin-student-performance-card > div,
+.admin-performance-modal .performance-card > div {
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+}
+
+/* Button itself stays clean */
+.admin-performance-modal .btn-outline,
+.admin-performance-modal button {
+    background: transparent !important;
+    border: 1px solid rgba(212, 175, 55, 0.55) !important;
+    color: #f2cf63 !important;
+}
+
+/* =====================================================
+   ADMIN COLOR CLEANUP PATCH
+   Uses old admin variables.
+   Keeps old buttons.
+   Keeps OG Danger Zone red.
+===================================================== */
+
+/* Admin pages only */
+body.admin-checking,
+.admin-dashboard,
+.admin-manager {
+    background: var(--admin-bg-main) !important;
+    color: var(--text-primary) !important;
+}
+
+/* Normal admin panels only — exclude Danger Zone */
+.admin-panel:not(.mcq-danger-zone),
+.admin-form,
+.admin-card,
+.manager-panel {
+    background: var(--admin-bg-soft) !important;
+    border: 1px solid var(--admin-border) !important;
+    color: var(--text-primary) !important;
+    box-shadow: var(--admin-shadow-soft, var(--admin-shadow)) !important;
+}
+
+/* Normal admin generated cards — exclude Danger Zone cards */
+.admin-list-card:not(.mcq-danger-card),
+.admin-performance-summary article,
+.admin-student-performance-card,
+.mcq-student-detail-card,
+.mcq-question-card,
+.admin-question-card,
+.question-card,
+.performance-card,
+.attempt-card,
+.student-card {
+    background: var(--admin-bg-card) !important;
+    border: 1px solid var(--admin-border) !important;
+    color: var(--text-primary) !important;
+    box-shadow: var(--admin-shadow-soft, var(--admin-shadow)) !important;
+}
+
+/* Admin modals */
+.admin-performance-modal,
+.admin-performance-modal-content,
+.admin-modal,
+.admin-modal-content {
+    background: var(--admin-bg-soft) !important;
+    border: 1px solid var(--admin-border) !important;
+    color: var(--text-primary) !important;
+}
+
+/* Cards inside admin modal */
+.admin-performance-modal .admin-list-card,
+.admin-performance-modal .admin-student-performance-card,
+.admin-performance-modal .mcq-student-detail-card,
+.admin-performance-modal .mcq-question-card,
+.admin-performance-modal .question-card,
+.admin-performance-modal .performance-card,
+.admin-performance-modal article {
+    background: var(--admin-bg-card) !important;
+    border: 1px solid var(--admin-border) !important;
+    color: var(--text-primary) !important;
+}
+
+/* Remove accidental wrapper boxes inside modal cards */
+.admin-performance-modal .admin-list-card > div,
+.admin-performance-modal .admin-student-performance-card > div,
+.admin-performance-modal .mcq-student-detail-card > div,
+.admin-performance-modal .performance-card > div,
+.admin-performance-modal article > div {
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+}
+
+/* Admin headings */
+.admin-header h1,
+.admin-manager-header h1,
+.admin-section-title h2,
+.admin-panel:not(.mcq-danger-zone) h1,
+.admin-panel:not(.mcq-danger-zone) h2,
+.admin-card h2,
+.admin-performance-modal h1,
+.admin-performance-modal h2,
+.admin-performance-modal-header h2 {
+    color: var(--text-primary) !important;
+}
+
+/* Admin labels / card headings */
+.admin-kicker,
+.admin-performance-modal .admin-kicker,
+.admin-list-card h3,
+.admin-student-performance-card h3,
+.mcq-student-detail-card h3,
+.mcq-question-card h3,
+.admin-question-card h3,
+.question-card h3,
+.performance-card h3,
+.attempt-card h3,
+.student-card h3 {
+    color: var(--gold) !important;
+}
+
+/* Admin normal text */
+.admin-header p,
+.admin-manager-header p,
+.admin-section-title p,
+.admin-panel:not(.mcq-danger-zone) p,
+.admin-card p,
+.admin-list-card p,
+.admin-performance-modal p,
+.admin-performance-modal span,
+.admin-performance-modal small,
+.admin-student-performance-card p,
+.mcq-student-detail-card p,
+.mcq-question-card p,
+.admin-question-card p,
+.question-card p,
+.performance-card p,
+.attempt-card p,
+.student-card p {
+    color: var(--text-muted-2) !important;
+}
+
+/* Admin stat labels */
+.admin-performance-summary span {
+    color: var(--text-muted-4) !important;
+}
+
+/* Admin stat values */
+.admin-performance-summary strong,
+.admin-list-card strong,
+.admin-student-performance-card strong,
+.mcq-student-detail-card strong,
+.mcq-question-card strong,
+.admin-question-card strong,
+.question-card strong,
+.performance-card strong,
+.attempt-card strong,
+.student-card strong {
+    color: var(--gold) !important;
+}
+
+/* Admin inputs only — buttons are NOT touched */
+.admin-form input,
+.admin-form select,
+.admin-form textarea,
+.admin-panel input,
+.admin-panel select,
+.admin-panel textarea {
+    background: var(--admin-input-bg) !important;
+    border: 1px solid var(--admin-input-border) !important;
+    color: var(--text-primary) !important;
+    box-shadow: none !important;
+}
+
+.admin-form input:focus,
+.admin-form select:focus,
+.admin-form textarea:focus,
+.admin-panel input:focus,
+.admin-panel select:focus,
+.admin-panel textarea:focus {
+    border-color: var(--admin-input-focus, var(--admin-input-border-focus)) !important;
+    outline: none !important;
+    box-shadow: var(--admin-shadow-focus) !important;
+}
+
+/* =====================================================
+   OG DANGER ZONE PROTECTION
+   Keep this AFTER admin cleanup.
+===================================================== */
+
+.mcq-danger-zone {
+    border: 1px solid rgba(239, 68, 68, 0.35) !important;
+    background:
+        linear-gradient(135deg, rgba(127, 29, 29, 0.22), rgba(8, 8, 8, 0.92)),
+        var(--bg-card) !important;
+    box-shadow: 0 0 28px rgba(239, 68, 68, 0.08) !important;
+}
+
+.mcq-danger-zone .admin-panel-header h2 {
+    color: #fecaca !important;
+}
+
+.mcq-danger-card {
+    border: 1px solid rgba(239, 68, 68, 0.28) !important;
+    background: rgba(8, 8, 8, 0.42) !important;
+}
+
+.mcq-danger-card h3 {
+    color: #fee2e2 !important;
+}
+
+.mcq-danger-card p {
+    color: var(--text-muted) !important;
+}
+
+.danger-btn {
+    border-color: rgba(239, 68, 68, 0.75) !important;
+    color: #fecaca !important;
+    background: rgba(127, 29, 29, 0.18) !important;
+}
+
+.danger-btn:hover {
+    color: #ffffff !important;
+    border-color: rgba(248, 113, 113, 0.95) !important;
+    background: rgba(185, 28, 28, 0.36) !important;
+    box-shadow: 0 0 18px rgba(239, 68, 68, 0.28) !important;
+}
+
+/* =====================================================
+   ADMIN NAVBAR THEME FIX ONLY
+   Applies to all admin pages using body.admin-checking.
+   Does not touch public navbar.
+   Does not touch old buttons.
+   Does not touch Danger Zone.
+===================================================== */
+
+body.admin-checking .admin-navbar {
+    background: #1a1a1a !important;
+    border-bottom: 1px solid rgba(212, 175, 55, 0.26) !important;
+    box-shadow: 0 14px 34px rgba(0, 0, 0, 0.34) !important;
+    backdrop-filter: blur(12px);
+}
+
+/* Navbar inner spacing stays same, only admin navbar look */
+body.admin-checking .admin-navbar .navbar-inner {
+    background: transparent !important;
+}
+
+/* Logo */
+body.admin-checking .admin-navbar .logo-text {
+    color: #f7f3e8 !important;
+}
+
+body.admin-checking .admin-navbar .logo-text span {
+    color: var(--gold) !important;
+}
+
+/* Admin nav links */
+body.admin-checking .admin-navbar .admin-nav-menu .nav-link {
+    color: rgba(247, 243, 232, 0.72) !important;
+    font-weight: 700;
+}
+
+/* Hover + active */
+body.admin-checking .admin-navbar .admin-nav-menu .nav-link:hover,
+body.admin-checking .admin-navbar .admin-nav-menu .nav-link.active {
+    color: var(--gold) !important;
+}
+
+/* Simple active indicator */
+body.admin-checking .admin-navbar .admin-nav-menu .nav-link.active {
+    text-shadow: 0 0 14px rgba(212, 175, 55, 0.18);
+}
+
+/* Mobile menu for admin navbar */
+@media (max-width: 900px) {
+    body.admin-checking .admin-navbar .admin-nav-menu {
+        background: #1a1a1a !important;
+        border: 1px solid rgba(212, 175, 55, 0.26) !important;
+        border-top: none !important;
+        box-shadow: 0 18px 38px rgba(0, 0, 0, 0.42) !important;
+    }
+
+    body.admin-checking .admin-navbar .admin-nav-menu .nav-link {
+        color: rgba(247, 243, 232, 0.78) !important;
+    }
+
+    body.admin-checking .admin-navbar .admin-nav-menu .nav-link:hover,
+    body.admin-checking .admin-navbar .admin-nav-menu .nav-link.active {
+        color: var(--gold) !important;
+    }
+}
+
+/* =====================================================
+   CAREER GUIDANCE SEARCH BAR COLOR FIX
+   Slightly lighter search input only.
+===================================================== */
+
+.career-search-input,
+#careerArticleSearch,
+.career-article-search,
+.career-guidance-search input {
+    background: #1a1a1a !important;
+    border: 1px solid rgba(212, 175, 55, 0.28) !important;
+    color: #f7f3e8 !important;
+    box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.035),
+        0 12px 28px rgba(0, 0, 0, 0.22) !important;
+}
+
+.career-search-input::placeholder,
+#careerArticleSearch::placeholder,
+.career-article-search::placeholder,
+.career-guidance-search input::placeholder {
+    color: rgba(247, 243, 232, 0.48) !important;
+}
+
+.career-search-input:focus,
+#careerArticleSearch:focus,
+.career-article-search:focus,
+.career-guidance-search input:focus {
+    background: #202020 !important;
+    border-color: rgba(212, 175, 55, 0.48) !important;
+    box-shadow:
+        0 0 0 3px rgba(212, 175, 55, 0.08),
+        0 14px 32px rgba(0, 0, 0, 0.26) !important;
+    outline: none !important;
+}
+

@@ -7,23 +7,23 @@
     --gold-muted: #f5c542;
     --gold-warm: #c89b3c;
 
-    --black: #0a0a0a;
-    --black-true: #000000;
-    --black-dark: #000000;
-    --black-very-dark: #070707;
-    --black-darker: #050505;
-    --black-deep: #040404;
+    --black: #121212;
+    --black-true: #0f0f0f;
+    --black-dark: #141414;
+    --black-very-dark: #101010;
+    --black-darker: #0d0d0d;
+    --black-deep: #0b0b0b;
     --black-rgb: 0, 0, 0;
 
-    --surface: #111111;
-    --surface-alt: #121212;
-    --surface-alt-2: #141414;
-    --surface-alt-3: #151515;
-    --surface-alt-4: #1a1a1a;
-    --surface-alt-5: #1f1f1f;
-    --surface-alt-6: #242424;
-    --surface-panel: #090909;
-    --surface-panel-darker: #0b0b0b;
+    --surface: #1a1a1a;
+    --surface-alt: #1d1d1d;
+    --surface-alt-2: #202020;
+    --surface-alt-3: #232323;
+    --surface-alt-4: #262626;
+    --surface-alt-5: #2a2a2a;
+    --surface-alt-6: #2e2e2e;
+    --surface-panel: #171717;
+    --surface-panel-darker: #141414;
 
     --white: #ffffff;
     --white-rgb: 255, 255, 255;
@@ -43,6 +43,7 @@
     --border-gold: var(--gold-border);
     --shadow-gold: var(--gold-shadow);
     --card-bg: var(--surface-panel);
+    --bg-card: var(--surface-panel);
 
     --success-rgb: 34, 139, 34;
     --error-rgb: 220, 20, 60;
@@ -187,7 +188,7 @@
     --color-fb923c: #fb923c;
     --color-ffd86b: #ffd86b;
     --info: #38bdf8;
-    --rgba-10-10-10-0_96: rgba(10, 10, 10, 0.96);
+    --rgba-10-10-10-0_96: rgba(26, 26, 26, 0.96);
     --rgba-12-11-7-0_95: rgba(12, 11, 7, 0.95);
     --rgba-132-204-22-0_22: rgba(132, 204, 22, 0.22);
     --rgba-153-246-228-0_28: rgba(153, 246, 228, 0.28);
@@ -237,41 +238,41 @@
     --rgba-255-220-40-0_75: rgba(255, 220, 40, 0.75);
     --rgba-255-220-40-0_8: rgba(255, 220, 40, 0.8);
     --rgba-255-220-40-0_95: rgba(255, 220, 40, 0.95);
-    --rgba-3-3-3-0_98: rgba(3, 3, 3, 0.98);
+    --rgba-3-3-3-0_98: rgba(18, 18, 18, 0.98);
     --rgba-34-139-34-0_18: rgba(34, 139, 34, 0.18);
     --rgba-34-139-34-0_8: rgba(34, 139, 34, 0.8);
-    --rgba-4-4-4-0_98: rgba(4, 4, 4, 0.98);
+    --rgba-4-4-4-0_98: rgba(20, 20, 20, 0.98);
     --rgba-56-189-248-0_25: rgba(56, 189, 248, 0.25);
     --rgba-74-222-128-0_08: rgba(74, 222, 128, 0.08);
     --rgba-74-222-128-0_12: rgba(74, 222, 128, 0.12);
     --rgba-74-222-128-0_22: rgba(74, 222, 128, 0.22);
-    --rgba-8-8-6-0_96: rgba(8, 8, 6, 0.96);
-    --rgba-8-8-8-0_82: rgba(8, 8, 8, 0.82);
+    --rgba-8-8-6-0_96: rgba(20, 20, 18, 0.96);
+    --rgba-8-8-8-0_82: rgba(18, 18, 18, 0.82);
     --rgba-80-200-255-0_08: rgba(80, 200, 255, 0.08);
     --success: #6bff9c;
-    --surface-border: #2e2e2e;
-    --surface-darker: #171717;
-    --surface-deep: #101010;
-    --surface-highlight: #1b1608;
+    --surface-border: #333333;
+    --surface-darker: #181818;
+    --surface-deep: #151515;
+    --surface-highlight: #241f12;
 
-    --admin-bg-dark: #050505;
-    --admin-bg-panel: rgba(255, 255, 255, 0.035);
+    --admin-bg-dark: #121212;
+    --admin-bg-panel: #1a1a1a;
     --admin-border-gold: rgba(212, 175, 55, 0.25);
     --admin-shadow-gold: rgba(212, 175, 55, 0.08);
 
-    --admin-bg-main: #050505;
-    --admin-bg-soft: #080808;
-    --admin-panel-bg: rgba(255, 255, 255, 0.035);
-    --admin-panel-bg-strong: rgba(255, 255, 255, 0.055);
+    --admin-bg-main: #121212;
+    --admin-bg-soft: #171717;
+    --admin-panel-bg: #1a1a1a;
+    --admin-panel-bg-strong: #202020;
 
     --admin-border: rgba(212, 175, 55, 0.26);
     --admin-border-hover: rgba(212, 175, 55, 0.48);
 
-    --admin-input-bg: #090909;
+    --admin-input-bg: #141414;
     --admin-input-border: rgba(212, 175, 55, 0.22);
     --admin-input-border-focus: rgba(212, 175, 55, 0.65);
 
-    --admin-shadow: 0 0 28px rgba(212, 175, 55, 0.08);
+    --admin-shadow: 0 16px 38px rgba(0, 0, 0, 0.32);
     --admin-shadow-focus: 0 0 24px rgba(212, 175, 55, 0.18);
 
 }
@@ -281,18 +282,19 @@
 ================================ */
 
 :root {
-    --admin-bg-main: #050505;
-    --admin-bg-soft: #080808;
-    --admin-bg-card: rgba(255, 255, 255, 0.035);
-    --admin-bg-card-strong: rgba(255, 255, 255, 0.055);
+    --admin-bg-main: #121212;
+    --admin-bg-soft: #171717;
+    --admin-bg-card: #1a1a1a;
+    --admin-bg-card-strong: #202020;
 
     --admin-border: rgba(212, 175, 55, 0.24);
     --admin-border-strong: rgba(212, 175, 55, 0.42);
 
-    --admin-input-bg: #050505;
+    --admin-input-bg: #141414;
     --admin-input-border: rgba(212, 175, 55, 0.22);
     --admin-input-focus: rgba(212, 175, 55, 0.68);
 
-    --admin-shadow-soft: 0 0 28px rgba(212, 175, 55, 0.08);
-    --admin-shadow-focus: 0 0 24px rgba(212, 175, 55, 0.16);
+    --admin-shadow-soft: 0 16px 38px rgba(0, 0, 0, 0.32);
+    --admin-shadow-focus: 0 0 20px rgba(212, 175, 55, 0.14);
 }
+
