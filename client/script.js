@@ -365,33 +365,39 @@ sectionLinks.forEach(link => {
     });
 });
 
-// Active Nav Link Highlight
+/* ================================
+   SECTION-BASED ACTIVE NAV
+   Only affects same-page # links.
+================================ */
+
 const sections = document.querySelectorAll("section[id]");
-const navLinks = document.querySelectorAll(".nav-link");
+const sectionNavLinks = document.querySelectorAll('.navbar .nav-link[href^="#"]');
 
-window.addEventListener("scroll", () => {
-    let currentSectionId = "";
+if (sections.length > 0 && sectionNavLinks.length > 0) {
+    window.addEventListener("scroll", () => {
+        let currentSectionId = "";
 
-    sections.forEach(section => {
-        const sectionTop = section.offsetTop - 120;
-        const sectionHeight = section.offsetHeight;
+        sections.forEach(section => {
+            const sectionTop = section.offsetTop - 120;
+            const sectionHeight = section.offsetHeight;
 
-        if (
-            window.scrollY >= sectionTop &&
-            window.scrollY < sectionTop + sectionHeight
-        ) {
-            currentSectionId = section.getAttribute("id");
-        }
+            if (
+                window.scrollY >= sectionTop &&
+                window.scrollY < sectionTop + sectionHeight
+            ) {
+                currentSectionId = section.getAttribute("id");
+            }
+        });
+
+        sectionNavLinks.forEach(link => {
+            link.classList.remove("active");
+
+            if (link.getAttribute("href") === `#${currentSectionId}`) {
+                link.classList.add("active");
+            }
+        });
     });
-
-    navLinks.forEach(link => {
-        link.classList.remove("active");
-
-        if (link.getAttribute("href") === `#${currentSectionId}`) {
-            link.classList.add("active");
-        }
-    });
-});
+}
 
 /* ================================
    MOBILE NAV DROPDOWN TAP SUPPORT
@@ -416,11 +422,6 @@ document.querySelectorAll(".nav-menu .dropdown > .nav-link").forEach((link) => {
         currentDropdown.classList.toggle("open");
     });
 });
-
-/* ================================
-   GLOBAL NAV PATCH
-   Adds Contact to hamburger/nav if missing
-================================ */
 
 document.addEventListener("DOMContentLoaded", () => {
     document.querySelectorAll(".nav-menu").forEach((navMenu) => {
@@ -576,3 +577,76 @@ document.addEventListener("click", (event) => {
 });
 
 document.body.insertAdjacentHTML("afterbegin", '<div class="left-sunshine-glow"></div>');
+
+/* =====================================================
+   MAIN NAV CURRENT PAGE ACTIVE LINK
+   Public navbar only.
+===================================================== */
+
+document.addEventListener("DOMContentLoaded", () => {
+    const currentPage =
+        window.location.pathname.split("/").pop() || "index.html";
+
+    const publicNavLinks =
+        document.querySelectorAll(".navbar:not(.admin-navbar) .nav-link[href$='.html']");
+
+    const careerPages = [
+        "career-guidance.html",
+        "article.html",
+        "after-10th.html",
+        "after-12th.html",
+        "group-selection.html",
+        "degree-selection.html",
+        "career-mistakes.html",
+        "student-mindset.html"
+    ];
+
+    const notesPages = [
+        "notes-10th.html",
+        "notes-12th.html"
+    ];
+
+    const paperPages = [
+        "papers-10th.html",
+        "papers-12th.html"
+    ];
+
+    const mcqPages = [
+        "mcq.html",
+        "mcq-set.html"
+    ];
+
+    publicNavLinks.forEach(link => {
+        const href = link.getAttribute("href");
+        if (!href) return;
+
+        const linkPage = href.split("/").pop();
+
+        link.classList.remove("active");
+
+        if (linkPage === currentPage) {
+            link.classList.add("active");
+            return;
+        }
+
+        if (notesPages.includes(currentPage) && linkPage.startsWith("notes-")) {
+            link.classList.add("active");
+            return;
+        }
+
+        if (paperPages.includes(currentPage) && linkPage.startsWith("papers-")) {
+            link.classList.add("active");
+            return;
+        }
+
+        if (careerPages.includes(currentPage) && linkPage === "career-guidance.html") {
+            link.classList.add("active");
+            return;
+        }
+
+        if (mcqPages.includes(currentPage) && linkPage === "mcq.html") {
+            link.classList.add("active");
+            return;
+        }
+    });
+});
