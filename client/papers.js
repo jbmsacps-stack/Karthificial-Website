@@ -1,108 +1,75 @@
-const modal =
-    document.getElementById("papers-modal");
+const modal = document.getElementById("papers-modal");
+const papersContainer = document.getElementById("papers-container");
+const modalTitle = document.getElementById("modal-title");
+const closeModalBtn = document.getElementById("close-modal");
 
-const modalTitle =
-    document.getElementById("modal-title");
+document.querySelectorAll(".view-papers-btn").forEach(button => {
 
-const papersContainer =
-    document.getElementById("papers-container");
+    button.addEventListener("click", async () => {
 
-const closeModalBtn =
-    document.getElementById("close-modal");
+        const standard = button.dataset.standard;
+        const subject = button.dataset.subject;
 
-const buttons =
-    document.querySelectorAll(".view-papers-btn");
+        modal.classList.remove("hidden");
 
-function openModal() {
-    modal.classList.remove("hidden");
-}
+        modalTitle.textContent = `${subject} Question Papers`;
 
-function closeModal() {
-    modal.classList.add("hidden");
-}
+        papersContainer.innerHTML = "Loading...";
 
-closeModalBtn.addEventListener(
-    "click",
-    closeModal
-);
-
-window.addEventListener("click", (e) => {
-
-    if (e.target === modal) {
-        closeModal();
-    }
-});
-
-buttons.forEach(button => {
-
-    button.addEventListener("click",
-        async () => {
-
-        const standard =
-            button.dataset.standard;
-
-        const subject =
-            button.dataset.subject;
-
-        modalTitle.textContent =
-            `${standard} ${subject} Papers`;
-
-        papersContainer.innerHTML =
-            "<p>Loading papers...</p>";
-
-        openModal();
-
-        const { data, error } = await supabase
+        const { data, error } = await window.supabaseClient
             .from("question_papers")
             .select("*")
             .eq("standard", standard)
-            .eq("subject", subject)
-            .order("created_at",
-                { ascending: false });
+            .eq("subject", subject);
+
+        console.log(data);
+        console.log(error);
 
         if (error) {
 
             papersContainer.innerHTML = `
-                <p>Failed to load papers.</p>
+                <p>Error loading papers</p>
             `;
 
             return;
         }
 
-        if (!data.length) {
+        if (!data || data.length === 0) {
 
             papersContainer.innerHTML = `
-                <p>No papers available yet.</p>
+                <p>No papers found</p>
             `;
 
             return;
         }
 
-        let html = "";
+        papersContainer.innerHTML = "";
 
         data.forEach(paper => {
 
-            html += `
-                <div class="resource-box-card"
-                     style="margin-bottom:15px;">
+            papersContainer.innerHTML += `
+
+                <div class="paper-card">
 
                     <h3>${paper.title}</h3>
 
-                    <p>
-                        ${paper.year || "Year Not Available"}
-                    </p>
+                    <p>Year: ${paper.year}</p>
 
-                    <a
-                        href="${paper.pdf_url}"
-                        target="_blank"
-                        class="resource-card-btn">
+                    <a href="${paper.file_url}"
+                       target="_blank"
+                       class="resource-card-btn">
+
                         Open PDF
+
                     </a>
 
                 </div>
+
             `;
         });
-
-        papersContainer.innerHTML = html;
     });
+});
+
+closeModalBtn.addEventListener("click", () => {
+    modal.classList.add("hidden");
 });
