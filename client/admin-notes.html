@@ -82,7 +82,653 @@
         </div>
     </nav>
 
+    <main class="admin-page">
 
+        <!-- ===================================== -->
+        <!-- PAGE HEADER -->
+        <!-- ===================================== -->
+
+        <section class="admin-page-header">
+
+            <div>
+
+                <span class="admin-badge">
+                    Administration
+                </span>
+
+                <h1>
+                    Study Material Manager
+                </h1>
+
+                <p>
+                    Upload notes, PDFs and YouTube videos for students.
+                </p>
+
+            </div>
+
+            <button id="refreshMaterialsBtn" class="btn-outline">
+
+                Refresh
+
+            </button>
+
+        </section>
+
+
+
+        <!-- ===================================== -->
+        <!-- FORM -->
+        <!-- ===================================== -->
+
+        <section class="admin-card">
+
+            <div class="admin-card-header">
+
+                <h2>Add / Edit Study Material</h2>
+
+            </div>
+
+            <form id="studyMaterialForm" class="admin-form">
+
+                <!-- Row -->
+
+                <div class="admin-form-row">
+
+                    <!-- Board -->
+
+                    <div class="admin-form-group">
+
+                        <label for="boardSelect">
+
+                            Board
+
+                        </label>
+
+                        <select id="boardSelect" required>
+
+                            <option value="">
+
+                                Select Board
+
+                            </option>
+
+                        </select>
+
+                    </div>
+
+                    <!-- Class -->
+
+                    <div class="admin-form-group">
+
+                        <label for="classSelect">
+
+                            Class
+
+                        </label>
+
+                        <select id="classSelect" required>
+
+                            <option value="">
+
+                                Select Class
+
+                            </option>
+
+                        </select>
+
+                    </div>
+
+                </div>
+
+                <!-- Row -->
+
+                <div class="admin-form-row">
+
+                    <!-- Subject -->
+
+                    <div class="admin-form-group">
+
+                        <label for="subjectSelect">
+
+                            Subject
+
+                        </label>
+
+                        <select id="subjectSelect" required>
+
+                            <option value="">
+
+                                Select Subject
+
+                            </option>
+
+                        </select>
+
+                    </div>
+
+                    <!-- Chapter -->
+
+                    <div class="admin-form-group">
+
+                        <label for="chapterSelect">
+
+                            Chapter
+
+                        </label>
+
+                        <select id="chapterSelect">
+
+                            <option value="">
+
+                                Select Chapter
+
+                            </option>
+
+                        </select>
+
+                    </div>
+
+                </div>
+
+                <!-- Material Type -->
+
+                <div class="admin-form-group">
+
+                    <label for="materialType">
+
+                        Material Type
+
+                    </label>
+
+                    <select id="materialType" required>
+
+                        <option value="notes">
+
+                            Notes
+
+                        </option>
+
+                        <option value="important_questions">
+
+                            Important Questions
+
+                        </option>
+
+                        <option value="question_bank">
+
+                            Question Bank
+
+                        </option>
+
+                        <option value="formula_sheet">
+
+                            Formula Sheet
+
+                        </option>
+
+                        <option value="revision_notes">
+
+                            Revision Notes
+
+                        </option>
+
+                        <option value="assignment">
+
+                            Assignment
+
+                        </option>
+
+                    </select>
+
+                </div>
+
+                <!-- Title -->
+
+                <div class="admin-form-group">
+
+                    <label for="materialTitle">
+
+                        Title
+
+                    </label>
+
+                    <input type="text" id="materialTitle" placeholder="Example : Laws of Motion Notes" required>
+
+                </div>
+
+                <!-- Description -->
+
+                <div class="admin-form-group">
+
+                    <label for="materialDescription">
+
+                        Description
+
+                    </label>
+
+                    <textarea id="materialDescription" rows="4" placeholder="Short description..."></textarea>
+
+                </div>
+
+                <!-- PDF Upload -->
+
+                <div class="admin-form-group">
+
+                    <label for="pdfFile">
+
+                        PDF File
+
+                    </label>
+
+                    <input type="file" id="pdfFile" accept=".pdf">
+
+                    <small class="form-helper">
+                        Upload study material PDF.
+                    </small>
+
+                </div>
+
+                <!-- Existing PDF (Edit Mode) -->
+
+                <div id="currentPdfContainer" class="admin-form-group" style="display:none;">
+
+                    <label>
+
+                        Current PDF
+
+                    </label>
+
+                    <a id="currentPdfLink" href="#" target="_blank" class="btn-outline">
+
+                        View Current PDF
+
+                    </a>
+
+                </div>
+
+                <!-- YouTube -->
+
+                <div class="admin-form-group">
+
+                    <label for="youtubeUrl">
+
+                        YouTube URL (Optional)
+
+                    </label>
+
+                    <input type="url" id="youtubeUrl" placeholder="https://www.youtube.com/watch?v=...">
+
+                </div>
+
+                <!-- Display Order + Status -->
+
+                <div class="admin-form-row">
+
+                    <div class="admin-form-group">
+
+                        <label for="sortOrder">
+
+                            Display Order
+
+                        </label>
+
+                        <input type="number" id="sortOrder" value="1" min="1">
+
+                    </div>
+
+                    <div class="admin-form-group">
+
+                        <label>
+
+                            Status
+
+                        </label>
+
+                        <div class="status-toggle">
+
+                            <label class="switch">
+
+                                <input type="checkbox" id="isActive" checked>
+
+                                <span class="slider"></span>
+
+                            </label>
+
+                            <span>
+
+                                Active
+
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <!-- Hidden -->
+
+                <input type="hidden" id="materialId">
+
+                <!-- Buttons -->
+
+                <div class="admin-form-actions">
+
+                    <button type="submit" class="btn-gold" id="saveMaterialBtn">
+
+                        Save Material
+
+                    </button>
+
+                    <button type="reset" class="btn-outline" id="resetMaterialBtn">
+
+                        Clear
+
+                    </button>
+
+                </div>
+
+            </form>
+
+        </section>
+
+
+
+        <!-- ===================================== -->
+        <!-- MATERIAL LIST -->
+        <!-- ===================================== -->
+
+        <section class="admin-card">
+
+            <div class="admin-card-header">
+
+                <div>
+
+                    <h2>
+
+                        Existing Study Materials
+
+                    </h2>
+
+                    <p>
+
+                        Manage uploaded PDFs and videos.
+
+                    </p>
+
+                </div>
+
+            </div>
+
+            <!-- Search -->
+
+            <div class="admin-search-bar">
+
+                <input type="text" id="searchMaterial" placeholder="Search by title...">
+
+            </div>
+
+            <!-- Filters -->
+
+            <div class="admin-form-row">
+
+                <div class="admin-form-group">
+
+                    <select id="filterBoard">
+
+                        <option value="">
+                            All Boards
+                        </option>
+
+                    </select>
+
+                </div>
+
+                <div class="admin-form-group">
+
+                    <select id="filterClass">
+
+                        <option value="">
+                            All Classes
+                        </option>
+
+                    </select>
+
+                </div>
+
+                <div class="admin-form-group">
+
+                    <select id="filterSubject">
+
+                        <option value="">
+                            All Subjects
+                        </option>
+
+                    </select>
+
+                </div>
+
+                <div class="admin-form-group">
+
+                    <select id="filterType">
+
+                        <option value="">
+                            All Material Types
+                        </option>
+
+                        <option value="notes">
+                            Notes
+                        </option>
+
+                        <option value="important_questions">
+                            Important Questions
+                        </option>
+
+                        <option value="question_bank">
+                            Question Bank
+                        </option>
+
+                        <option value="formula_sheet">
+                            Formula Sheet
+                        </option>
+
+                        <option value="revision_notes">
+                            Revision Notes
+                        </option>
+
+                    </select>
+
+                </div>
+
+            </div>
+
+            <!-- Materials Table -->
+
+            <div class="table-responsive">
+
+                <table class="admin-table">
+
+                    <thead>
+
+                        <tr>
+
+                            <th>#</th>
+
+                            <th>Title</th>
+
+                            <th>Board</th>
+
+                            <th>Class</th>
+
+                            <th>Subject</th>
+
+                            <th>Chapter</th>
+
+                            <th>Type</th>
+
+                            <th>PDF</th>
+
+                            <th>Video</th>
+
+                            <th>Status</th>
+
+                            <th>Actions</th>
+
+                        </tr>
+
+                    </thead>
+
+                    <tbody id="materialsTableBody">
+
+                        <!-- JavaScript renders rows here -->
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+
+
+            <!-- Empty State -->
+
+            <div id="emptyState" class="empty-state" style="display:none;">
+
+                <div class="empty-icon">
+
+                    📚
+
+                </div>
+
+                <h3>
+
+                    No Study Materials Found
+
+                </h3>
+
+                <p>
+
+                    Upload your first study material to get started.
+
+                </p>
+
+            </div>
+
+
+
+            <!-- Loading -->
+
+            <div id="loadingState" class="loading-state" style="display:none;">
+
+                <div class="loading-spinner"></div>
+
+                <p>
+
+                    Loading Study Materials...
+
+                </p>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+
+    <!-- =====================================================
+     DELETE CONFIRMATION MODAL
+====================================================== -->
+
+    <div id="deleteModal" class="modal">
+
+        <div class="modal-content">
+
+            <div class="modal-header">
+
+                <h2>
+
+                    Delete Study Material
+
+                </h2>
+
+            </div>
+
+            <div class="modal-body">
+
+                <p>
+
+                    Are you sure you want to delete this study material?
+
+                </p>
+
+                <p class="danger-text">
+
+                    This action cannot be undone.
+
+                </p>
+
+            </div>
+
+            <div class="modal-footer">
+
+                <button id="cancelDeleteBtn" class="btn-outline">
+
+                    Cancel
+
+                </button>
+
+                <button id="confirmDeleteBtn" class="btn-danger">
+
+                    Delete
+
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- =====================================================
+     PDF PREVIEW MODAL
+====================================================== -->
+
+    <div id="pdfModal" class="modal">
+
+        <div class="modal-content modal-large">
+
+            <div class="modal-header">
+
+                <h2>
+
+                    PDF Preview
+
+                </h2>
+
+                <button id="closePdfModal" class="modal-close">
+
+                    ✕
+
+                </button>
+
+            </div>
+
+            <div class="modal-body">
+
+                <iframe id="pdfPreviewFrame" src="" width="100%" height="700">
+
+                </iframe>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <script src="admin-notes.js"></script>
     <script src="script.js" defer></script>
     <script src="config.js"></script>
     <script src="clerk-auth.js"></script>
