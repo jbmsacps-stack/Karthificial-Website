@@ -79,7 +79,7 @@
 
     <main class="resource-main">
 
-        <main class="mcq-page">
+        <section class="mcq-page">
 
             <!-- ========================= -->
             <!-- QUIZ SETUP -->
@@ -180,7 +180,7 @@
 
                         <label class="shuffle-item">
 
-                            <input type="checkbox">
+                            <input id="shuffleQuestions" type="checkbox">
 
                             <div>
 
@@ -196,7 +196,7 @@
 
                         <label class="shuffle-item">
 
-                            <input type="checkbox">
+                            <input id="shuffleQuestions" type="checkbox">
 
                             <div>
 
@@ -247,14 +247,19 @@
 
             </section>
 
-        </main>
+        </section>
 
-        <script src="script.js" defer></script>
-        <script src="config.js"></script>
-        <script src="clerk-auth.js"></script>
-        <script src="mcq.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
         <script src="supabase-config.js"></script>
+
+        <script src="config.js"></script>
+
+        <script src="clerk-auth.js"></script>
+
+        <script src="script.js"></script>
+
+        <script src="mcq.js"></script>
 
 </body>
 
