@@ -261,6 +261,10 @@ function renderMaterials(materials) {
 
     <h2>${material.title}</h2>
 
+    <p class="study-description">
+    ${material.description ?? "No description available."}
+</p>
+
     <div class="study-tags">
 
     <span class="study-tag">

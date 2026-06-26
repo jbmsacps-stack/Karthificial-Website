@@ -15871,3 +15871,23 @@ body:has(#paper-form) .admin-list-card {
     font-size:16px;
     line-height:1.6;
 }
+
+.study-description{
+    margin:12px 0 20px;
+    padding:12px 16px;
+    border-radius:12px;
+
+    color:#b8c5d4;
+    font-size:14px;
+    line-height:1.6;
+
+    display:-webkit-box;
+    -webkit-box-orient:vertical;
+    -webkit-line-clamp:2;
+
+    overflow:hidden;
+    text-overflow:ellipsis;
+
+    min-height:48px;
+}
+
