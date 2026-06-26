@@ -15891,3 +15891,513 @@ body:has(#paper-form) .admin-list-card {
     min-height:48px;
 }
 
+.mcq-page{
+
+    padding:60px 20px;
+
+}
+
+.mcq-card{
+
+    max-width:700px;
+    margin:auto;
+    background:var(--surface);
+    border-radius:18px;
+    padding:35px;
+    box-shadow:0 10px 30px rgba(0,0,0,.08);
+
+}
+
+.mcq-card h1{
+
+    margin-bottom:10px;
+
+}
+
+.mcq-subtitle{
+
+    color:gray;
+    margin-bottom:35px;
+
+}
+
+.form-group{
+
+    margin-bottom:30px;
+
+}
+
+.form-group label{
+
+    display:block;
+    font-weight:600;
+    margin-bottom:12px;
+
+}
+
+select,
+input[type=number]{
+
+    width:100%;
+    height:48px;
+    padding:10px;
+
+}
+
+.chapter-header{
+
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:15px;
+
+}
+
+#chapterContainer{
+
+    border:1px solid #ddd;
+    border-radius:12px;
+    max-height:250px;
+    overflow:auto;
+    padding:15px;
+
+}
+
+.chapter-item{
+
+    display:flex;
+    gap:10px;
+    margin-bottom:12px;
+
+}
+
+.question-count{
+
+    display:flex;
+    align-items:center;
+    gap:15px;
+
+}
+
+.question-count button{
+
+    width:45px;
+    height:45px;
+
+}
+
+.checkbox-row{
+
+    display:flex !important;
+    gap:12px;
+    align-items:center;
+
+}
+
+.hidden{
+
+    display:none;
+
+}
+
+/* ===========================
+   MCQ PAGE
+=========================== */
+
+.mcq-page {
+    min-height: 100vh;
+    padding: 70px 20px;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+
+    background:
+        radial-gradient(circle at top, rgba(32,59,94,.35), transparent 55%),
+        #08111d;
+}
+
+/* ===========================
+   CARD
+=========================== */
+
+.mcq-card {
+
+    width: 100%;
+    max-width: 1050px;
+
+    background: #1d1b1b;
+
+    border: 1px solid rgba(212,175,55,.22);
+
+    border-radius: 22px;
+
+    padding: 42px;
+
+    box-shadow:
+        0 15px 45px rgba(0,0,0,.45);
+
+}
+
+/* ===========================
+   TITLE
+=========================== */
+
+.mcq-card h1{
+
+    font-size:52px;
+
+    color:#fff;
+
+    margin-bottom:15px;
+
+    font-weight:700;
+
+}
+
+.mcq-subtitle{
+
+    color:#9f9f9f;
+
+    font-size:20px;
+
+    margin-bottom:30px;
+
+    line-height:1.6;
+
+}
+
+.mcq-divider{
+
+    height:1px;
+
+    background:rgba(212,175,55,.2);
+
+    margin-bottom:35px;
+
+}
+
+/* ===========================
+   FORM
+=========================== */
+
+.form-group{
+
+    margin-bottom:35px;
+
+}
+
+.form-group label{
+
+    display:block;
+
+    color:white;
+
+    font-size:24px;
+
+    font-weight:600;
+
+    margin-bottom:15px;
+
+}
+
+/* ===========================
+   DROPDOWN
+=========================== */
+
+select{
+
+    width:100%;
+
+    height:66px;
+
+    border-radius:15px;
+
+    background:#081322;
+
+    color:white;
+
+    border:1px solid rgba(212,175,55,.35);
+
+    padding:0 22px;
+
+    font-size:22px;
+
+    outline:none;
+
+    transition:.25s;
+
+}
+
+select:focus{
+
+    border-color:#d4af37;
+
+    box-shadow:0 0 0 3px rgba(212,175,55,.15);
+
+}
+
+/* ===========================
+   CHAPTER
+=========================== */
+
+.chapter-header{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    margin-bottom:15px;
+
+}
+
+.chapter-actions{
+
+    display:flex;
+
+    gap:10px;
+
+}
+
+.chapter-actions button{
+
+    padding:10px 18px;
+
+    background:#242424;
+
+    border:1px solid rgba(212,175,55,.25);
+
+    color:white;
+
+    border-radius:10px;
+
+    cursor:pointer;
+
+    transition:.25s;
+
+}
+
+.chapter-actions button:hover{
+
+    background:#d4af37;
+
+    color:black;
+
+}
+
+#chapterContainer{
+
+    min-height:130px;
+
+    border-radius:14px;
+
+    border:1px solid rgba(255,255,255,.12);
+
+    background:#0d1625;
+
+    padding:25px;
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:18px;
+
+}
+
+/* ===========================
+   QUESTION COUNT
+=========================== */
+
+.question-count{
+
+    display:flex;
+
+    gap:18px;
+
+    align-items:center;
+
+}
+
+.question-count button{
+
+    width:68px;
+
+    height:68px;
+
+    border-radius:12px;
+
+    background:#0b1322;
+
+    color:#d4af37;
+
+    border:1px solid rgba(212,175,55,.35);
+
+    font-size:32px;
+
+    cursor:pointer;
+
+    transition:.25s;
+
+}
+
+.question-count button:hover{
+
+    background:#d4af37;
+
+    color:black;
+
+}
+
+.question-count input{
+
+    flex:1;
+
+    height:68px;
+
+    border-radius:14px;
+
+    background:#081322;
+
+    color:white;
+
+    border:1px solid rgba(212,175,55,.35);
+
+    text-align:center;
+
+    font-size:32px;
+
+    outline:none;
+
+}
+
+#availableQuestions{
+
+    display:block;
+
+    margin-top:15px;
+
+    color:#d4af37;
+
+    font-size:18px;
+
+}
+
+/* ===========================
+   SHUFFLE
+=========================== */
+
+.shuffle-grid{
+
+    display:grid;
+
+    grid-template-columns:1fr 1fr;
+
+    gap:40px;
+
+}
+
+.shuffle-item{
+
+    display:flex;
+
+    gap:18px;
+
+    align-items:flex-start;
+
+}
+
+.shuffle-item input{
+
+    width:24px;
+
+    height:24px;
+
+    accent-color:#d4af37;
+
+}
+
+.shuffle-title{
+
+    color:white;
+
+    font-size:22px;
+
+    font-weight:600;
+
+}
+
+.shuffle-desc{
+
+    color:#8d8d8d;
+
+    font-size:17px;
+
+    margin-top:6px;
+
+}
+
+/* ===========================
+   BUTTON
+=========================== */
+
+#startQuizBtn{
+
+    margin-top:35px;
+
+    width:100%;
+
+    height:72px;
+
+    border:none;
+
+    border-radius:15px;
+
+    background:#d4af37;
+
+    color:black;
+
+    font-size:28px;
+
+    font-weight:700;
+
+    cursor:pointer;
+
+    transition:.25s;
+
+}
+
+#startQuizBtn:hover{
+
+    transform:translateY(-2px);
+
+    box-shadow:0 12px 30px rgba(212,175,55,.35);
+
+}
+
+/* ===========================
+   MOBILE
+=========================== */
+
+@media(max-width:768px){
+
+    .mcq-card{
+
+        padding:25px;
+
+    }
+
+    .mcq-card h1{
+
+        font-size:38px;
+
+    }
+
+    .shuffle-grid{
+
+        grid-template-columns:1fr;
+
+    }
+
+}
