@@ -388,52 +388,25 @@ async function applyFilters(searchResults = null) {
 }
 
 // =======================================================
-// 8. PDF UPLOAD
+// 8. PDF / DRIVE LINK HELPERS
 // =======================================================
 
-async function uploadPDF(file) {
-    try {
-        if (!file) {
-            throw new Error("No file selected");
-        }
+function isValidHttpUrl(value) {
+    if (!value || typeof value !== "string") return false;
+    const trimmed = value.trim();
+    return /^https?:\/\//i.test(trimmed);
+}
 
-        if (file.type !== 'application/pdf') {
-            throw new Error("Only PDF files are allowed");
-        }
+function getEmbeddablePdfUrl(url) {
+    const trimmed = (url || "").trim();
 
-        const fileName = `${Date.now()}-${file.name}`;
-        const bucketName = "study-materials";
+    if (!trimmed) return "";
 
-        // Upload file to storage
-        const { data, error } = await window.supabaseClient.storage
-            .from(bucketName)
-            .upload(fileName, file);
-
-        if (error) {
-            console.error("Upload error:", error);
-            throw new Error(error.message || "Failed to upload PDF");
-        }
-
-        if (!data) {
-            throw new Error("Upload did not return data");
-        }
-
-        // Get public URL
-        const { data: publicData, error: urlError } = window.supabaseClient.storage
-            .from(bucketName)
-            .getPublicUrl(fileName);
-
-        if (urlError) {
-            console.error("URL generation error:", urlError);
-            throw new Error("Failed to generate public URL");
-        }
-
-        return publicData.publicUrl;
-    } catch (error) {
-        console.error("PDF upload error:", error);
-        showToast("Error uploading PDF: " + error.message);
-        throw error;
+    if (trimmed.includes("drive.google.com/file") || trimmed.includes("drive.google.com/open")) {
+        return `https://drive.google.com/viewerng/viewer?embedded=true&url=${encodeURIComponent(trimmed)}`;
     }
+
+    return trimmed;
 }
 
 // =======================================================
@@ -461,13 +434,12 @@ async function saveMaterial(e) {
             showToast("Please enter a Title");
             return;
         }
-
-        let pdfUrl = currentPdfUrl; // Default to existing PDF in edit mode
-
-        // Upload new PDF if selected
-        if (pdfInput.files && pdfInput.files.length > 0) {
-            pdfUrl = await uploadPDF(pdfInput.files[0]);
+        if (!isValidHttpUrl(pdfInput.value)) {
+            showToast("Please enter a valid PDF or Drive link.");
+            return;
         }
+
+        const pdfUrl = pdfInput.value.trim();
 
         const payload = {
             subject_id: Number(subjectSelect.value),
@@ -481,46 +453,31 @@ async function saveMaterial(e) {
             is_active: isActiveCheckbox.checked
         };
 
-        console.log("SAVE MATERIAL - Editing ID:", editingId);
-        console.log("SAVE MATERIAL - Payload:", payload);
-
         if (editingId !== null && editingId !== undefined) {
-            // UPDATE
-            console.log("ENTERING UPDATE BLOCK - Editing ID:", editingId);
             const { error } = await window.supabaseClient
                 .from("study_materials")
                 .update(payload)
                 .eq("id", editingId);
 
             if (error) {
-                console.error("UPDATE ERROR - Full Supabase Error:", error);
-                console.error("UPDATE ERROR - Error Code:", error.code);
-                console.error("UPDATE ERROR - Error Message:", error.message);
-                console.error("UPDATE ERROR - Error Details:", error.details);
+                console.error("Update error:", error);
                 throw error;
             }
 
-            console.log("UPDATE SUCCESS - Record updated for ID:", editingId);
             editingId = null;
             currentPdfUrl = null;
             showToast("Study material updated successfully!");
             document.getElementById("saveMaterialBtn").textContent = "Save Material";
         } else {
-            // INSERT
-            console.log("ENTERING INSERT BLOCK");
             const { error } = await window.supabaseClient
                 .from("study_materials")
                 .insert([payload]);
 
             if (error) {
-                console.error("INSERT ERROR - Full Supabase Error:", error);
-                console.error("INSERT ERROR - Error Code:", error.code);
-                console.error("INSERT ERROR - Error Message:", error.message);
-                console.error("INSERT ERROR - Error Details:", error.details);
+                console.error("Insert error:", error);
                 throw error;
             }
 
-            console.log("INSERT SUCCESS - New record created");
             showToast("Study material created successfully!");
         }
 
@@ -528,11 +485,7 @@ async function saveMaterial(e) {
         currentPdfContainer.style.display = "none";
         await loadMaterials();
     } catch (error) {
-        console.error("SAVE MATERIAL - ERROR CAUGHT:", error);
-        console.error("SAVE MATERIAL - Full Error Object:", JSON.stringify(error, null, 2));
-        console.error("SAVE MATERIAL - Error Message:", error.message);
-        console.error("SAVE MATERIAL - Error Code:", error.code);
-        console.error("SAVE MATERIAL - Error Details:", error.details);
+        console.error("Save error:", error);
         showToast("Error: " + (error.message || "Failed to save material"));
     }
 }
@@ -543,25 +496,15 @@ async function saveMaterial(e) {
 
 async function editMaterial(id) {
     try {
-        console.log("EDIT MATERIAL CALLED - ID:", id, "Type:", typeof id);
-        console.log("EDIT MATERIAL - materials array length:", materials.length);
-        
-        const material = materials.find(m => {
-            console.log("Checking material - m.id:", m.id, "Type:", typeof m.id, "id param:", id, "Match:", m.id === id);
-            return m.id === id;
-        });
+        const material = materials.find(m => m.id === id);
         
         if (!material) {
-            console.warn("EDIT ERROR - Material not found in array for ID:", id);
-            console.log("Available materials IDs:", materials.map(m => ({ id: m.id, type: typeof m.id, title: m.title })));
             showToast("Material not found");
             return;
         }
 
         editingId = id;
-        console.log("EDIT MATERIAL - editingId SET TO:", editingId, "Type:", typeof editingId);
         currentPdfUrl = material.pdf_url || null;
-        console.log("EDIT MATERIAL - currentPdfUrl SET TO:", currentPdfUrl);
 
         // Populate basic fields
         titleInput.value = material.title || "";
@@ -570,11 +513,13 @@ async function editMaterial(id) {
         materialTypeSelect.value = material.material_type || "notes";
         sortOrderInput.value = material.sort_order || 1;
         isActiveCheckbox.checked = material.is_active !== false;
+        pdfInput.value = material.pdf_url || "";
 
         // Populate current PDF link if exists
         if (material.pdf_url) {
             currentPdfContainer.style.display = "block";
             currentPdfLink.href = material.pdf_url;
+            currentPdfLink.textContent = material.pdf_url;
         } else {
             currentPdfContainer.style.display = "none";
         }
@@ -672,18 +617,28 @@ async function confirmDelete() {
 
 function openPdfModal(url) {
     try {
-        if (!url || url.trim() === "") {
-            showToast("No PDF URL available");
+        const trimmedUrl = (url || "").trim();
+
+        if (!isValidHttpUrl(trimmedUrl)) {
+            showToast("No valid PDF or Drive link available");
             return;
         }
+
         if (!pdfPreviewFrame) {
             console.error("PDF preview frame element not found");
             showToast("PDF preview not available");
             return;
         }
-        pdfPreviewFrame.src = url;
-        if (pdfModal) {
-            pdfModal.classList.remove("hidden");
+
+        const embeddableUrl = getEmbeddablePdfUrl(trimmedUrl);
+
+        if (embeddableUrl && (embeddableUrl.endsWith(".pdf") || embeddableUrl.includes("viewerng/viewer"))) {
+            pdfPreviewFrame.src = embeddableUrl;
+            if (pdfModal) {
+                pdfModal.classList.remove("hidden");
+            }
+        } else {
+            window.open(trimmedUrl, "_blank", "noopener,noreferrer");
         }
     } catch (error) {
         console.error("Error opening PDF modal:", error);
