@@ -16471,3 +16471,31 @@ h3 {
         padding: 20px;
     }
 }
+
+.hidden{
+    display:none !important;
+}
+
+.modal{
+    position:fixed;
+    inset:0;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background:rgba(0,0,0,.7);
+    z-index:9999;
+}
+
+.modal-content{
+    width:700px;
+    max-width:90%;
+    background:#111;
+    border:1px solid rgba(212,175,55,.35);
+    border-radius:20px;
+    padding:30px;
+}
+
+.modal-large{
+    width:1100px;
+    max-width:95%;
+}

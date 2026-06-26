@@ -5,6 +5,7 @@
 // ── State ───────────────────────────────────────────────
 let editingId = null;
 let materials = [];
+let deleteMaterialId = null;
 
 // ── Form selects ────────────────────────────────────────
 const boardSelect = document.getElementById("boardSelect");
@@ -37,6 +38,8 @@ const searchInput = document.getElementById("searchMaterial");
 // =======================================================
 // INIT
 // =======================================================
+
+
 
 document.addEventListener("DOMContentLoaded", async () => {
     await loadBoards();
@@ -506,20 +509,60 @@ async function editMaterial(id) {
 // DELETE
 // =======================================================
 
-async function deleteMaterial(id) {
-    const ok = confirm("Delete this study material? This cannot be undone.");
-    if (!ok) return;
+function deleteMaterial(id) {
 
-    const { error } = await supabase
-        .from("study_materials")
-        .delete()
-        .eq("id", id);
+    deleteMaterialId = id;
 
-    if (error) { console.error(error); return; }
+    document
+        .getElementById("deleteModal")
+        .classList.remove("hidden");
 
-    showToast("Material deleted.");
-    await loadMaterials();
 }
+
+document
+    .getElementById("cancelDeleteBtn")
+    .addEventListener("click", () => {
+
+        deleteMaterialId = null;
+
+        document
+            .getElementById("deleteModal")
+            .classList.add("hidden");
+
+    });
+
+document
+    .getElementById("confirmDeleteBtn")
+    .addEventListener("click", async () => {
+
+        if (!deleteMaterialId) return;
+
+        const { error } = await supabase
+            .from("study_materials")
+            .delete()
+            .eq("id", deleteMaterialId);
+
+        if (error) {
+
+            console.error(error);
+
+            showToast("Failed to delete material");
+
+            return;
+
+        }
+
+        document
+            .getElementById("deleteModal")
+            .classList.add("hidden");
+
+        deleteMaterialId = null;
+
+        showToast("Material deleted successfully");
+
+        await loadMaterials();
+
+    });
 
 // =======================================================
 // RESET FORM
@@ -538,3 +581,39 @@ document.getElementById("resetMaterialBtn").addEventListener("click", () => {
 document.getElementById("refreshMaterialsBtn").addEventListener("click", async () => {
     await loadMaterials();
 });
+
+function openDeleteModal(){
+
+    document
+        .getElementById("deleteModal")
+        .classList.remove("hidden");
+
+}
+
+function closeDeleteModal(){
+
+    document
+        .getElementById("deleteModal")
+        .classList.add("hidden");
+
+}
+
+function openPdfModal(url){
+
+    document.getElementById("pdfPreviewFrame").src = url;
+
+    document
+        .getElementById("pdfModal")
+        .classList.remove("hidden");
+
+}
+
+function closePdfModal(){
+
+    document.getElementById("pdfPreviewFrame").src="";
+
+    document
+        .getElementById("pdfModal")
+        .classList.add("hidden");
+
+}
