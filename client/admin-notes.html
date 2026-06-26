@@ -105,6 +105,171 @@
             color: #d4af37 !important;
             border-color: #d4af37 !important;
         }
+
+        /* Button variations */
+        .btn-danger {
+            background: #dc3545 !important;
+            color: #fff !important;
+            border: 1px solid #dc3545 !important;
+        }
+
+        .btn-danger:hover {
+            background: #c82333 !important;
+            border-color: #bd2130 !important;
+        }
+
+        .btn-sm {
+            padding: 6px 12px !important;
+            font-size: 0.875rem !important;
+        }
+
+        .edit-btn, .delete-btn {
+            padding: 8px 16px;
+            margin: 0 4px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: 0.3s ease;
+        }
+
+        .edit-btn {
+            background: #d4af37;
+            color: #000;
+        }
+
+        .edit-btn:hover {
+            background: #ffcd5c;
+        }
+
+        .delete-btn {
+            background: #dc3545;
+            color: #fff;
+        }
+
+        .delete-btn:hover {
+            background: #c82333;
+        }
+
+        /* Modal header, body, footer */
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            border-bottom: 1px solid rgba(212, 175, 55, .35);
+            padding-bottom: 15px;
+        }
+
+        .modal-header h2 {
+            margin: 0;
+            color: #d4af37;
+        }
+
+        .modal-close {
+            background: none;
+            border: none;
+            color: #d4af37;
+            font-size: 28px;
+            cursor: pointer;
+            padding: 0;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: 0.3s ease;
+        }
+
+        .modal-close:hover {
+            color: #fff;
+        }
+
+        .modal-body {
+            margin-bottom: 20px;
+            color: #fff;
+        }
+
+        .modal-footer {
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+            border-top: 1px solid rgba(212, 175, 55, .35);
+            padding-top: 20px;
+        }
+
+        .danger-text {
+            color: #dc3545 !important;
+            font-weight: 600;
+            margin-top: 10px;
+        }
+
+        /* Toast notifications */
+        @keyframes slideInUp {
+            from {
+                transform: translateY(100px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideOutDown {
+            from {
+                transform: translateY(0);
+                opacity: 1;
+            }
+            to {
+                transform: translateY(100px);
+                opacity: 0;
+            }
+        }
+
+        /* Loading spinner */
+        .loading-spinner {
+            border: 4px solid rgba(212, 175, 55, .3);
+            border-top: 4px solid #d4af37;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 15px;
+        }
+
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        .loading-state {
+            text-align: center;
+            padding: 40px;
+            color: #d4af37;
+        }
+
+        /* Empty state */
+        .empty-state {
+            text-align: center;
+            padding: 60px 20px;
+            color: #999;
+        }
+
+        .empty-icon {
+            font-size: 60px;
+            margin-bottom: 20px;
+        }
+
+        .empty-state h3 {
+            color: #d4af37;
+            margin-bottom: 10px;
+        }
+
+        .empty-state p {
+            color: #999;
+        }
     </style>
     <script type="module" src="speed-insights.js"></script>
 </head>
@@ -194,12 +359,6 @@
                 </p>
 
             </div>
-
-            <button id="refreshMaterialsBtn" class="btn-outline">
-
-                Refresh
-
-            </button>
 
         </section>
 
@@ -644,10 +803,6 @@
                             <th>#</th>
 
                             <th>Title</th>
-
-                            <th>Board</th>
-
-                            <th>Class</th>
 
                             <th>Subject</th>
 
