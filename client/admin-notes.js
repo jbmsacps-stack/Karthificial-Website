@@ -240,7 +240,7 @@ subjectSelect.addEventListener("change", async () => {
 // =======================================================
 
 async function loadFilterBoards() {
-    const { data, error } = await supabase
+    const { data, error } = await window.supabaseClient
         .from("boards")
         .select("*")
         .order("id");
@@ -254,7 +254,7 @@ async function loadFilterBoards() {
 }
 
 async function loadFilterClasses(boardId) {
-    const { data, error } = await supabase
+    const { data, error } = await window.supabaseClient
         .from("classes")
         .select("*")
         .eq("board_id", boardId)
@@ -269,7 +269,7 @@ async function loadFilterClasses(boardId) {
 }
 
 async function loadFilterSubjects(classId) {
-    const { data, error } = await supabase
+    const { data, error } = await window.supabaseClient
         .from("subjects")
         .select("*")
         .eq("class_id", classId)
@@ -321,7 +321,7 @@ function applyFilters() {
 async function loadMaterials() {
     showLoading();
 
-    const { data, error } = await supabase
+    const { data, error } = await window.supabaseClient
         .from("study_materials")
         .select(`
             *,
@@ -362,7 +362,11 @@ function renderTable(list) {
                 <td>${item.chapters?.title ?? "-"}</td>
                 <td>${item.material_type}</td>
                 <td>${item.pdf_url
-                ? `<a href="${item.pdf_url}" target="_blank">View PDF</a>`
+                ? `<button
+    class="btn-outline"
+    onclick="openPdfModal('${item.pdf_url}')">
+    View PDF
+</button>`
                 : "-"}</td>
                 <td>${item.youtube_url
                 ? `<a href="${item.youtube_url}" target="_blank">Watch</a>`
@@ -394,19 +398,25 @@ searchInput.addEventListener("input", () => {
 // =======================================================
 
 async function uploadPDF(file) {
-    if (!file) return null;
+
+    console.log("Uploading:", file);
 
     const fileName = `${Date.now()}-${file.name}`;
 
-    const { data, error } = await supabase.storage
-        .from("study-materials")   // ← verify this matches your bucket name in Supabase
+    const { data, error } = await window.supabaseClient.storage
+        .from("study-materials")
         .upload(fileName, file);
 
-    if (error) { console.error(error); throw error; }
+    console.log("Upload Data:", data);
+    console.log("Upload Error:", error);
 
-    const { data: publicData } = supabase.storage
+    if (error) throw error;
+
+    const { data: publicData } = window.supabaseClient.storage
         .from("study-materials")
         .getPublicUrl(fileName);
+
+    console.log("Public URL:", publicData.publicUrl);
 
     return publicData.publicUrl;
 }
@@ -437,7 +447,7 @@ materialForm.addEventListener("submit", async (e) => {
         };
 
         if (editingId) {
-            const { error } = await supabase
+            const { error } = await window.supabaseClient
                 .from("study_materials")
                 .update(payload)
                 .eq("id", editingId);
@@ -448,7 +458,7 @@ materialForm.addEventListener("submit", async (e) => {
             document.getElementById("saveMaterialBtn").textContent = "Save Material";
 
         } else {
-            const { error } = await supabase
+            const { error } = await window.supabaseClient
                 .from("study_materials")
                 .insert(payload);
 
@@ -537,7 +547,7 @@ document
 
         if (!deleteMaterialId) return;
 
-        const { error } = await supabase
+        const { error } = await window.supabaseClient
             .from("study_materials")
             .delete()
             .eq("id", deleteMaterialId);
@@ -582,7 +592,7 @@ document.getElementById("refreshMaterialsBtn").addEventListener("click", async (
     await loadMaterials();
 });
 
-function openDeleteModal(){
+function openDeleteModal() {
 
     document
         .getElementById("deleteModal")
@@ -590,7 +600,7 @@ function openDeleteModal(){
 
 }
 
-function closeDeleteModal(){
+function closeDeleteModal() {
 
     document
         .getElementById("deleteModal")
@@ -598,7 +608,7 @@ function closeDeleteModal(){
 
 }
 
-function openPdfModal(url){
+function openPdfModal(url) {
 
     document.getElementById("pdfPreviewFrame").src = url;
 
@@ -608,9 +618,9 @@ function openPdfModal(url){
 
 }
 
-function closePdfModal(){
+function closePdfModal() {
 
-    document.getElementById("pdfPreviewFrame").src="";
+    document.getElementById("pdfPreviewFrame").src = "";
 
     document
         .getElementById("pdfModal")
