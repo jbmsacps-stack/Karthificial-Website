@@ -481,27 +481,46 @@ async function saveMaterial(e) {
             is_active: isActiveCheckbox.checked
         };
 
-        if (editingId) {
+        console.log("SAVE MATERIAL - Editing ID:", editingId);
+        console.log("SAVE MATERIAL - Payload:", payload);
+
+        if (editingId !== null && editingId !== undefined) {
             // UPDATE
+            console.log("ENTERING UPDATE BLOCK - Editing ID:", editingId);
             const { error } = await window.supabaseClient
                 .from("study_materials")
                 .update(payload)
                 .eq("id", editingId);
 
-            if (error) throw error;
+            if (error) {
+                console.error("UPDATE ERROR - Full Supabase Error:", error);
+                console.error("UPDATE ERROR - Error Code:", error.code);
+                console.error("UPDATE ERROR - Error Message:", error.message);
+                console.error("UPDATE ERROR - Error Details:", error.details);
+                throw error;
+            }
 
+            console.log("UPDATE SUCCESS - Record updated for ID:", editingId);
             editingId = null;
             currentPdfUrl = null;
             showToast("Study material updated successfully!");
             document.getElementById("saveMaterialBtn").textContent = "Save Material";
         } else {
             // INSERT
+            console.log("ENTERING INSERT BLOCK");
             const { error } = await window.supabaseClient
                 .from("study_materials")
                 .insert([payload]);
 
-            if (error) throw error;
+            if (error) {
+                console.error("INSERT ERROR - Full Supabase Error:", error);
+                console.error("INSERT ERROR - Error Code:", error.code);
+                console.error("INSERT ERROR - Error Message:", error.message);
+                console.error("INSERT ERROR - Error Details:", error.details);
+                throw error;
+            }
 
+            console.log("INSERT SUCCESS - New record created");
             showToast("Study material created successfully!");
         }
 
@@ -509,7 +528,11 @@ async function saveMaterial(e) {
         currentPdfContainer.style.display = "none";
         await loadMaterials();
     } catch (error) {
-        console.error("Save error:", error);
+        console.error("SAVE MATERIAL - ERROR CAUGHT:", error);
+        console.error("SAVE MATERIAL - Full Error Object:", JSON.stringify(error, null, 2));
+        console.error("SAVE MATERIAL - Error Message:", error.message);
+        console.error("SAVE MATERIAL - Error Code:", error.code);
+        console.error("SAVE MATERIAL - Error Details:", error.details);
         showToast("Error: " + (error.message || "Failed to save material"));
     }
 }
@@ -520,14 +543,25 @@ async function saveMaterial(e) {
 
 async function editMaterial(id) {
     try {
-        const material = materials.find(m => m.id === id);
+        console.log("EDIT MATERIAL CALLED - ID:", id, "Type:", typeof id);
+        console.log("EDIT MATERIAL - materials array length:", materials.length);
+        
+        const material = materials.find(m => {
+            console.log("Checking material - m.id:", m.id, "Type:", typeof m.id, "id param:", id, "Match:", m.id === id);
+            return m.id === id;
+        });
+        
         if (!material) {
+            console.warn("EDIT ERROR - Material not found in array for ID:", id);
+            console.log("Available materials IDs:", materials.map(m => ({ id: m.id, type: typeof m.id, title: m.title })));
             showToast("Material not found");
             return;
         }
 
         editingId = id;
+        console.log("EDIT MATERIAL - editingId SET TO:", editingId, "Type:", typeof editingId);
         currentPdfUrl = material.pdf_url || null;
+        console.log("EDIT MATERIAL - currentPdfUrl SET TO:", currentPdfUrl);
 
         // Populate basic fields
         titleInput.value = material.title || "";
