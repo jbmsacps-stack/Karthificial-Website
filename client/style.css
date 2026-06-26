@@ -13292,7 +13292,7 @@ body {
 .portfolio-section,
 .notes-section,
 .papers-section,
-.mcq-section,
+/* .mcq-section, */
 .career-section,
 .contact-section,
 .resources-section,
@@ -15904,7 +15904,7 @@ body:has(#paper-form) .admin-list-card {
 
 .mcq-page {
     min-height: 100vh;
-    padding: 70px 20px;
+    padding: 20px 20px;
     display: flex;
     justify-content: center;
     align-items: flex-start;
@@ -16118,7 +16118,7 @@ select:focus{
 
     border:1px solid rgba(212,175,55,0.18);
 
-    background:#081a2f;
+    /* background:#081a2f; */
 
     padding:24px;
 
@@ -16310,7 +16310,7 @@ select:focus{
 
     color:#050910;
 
-    font-size:26px;
+    font-size:20px;
 
     font-weight:800;
 
@@ -16353,3 +16353,4 @@ select:focus{
     }
 
 }
+
