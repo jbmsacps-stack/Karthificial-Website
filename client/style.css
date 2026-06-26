@@ -15909,9 +15909,9 @@ body:has(#paper-form) .admin-list-card {
     justify-content: center;
     align-items: flex-start;
 
-    background:
+    /* background:
         radial-gradient(circle at top, rgba(32,59,94,.35), transparent 55%),
-        #08111d;
+        #08111d; */
 }
 
 /* ===========================
@@ -15933,8 +15933,8 @@ body:has(#paper-form) .admin-list-card {
 
     padding: 42px;
 
-    box-shadow:
-        0 24px 60px rgba(0,0,0,0.32);
+    /* box-shadow:
+        0 24px 60px rgba(0,0,0,0.32); */
 
 }
 
