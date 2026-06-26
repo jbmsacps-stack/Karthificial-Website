@@ -149,7 +149,7 @@ async function loadSubjects(classId) {
             .select("id, name, class_id, is_active")
             .eq("class_id", parseInt(classId))
             .eq("is_active", true)
-            .order("display_order");
+            .order("sort_order");
 
         if (error) throw error;
 
@@ -241,7 +241,7 @@ async function loadFilterSubjects(classId) {
             .select("*")
             .eq("class_id", classId)
             .eq("is_active", true)
-            .order("display_order");
+            .order("sort_order");
 
         if (error) throw error;
 
@@ -264,15 +264,23 @@ async function loadMaterials() {
     try {
         showLoading();
 
-        // Join with subjects, chapters, classes, and boards to get complete data
+        // Fetch study_materials with valid joins only
+        // Using foreign key aliases to join subjects and chapters
         const { data, error } = await window.supabaseClient
             .from("study_materials")
             .select(`
-                *,
-                subjects:subject_id (id, name, class_id),
-                chapters:chapter_id (id, title),
-                classes:subjects.class_id (id, name, board_id),
-                boards:subjects.class_id.board_id (id, name)
+                id,
+                title,
+                description,
+                subject_id,
+                chapter_id,
+                material_type,
+                pdf_url,
+                youtube_url,
+                sort_order,
+                is_active,
+                subjects!subject_id (id, name, class_id),
+                chapters!chapter_id (id, title)
             `)
             .order("sort_order");
 
@@ -280,17 +288,12 @@ async function loadMaterials() {
 
         if (error) throw error;
 
-        // Process data to flatten relationships
-        materials = (data || []).map(item => {
-            const subjectData = Array.isArray(item.subjects) ? item.subjects[0] : item.subjects;
-            const chapterData = Array.isArray(item.chapters) ? item.chapters[0] : item.chapters;
-            
-            return {
-                ...item,
-                subject_name: subjectData?.name || "-",
-                chapter_name: chapterData?.title || "-",
-            };
-        });
+        // Process data - subjects and chapters are already joined properly
+        materials = (data || []).map(item => ({
+            ...item,
+            subject_name: item.subjects?.name || "-",
+            chapter_name: item.chapters?.title || "-"
+        }));
 
         renderTable(materials);
     } catch (error) {
@@ -311,14 +314,18 @@ function renderTable(list) {
 
     if (emptyState) emptyState.style.display = "none";
 
-    tableBody.innerHTML = list.map((item, index) => `
+    tableBody.innerHTML = list.map((item, index) => {
+        // Escape PDF URL for use in onclick
+        const escapedPdfUrl = (item.pdf_url || "").replace(/'/g, "\\'");
+        
+        return `
         <tr>
             <td>${index + 1}</td>
             <td>${item.title || "-"}</td>
             <td>${item.subject_name || "-"}</td>
             <td>${item.chapter_name || "-"}</td>
             <td>${item.material_type || "-"}</td>
-            <td>${item.pdf_url ? `<button class="btn-outline btn-sm" onclick="openPdfModal('${item.pdf_url}')">View PDF</button>` : "-"}</td>
+            <td>${item.pdf_url ? `<button class="btn-outline btn-sm" onclick="openPdfModal('${escapedPdfUrl}')">View PDF</button>` : "-"}</td>
             <td>${item.youtube_url ? `<a href="${item.youtube_url}" target="_blank" class="btn-outline btn-sm">Watch Video</a>` : "-"}</td>
             <td>${item.is_active ? "✅" : "❌"}</td>
             <td>
@@ -326,7 +333,8 @@ function renderTable(list) {
                 <button class="delete-btn" onclick="showDeleteModal(${item.id})">Delete</button>
             </td>
         </tr>
-    `).join("");
+        `;
+    }).join("");
 }
 
 // =======================================================
@@ -334,41 +342,49 @@ function renderTable(list) {
 // =======================================================
 
 function applySearch() {
-    const keyword = searchInput.value.toLowerCase().trim();
-    
-    let filtered = materials;
-    
-    if (keyword) {
-        filtered = materials.filter(item => {
-            const titleMatch = (item.title || "").toLowerCase().includes(keyword);
-            const subjectMatch = (item.subject_name || "").toLowerCase().includes(keyword);
-            const chapterMatch = (item.chapter_name || "").toLowerCase().includes(keyword);
-            return titleMatch || subjectMatch || chapterMatch;
-        });
+    try {
+        const keyword = searchInput.value.toLowerCase().trim();
+        
+        let filtered = materials;
+        
+        if (keyword) {
+            filtered = materials.filter(item => {
+                const titleMatch = (item.title || "").toLowerCase().includes(keyword);
+                const subjectMatch = (item.subject_name || "").toLowerCase().includes(keyword);
+                const chapterMatch = (item.chapter_name || "").toLowerCase().includes(keyword);
+                return titleMatch || subjectMatch || chapterMatch;
+            });
+        }
+        
+        // Apply filters on top of search
+        applyFilters(filtered);
+    } catch (error) {
+        console.error("Search error:", error);
+        renderTable(materials);
     }
-    
-    // Apply filters on top of search
-    applyFilters(filtered);
 }
 
 // =======================================================
 // 7. FILTERS (Board → Class → Subject → Material Type)
 // =======================================================
 
-function applyFilters(searchResults = null) {
-    let filtered = searchResults !== null ? searchResults : materials;
+async function applyFilters(searchResults = null) {
+    try {
+        let filtered = searchResults !== null ? searchResults : materials;
 
-    if (filterBoard.value || filterClass.value || filterSubject.value || filterType.value) {
-        filtered = filtered.filter(m => {
-            const boardMatch = !filterBoard.value || (m.subjects?.class_id ? true : false); // Simplified - would need more data
-            const classMatch = !filterClass.value || (m.subjects?.class_id ? true : false); // Simplified
-            const subjectMatch = !filterSubject.value || m.subject_id == filterSubject.value;
-            const typeMatch = !filterType.value || m.material_type === filterType.value;
-            return subjectMatch && typeMatch;
-        });
+        // Apply filter conditions
+        if (filterSubject.value) {
+            filtered = filtered.filter(m => m.subject_id == filterSubject.value);
+        }
+        if (filterType.value) {
+            filtered = filtered.filter(m => m.material_type === filterType.value);
+        }
+
+        renderTable(filtered);
+    } catch (error) {
+        console.error("Filter error:", error);
+        renderTable(filtered);
     }
-
-    renderTable(filtered);
 }
 
 // =======================================================
@@ -377,22 +393,40 @@ function applyFilters(searchResults = null) {
 
 async function uploadPDF(file) {
     try {
-        if (!file || file.type !== 'application/pdf') {
-            throw new Error("Please upload a valid PDF file");
+        if (!file) {
+            throw new Error("No file selected");
+        }
+
+        if (file.type !== 'application/pdf') {
+            throw new Error("Only PDF files are allowed");
         }
 
         const fileName = `${Date.now()}-${file.name}`;
+        const bucketName = "study-materials";
 
+        // Upload file to storage
         const { data, error } = await window.supabaseClient.storage
-            .from("study-materials")
+            .from(bucketName)
             .upload(fileName, file);
 
-        if (error) throw error;
+        if (error) {
+            console.error("Upload error:", error);
+            throw new Error(error.message || "Failed to upload PDF");
+        }
+
+        if (!data) {
+            throw new Error("Upload did not return data");
+        }
 
         // Get public URL
-        const { data: publicData } = window.supabaseClient.storage
-            .from("study-materials")
+        const { data: publicData, error: urlError } = window.supabaseClient.storage
+            .from(bucketName)
             .getPublicUrl(fileName);
+
+        if (urlError) {
+            console.error("URL generation error:", urlError);
+            throw new Error("Failed to generate public URL");
+        }
 
         return publicData.publicUrl;
     } catch (error) {
@@ -428,10 +462,10 @@ async function saveMaterial(e) {
             return;
         }
 
-        let pdfUrl = currentPdfUrl; // Default to existing PDF
+        let pdfUrl = currentPdfUrl; // Default to existing PDF in edit mode
 
         // Upload new PDF if selected
-        if (pdfInput.files.length > 0) {
+        if (pdfInput.files && pdfInput.files.length > 0) {
             pdfUrl = await uploadPDF(pdfInput.files[0]);
         }
 
@@ -603,17 +637,37 @@ async function confirmDelete() {
 // =======================================================
 
 function openPdfModal(url) {
-    if (!url) {
-        showToast("No PDF URL available");
-        return;
+    try {
+        if (!url || url.trim() === "") {
+            showToast("No PDF URL available");
+            return;
+        }
+        if (!pdfPreviewFrame) {
+            console.error("PDF preview frame element not found");
+            showToast("PDF preview not available");
+            return;
+        }
+        pdfPreviewFrame.src = url;
+        if (pdfModal) {
+            pdfModal.classList.remove("hidden");
+        }
+    } catch (error) {
+        console.error("Error opening PDF modal:", error);
+        showToast("Error opening PDF preview");
     }
-    pdfPreviewFrame.src = url;
-    pdfModal.classList.remove("hidden");
 }
 
 function closePdfModal() {
-    pdfPreviewFrame.src = "";
-    pdfModal.classList.add("hidden");
+    try {
+        if (pdfPreviewFrame) {
+            pdfPreviewFrame.src = "";
+        }
+        if (pdfModal) {
+            pdfModal.classList.add("hidden");
+        }
+    } catch (error) {
+        console.error("Error closing PDF modal:", error);
+    }
 }
 
 // =======================================================
