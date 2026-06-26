@@ -96,6 +96,8 @@
                         Shuffle questions and options for better preparation.
                     </p>
 
+                    <div class="mcq-divider"></div>
+
                     <!-- SUBJECT -->
 
                     <div class="form-group">
@@ -122,15 +124,17 @@
 
                             <div class="chapter-actions">
 
-                                <button id="selectAllBtn">✓ Select All</button>
+                                <button id="selectAllBtn" type="button">✓ Select All</button>
 
-                                <button id="clearBtn">✕ Clear</button>
+                                <button id="clearBtn" type="button">✕ Clear</button>
 
                             </div>
 
                         </div>
 
                         <div id="chapterContainer">
+
+                            <p class="empty-text">Choose a subject to load chapters.</p>
 
                             <!-- JS generates checkboxes -->
 
@@ -150,19 +154,11 @@
 
                         <div class="question-count">
 
-                            <button id="minusBtn">
-
-                                −
-
-                            </button>
+                            <button id="minusBtn" type="button">−</button>
 
                             <input id="questionCount" type="number" value="10" min="1">
 
-                            <button id="plusBtn">
-
-                                +
-
-                            </button>
+                            <button id="plusBtn" type="button">+</button>
 
                         </div>
 
@@ -181,7 +177,6 @@
                         <label class="shuffle-item">
 
                             <input id="shuffleQuestions" type="checkbox">
-
                             <div>
 
                                 <div class="shuffle-title">Shuffle Questions</div>
@@ -194,9 +189,10 @@
 
                         </label>
 
+
                         <label class="shuffle-item">
 
-                            <input id="shuffleQuestions" type="checkbox">
+                            <input id="shuffleOptions" type="checkbox">
 
                             <div>
 
@@ -212,11 +208,7 @@
 
                     </div>
 
-                    <button id="startQuizBtn" class="btn-gold">
-
-                        Start Quiz
-
-                    </button>
+                    <button id="startQuizBtn" type="button" class="btn-gold">Start Quiz</button>
 
                 </div>
 
