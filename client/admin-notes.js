@@ -1,215 +1,19 @@
 // =======================================================
-// ADMIN NOTES MANAGER
+// ADMIN NOTES MANAGER — clean rewrite
 // =======================================================
 
+// ── State ───────────────────────────────────────────────
+let editingId = null;
+let materials = [];
+
+// ── Form selects ────────────────────────────────────────
 const boardSelect = document.getElementById("boardSelect");
 const classSelect = document.getElementById("classSelect");
 const subjectSelect = document.getElementById("subjectSelect");
 const chapterSelect = document.getElementById("chapterSelect");
 
+// ── Form inputs ─────────────────────────────────────────
 const materialForm = document.getElementById("studyMaterialForm");
-
-const tableBody = document.getElementById("materialsTableBody");
-
-document.addEventListener("DOMContentLoaded", async () => {
-
-    await loadBoards();
-
-});
-
-async function loadBoards() {
-
-    const { data, error } = await supabase
-
-        .from("boards")
-
-        .select("*")
-
-        .order("id");
-
-    if (error) {
-
-        console.error(error);
-
-        return;
-
-    }
-
-    boardSelect.innerHTML =
-        `<option value="">Select Board</option>`;
-
-    data.forEach(board => {
-
-        boardSelect.innerHTML += `
-
-            <option value="${board.id}">
-
-                ${board.name}
-
-            </option>
-
-        `;
-
-    });
-
-}
-
-boardSelect.addEventListener("change", async () => {
-
-    classSelect.innerHTML = "";
-
-    subjectSelect.innerHTML = "";
-
-    chapterSelect.innerHTML = "";
-
-    await loadClasses(boardSelect.value);
-
-});
-
-async function loadClasses(boardId){
-
-    const {data,error} = await supabase
-
-        .from("classes")
-
-        .select("*")
-
-        .eq("board_id",boardId)
-
-        .order("id");
-
-    if(error){
-
-        console.error(error);
-
-        return;
-
-    }
-
-    classSelect.innerHTML =
-
-    `<option value="">Select Class</option>`;
-
-    data.forEach(item=>{
-
-        classSelect.innerHTML +=
-
-        `<option value="${item.id}">
-
-            ${item.name}
-
-        </option>`;
-
-    });
-
-}
-
-classSelect.addEventListener("change",async()=>{
-
-    subjectSelect.innerHTML="";
-
-    chapterSelect.innerHTML="";
-
-    await loadSubjects(classSelect.value);
-
-});
-
-classSelect.addEventListener("change",async()=>{
-
-    subjectSelect.innerHTML="";
-
-    chapterSelect.innerHTML="";
-
-    await loadSubjects(classSelect.value);
-
-});
-
-async function loadSubjects(classId){
-
-    const {data,error}=await supabase
-
-        .from("subjects")
-
-        .select("*")
-
-        .eq("class_id",classId)
-
-        .order("display_order");
-
-    if(error){
-
-        console.error(error);
-
-        return;
-
-    }
-
-    subjectSelect.innerHTML=
-
-    `<option value="">Select Subject</option>`;
-
-    data.forEach(subject=>{
-
-        subjectSelect.innerHTML +=
-
-        `<option value="${subject.id}">
-
-            ${subject.name}
-
-        </option>`;
-
-    });
-
-}
-
-subjectSelect.addEventListener("change",async()=>{
-
-    chapterSelect.innerHTML="";
-
-    await loadChapters(subjectSelect.value);
-
-});
-
-async function loadChapters(subjectId){
-
-    const {data,error}=await supabase
-
-        .from("chapters")
-
-        .select("*")
-
-        .eq("subject_id",subjectId)
-
-        .order("chapter_number");
-
-    if(error){
-
-        console.error(error);
-
-        return;
-
-    }
-
-    chapterSelect.innerHTML=
-
-    `<option value="">Select Chapter</option>`;
-
-    data.forEach(chapter=>{
-
-        chapterSelect.innerHTML +=
-
-        `<option value="${chapter.id}">
-
-            ${chapter.chapter_number}
-            -
-            ${chapter.title}
-
-        </option>`;
-
-    });
-
-}
-
 const titleInput = document.getElementById("materialTitle");
 const descriptionInput = document.getElementById("materialDescription");
 const materialType = document.getElementById("materialType");
@@ -218,252 +22,304 @@ const pdfInput = document.getElementById("pdfFile");
 const sortOrder = document.getElementById("sortOrder");
 const isActive = document.getElementById("isActive");
 
-async function uploadPDF(file) {
+// ── Table ────────────────────────────────────────────────
+const tableBody = document.getElementById("materialsTableBody");
 
-    if (!file) return null;
+// ── Filter selects ───────────────────────────────────────
+const filterBoard = document.getElementById("filterBoard");
+const filterClass = document.getElementById("filterClass");
+const filterSubject = document.getElementById("filterSubject");
+const filterType = document.getElementById("filterType");
 
-    const fileName = `${Date.now()}-${file.name}`;
+// ── Search ───────────────────────────────────────────────
+const searchInput = document.getElementById("searchMaterial");
 
-    const { data, error } = await supabase.storage
+// =======================================================
+// INIT
+// =======================================================
 
-        .from("study-materials")
-
-        .upload(fileName, file);
-
-    if (error) {
-
-        console.error(error);
-
-        throw error;
-
-    }
-
-    const { data: publicUrl } = supabase.storage
-
-        .from("study-materials")
-
-        .getPublicUrl(fileName);
-
-    return publicUrl.publicUrl;
-
-}
-
-materialForm.addEventListener("submit", async (e) => {
-
-    e.preventDefault();
-
-    try {
-
-        let pdfUrl = null;
-
-        if (pdfInput.files.length > 0) {
-
-            pdfUrl = await uploadPDF(pdfInput.files[0]);
-
-        }
-
-        const payload = {
-
-            subject_id: Number(subjectSelect.value),
-
-            chapter_id: chapterSelect.value
-                ? Number(chapterSelect.value)
-                : null,
-
-            material_type: materialType.value,
-
-            title: titleInput.value.trim(),
-
-            description: descriptionInput.value.trim(),
-
-            pdf_url: pdfUrl,
-
-            youtube_url: youtubeInput.value.trim(),
-
-            sort_order: Number(sortOrder.value),
-
-            is_active: isActive.checked
-
-        };
-
-        const { error } = await supabase
-
-            .from("study_materials")
-
-            if (editingId) {
-
-    const { error } = await supabase
-
-        .from("study_materials")
-
-        .update(payload)
-
-        .eq("id", editingId);
-
-    if (error) throw error;
-
-    editingId = null;
-
-    document
-
-        .getElementById("saveMaterialBtn")
-
-        .textContent =
-
-        "Save Material";
-
-}
-else {
-
-    const { error } = await supabase
-
-        .from("study_materials")
-
-        .insert(payload);
-
-    if (error) throw error;
-
-}
-
-        if (error) throw error;
-
-        alert("Study Material Uploaded Successfully!");
-
-        materialForm.reset();
-
-        await loadMaterials();
-
-    }
-
-    catch (err) {
-
-        console.error(err);
-
-        alert(err.message);
-
-    }
-
+document.addEventListener("DOMContentLoaded", async () => {
+    await loadBoards();
+    await loadFilterBoards();
+    await loadMaterials();
 });
 
-async function loadMaterials() {
+// =======================================================
+// LOADING UI
+// =======================================================
 
-    const { data, error } = await supabase
-
-        .from("study_materials")
-
-        .select(`
-            *,
-            subjects(name),
-            chapters(title)
-        `)
-        .order("sort_order");
-
-    if (error) {
-
-        console.error(error);
-
-        return;
-
-    }
-
-    renderTable(data);
-
+function showLoading() {
+    document.getElementById("loadingState").style.display = "block";
 }
 
-function renderTable(materials) {
+function hideLoading() {
+    document.getElementById("loadingState").style.display = "none";
+}
 
-    tableBody.innerHTML = "";
+function showToast(message) {
+    const toast = document.createElement("div");
+    toast.className = "toast";
+    toast.innerText = message;
+    document.body.appendChild(toast);
+    setTimeout(() => toast.classList.add("show"), 100);
+    setTimeout(() => toast.remove(), 3000);
+}
 
-    if (!materials.length) {
+// =======================================================
+// FORM DROPDOWN CHAIN
+// =======================================================
 
-        document.getElementById("emptyState").style.display = "block";
+async function loadBoards() {
 
+    const { data, error } = await window.supabaseClient
+        .from("boards")
+        .select("*");
+
+    console.log("DATA:", data);
+    console.log("ERROR:", error);
+
+    if (error) {
+        alert(error.message);
         return;
-
     }
 
-    document.getElementById("emptyState").style.display = "none";
+    if (!data || data.length === 0) {
+        alert("Boards table returned 0 rows.");
+        return;
+    }
 
-    materials.forEach((item, index) => {
+    boardSelect.innerHTML = `<option value="">Select Board</option>`;
 
-        tableBody.innerHTML += `
+    data.forEach(board => {
 
-<tr>
+        console.log(board);
 
-<td>${index + 1}</td>
-
-<td>${item.title}</td>
-
-<td>${item.subjects?.name ?? "-"}</td>
-
-<td>${item.chapters?.title ?? "-"}</td>
-
-<td>${item.material_type}</td>
-
-<td>
-
-${item.pdf_url
-? `<a href="${item.pdf_url}" target="_blank">View PDF</a>`
-: "-"}
-
-</td>
-
-<td>
-
-${item.youtube_url
-? `<a href="${item.youtube_url}" target="_blank">Watch</a>`
-: "-"}
-
-</td>
-
-<td>
-
-${item.is_active ? "✅" : "❌"}
-
-</td>
-
-<td>
-
-<button
-class="edit-btn"
-onclick="editMaterial(${item.id})">
-
-Edit
-
-</button>
-
-<button
-class="delete-btn"
-onclick="deleteMaterial(${item.id})">
-
-Delete
-
-</button>
-
-</td>
-
-</tr>
-
+        boardSelect.innerHTML += `
+<option value="${board.id}">
+${board.name}
+</option>
 `;
 
     });
 
 }
 
-document.addEventListener("DOMContentLoaded", async () => {
+async function loadClasses(boardId) {
 
-    await loadBoards();
+    const { data, error } = await window.supabaseClient
+        .from("classes")
+        .select("*")
+        .eq("board_id", boardId)
+        .eq("is_active", true)
+        .order("id");
 
-    await loadMaterials();
+    console.log("Classes:", data);
+    console.log("Class Error:", error);
 
+    if (error) {
+        alert(error.message);
+        return;
+    }
+
+    classSelect.innerHTML = `
+        <option value="">Select Class</option>
+    `;
+
+    data.forEach(cls => {
+
+        classSelect.innerHTML += `
+            <option value="${cls.id}">
+                ${cls.name}
+            </option>
+        `;
+
+    });
+
+}
+
+async function loadSubjects(classId) {
+
+    console.log("Loading subjects for class:", classId);
+
+    const { data, error } = await window.supabaseClient
+        .from("subjects")
+        .select("id, name, class_id, is_active")
+        .eq("class_id", parseInt(classId))
+        .eq("is_active", true);
+
+    if (error) {
+        console.error("Subject Error:", error);
+        return;
+    }
+
+    console.log("Subjects Found:", data);
+
+    subjectSelect.innerHTML = `
+        <option value="">Select Subject</option>
+    `;
+
+    if (!data || data.length === 0) {
+        subjectSelect.innerHTML += `
+            <option disabled>No Subjects Found</option>
+        `;
+        return;
+    }
+
+    data.forEach(subject => {
+
+        const option = document.createElement("option");
+
+        option.value = subject.id;
+        option.textContent = subject.name;
+
+        subjectSelect.appendChild(option);
+
+    });
+
+}
+
+async function loadChapters(subjectId) {
+
+    console.log("Loading chapters for subject:", subjectId);
+
+    const { data, error } = await window.supabaseClient
+        .from("chapters")
+        .select("*")
+        .eq("subject_id", Number(subjectId))
+        .eq("is_active", true)
+        .order("chapter_number");
+
+    console.log("Chapters:", data);
+    console.log("Chapter Error:", error);
+
+    if (error) {
+        console.error(error);
+        return;
+    }
+
+    chapterSelect.innerHTML =
+        `<option value="">Select Chapter</option>`;
+
+    data.forEach(chapter => {
+
+        chapterSelect.innerHTML += `
+            <option value="${chapter.id}">
+                Unit ${chapter.unit_number} • Chapter ${chapter.chapter_number} - ${chapter.title}
+            </option>
+        `;
+
+    });
+
+}
+
+// ── Form dropdown listeners ──────────────────────────────
+
+boardSelect.addEventListener("change", async () => {
+    classSelect.innerHTML = `<option value="">Select Class</option>`;
+    subjectSelect.innerHTML = `<option value="">Select Subject</option>`;
+    chapterSelect.innerHTML = `<option value="">Select Chapter</option>`;
+    if (boardSelect.value) await loadClasses(boardSelect.value);
 });
 
+classSelect.addEventListener("change", async () => {
+    subjectSelect.innerHTML = `<option value="">Select Subject</option>`;
+    chapterSelect.innerHTML = `<option value="">Select Chapter</option>`;
+    if (classSelect.value) await loadSubjects(classSelect.value);
+});
+
+subjectSelect.addEventListener("change", async () => {
+    chapterSelect.innerHTML = `<option value="">Select Chapter</option>`;
+    if (subjectSelect.value) await loadChapters(subjectSelect.value);
+});
+
+// =======================================================
+// FILTER DROPDOWN CHAIN
+// =======================================================
+
+async function loadFilterBoards() {
+    const { data, error } = await supabase
+        .from("boards")
+        .select("*")
+        .order("id");
+
+    if (error) { console.error(error); return; }
+
+    filterBoard.innerHTML = `<option value="">All Boards</option>`;
+    data.forEach(board => {
+        filterBoard.innerHTML += `<option value="${board.id}">${board.name}</option>`;
+    });
+}
+
+async function loadFilterClasses(boardId) {
+    const { data, error } = await supabase
+        .from("classes")
+        .select("*")
+        .eq("board_id", boardId)
+        .order("id");
+
+    if (error) { console.error(error); return; }
+
+    filterClass.innerHTML = `<option value="">All Classes</option>`;
+    data.forEach(cls => {
+        filterClass.innerHTML += `<option value="${cls.id}">${cls.name}</option>`;
+    });
+}
+
+async function loadFilterSubjects(classId) {
+    const { data, error } = await supabase
+        .from("subjects")
+        .select("*")
+        .eq("class_id", classId)
+        .order("display_order");
+
+    if (error) { console.error(error); return; }
+
+    filterSubject.innerHTML = `<option value="">All Subjects</option>`;
+    data.forEach(subject => {
+        filterSubject.innerHTML += `<option value="${subject.id}">${subject.name}</option>`;
+    });
+}
+
+// ── Filter listeners ─────────────────────────────────────
+
+filterBoard.addEventListener("change", async () => {
+    filterClass.innerHTML = `<option value="">All Classes</option>`;
+    filterSubject.innerHTML = `<option value="">All Subjects</option>`;
+    if (filterBoard.value) await loadFilterClasses(filterBoard.value);
+    applyFilters();
+});
+
+filterClass.addEventListener("change", async () => {
+    filterSubject.innerHTML = `<option value="">All Subjects</option>`;
+    if (filterClass.value) await loadFilterSubjects(filterClass.value);
+    applyFilters();
+});
+
+filterSubject.addEventListener("change", applyFilters);
+filterType.addEventListener("change", applyFilters);
+
+function applyFilters() {
+    let filtered = [...materials];
+
+    if (filterSubject.value) {
+        filtered = filtered.filter(m => m.subject_id == filterSubject.value);
+    }
+    if (filterType.value) {
+        filtered = filtered.filter(m => m.material_type === filterType.value);
+    }
+
+    renderTable(filtered);
+}
+
+// =======================================================
+// LOAD & RENDER MATERIALS
+// =======================================================
+
 async function loadMaterials() {
+    showLoading();
 
     const { data, error } = await supabase
-
         .from("study_materials")
-
         .select(`
             *,
             subjects(name),
@@ -471,443 +327,214 @@ async function loadMaterials() {
         `)
         .order("sort_order");
 
+    hideLoading();
+
     if (error) {
-
         console.error(error);
-
         return;
-
     }
 
     materials = data;
-
     renderTable(materials);
-
 }
 
-const searchInput = document.getElementById("searchMaterial");
+function renderTable(list) {
+    tableBody.innerHTML = "";
+
+    const emptyState = document.getElementById("emptyState");
+
+    if (!list.length) {
+        emptyState.style.display = "block";
+        return;
+    }
+
+    emptyState.style.display = "none";
+
+    list.forEach((item, index) => {
+        tableBody.innerHTML += `
+            <tr>
+                <td>${index + 1}</td>
+                <td>${item.title}</td>
+                <td>${item.subjects?.name ?? "-"}</td>
+                <td>${item.chapters?.title ?? "-"}</td>
+                <td>${item.material_type}</td>
+                <td>${item.pdf_url
+                ? `<a href="${item.pdf_url}" target="_blank">View PDF</a>`
+                : "-"}</td>
+                <td>${item.youtube_url
+                ? `<a href="${item.youtube_url}" target="_blank">Watch</a>`
+                : "-"}</td>
+                <td>${item.is_active ? "✅" : "❌"}</td>
+                <td>
+                    <button class="edit-btn" onclick="editMaterial(${item.id})">Edit</button>
+                    <button class="delete-btn" onclick="deleteMaterial(${item.id})">Delete</button>
+                </td>
+            </tr>
+        `;
+    });
+}
+
+// =======================================================
+// SEARCH
+// =======================================================
 
 searchInput.addEventListener("input", () => {
-
     const keyword = searchInput.value.toLowerCase();
-
     const filtered = materials.filter(item =>
-
-        item.title.toLowerCase().includes(keyword)
-
+        (item.title || "").toLowerCase().includes(keyword)
     );
-
     renderTable(filtered);
-
 });
 
-document
+// =======================================================
+// PDF UPLOAD
+// =======================================================
 
-.getElementById("refreshMaterialsBtn")
+async function uploadPDF(file) {
+    if (!file) return null;
 
-.addEventListener("click", async () => {
+    const fileName = `${Date.now()}-${file.name}`;
 
-    await loadMaterials();
+    const { data, error } = await supabase.storage
+        .from("study-materials")   // ← verify this matches your bucket name in Supabase
+        .upload(fileName, file);
 
+    if (error) { console.error(error); throw error; }
+
+    const { data: publicData } = supabase.storage
+        .from("study-materials")
+        .getPublicUrl(fileName);
+
+    return publicData.publicUrl;
+}
+
+// =======================================================
+// SAVE (INSERT / UPDATE)
+// =======================================================
+
+materialForm.addEventListener("submit", async (e) => {
+    e.preventDefault();
+
+    try {
+        let pdfUrl = null;
+        if (pdfInput.files.length > 0) {
+            pdfUrl = await uploadPDF(pdfInput.files[0]);
+        }
+
+        const payload = {
+            subject_id: Number(subjectSelect.value),
+            chapter_id: chapterSelect.value ? Number(chapterSelect.value) : null,
+            material_type: materialType.value,
+            title: titleInput.value.trim(),
+            description: descriptionInput.value.trim(),
+            pdf_url: pdfUrl,
+            youtube_url: youtubeInput.value.trim(),
+            sort_order: Number(sortOrder.value),
+            is_active: isActive.checked
+        };
+
+        if (editingId) {
+            const { error } = await supabase
+                .from("study_materials")
+                .update(payload)
+                .eq("id", editingId);
+
+            if (error) throw error;
+
+            editingId = null;
+            document.getElementById("saveMaterialBtn").textContent = "Save Material";
+
+        } else {
+            const { error } = await supabase
+                .from("study_materials")
+                .insert(payload);
+
+            if (error) throw error;
+        }
+
+        showToast("Study material saved successfully!");
+        materialForm.reset();
+        await loadMaterials();
+
+    } catch (err) {
+        console.error(err);
+        alert(err.message);
+    }
 });
+
+// =======================================================
+// EDIT
+// =======================================================
 
 async function editMaterial(id) {
-
     const material = materials.find(m => m.id === id);
-
     if (!material) return;
 
     editingId = id;
 
-    titleInput.value = material.title;
-
+    // Populate basic fields
+    titleInput.value = material.title || "";
     descriptionInput.value = material.description || "";
-
     youtubeInput.value = material.youtube_url || "";
-
     materialType.value = material.material_type;
-
     sortOrder.value = material.sort_order;
-
     isActive.checked = material.is_active;
 
-    boardSelect.value = "";
+    // Rebuild the dropdown chain from scratch so each level is populated
+    // Board → Class → Subject → Chapter
+    // We don't store board_id / class_id on study_materials directly,
+    // so we load subjects first to fill that select, then chapters.
+    await loadBoards();
+    boardSelect.value = "";             // unknown without extra join; user can set manually
 
-    classSelect.value = "";
+    classSelect.innerHTML = `<option value="">Select Class</option>`;
+    subjectSelect.innerHTML = `<option value="">Select Subject</option>`;
+    chapterSelect.innerHTML = `<option value="">Select Chapter</option>`;
 
-    subjectSelect.value = material.subject_id;
+    // Pre-select subject and load chapters
+    if (material.subject_id) {
+        await loadChapters(material.subject_id);
+        subjectSelect.value = material.subject_id;
+        chapterSelect.value = material.chapter_id || "";
+    }
 
-    await loadChapters(material.subject_id);
-
-    chapterSelect.value = material.chapter_id;
-
-    document
-
-        .getElementById("saveMaterialBtn")
-
-        .textContent = "Update Material";
-
-    window.scrollTo({
-
-        top:0,
-
-        behavior:"smooth"
-
-    });
-
+    document.getElementById("saveMaterialBtn").textContent = "Update Material";
+    window.scrollTo({ top: 0, behavior: "smooth" });
 }
 
-async function deleteMaterial(id){
+// =======================================================
+// DELETE
+// =======================================================
 
-    const ok = confirm(
+async function deleteMaterial(id) {
+    const ok = confirm("Delete this study material? This cannot be undone.");
+    if (!ok) return;
 
-        "Delete this study material?"
-
-    );
-
-    if(!ok) return;
-
-    const {error} = await supabase
-
+    const { error } = await supabase
         .from("study_materials")
-
         .delete()
+        .eq("id", id);
 
-        .eq("id",id);
+    if (error) { console.error(error); return; }
 
-    if(error){
-
-        console.error(error);
-
-        return;
-
-    }
-
+    showToast("Material deleted.");
     await loadMaterials();
-
 }
 
-document
+// =======================================================
+// RESET FORM
+// =======================================================
 
-.getElementById("resetMaterialBtn")
-
-.addEventListener("click",()=>{
-
-    editingId=null;
-
+document.getElementById("resetMaterialBtn").addEventListener("click", () => {
+    editingId = null;
     materialForm.reset();
-
-    document
-
-    .getElementById("saveMaterialBtn")
-
-    .textContent=
-
-    "Save Material";
-
+    document.getElementById("saveMaterialBtn").textContent = "Save Material";
 });
 
-const filterSubject =
+// =======================================================
+// REFRESH
+// =======================================================
 
-document.getElementById("filterSubject");
-
-filterSubject.addEventListener(
-
-"change",
-
-()=>{
-
-const value=
-
-filterSubject.value;
-
-if(!value){
-
-renderTable(materials);
-
-return;
-
-}
-
-const filtered=
-
-materials.filter(
-
-item=>item.subject_id==value
-
-);
-
-renderTable(filtered);
-
+document.getElementById("refreshMaterialsBtn").addEventListener("click", async () => {
+    await loadMaterials();
 });
-
-const filterType =
-
-document.getElementById("filterType");
-
-filterType.addEventListener(
-
-"change",
-
-()=>{
-
-const value=
-
-filterType.value;
-
-if(!value){
-
-renderTable(materials);
-
-return;
-
-}
-
-const filtered=
-
-materials.filter(
-
-item=>item.material_type===value
-
-);
-
-renderTable(filtered);
-
-});
-
-const filterType =
-
-document.getElementById("filterType");
-
-filterType.addEventListener(
-
-"change",
-
-()=>{
-
-const value=
-
-filterType.value;
-
-if(!value){
-
-renderTable(materials);
-
-return;
-
-}
-
-const filtered=
-
-materials.filter(
-
-item=>item.material_type===value
-
-);
-
-renderTable(filtered);
-
-});
-
-async function loadFilterBoards() {
-
-    const { data, error } = await supabase
-
-        .from("boards")
-
-        .select("*")
-
-        .order("id");
-
-    if (error) return console.error(error);
-
-    filterBoard.innerHTML =
-        `<option value="">All Boards</option>`;
-
-    data.forEach(board => {
-
-        filterBoard.innerHTML += `
-
-        <option value="${board.id}">
-
-            ${board.name}
-
-        </option>
-
-        `;
-
-    });
-
-}
-
-async function loadFilterClasses(boardId) {
-
-    const { data, error } = await supabase
-
-        .from("classes")
-
-        .select("*")
-
-        .eq("board_id", boardId)
-
-        .order("id");
-
-    if (error) return console.error(error);
-
-    filterClass.innerHTML =
-        `<option value="">All Classes</option>`;
-
-    data.forEach(cls => {
-
-        filterClass.innerHTML += `
-
-        <option value="${cls.id}">
-
-            ${cls.name}
-
-        </option>
-
-        `;
-
-    });
-
-}
-
-async function loadFilterSubjects(classId) {
-
-    const { data, error } = await supabase
-
-        .from("subjects")
-
-        .select("*")
-
-        .eq("class_id", classId)
-
-        .order("display_order");
-
-    if (error) return console.error(error);
-
-    filterSubject.innerHTML =
-        `<option value="">All Subjects</option>`;
-
-    data.forEach(subject => {
-
-        filterSubject.innerHTML += `
-
-        <option value="${subject.id}">
-
-            ${subject.name}
-
-        </option>
-
-        `;
-
-    });
-
-}
-
-filterBoard.addEventListener("change", async () => {
-
-    await loadFilterClasses(filterBoard.value);
-
-});
-
-filterClass.addEventListener("change", async () => {
-
-    await loadFilterSubjects(filterClass.value);
-
-});
-
-function applyFilters() {
-
-    let filtered = [...materials];
-
-    if (filterSubject.value) {
-
-        filtered = filtered.filter(
-
-            m => m.subject_id == filterSubject.value
-
-        );
-
-    }
-
-    if (filterType.value) {
-
-        filtered = filtered.filter(
-
-            m => m.material_type === filterType.value
-
-        );
-
-    }
-
-    renderTable(filtered);
-
-}
-
-filterSubject.addEventListener(
-
-    "change",
-
-    applyFilters
-
-);
-
-filterType.addEventListener(
-
-    "change",
-
-    applyFilters
-
-);
-
-function showLoading(){
-
-    document
-
-        .getElementById("loadingState")
-
-        .style.display="block";
-
-}
-
-function hideLoading(){
-
-    document
-
-        .getElementById("loadingState")
-
-        .style.display="none";
-
-}
-
-showLoading();
-
-const {data,error}=...
-
-hideLoading();
-
-function showToast(message){
-
-    const toast=document.createElement("div");
-
-    toast.className="toast";
-
-    toast.innerText=message;
-
-    document.body.appendChild(toast);
-
-    setTimeout(()=>{
-
-        toast.classList.add("show");
-
-    },100);
-
-    setTimeout(()=>{
-
-        toast.remove();
-
-    },3000);
-
-}
