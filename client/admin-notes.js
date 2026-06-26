@@ -49,8 +49,9 @@ document.addEventListener("DOMContentLoaded", async () => {
         await loadMaterials();
         attachEventListeners();
     } catch (error) {
-        console.error("Initialization error:", error);
-        showToast("Error initializing page");
+        console.error("Error initialising page:", error);
+        console.error("Stack:", error.stack);
+        showToast(error.message || "Initialization failed");
     }
 });
 
@@ -261,6 +262,7 @@ async function loadFilterSubjects(classId) {
 // =======================================================
 
 async function loadMaterials() {
+
     try {
         showLoading();
 
@@ -287,6 +289,7 @@ async function loadMaterials() {
         hideLoading();
 
         if (error) throw error;
+        console.log("Study Materials:", data);
 
         // Process data - subjects and chapters are already joined properly
         materials = (data || []).map(item => ({
@@ -317,7 +320,7 @@ function renderTable(list) {
     tableBody.innerHTML = list.map((item, index) => {
         // Escape PDF URL for use in onclick
         const escapedPdfUrl = (item.pdf_url || "").replace(/'/g, "\\'");
-        
+
         return `
         <tr>
             <td>${index + 1}</td>
@@ -344,9 +347,9 @@ function renderTable(list) {
 function applySearch() {
     try {
         const keyword = searchInput.value.toLowerCase().trim();
-        
+
         let filtered = materials;
-        
+
         if (keyword) {
             filtered = materials.filter(item => {
                 const titleMatch = (item.title || "").toLowerCase().includes(keyword);
@@ -355,7 +358,7 @@ function applySearch() {
                 return titleMatch || subjectMatch || chapterMatch;
             });
         }
-        
+
         // Apply filters on top of search
         applyFilters(filtered);
     } catch (error) {
@@ -458,6 +461,8 @@ async function saveMaterial(e) {
                 .from("study_materials")
                 .update(payload)
                 .eq("id", editingId);
+            console.log("Deleting ID:", deleteMaterialId);
+            console.log("Delete Error:", error);
 
             if (error) {
                 console.error("Update error:", error);
@@ -497,7 +502,7 @@ async function saveMaterial(e) {
 async function editMaterial(id) {
     try {
         const material = materials.find(m => m.id === id);
-        
+
         if (!material) {
             showToast("Material not found");
             return;
@@ -536,7 +541,7 @@ async function editMaterial(id) {
                 .eq("is_active", true);
 
             const matchingSubject = allSubjects?.find(s => s.id === material.subject_id);
-            
+
             if (matchingSubject) {
                 // Load classes for the board
                 const { data: allClasses } = await window.supabaseClient
@@ -545,19 +550,19 @@ async function editMaterial(id) {
                     .eq("is_active", true);
 
                 const matchingClass = allClasses?.find(c => c.id === matchingSubject.class_id);
-                
+
                 if (matchingClass) {
                     // Populate Board
                     boardSelect.value = matchingClass.board_id || "";
-                    
+
                     // Load classes for selected board
                     await loadClasses(matchingClass.board_id);
                     classSelect.value = matchingClass.id;
-                    
+
                     // Load subjects for selected class
                     await loadSubjects(matchingClass.id);
                     subjectSelect.value = material.subject_id;
-                    
+
                     // Load chapters for selected subject
                     await loadChapters(material.subject_id);
                     chapterSelect.value = material.chapter_id || "";
@@ -616,47 +621,16 @@ async function confirmDelete() {
 // =======================================================
 
 function openPdfModal(url) {
-    try {
-        const trimmedUrl = (url || "").trim();
 
-        if (!isValidHttpUrl(trimmedUrl)) {
-            showToast("No valid PDF or Drive link available");
-            return;
-        }
+    const trimmedUrl = (url || "").trim();
 
-        if (!pdfPreviewFrame) {
-            console.error("PDF preview frame element not found");
-            showToast("PDF preview not available");
-            return;
-        }
-
-        const embeddableUrl = getEmbeddablePdfUrl(trimmedUrl);
-
-        if (embeddableUrl && (embeddableUrl.endsWith(".pdf") || embeddableUrl.includes("viewerng/viewer"))) {
-            pdfPreviewFrame.src = embeddableUrl;
-            if (pdfModal) {
-                pdfModal.classList.remove("hidden");
-            }
-        } else {
-            window.open(trimmedUrl, "_blank", "noopener,noreferrer");
-        }
-    } catch (error) {
-        console.error("Error opening PDF modal:", error);
-        showToast("Error opening PDF preview");
+    if (!trimmedUrl) {
+        showToast("No PDF / Drive link available.");
+        return;
     }
-}
 
-function closePdfModal() {
-    try {
-        if (pdfPreviewFrame) {
-            pdfPreviewFrame.src = "";
-        }
-        if (pdfModal) {
-            pdfModal.classList.add("hidden");
-        }
-    } catch (error) {
-        console.error("Error closing PDF modal:", error);
-    }
+    window.open(trimmedUrl, "_blank", "noopener,noreferrer");
+
 }
 
 // =======================================================
@@ -725,15 +699,8 @@ function attachEventListeners() {
     document.getElementById("cancelDeleteBtn")?.addEventListener("click", closeDeleteModal);
     document.getElementById("confirmDeleteBtn")?.addEventListener("click", confirmDelete);
 
-    // PDF modal
-    document.getElementById("closePdfModal")?.addEventListener("click", closePdfModal);
-    
     // Close modals on background click
     deleteModal?.addEventListener("click", (e) => {
         if (e.target === deleteModal) closeDeleteModal();
-    });
-    
-    pdfModal?.addEventListener("click", (e) => {
-        if (e.target === pdfModal) closePdfModal();
     });
 }
