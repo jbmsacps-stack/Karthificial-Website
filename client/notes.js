@@ -240,8 +240,6 @@ async function loadStudyMaterials() {
 
 function renderMaterials(materials) {
 
-    materialGrid.innerHTML = "";
-
     if (!materials.length) {
 
         materialGrid.innerHTML = `
@@ -249,73 +247,68 @@ function renderMaterials(materials) {
                 <h3>No Study Materials Available</h3>
             </div>
         `;
-
         return;
     }
 
+    let html = "";
+
     materials.forEach(material => {
 
-        materialGrid.innerHTML += `
-
+        html += `
         <div class="study-card">
 
-    <h2>${material.title}</h2>
+            <h2>${material.title}</h2>
 
-    <p class="study-description">
-    ${material.description ?? "No description available."}
-</p>
+            <p class="study-description">
+                ${material.description ?? "No description available."}
+            </p>
 
-    <div class="study-tags">
+            <div class="study-tags">
 
-    <span class="study-tag">
-        ${material.subjects?.classes?.name ?? ""}
-    </span>
+                <span class="study-tag">
+                    ${material.subjects?.classes?.name ?? ""}
+                </span>
 
-    <span class="study-tag">
-        ${material.subjects?.name ?? ""}
-    </span>
+                <span class="study-tag">
+                    ${material.subjects?.name ?? ""}
+                </span>
 
-    <span class="study-tag">
-        ${material.material_type ?? "Notes"}
-    </span>
+                <span class="study-tag">
+                    ${material.material_type ?? "Notes"}
+                </span>
 
-    <span class="study-tag">
-        ${material.chapters?.title ?? ""}
-    </span>
+                <span class="study-tag">
+                    ${material.chapters?.title ?? ""}
+                </span>
 
-</div>
+            </div>
 
-    <div class="study-actions">
+            <div class="study-actions ${material.youtube_url ? "" : "single-action"}">
 
-        ${material.pdf_url
-                ? `
-            <a
-                href="${material.pdf_url}"
-                target="_blank"
-                class="download-btn">
-                Download PDF
-            </a>`
-                : ""
-            }
+                ${material.pdf_url ? `
+                    <a href="${material.pdf_url}"
+                       target="_blank"
+                       class="download-btn">
+                       Download PDF
+                    </a>
+                ` : ""}
 
-        ${material.youtube_url
-                ? `
-            <a
-                href="${material.youtube_url}"
-                target="_blank"
-                class="watch-btn">
-                Watch Video
-            </a>`
-                : ""
-            }
+                ${material.youtube_url ? `
+                    <a href="${material.youtube_url}"
+                       target="_blank"
+                       class="watch-btn">
+                       Watch Video
+                    </a>
+                ` : ""}
 
-    </div>
+            </div>
 
-</div>
-
+        </div>
         `;
 
     });
+
+    materialGrid.innerHTML = html;
 
 }
 
