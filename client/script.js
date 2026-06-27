@@ -404,23 +404,32 @@ if (sections.length > 0 && sectionNavLinks.length > 0) {
 ================================ */
 
 document.querySelectorAll(".nav-menu .dropdown > .nav-link").forEach((link) => {
+
     link.addEventListener("click", (event) => {
-        if (window.innerWidth > 900) {
+
+        if (window.innerWidth > 900) return;
+
+        const dropdown = link.closest(".dropdown");
+
+        // If dropdown is not open, first tap opens it
+        if (!dropdown.classList.contains("open")) {
+
+            event.preventDefault();
+
+            document.querySelectorAll(".nav-menu .dropdown").forEach(item => {
+                if (item !== dropdown) {
+                    item.classList.remove("open");
+                }
+            });
+
+            dropdown.classList.add("open");
+
             return;
         }
 
-        event.preventDefault();
-
-        const currentDropdown = link.closest(".dropdown");
-
-        document.querySelectorAll(".nav-menu .dropdown").forEach((dropdown) => {
-            if (dropdown !== currentDropdown) {
-                dropdown.classList.remove("open");
-            }
-        });
-
-        currentDropdown.classList.toggle("open");
+        // Second tap goes to href normally
     });
+
 });
 
 document.addEventListener("DOMContentLoaded", () => {
