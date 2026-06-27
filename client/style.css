@@ -16485,3 +16485,118 @@ select:focus{
     text-align:center;
     font-size:20px;
 }
+
+/* =====================================================
+   MOBILE NAVBAR HAMBURGER OVERLAP FIX
+===================================================== */
+@media (max-width: 900px) {
+    .navbar-inner {
+        display: flex !important;
+        flex-direction: row !important;
+        align-items: center !important;
+        justify-content: space-between !important;
+        width: 94% !important;
+        min-height: 72px !important;
+        padding: 0 !important;
+        gap: 0 !important;
+        position: relative !important;
+    }
+
+    /* Logo stays LEFT */
+    .logo {
+        flex: 1 1 auto !important;
+        min-width: 0 !important;
+        max-width: calc(100% - 120px) !important;
+        order: 1 !important;
+    }
+
+    .logo-text {
+        font-size: 1rem !important;
+        white-space: nowrap !important;
+        overflow: hidden !important;
+        text-overflow: ellipsis !important;
+    }
+
+    .logo-mark {
+        width: 32px !important;
+        height: 32px !important;
+        flex: 0 0 32px !important;
+    }
+
+    /* Hamburger stays RIGHT of logo, LEFT of buttons */
+    .hamburger {
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 5px !important;
+        cursor: pointer !important;
+        order: 3 !important;
+        flex: 0 0 auto !important;
+        margin-left: 10px !important;
+        z-index: 10 !important;
+        position: relative !important;
+    }
+
+    .hamburger span {
+        width: 26px !important;
+        height: 3px !important;
+        background-color: var(--gold) !important;
+        border-radius: 20px !important;
+        display: block !important;
+    }
+
+    /* Login/Signup buttons stay FAR RIGHT */
+    .nav-actions {
+        display: flex !important;
+        align-items: center !important;
+        gap: 7px !important;
+        order: 2 !important;
+        flex: 0 0 auto !important;
+        margin-left: auto !important;
+    }
+
+    .nav-actions .btn-outline,
+    .nav-actions .btn-gold {
+        padding: 7px 11px !important;
+        font-size: 0.72rem !important;
+        border-radius: 999px !important;
+        white-space: nowrap !important;
+    }
+
+    /* Dropdown full width below navbar */
+    .nav-menu {
+        position: absolute !important;
+        top: 72px !important;
+        left: 0 !important;
+        right: 0 !important;
+        width: 100vw !important;
+        z-index: 9999 !important;
+    }
+
+    /* Hide mobile-actions from dropdown when not needed */
+    .mobile-actions {
+        display: flex !important;
+        gap: 10px !important;
+        margin-top: 14px !important;
+        padding-top: 14px !important;
+        border-top: 1px solid rgba(212, 175, 55, 0.16) !important;
+    }
+}
+
+/* Extra small screens */
+@media (max-width: 420px) {
+    .logo-text {
+        font-size: 0.85rem !important;
+    }
+
+    .logo-mark {
+        width: 28px !important;
+        height: 28px !important;
+        flex: 0 0 28px !important;
+    }
+
+    .nav-actions .btn-outline,
+    .nav-actions .btn-gold {
+        padding: 6px 9px !important;
+        font-size: 0.66rem !important;
+    }
+}
