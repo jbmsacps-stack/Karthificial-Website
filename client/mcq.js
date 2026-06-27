@@ -2,6 +2,8 @@ console.log('mcq.js loaded');
 
 // Elements
 const subjectSelect = document.getElementById('subjectSelect');
+const boardSelect = document.getElementById("boardSelect");
+const classSelect = document.getElementById("classSelect");
 const chapterContainer = document.getElementById('chapterContainer');
 const questionCountInput = document.getElementById('questionCount');
 const availableQuestions = document.getElementById('availableQuestions');
@@ -13,8 +15,6 @@ const shuffleOptions = document.getElementById('shuffleOptions');
 const quizProgress = document.getElementById("quizProgress");
 const questionText = document.getElementById("questionText");
 const optionsContainer = document.getElementById("optionsContainer");
-const prevBtn = document.getElementById("prevBtn");
-const nextBtn = document.getElementById("nextBtn");
 const mcqSetup = document.getElementById("mcq-setup");
 const mcqQuiz = document.getElementById("mcq-quiz");
 
@@ -24,7 +24,7 @@ if (!window._mcqInitialized) {
     (async function init() {
         try {
             await waitForSupabase(5000);
-            await loadSubjects();
+            await loadBoards();
             attachListeners();
         } catch (err) {
             console.error('MCQ init error:', err);
@@ -61,50 +61,89 @@ function clearMessage() {
     if (el) el.remove();
 }
 
-async function loadSubjects() {
-    try {
-        const client = window.supabaseClient;
-        const { data, error } = await client.from('mcq_questions').select('subject');
-        if (error) throw error;
-        const subjects = Array.from(new Set((data || []).map(d => d.subject).filter(Boolean))).sort((a, b) => a.localeCompare(b));
-        subjectSelect.innerHTML = `<option value="">Select Subject</option>`;
-        subjects.forEach(s => {
-            const opt = document.createElement('option');
-            opt.value = s;
-            opt.textContent = s;
-            subjectSelect.appendChild(opt);
-        });
-    } catch (err) {
-        console.error(err);
-        showMessage('Unable to load subjects.');
+async function loadBoards() {
+
+    const { data, error } = await window.supabaseClient
+        .from("boards")
+        .select("id,name")
+        .eq("is_active", true);
+
+    if (error) {
+        console.error(error);
+        return;
     }
+
+    boardSelect.innerHTML =
+        '<option value="">Select Board</option>';
+
+    data.forEach(board => {
+
+        boardSelect.innerHTML += `
+            <option value="${board.id}">
+                ${board.name}
+            </option>
+        `;
+
+    });
+
 }
 
-async function loadChapters(subject) {
-    try {
-        chapterContainer.innerHTML = '<p class="empty-text">Choose a subject to load chapters.</p>';
-        if (!subject) return;
-        const client = window.supabaseClient;
-        const { data, error } = await client.from('mcq_questions').select('chapter').eq('subject', subject);
-        if (error) throw error;
-        const chapters = Array.from(new Set((data || []).map(d => d.chapter).filter(Boolean))).sort((a, b) => a.localeCompare(b));
-        if (chapters.length === 0) {
-            chapterContainer.innerHTML = '<p class="empty-text">No chapters found for this subject.</p>';
-            updateQuestionCount();
-            return;
-        }
-        chapterContainer.innerHTML = '';
-        chapters.forEach(ch => {
-            const label = document.createElement('label');
-            label.className = 'chapter-item';
-            label.innerHTML = `<input type="checkbox" value="${escapeHtml(ch)}"> ${escapeHtml(ch)}`;
-            chapterContainer.appendChild(label);
-        });
-        updateQuestionCount();
-    } catch (err) {
-        console.error(err);
-        showMessage('Unable to load chapters.');
+async function loadClasses(boardId) {
+
+    const { data, error } = await window.supabaseClient
+        .from("classes")
+        .select("id,name")
+        .eq("board_id", boardId)
+        .eq("is_active", true);
+
+    if (error) {
+        console.error(error);
+        return;
     }
+
+    classSelect.innerHTML =
+        '<option value="">Select Class</option>';
+
+    data.forEach(cls => {
+
+        classSelect.innerHTML += `
+            <option value="${cls.id}">
+                ${cls.name}
+            </option>
+        `;
+
+    });
+
+}
+
+async function loadSubjects(boardId, classId) {
+
+    const { data, error } = await window.supabaseClient
+        .from("subjects")
+        .select("id,name")
+        .eq("board_id", boardId)
+        .eq("class_id", classId)
+        .eq("is_active", true)
+        .order("sort_order");
+
+    if (error) {
+        console.error(error);
+        return;
+    }
+
+    subjectSelect.innerHTML =
+        '<option value="">Select Subject</option>';
+
+    data.forEach(subject => {
+
+        subjectSelect.innerHTML += `
+            <option value="${subject.id}">
+                ${subject.name}
+            </option>
+        `;
+
+    });
+
 }
 
 async function updateQuestionCount() {
@@ -119,7 +158,15 @@ async function updateQuestionCount() {
     }
     try {
         const client = window.supabaseClient;
-        const res = await client.from('mcq_questions').select('*', { head: true, count: 'exact' }).eq('subject', subject).in('chapter', selected);
+        const res = await client
+
+            .from("mcq_questions")
+
+            .select("*", { head: true, count: "exact" })
+
+            .eq("subject_id", Number(subject))
+
+            .in("chapter_id", selected.map(Number));
         const count = res.count || 0;
         window._availableQuestions = count;
         availableQuestions.textContent = `${count} Questions Available`;
@@ -172,54 +219,87 @@ function clearSelection() {
 function escapeHtml(s) { return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;'); }
 
 async function startQuiz() {
+
+    alert("startQuiz() called");
+
+    console.log("START QUIZ CLICKED");
+
     clearMessage();
+
     const subject = subjectSelect.value;
-    const chapters = Array.from(chapterContainer.querySelectorAll('input:checked')).map(i => i.value);
-    const available = Number(window._availableQuestions) || 0;
-    if (!subject) { showMessage('Please select a subject.'); return; }
-    if (chapters.length === 0) { showMessage('Please select at least one chapter.'); return; }
-    if (available <= 0) { showMessage('No questions available for the selected chapters.'); return; }
-    try {
-        const client = window.supabaseClient;
-        const { data, error } = await client.from('mcq_questions').select('*').eq('subject', subject).in('chapter', chapters);
-        if (error) throw error;
-        let questions = data || [];
-        // Shuffle questions if requested
-        if (shuffleQuestions && shuffleQuestions.checked) questions = questions.sort(() => Math.random() - 0.5);
-        // Shuffle options per question if requested
-        if (shuffleOptions && shuffleOptions.checked) {
-            questions = questions.map(q => shuffleQuestionOptions(q));
-        }
-        // Limit
-        const count = Number(questionCountInput.value) || 1;
-        questions = questions.slice(0, count);
-        // Save state
 
-        sessionStorage.setItem(
-            "mcqQuestions",
-            JSON.stringify(questions)
-        );
+    const chapters = Array.from(
+        chapterContainer.querySelectorAll("input:checked")
+    ).map(i => i.value);
 
-        sessionStorage.setItem(
-            "currentQuestion",
-            0
-        );
+    console.log("Subject:", subject);
+    console.log("Chapters:", chapters);
 
-        sessionStorage.setItem(
-            "userAnswers",
-            JSON.stringify([])
-        );
-
-        // Open quiz screen
-        document.getElementById("mcq-setup").classList.add("hidden");
-        document.getElementById("mcq-quiz").classList.remove("hidden");
-
-        // Load first question
-        loadQuestion();
-    } catch (err) {
-        console.error(err);
-        showMessage('Failed to load questions.');
+    if (!subject) {
+        alert("Please select a subject");
+        return;
     }
+
+    if (chapters.length === 0) {
+        alert("Please select at least one chapter");
+        return;
+    }
+
+    const client = window.supabaseClient;
+
+    const { data, error } = await client
+
+        .from("mcq_questions")
+
+        .select("*")
+
+        .eq("subject_id", Number(subject))
+
+        .in("chapter_id", chapters.map(Number));
+
+    console.log("Data:", data);
+    console.log("Error:", error);
+
+    if (error) {
+        console.error(error);
+        return;
+    }
+
+    let questions = data || [];
+
+    if (shuffleQuestions.checked) {
+        questions.sort(() => Math.random() - 0.5);
+    }
+
+    questions = questions.slice(
+        0,
+        Number(questionCountInput.value)
+    );
+
+    console.log("Questions:", questions);
+
+    sessionStorage.setItem(
+        "mcqQuestions",
+        JSON.stringify(questions)
+    );
+
+    sessionStorage.setItem(
+        "currentQuestion",
+        "0"
+    );
+
+    sessionStorage.setItem(
+        "userAnswers",
+        JSON.stringify([])
+    );
+
+    mcqSetup.classList.add("hidden");
+    mcqQuiz.classList.remove("hidden");
+
+    console.log("Opening Quiz");
+
+    loadQuestion();
+
 }
 
 function shuffleQuestionOptions(q) {
@@ -253,7 +333,29 @@ function shuffleQuestionOptions(q) {
 }
 
 function attachListeners() {
-    subjectSelect.addEventListener('change', () => loadChapters(subjectSelect.value));
+
+    console.log("attachListeners called");
+
+    boardSelect.addEventListener("change", () => {
+
+        loadClasses(boardSelect.value);
+
+    });
+
+    classSelect.addEventListener("change", () => {
+
+        loadSubjects(
+            boardSelect.value,
+            classSelect.value
+        );
+
+    });
+
+    subjectSelect.addEventListener("change", () => {
+
+        loadChapters(subjectSelect.value);
+
+    });
     chapterContainer.addEventListener('change', () => updateQuestionCount());
     selectAllBtn.addEventListener('click', selectAll);
     clearBtn.addEventListener('click', clearSelection);
@@ -266,6 +368,7 @@ function attachListeners() {
     //     decreaseQuestions();
     // });
     startQuizBtn.addEventListener('click', startQuiz);
+    console.log("Start Quiz listener attached");
     if (prevBtn) {
 
         prevBtn.addEventListener("click", () => {
@@ -304,13 +407,23 @@ function attachListeners() {
 
 function loadQuestion() {
 
-    const questions = JSON.parse(sessionStorage.getItem("mcqQuestions"));
+    const questions = JSON.parse(
+        sessionStorage.getItem("mcqQuestions")
+    );
 
-    const current = Number(sessionStorage.getItem("currentQuestion"));
+    if (!questions || questions.length === 0) {
+        console.error("No questions found.");
+        return;
+    }
+
+    const current = Number(
+        sessionStorage.getItem("currentQuestion")
+    );
 
     const q = questions[current];
 
-    quizProgress.textContent = `Question ${current + 1} / ${questions.length}`;
+    quizProgress.textContent =
+        `Question ${current + 1} / ${questions.length}`;
 
     questionText.textContent = q.question;
 
@@ -327,9 +440,10 @@ function loadQuestion() {
 
         optionsContainer.innerHTML += `
             <label class="option-card">
-                <input type="radio"
-                       name="answer"
-                       value="${option.key}">
+                <input
+                    type="radio"
+                    name="answer"
+                    value="${option.key}">
                 ${option.text}
             </label>
         `;
@@ -338,3 +452,46 @@ function loadQuestion() {
 
 }
 
+async function loadChapters(subjectId) {
+
+    const { data, error } = await window.supabaseClient
+
+        .from("chapters")
+
+        .select("id,title")
+
+        .eq("subject_id", subjectId)
+
+        .eq("is_active", true)
+
+        .order("sort_order");
+
+    if (error) {
+
+        console.error(error);
+
+        return;
+
+    }
+
+    chapterContainer.innerHTML = "";
+
+    data.forEach(chapter => {
+
+        chapterContainer.innerHTML += `
+
+            <label class="chapter-item">
+
+                <input
+                    type="checkbox"
+                    value="${chapter.id}">
+
+                ${chapter.title}
+
+            </label>
+
+        `;
+
+    });
+
+}

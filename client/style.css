@@ -13673,7 +13673,7 @@ body:has(.resource-main) {
 
 .resource-box-card:hover {
     transform: scale(1.01);
-    transition: transform 0.35s ease;
+    /* transition: transform 0.35s ease; */
 }
 
 /* =====================================================
@@ -16096,7 +16096,7 @@ select:focus{
 
     font-weight:700;
 
-    transition:background .25s ease, color .25s ease, transform .25s ease;
+    /* transition:background .25s ease, color .25s ease, transform .25s ease; */
 
 }
 
@@ -16106,7 +16106,7 @@ select:focus{
 
     color:#050910;
 
-    transform:translateY(-1px);
+    /* transform:translateY(-1px); */
 
 }
 
@@ -16164,7 +16164,7 @@ select:focus{
 
     cursor:pointer;
 
-    transition:background .25s ease, transform .25s ease, box-shadow .25s ease;
+    /* transition:background .25s ease, transform .25s ease, box-shadow .25s ease; */
 
 }
 
@@ -16174,7 +16174,7 @@ select:focus{
 
     color:#050910;
 
-    transform:translateY(-1px);
+    /* transform:translateY(-1px); */
 
 }
 
@@ -16202,13 +16202,13 @@ select:focus{
 
 }
 
-.question-count input:focus{
+/* .question-count input:focus{
 
     border-color:rgba(212,175,55,0.68);
 
     box-shadow:0 0 0 4px rgba(212,175,55,0.14);
 
-}
+} */
 
 #availableQuestions{
 
@@ -16324,7 +16324,7 @@ select:focus{
 
     transform:translateY(-1px);
 
-    box-shadow:0 20px 45px rgba(212,175,55,0.22);
+    /* box-shadow:0 20px 45px rgba(212,175,55,0.22); */
 
 }
 
@@ -16599,4 +16599,92 @@ select:focus{
         padding: 6px 9px !important;
         font-size: 0.66rem !important;
     }
+}
+
+.form-row{
+
+    display:grid;
+
+    grid-template-columns:1fr 1fr;
+
+    gap:20px;
+
+    margin-bottom:24px;
+
+}
+
+@media(max-width:768px){
+
+    .form-row{
+
+        grid-template-columns:1fr;
+
+    }
+
+}
+
+/* Chapter Container */
+
+#chapterContainer{
+
+    display:grid;
+
+    grid-template-columns:repeat(2,1fr);
+
+    gap:16px;
+
+    margin-top:18px;
+
+}
+
+/* Chapter Card */
+
+.chapter-item{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:12px;
+
+    padding:14px 18px;
+
+    background:#101826;
+
+    border:1px solid rgba(212,175,55,.25);
+
+    border-radius:12px;
+
+    cursor:pointer;
+
+    transition:.25s;
+
+    color:#fff;
+
+    font-weight:500;
+
+}
+
+.chapter-item:hover{
+
+    border-color:#d4af37;
+
+    background:#162033;
+
+    /* transform:translateY(-2px); */
+
+}
+
+.chapter-item input{
+
+    width:18px;
+
+    height:18px;
+
+    accent-color:#d4af37;
+
+    cursor:pointer;
+
+    flex-shrink:0;
+
 }
