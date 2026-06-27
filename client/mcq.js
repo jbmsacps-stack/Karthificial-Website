@@ -7,11 +7,16 @@ const questionCountInput = document.getElementById('questionCount');
 const availableQuestions = document.getElementById('availableQuestions');
 const selectAllBtn = document.getElementById('selectAllBtn');
 const clearBtn = document.getElementById('clearBtn');
-const plusBtn = document.getElementById('plusBtn');
-const minusBtn = document.getElementById('minusBtn');
 const startQuizBtn = document.getElementById('startQuizBtn');
 const shuffleQuestions = document.getElementById('shuffleQuestions');
 const shuffleOptions = document.getElementById('shuffleOptions');
+const quizProgress = document.getElementById("quizProgress");
+const questionText = document.getElementById("questionText");
+const optionsContainer = document.getElementById("optionsContainer");
+const prevBtn = document.getElementById("prevBtn");
+const nextBtn = document.getElementById("nextBtn");
+const mcqSetup = document.getElementById("mcq-setup");
+const mcqQuiz = document.getElementById("mcq-quiz");
 
 // Guard against duplicate initialization
 if (!window._mcqInitialized) {
@@ -61,7 +66,7 @@ async function loadSubjects() {
         const client = window.supabaseClient;
         const { data, error } = await client.from('mcq_questions').select('subject');
         if (error) throw error;
-        const subjects = Array.from(new Set((data || []).map(d => d.subject).filter(Boolean))).sort((a,b)=>a.localeCompare(b));
+        const subjects = Array.from(new Set((data || []).map(d => d.subject).filter(Boolean))).sort((a, b) => a.localeCompare(b));
         subjectSelect.innerHTML = `<option value="">Select Subject</option>`;
         subjects.forEach(s => {
             const opt = document.createElement('option');
@@ -82,7 +87,7 @@ async function loadChapters(subject) {
         const client = window.supabaseClient;
         const { data, error } = await client.from('mcq_questions').select('chapter').eq('subject', subject);
         if (error) throw error;
-        const chapters = Array.from(new Set((data || []).map(d => d.chapter).filter(Boolean))).sort((a,b)=>a.localeCompare(b));
+        const chapters = Array.from(new Set((data || []).map(d => d.chapter).filter(Boolean))).sort((a, b) => a.localeCompare(b));
         if (chapters.length === 0) {
             chapterContainer.innerHTML = '<p class="empty-text">No chapters found for this subject.</p>';
             updateQuestionCount();
@@ -129,10 +134,7 @@ async function updateQuestionCount() {
 }
 
 function updateButtonsState() {
-    const val = Number(questionCountInput.value) || 1;
-    const max = Number(window._availableQuestions) || 0;
-    minusBtn.disabled = val <= 1;
-    plusBtn.disabled = max <= 0 || val >= max;
+
 }
 
 function selectAll() {
@@ -145,20 +147,29 @@ function clearSelection() {
     updateQuestionCount();
 }
 
-function increaseQuestions() {
-    const max = Number(window._availableQuestions) || Infinity;
-    const val = Number(questionCountInput.value) || 1;
-    if (val < max) questionCountInput.value = val + 1;
-    updateButtonsState();
-}
+// function increaseQuestions() {
 
-function decreaseQuestions() {
-    const val = Number(questionCountInput.value) || 1;
-    if (val > 1) questionCountInput.value = val - 1;
-    updateButtonsState();
-}
+//     console.log("PLUS CLICKED");
 
-function escapeHtml(s){ return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+//     let value = parseInt(questionCountInput.value, 10) || 1;
+
+//     questionCountInput.value = value + 1;
+
+// }
+
+// function decreaseQuestions() {
+
+//     let value = parseInt(questionCountInput.value, 10) || 1;
+
+//     if (value > 1) {
+
+//         questionCountInput.value = value - 1;
+
+//     }
+
+// }
+
+function escapeHtml(s) { return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;'); }
 
 async function startQuiz() {
     clearMessage();
@@ -183,12 +194,28 @@ async function startQuiz() {
         const count = Number(questionCountInput.value) || 1;
         questions = questions.slice(0, count);
         // Save state
-        sessionStorage.setItem('mcqQuestions', JSON.stringify(questions));
-        sessionStorage.setItem('shuffleOptions', Boolean(shuffleOptions && shuffleOptions.checked));
-        // Move to quiz screen
-        document.getElementById('mcq-setup').classList.add('hidden');
-        const quizSection = document.getElementById('mcq-quiz');
-        if (quizSection) quizSection.classList.remove('hidden');
+
+        sessionStorage.setItem(
+            "mcqQuestions",
+            JSON.stringify(questions)
+        );
+
+        sessionStorage.setItem(
+            "currentQuestion",
+            0
+        );
+
+        sessionStorage.setItem(
+            "userAnswers",
+            JSON.stringify([])
+        );
+
+        // Open quiz screen
+        document.getElementById("mcq-setup").classList.add("hidden");
+        document.getElementById("mcq-quiz").classList.remove("hidden");
+
+        // Load first question
+        loadQuestion();
     } catch (err) {
         console.error(err);
         showMessage('Failed to load questions.');
@@ -197,7 +224,7 @@ async function startQuiz() {
 
 function shuffleQuestionOptions(q) {
     try {
-        const keys = ['option_a','option_b','option_c','option_d'];
+        const keys = ['option_a', 'option_b', 'option_c', 'option_d'];
         const opts = keys.map(k => ({ key: k, text: q[k] }));
         // Preserve original correct key if possible
         let originalKey = null;
@@ -230,8 +257,84 @@ function attachListeners() {
     chapterContainer.addEventListener('change', () => updateQuestionCount());
     selectAllBtn.addEventListener('click', selectAll);
     clearBtn.addEventListener('click', clearSelection);
-    plusBtn.addEventListener('click', increaseQuestions);
-    minusBtn.addEventListener('click', decreaseQuestions);
+    // plusBtn.addEventListener("click", () => {
+    //     console.log("PLUS");
+    //     increaseQuestions();
+    // });
+    // minusBtn.addEventListener("click", () => {
+    //     console.log("MINUS");
+    //     decreaseQuestions();
+    // });
     startQuizBtn.addEventListener('click', startQuiz);
-    questionCountInput.addEventListener('input', updateButtonsState);
+    if (prevBtn) {
+
+        prevBtn.addEventListener("click", () => {
+
+            let current = Number(sessionStorage.getItem("currentQuestion"));
+
+            if (current === 0) return;
+
+            current--;
+
+            sessionStorage.setItem("currentQuestion", current);
+
+            loadQuestion();
+
+        });
+    }
+    if (nextBtn) {
+
+        nextBtn.addEventListener("click", () => {
+
+            const questions = JSON.parse(sessionStorage.getItem("mcqQuestions"));
+
+            let current = Number(sessionStorage.getItem("currentQuestion"));
+
+            if (current >= questions.length - 1) return;
+
+            current++;
+
+            sessionStorage.setItem("currentQuestion", current);
+
+            loadQuestion();
+
+        });
+    }
 }
+
+function loadQuestion() {
+
+    const questions = JSON.parse(sessionStorage.getItem("mcqQuestions"));
+
+    const current = Number(sessionStorage.getItem("currentQuestion"));
+
+    const q = questions[current];
+
+    quizProgress.textContent = `Question ${current + 1} / ${questions.length}`;
+
+    questionText.textContent = q.question;
+
+    optionsContainer.innerHTML = "";
+
+    const options = [
+        { key: "A", text: q.option_a },
+        { key: "B", text: q.option_b },
+        { key: "C", text: q.option_c },
+        { key: "D", text: q.option_d }
+    ];
+
+    options.forEach(option => {
+
+        optionsContainer.innerHTML += `
+            <label class="option-card">
+                <input type="radio"
+                       name="answer"
+                       value="${option.key}">
+                ${option.text}
+            </label>
+        `;
+
+    });
+
+}
+
