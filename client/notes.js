@@ -319,6 +319,7 @@ async function loadChapters(subjectId) {
         .select("*")
         .eq("subject_id", subjectId)
         .eq("is_active", true)
+        .gt("chapter_number", 0)      // Ignore database "All Chapters"
         .order("chapter_number");
 
     if (error) {
