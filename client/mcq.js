@@ -25,6 +25,7 @@ if (!window._mcqInitialized) {
         try {
             await waitForSupabase(5000);
             await loadBoards();
+            await restoreSelections();
             attachListeners();
         } catch (err) {
             console.error('MCQ init error:', err);
@@ -338,11 +339,15 @@ function attachListeners() {
 
     boardSelect.addEventListener("change", () => {
 
+        localStorage.setItem("mcqBoard", boardSelect.value);
+
         loadClasses(boardSelect.value);
 
     });
 
     classSelect.addEventListener("change", () => {
+
+        localStorage.setItem("mcqClass", classSelect.value);
 
         loadSubjects(
             boardSelect.value,
@@ -353,9 +358,30 @@ function attachListeners() {
 
     subjectSelect.addEventListener("change", () => {
 
+        localStorage.setItem("mcqSubject", subjectSelect.value);
+
         loadChapters(subjectSelect.value);
 
     });
+
+    shuffleQuestions.addEventListener("change", () => {
+
+        localStorage.setItem(
+            "mcqShuffleQuestions",
+            shuffleQuestions.checked
+        );
+
+    });
+
+    shuffleOptions.addEventListener("change", () => {
+
+        localStorage.setItem(
+            "mcqShuffleOptions",
+            shuffleOptions.checked
+        );
+
+    });
+
     chapterContainer.addEventListener('change', () => updateQuestionCount());
     selectAllBtn.addEventListener('click', selectAll);
     clearBtn.addEventListener('click', clearSelection);
@@ -493,5 +519,46 @@ async function loadChapters(subjectId) {
         `;
 
     });
+
+}
+
+async function restoreSelections() {
+
+    const board = localStorage.getItem("mcqBoard");
+    const cls = localStorage.getItem("mcqClass");
+    const subject = localStorage.getItem("mcqSubject");
+
+    if (board) {
+
+        boardSelect.value = board;
+
+        await loadClasses(board);
+
+    }
+
+    if (cls) {
+
+        classSelect.value = cls;
+
+        await loadSubjects(board, cls);
+
+    }
+
+    if (subject) {
+
+        subjectSelect.value = subject;
+
+        await loadChapters(subject);
+
+    }
+
+    questionCountInput.value =
+        localStorage.getItem("mcqQuestionCount") || 10;
+
+    shuffleQuestions.checked =
+        localStorage.getItem("mcqShuffleQuestions") === "true";
+
+    shuffleOptions.checked =
+        localStorage.getItem("mcqShuffleOptions") === "true";
 
 }
