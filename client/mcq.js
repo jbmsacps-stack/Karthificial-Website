@@ -1,4 +1,8 @@
 console.log('mcq.js loaded');
+let questions = [];
+let currentQuestion = 0;
+let score = 0;
+let selectedAnswers = [];
 
 // Elements
 const subjectSelect = document.getElementById('subjectSelect');
@@ -17,6 +21,7 @@ const questionText = document.getElementById("questionText");
 const optionsContainer = document.getElementById("optionsContainer");
 const mcqSetup = document.getElementById("mcq-setup");
 const mcqQuiz = document.getElementById("mcq-quiz");
+
 
 // Guard against duplicate initialization
 if (!window._mcqInitialized) {
@@ -154,7 +159,6 @@ async function updateQuestionCount() {
     if (!subject || selected.length === 0) {
         availableQuestions.textContent = '0 Questions Available';
         window._availableQuestions = 0;
-        updateButtonsState();
         return;
     }
     try {
@@ -174,15 +178,10 @@ async function updateQuestionCount() {
         // Ensure requested count does not exceed available
         const requested = Number(questionCountInput.value) || 1;
         if (count < requested) questionCountInput.value = Math.max(1, count);
-        updateButtonsState();
     } catch (err) {
         console.error(err);
-        showMessage('Unable to count available questions.');
+        showToast("Unable to count questions.", "error");
     }
-}
-
-function updateButtonsState() {
-
 }
 
 function selectAll() {
@@ -221,8 +220,6 @@ function escapeHtml(s) { return String(s).replace(/&/g, '&amp;').replace(/</g, '
 
 async function startQuiz() {
 
-    alert("startQuiz() called");
-
     console.log("START QUIZ CLICKED");
 
     clearMessage();
@@ -237,12 +234,12 @@ async function startQuiz() {
     console.log("Chapters:", chapters);
 
     if (!subject) {
-        alert("Please select a subject");
+        showToast("Please select a subject.", "warning");
         return;
     }
 
     if (chapters.length === 0) {
-        alert("Please select at least one chapter");
+        showToast("Select at least one chapter.", "warning");
         return;
     }
 
@@ -266,7 +263,7 @@ async function startQuiz() {
         return;
     }
 
-    let questions = data || [];
+    questions = data || [];
 
     if (shuffleQuestions.checked) {
         questions.sort(() => Math.random() - 0.5);
@@ -345,6 +342,13 @@ function attachListeners() {
 
     });
 
+    questionCountInput.addEventListener("input", () => {
+        localStorage.setItem(
+            "mcqQuestionCount",
+            questionCountInput.value
+        );
+    });
+
     classSelect.addEventListener("change", () => {
 
         localStorage.setItem("mcqClass", classSelect.value);
@@ -399,13 +403,13 @@ function attachListeners() {
 
         prevBtn.addEventListener("click", () => {
 
-            let current = Number(sessionStorage.getItem("currentQuestion"));
+            if (currentQuestion === 0) {
 
-            if (current === 0) return;
+                return;
 
-            current--;
+            }
 
-            sessionStorage.setItem("currentQuestion", current);
+            currentQuestion--;
 
             loadQuestion();
 
@@ -415,17 +419,32 @@ function attachListeners() {
 
         nextBtn.addEventListener("click", () => {
 
-            const questions = JSON.parse(sessionStorage.getItem("mcqQuestions"));
+            const selected = document.querySelector(
+                'input[name="answer"]:checked'
+            );
 
-            let current = Number(sessionStorage.getItem("currentQuestion"));
+            if (!selected) {
 
-            if (current >= questions.length - 1) return;
+                alert("Please select an answer.");
 
-            current++;
+                return;
 
-            sessionStorage.setItem("currentQuestion", current);
+            }
 
-            loadQuestion();
+            selectedAnswers[currentQuestion] = selected.value;
+
+            if (currentQuestion < questions.length - 1) {
+
+                currentQuestion++;
+
+                loadQuestion();
+
+            }
+            else {
+
+                finishQuiz();
+
+            }
 
         });
     }
@@ -438,13 +457,16 @@ function loadQuestion() {
     );
 
     if (!questions || questions.length === 0) {
-        console.error("No questions found.");
         return;
     }
 
     const current = Number(
         sessionStorage.getItem("currentQuestion")
     );
+
+    const answers = JSON.parse(
+        sessionStorage.getItem("userAnswers")
+    ) || [];
 
     const q = questions[current];
 
@@ -464,17 +486,92 @@ function loadQuestion() {
 
     options.forEach(option => {
 
+        const checked =
+            selectedAnswers[current] === option.key
+                ? "checked"
+                : "";
+
         optionsContainer.innerHTML += `
-            <label class="option-card">
-                <input
-                    type="radio"
-                    name="answer"
-                    value="${option.key}">
-                ${option.text}
-            </label>
-        `;
+        <label class="option-card">
+
+            <input
+                type="radio"
+                name="answer"
+                value="${option.key}"
+                ${checked}>
+
+            ${option.text}
+
+        </label>
+    `;
 
     });
+
+    document
+        .querySelectorAll('input[name="answer"]')
+        .forEach(radio => {
+
+            radio.addEventListener("change", () => {
+
+                selectedAnswers[current] = radio.value;
+
+            });
+
+        });
+
+    document
+        .querySelectorAll('input[name="answer"]')
+        .forEach(radio => {
+
+            radio.addEventListener("change", () => {
+
+                const answers = JSON.parse(
+                    sessionStorage.getItem("userAnswers")
+                ) || [];
+
+                answers[current] = radio.value;
+
+                sessionStorage.setItem(
+                    "userAnswers",
+                    JSON.stringify(answers)
+                );
+
+            });
+
+        });
+
+    prevBtn.disabled = currentQuestion === 0;
+
+    if (currentQuestion === questions.length - 1) {
+
+        nextBtn.textContent = "Finish Quiz";
+
+    }
+    else {
+
+        nextBtn.textContent = "Next";
+
+    }
+
+}
+
+function finishQuiz() {
+
+    let score = 0;
+
+    questions.forEach((question, index) => {
+
+        if (selectedAnswers[index] === question.correct_option) {
+
+            score++;
+
+        }
+
+    });
+
+    alert(
+        `Quiz Finished!\n\nScore: ${score} / ${questions.length}`
+    );
 
 }
 
@@ -504,19 +601,25 @@ async function loadChapters(subjectId) {
 
     data.forEach(chapter => {
 
+        if (
+            chapter.title.trim().toLowerCase() === "all chapters"
+        ) {
+            return;
+        }
+
         chapterContainer.innerHTML += `
 
-            <label class="chapter-item">
+        <label class="chapter-item">
 
-                <input
-                    type="checkbox"
-                    value="${chapter.id}">
+            <input
+                type="checkbox"
+                value="${chapter.id}">
 
-                ${chapter.title}
+            ${chapter.title}
 
-            </label>
+        </label>
 
-        `;
+    `;
 
     });
 
@@ -560,5 +663,27 @@ async function restoreSelections() {
 
     shuffleOptions.checked =
         localStorage.getItem("mcqShuffleOptions") === "true";
+
+}
+
+function showToast(message, type = "info") {
+
+    const toast = document.getElementById("toast");
+
+    toast.textContent = message;
+
+    toast.className = "";
+
+    toast.classList.add(type);
+
+    toast.classList.add("show");
+
+    clearTimeout(window.toastTimer);
+
+    window.toastTimer = setTimeout(() => {
+
+        toast.classList.remove("show");
+
+    }, 2500);
 
 }
