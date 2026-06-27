@@ -10429,7 +10429,6 @@ body.admin-checking main {
 
 .career-article-link:hover {
     color: var(--gold-light);
-    letter-spacing: 0.8px;
     text-shadow: 0 0 14px rgba(var(--gold-rgb), 0.45);
 }
 
