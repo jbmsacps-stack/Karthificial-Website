@@ -54,7 +54,7 @@
                     <a href="notes.html" class="nav-link">Notes</a>
                 </li>
 
-                 <li>
+                <li>
                     <a href="paper.html" class="nav-link">QP Generator</a>
                 </li>
 
@@ -158,11 +158,11 @@
 
                         <div class="question-count">
 
-                            <button id="minusBtn" type="button">−</button>
+                            <!-- <button id="minusBtn" type="button">−</button> -->
 
                             <input id="questionCount" type="number" value="10" min="1">
 
-                            <button id="plusBtn" type="button">+</button>
+                            <!-- <button id="plusBtn" type="button">+</button> -->
 
                         </div>
 
@@ -226,13 +226,47 @@
 
             <section id="mcq-quiz" class="mcq-section hidden">
 
-                <!-- Will be built later -->
+                <div class="mcq-card">
+
+                    <div class="quiz-header">
+
+                        <span id="quizProgress">
+                            Question 1 / 10
+                        </span>
+
+                        <div id="quizTimer">
+                            00:00
+                        </div>
+
+                    </div>
+
+                    <h2 id="questionText">
+                        Loading question...
+                    </h2>
+
+                    <div id="optionsContainer">
+
+                    </div>
+
+                    <div class="quiz-footer">
+
+                        <button type="button" id="prevBtn" class="btn-outline">
+
+                            Previous
+
+                        </button>
+
+                        <button type="button" id="nextBtn" class="btn-gold">
+
+                            Next
+
+                        </button>
+
+                    </div>
+
+                </div>
 
             </section>
-
-
-
-
             <!-- ========================= -->
             <!-- RESULTS -->
             <!-- ========================= -->
