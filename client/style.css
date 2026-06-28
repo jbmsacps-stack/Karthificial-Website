@@ -16802,3 +16802,47 @@ select:focus{
 
 }
 
+/* ADMIN mobile fix */
+@media (max-width:900px){
+
+    .admin-navbar{
+        position:relative;
+    }
+
+    .admin-navbar .navbar-inner{
+        height:70px !important;
+        min-height:70px !important;
+        display:flex !important;
+        align-items:center !important;
+        justify-content:space-between !important;
+        position:relative !important;
+    }
+
+    .admin-navbar .hamburger{
+        display:flex !important;
+        position:absolute !important;
+        top:18px !important;
+        left:30% !important;
+        transform:translateX(-50%) !important;
+        margin:0 !important;
+        padding:0 !important;
+        z-index:9999 !important;
+    }
+
+    .admin-navbar .nav-menu{
+        top:70px !important;
+    }
+}
+
+/* Equal width for Admin and Logout buttons */
+.nav-actions .btn-outline,
+.nav-actions .btn-gold {
+    width: 110px;
+    height: 42px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    box-sizing: border-box;
+}
