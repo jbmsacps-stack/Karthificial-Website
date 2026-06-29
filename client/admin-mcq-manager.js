@@ -845,16 +845,18 @@ async function renderDashboardAnalytics() {
                 </div>
             </div>
         </div>
-        <div class="analytics-section">
-            <h3>🎓 Student Performance Analysis</h3>
-            <div class="analytics-list">
-                ${await renderStudentPerformanceSections()}
-            </div>
-        </div>
     `;
 
     questionBankCard.insertAdjacentElement("afterend", shell);
 }
+
+
+// <div class="analytics-section">
+//     <h3>🎓 Student Performance Analysis</h3>
+//     <div class="analytics-list">
+//         ${await renderStudentPerformanceSections()}
+//     </div>
+// </div>
 
 async function renderStudentPerformanceSections() {
     // These analytics queries assume student-centric tables such as student_mcq_attempts,
@@ -887,14 +889,14 @@ async function renderStudentPerformanceSections() {
     const topStudentsMarkup = topStudents.length ? topStudents.map((student) => `
         <div class="analytics-list-item">
             <strong>${escapeHtml(student.name || "Unnamed Student")}</strong>
-            <div class="analytics-meta">Class: ${escapeHtml(student.className || "-" )} • Avg Score: ${Number(student.averageScore || 0).toFixed(0)} • Accuracy: ${Number(student.accuracy || 0).toFixed(0)}% • Tests: ${Number(student.totalTests || 0)}</div>
+            <div class="analytics-meta">Class: ${escapeHtml(student.className || "-")} • Avg Score: ${Number(student.averageScore || 0).toFixed(0)} • Accuracy: ${Number(student.accuracy || 0).toFixed(0)}% • Tests: ${Number(student.totalTests || 0)}</div>
         </div>
     `).join("") : '<div class="analytics-list-item"><strong>No top performers yet.</strong></div>';
 
     const attentionMarkup = attentionStudents.length ? attentionStudents.map((student) => `
         <div class="analytics-list-item">
             <strong>${escapeHtml(student.name || "Unnamed Student")}</strong>
-            <div class="analytics-meta">Class: ${escapeHtml(student.className || "-" )} • Weak Subject: ${escapeHtml(student.weakSubject || "-")} • Weak Chapter: ${escapeHtml(student.weakChapter || "-")} • Suggested Action: ${escapeHtml(student.suggestedAction || "Review missed concepts")}</div>
+            <div class="analytics-meta">Class: ${escapeHtml(student.className || "-")} • Weak Subject: ${escapeHtml(student.weakSubject || "-")} • Weak Chapter: ${escapeHtml(student.weakChapter || "-")} • Suggested Action: ${escapeHtml(student.suggestedAction || "Review missed concepts")}</div>
         </div>
     `).join("") : '<div class="analytics-list-item"><strong>No students need attention right now.</strong></div>';
 
@@ -1098,11 +1100,11 @@ function buildWeeklyTrendChart(weeklyTrend) {
             <svg viewBox="0 0 100 100" preserveAspectRatio="none">
                 <polyline fill="none" stroke="#d4af37" stroke-width="2.2" points="${points.join(" ")}" />
                 ${weeklyTrend.map((item, index) => {
-                    const value = Number(item.average) || 0;
-                    const x = (index / Math.max(1, weeklyTrend.length - 1)) * 100;
-                    const y = 100 - (value / maxValue) * 70;
-                    return `<circle cx="${x}" cy="${y}" r="1.8" fill="#fff" />`;
-                }).join("")}
+        const value = Number(item.average) || 0;
+        const x = (index / Math.max(1, weeklyTrend.length - 1)) * 100;
+        const y = 100 - (value / maxValue) * 70;
+        return `<circle cx="${x}" cy="${y}" r="1.8" fill="#fff" />`;
+    }).join("")}
             </svg>
             <div class="analytics-meta">Average score per week from Supabase data</div>
         </div>

@@ -83,7 +83,200 @@
 
 
     <main class="resource-main">
-        
+        <section class="paper-generator">
+
+            <!-- LEFT PANEL -->
+            <aside class="paper-config">
+
+                <h2>Question Paper Generator</h2>
+
+                <!-- Board -->
+                <div class="form-group">
+                    <label>Board</label>
+                    <select id="board-select">
+                        <option value="">Select Board</option>
+                    </select>
+                </div>
+
+                <!-- Class -->
+                <div class="form-group">
+                    <label>Class</label>
+                    <select id="class-select" disabled>
+                        <option value="">Select Class</option>
+                    </select>
+                </div>
+
+                <!-- Subject -->
+                <div class="form-group">
+                    <label>Subject</label>
+                    <select id="subject-select" disabled>
+                        <option value="">Science</option>
+                    </select>
+
+                    <small class="science-badge">
+                        Currently available for Science only
+                    </small>
+                </div>
+
+                <!-- Pattern -->
+                <div class="config-section">
+
+                    <h3>Paper Pattern</h3>
+
+                    <label class="radio-option">
+                        <input type="radio" name="paper-pattern" value="official" checked>
+
+                        Official TN State Board
+                    </label>
+
+                    <label class="radio-option">
+                        <input type="radio" name="paper-pattern" value="custom">
+
+                        Custom Pattern
+                    </label>
+
+                </div>
+
+                <!-- Mark Distribution -->
+                <div id="custom-pattern-section">
+
+                    <h3>Mark Distribution</h3>
+
+                    <div class="marks-grid">
+
+                        <div>
+                            <label>1 Mark</label>
+                            <input id="marks-1" type="number" min="0" value="0">
+                        </div>
+
+                        <div>
+                            <label>2 Marks</label>
+                            <input id="marks-2" type="number" min="0" value="0">
+                        </div>
+
+                        <div>
+                            <label>5 Marks</label>
+                            <input id="marks-5" type="number" min="0" value="0">
+                        </div>
+
+                        <div>
+                            <label>10 Marks</label>
+                            <input id="marks-10" type="number" min="0" value="0">
+                        </div>
+
+                    </div>
+
+                    <p id="total-marks-display">
+                        Total Marks : 0
+                    </p>
+
+                </div>
+
+                <!-- Chapters -->
+
+                <div class="config-section">
+
+                    <div class="section-header">
+
+                        <h3>Chapters</h3>
+
+                        <div>
+
+                            <button id="select-all-chapters" type="button" class="text-btn">
+                                Select All
+                            </button>
+
+                            <button id="clear-all-chapters" type="button" class="text-btn">
+                                Clear
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                    <div id="chapter-list" class="chip-grid">
+                    </div>
+
+                </div>
+
+                <!-- Nature -->
+
+                <div class="config-section">
+
+                    <h3>Nature of Questions</h3>
+
+                    <div id="nature-list" class="chip-grid">
+                    </div>
+
+                </div>
+
+                <!-- Source -->
+
+                <div class="config-section">
+
+                    <h3>Question Source</h3>
+
+                    <label class="radio-option">
+
+                        <input type="radio" name="source" value="all" checked>
+
+                        All Questions
+
+                    </label>
+
+                    <label class="radio-option">
+
+                        <input type="radio" name="source" value="pyq">
+
+                        PYQ Questions Only
+
+                    </label>
+
+                </div>
+
+                <div id="paper-error" class="inline-error">
+                </div>
+
+                <button id="generate-btn" class="btn-gold">
+
+                    Generate Paper
+
+                </button>
+
+            </aside>
+
+            <!-- RIGHT PANEL -->
+
+            <section id="paper-preview-wrapper" class="paper-preview">
+
+                <div id="paper-preview-content">
+
+                    <div class="preview-placeholder">
+
+                        <h2>Preview</h2>
+
+                        <p>
+
+                            Configure your paper and click
+                            <strong>Generate Paper</strong>
+
+                            to preview the exam here.
+
+                        </p>
+
+                    </div>
+
+                </div>
+
+                <button id="download-btn" class="btn-gold" disabled>
+
+                    Download PDF
+
+                </button>
+
+            </section>
+
+        </section>
     </main>
 
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
