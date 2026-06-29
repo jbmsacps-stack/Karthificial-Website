@@ -577,7 +577,7 @@ function loadQuestion() {
 
 }
 
-function finishQuiz() {
+async function finishQuiz() {
 
     let score = 0;
 
@@ -592,6 +592,42 @@ function finishQuiz() {
     });
 
     const percent = Math.round((score / questions.length) * 100);
+
+    const {
+        data: { user }
+    } = await window.supabaseClient.auth.getUser();
+
+    if (user) {
+
+        const { error } = await window.supabaseClient
+            .from("quiz_attempts")
+            .insert({
+
+                user_id: user.id,
+
+                board_id: Number(boardSelect.value),
+
+                class_id: Number(classSelect.value),
+
+                subject_id: Number(subjectSelect.value),
+
+                total_questions: questions.length,
+
+                correct_answers: score,
+
+                wrong_answers: questions.length - score,
+
+                percentage: percent
+
+            });
+
+        if (error) {
+
+            console.error(error);
+
+        }
+
+    }
 
     document.getElementById("performancePercent").textContent =
         percent + "%";
