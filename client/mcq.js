@@ -23,6 +23,7 @@ const mcqSetup = document.getElementById("mcq-setup");
 const mcqQuiz = document.getElementById("mcq-quiz");
 
 
+
 // Guard against duplicate initialization
 if (!window._mcqInitialized) {
     window._mcqInitialized = true;
@@ -296,6 +297,8 @@ async function startQuiz() {
 
     console.log("Opening Quiz");
 
+    currentQuestion = 0;
+    selectedAnswers = [];
     loadQuestion();
 
 }
@@ -331,6 +334,8 @@ function shuffleQuestionOptions(q) {
 }
 
 function attachListeners() {
+    const prevBtn = document.getElementById("prevBtn");
+    const nextBtn = document.getElementById("nextBtn");
 
     console.log("attachListeners called");
 
@@ -418,60 +423,77 @@ function attachListeners() {
     if (nextBtn) {
 
         nextBtn.addEventListener("click", () => {
+            console.log("Next clicked", currentQuestion, questions.length);
 
             const selected = document.querySelector(
                 'input[name="answer"]:checked'
             );
 
-            if (!selected) {
+            if (selected) {
+                selectedAnswers[currentQuestion] = selected.value;
+            }
 
-                alert("Please select an answer.");
+            if (currentQuestion >= questions.length - 1) {
 
+                finishQuiz();
                 return;
 
             }
 
-            selectedAnswers[currentQuestion] = selected.value;
+            currentQuestion++;
 
-            if (currentQuestion < questions.length - 1) {
-
-                currentQuestion++;
-
-                loadQuestion();
-
-            }
-            else {
-
-                finishQuiz();
-
-            }
+            loadQuestion();
 
         });
+
     }
+    document.getElementById("notesBtn").addEventListener("click", () => {
+
+        window.location.href = "notes.html";
+
+    });
+
+    document.getElementById("paperBtn").addEventListener("click", () => {
+
+        window.location.href = "paper.html";
+
+    });
+
+    document
+        .getElementById("retryBtn")
+        .addEventListener("click", () => {
+
+            document
+                .getElementById("quizResult")
+                .classList.add("hidden");
+
+            mcqSetup.classList.remove("hidden");
+
+        });
 }
 
 function loadQuestion() {
-
-    const questions = JSON.parse(
-        sessionStorage.getItem("mcqQuestions")
-    );
 
     if (!questions || questions.length === 0) {
         return;
     }
 
-    const current = Number(
-        sessionStorage.getItem("currentQuestion")
-    );
-
-    const answers = JSON.parse(
-        sessionStorage.getItem("userAnswers")
-    ) || [];
+    const current = currentQuestion;
 
     const q = questions[current];
+    const quizSubject =
+        document.getElementById("quizSubject");
+
+    quizSubject.textContent =
+        q.subject_name || "Practice Quiz";
 
     quizProgress.textContent =
-        `Question ${current + 1} / ${questions.length}`;
+        `Question ${current + 1} of ${questions.length}`;
+
+    const progressFill = document.getElementById("progressFill");
+
+    progressFill.style.width =
+        `${((current + 1) / questions.length) * 100}%`;
 
     questionText.textContent = q.question;
 
@@ -559,9 +581,9 @@ function finishQuiz() {
 
     let score = 0;
 
-    questions.forEach((question, index) => {
+    questions.forEach((q, index) => {
 
-        if (selectedAnswers[index] === question.correct_option) {
+        if (selectedAnswers[index] === q.correct_option) {
 
             score++;
 
@@ -569,9 +591,65 @@ function finishQuiz() {
 
     });
 
-    alert(
-        `Quiz Finished!\n\nScore: ${score} / ${questions.length}`
-    );
+    const percent = Math.round((score / questions.length) * 100);
+
+    document.getElementById("performancePercent").textContent =
+        percent + "%";
+
+    setTimeout(() => {
+
+        document.getElementById("performanceFill").style.width =
+            percent + "%";
+
+    }, 100);
+
+    mcqQuiz.classList.add("hidden");
+
+    document
+        .getElementById("quizResult")
+        .classList.remove("hidden");
+
+    document.getElementById("resultPercent").textContent =
+        percent + "%";
+
+    document.getElementById("correctCount").textContent =
+        score;
+
+    document.getElementById("wrongCount").textContent =
+        questions.length - score;
+
+    document.getElementById("totalCount").textContent =
+        questions.length;
+
+    if (percent >= 90) {
+
+        resultText.textContent =
+            "Outstanding Performance!";
+
+        recommendationText.textContent =
+            "You're ready for tougher questions.";
+
+    }
+
+    else if (percent >= 70) {
+
+        resultText.textContent =
+            "Very Good!";
+
+        recommendationText.textContent =
+            "Revise weak questions and try again.";
+
+    }
+
+    else {
+
+        resultText.textContent =
+            "Needs Improvement";
+
+        recommendationText.textContent =
+            "Read notes, watch the video and retry this quiz.";
+
+    }
 
 }
 
@@ -685,21 +763,5 @@ function showToast(message, type = "info") {
         toast.classList.remove("show");
 
     }, 2500);
-
-}
-
-function showToast(message){
-
-    const toast = document.getElementById("toast");
-
-    toast.textContent = message;
-
-    toast.classList.add("show");
-
-    setTimeout(()=>{
-
-        toast.classList.remove("show");
-
-    },3000);
 
 }

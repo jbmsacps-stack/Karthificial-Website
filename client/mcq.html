@@ -272,12 +272,28 @@
 
                     <div class="quiz-header">
 
-                        <span id="quizProgress">
-                            Question 1 / 10
-                        </span>
+                        <div class="quiz-top">
 
-                        <div id="quizTimer">
-                            00:00
+                            <div>
+
+                                <div class="quiz-subject" id="quizSubject">
+                                    Science
+                                </div>
+
+                                <div id="quizProgress">
+                                    Question 1 of 10
+                                </div>
+
+                            </div>
+
+
+                        </div>
+
+                        <div class="progress-bar">
+
+                            <div id="progressFill" class="progress-fill">
+                            </div>
+
                         </div>
 
                     </div>
@@ -313,7 +329,7 @@
             <!-- RESULTS -->
             <!-- ========================= -->
 
-            <section id="mcq-results" class="mcq-section hidden">
+            <!-- <section id="mcq-results" class="mcq-section hidden">
 
                 <div class="mcq-card">
 
@@ -371,6 +387,105 @@
 
                 </div>
 
+            </section> -->
+
+            <!-- =========================
+     Quiz Result
+========================== -->
+
+            <section id="quizResult" class="quiz-result hidden">
+
+                <div class="result-card">
+                    <h2>Quiz Completed!</h2>
+
+                    <div class="performance-section">
+
+                        <div class="performance-header">
+
+                            <span>Performance</span>
+
+                            <span id="performancePercent">72%</span>
+
+                        </div>
+
+                        <div class="performance-track">
+
+                            <div id="performanceFill" class="performance-fill">
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <div class="result-score">
+
+                        <span id="resultPercent">0%</span>
+
+                    </div>
+
+                    <p id="resultText">
+                        Excellent Work!
+                    </p>
+
+                    <div class="result-stats">
+
+                        <div>
+
+                            <h3 id="correctCount">0</h3>
+
+                            <span>Correct</span>
+
+                        </div>
+
+                        <div>
+
+                            <h3 id="wrongCount">0</h3>
+
+                            <span>Wrong</span>
+
+                        </div>
+
+                        <div>
+
+                            <h3 id="totalCount">0</h3>
+
+                            <span>Total</span>
+
+                        </div>
+
+                    </div>
+
+                    <div class="recommendation-box">
+
+                        <h4>AI Recommendation</h4>
+
+                        <p id="recommendationText">
+
+                            Great attempt.
+
+                        </p>
+
+                    </div>
+
+                    <div class="result-buttons">
+
+                        <button id="notesBtn" class="btn-outline">
+                            
+                                📄 Read Notes
+                        </button>
+
+                        <button id="paperBtn" class="btn-outline">
+                            📄 Generate Question Paper
+                        </button>
+
+                        <button id="retryBtn" class="btn-gold">
+                            🔄 Retry Quiz
+                        </button>
+
+                    </div>
+
+                </div>
+
             </section>
 
         </section>
@@ -385,7 +500,7 @@
 
         <script src="script.js"></script>
 
-        <script defer src="mcq.js"></script>
+        <script src="mcq.js"></script>
 
         <div id="toast"></div>
 </body>
