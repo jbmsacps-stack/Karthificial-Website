@@ -561,10 +561,10 @@ function validatePaper() {
     }
 
     const total =
-        (+marks1.value || 0) +
-        (+marks2.value || 0) +
-        (+marks5.value || 0) +
-        (+marks10.value || 0);
+        (+marks1.value || 0) * 1 +
+        (+marks2.value || 0) * 2 +
+        (+marks5.value || 0) * 5 +
+        (+marks10.value || 0) * 10;
 
     if (total === 0) {
 
@@ -645,6 +645,13 @@ async function generatePaper() {
 
     generateBtn.textContent = "Generating...";
 
+    preview.innerHTML = `
+<div class="preview-placeholder">
+    <h2>Generating Paper...</h2>
+    <p>Please wait...</p>
+</div>
+`;
+
     try {
 
         let query = supabase
@@ -663,20 +670,6 @@ async function generatePaper() {
 
         }
 
-        if (!data || data.length === 0) {
-
-            preview.innerHTML = `
-        <div class="preview-placeholder">
-            <h2>No Questions Found</h2>
-            <p>
-                No questions match the selected filters.
-            </p>
-        </div>
-    `;
-
-            return;
-        }
-
         const source =
             document.querySelector(
                 'input[name="source"]:checked'
@@ -692,6 +685,20 @@ async function generatePaper() {
 
         if (error)
             throw error;
+
+        if (!data || data.length === 0) {
+
+            preview.innerHTML = `
+        <div class="preview-placeholder">
+            <h2>No Questions Found</h2>
+            <p>
+                No questions match the selected filters.
+            </p>
+        </div>
+    `;
+
+            return;
+        }
 
         buildPaper(data || []);
 
@@ -844,4 +851,40 @@ function renderPaper(sections) {
     downloadBtn.disabled = false;
 
 }
+
+/* ===========================================
+   HELPER FUNCTIONS
+=========================================== */
+
+function updateTotalMarks() {
+
+    const total =
+        (+marks1.value || 0) * 1 +
+        (+marks2.value || 0) * 2 +
+        (+marks5.value || 0) * 5 +
+        (+marks10.value || 0) * 10;
+
+    totalMarksDisplay.textContent = total;
+
+}
+
+function showError(message) {
+
+    errorBox.textContent = message;
+    errorBox.style.display = "block";
+
+}
+
+function hideError() {
+
+    errorBox.textContent = "";
+    errorBox.style.display = "none";
+
+}
+
+downloadBtn.addEventListener("click", () => {
+
+    window.print();
+
+});
 
