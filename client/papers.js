@@ -263,7 +263,7 @@ async function loadSubjects(boardId, classId) {
 
     await loadChapters(science.id);
 
-    await loadNatureTags(science.id);
+    await loadNatureTags();
 
     await loadPaperPattern();
 
@@ -368,7 +368,7 @@ let paperPattern = [];
    LOAD NATURE TAGS
 =========================================== */
 
-async function loadNatureTags(subjectId) {
+async function loadNatureTags() {
 
     const { data, error } = await supabase
         .from("nature_tags")
@@ -464,6 +464,13 @@ async function loadPaperPattern() {
     }
 
     paperPattern = data;
+    if (!paperPattern.length) {
+
+        showError("No paper pattern found for this subject.");
+
+        return;
+
+    }
 
 }
 
@@ -476,19 +483,25 @@ function applyOfficialPattern() {
 
     paperPattern.forEach(section => {
 
-        const marks = section.marks_per_question;
+        switch (section.marks_per_question) {
 
-        if (marks === 1)
-            one += section.attempt_questions;
+            case 1:
+                one += section.attempt_questions;
+                break;
 
-        else if (marks === 2)
-            two += section.attempt_questions;
+            case 2:
+                two += section.attempt_questions;
+                break;
 
-        else if (marks === 5)
-            five += section.attempt_questions;
+            case 4:
+                five += section.attempt_questions;
+                break;
 
-        else if (marks === 10)
-            ten += section.attempt_questions;
+            case 7:
+                ten += section.attempt_questions;
+                break;
+
+        }
 
     });
 
@@ -560,11 +573,13 @@ function validatePaper() {
 
     }
 
+    const official = officialRadio.checked;
+
     const total =
         (+marks1.value || 0) * 1 +
         (+marks2.value || 0) * 2 +
-        (+marks5.value || 0) * 5 +
-        (+marks10.value || 0) * 10;
+        (+marks5.value || 0) * (official ? 4 : 5) +
+        (+marks10.value || 0) * (official ? 7 : 10);
 
     if (total === 0) {
 
@@ -638,12 +653,16 @@ generateBtn.addEventListener("click", async () => {
 =========================================== */
 
 async function generatePaper() {
+    downloadBtn.disabled = true;
 
     hideError();
 
     generateBtn.disabled = true;
 
-    generateBtn.textContent = "Generating...";
+    generateBtn.innerHTML = `
+<span class="spinner"></span>
+Generating...
+`;
 
     preview.innerHTML = `
 <div class="preview-placeholder">
@@ -755,6 +774,11 @@ function renderPaper(sections) {
 
     let questionNumber = 1;
 
+    const selectedChapters = chapters
+        .filter(ch => selectedChapterIds.includes(ch.id))
+        .map(ch => ch.title)
+        .join(", ");
+
     let html = `
 
     <div class="paper-header">
@@ -775,12 +799,33 @@ function renderPaper(sections) {
 
         </p>
 
-        <p>
+        <div class="paper-meta">
 
-            Paper ID :
-            ${paperId}
+    <span>
 
-        </p>
+        Total Marks :
+        ${totalMarksDisplay.textContent.replace("Total Marks : ", "")}
+
+    </span>
+
+    <span>
+
+        Time : ______ Hours
+
+    </span>
+
+</div>
+
+<div class="paper-meta">
+
+    <span>
+
+        Paper ID :
+        ${paperId}
+
+    </span>
+
+</div>
 
     </div>
 
@@ -812,21 +857,27 @@ function renderPaper(sections) {
 
         `;
 
-        section.questions.forEach(q => {
+        if (section.questions.length === 0) {
 
             html += `
+        <p class="paper-warning">
+            No questions available for this section.
+        </p>
+    `;
 
+        } else {
+
+            section.questions.forEach(q => {
+
+                html += `
             <div class="paper-question">
-
-                ${questionNumber++}.
-
-                ${q.question_text}
-
+                ${questionNumber++}. ${q.question_text}
             </div>
+        `;
 
-            `;
+            });
 
-        });
+        }
 
         if (section.pattern.special_notes) {
 
@@ -852,19 +903,36 @@ function renderPaper(sections) {
 
 }
 
+html += `
+<div class="paper-summary">
+
+    <strong>Total Questions :</strong>
+
+    ${sections.reduce(
+    (sum, s) => sum + s.questions.length,
+    0
+)
+    }
+
+</div>
+`;
+
 /* ===========================================
    HELPER FUNCTIONS
 =========================================== */
 
 function updateTotalMarks() {
 
+    const official = officialRadio.checked;
+
     const total =
         (+marks1.value || 0) * 1 +
         (+marks2.value || 0) * 2 +
-        (+marks5.value || 0) * 5 +
-        (+marks10.value || 0) * 10;
+        (+marks5.value || 0) * (official ? 4 : 5) +
+        (+marks10.value || 0) * (official ? 7 : 10);
 
-    totalMarksDisplay.textContent = total;
+    totalMarksDisplay.textContent =
+        `Total Marks : ${total}`;
 
 }
 
