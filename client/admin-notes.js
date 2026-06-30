@@ -38,6 +38,9 @@ const deleteModal = document.getElementById("deleteModal");
 const pdfModal = document.getElementById("pdfModal");
 const pdfPreviewFrame = document.getElementById("pdfPreviewFrame");
 
+const customTypeContainer = document.getElementById("customTypeContainer");
+const customMaterialTypeInput = document.getElementById("customMaterialType");
+
 // =======================================================
 // 1. INITIALIZATION
 // =======================================================
@@ -442,12 +445,21 @@ async function saveMaterial(e) {
             return;
         }
 
+        let materialTypeValue = materialTypeSelect.value;
+        if (materialTypeValue === "others") {
+            if (!customMaterialTypeInput.value.trim()) {
+                showToast("Please enter a custom material type");
+                return;
+            }
+            materialTypeValue = customMaterialTypeInput.value.trim();
+        }
+
         const pdfUrl = pdfInput.value.trim();
 
         const payload = {
             subject_id: Number(subjectSelect.value),
             chapter_id: chapterSelect.value ? Number(chapterSelect.value) : null,
-            material_type: materialTypeSelect.value,
+            material_type: materialTypeValue,   // ← changed from materialTypeSelect.value
             title: titleInput.value.trim(),
             description: descriptionInput.value.trim(),
             pdf_url: pdfUrl,
@@ -488,6 +500,8 @@ async function saveMaterial(e) {
 
         materialForm.reset();
         currentPdfContainer.style.display = "none";
+        customTypeContainer.style.display = "none";   // ← add this
+        customMaterialTypeInput.value = "";
         await loadMaterials();
     } catch (error) {
         console.error("Save error:", error);
@@ -515,7 +529,16 @@ async function editMaterial(id) {
         titleInput.value = material.title || "";
         descriptionInput.value = material.description || "";
         youtubeInput.value = material.youtube_url || "";
-        materialTypeSelect.value = material.material_type || "notes";
+        const knownTypes = ["notes", "important_questions", "question_bank", "formula_sheet", "revision_notes", "assignment"];
+        if (material.material_type && !knownTypes.includes(material.material_type)) {
+            materialTypeSelect.value = "others";
+            customTypeContainer.style.display = "block";
+            customMaterialTypeInput.value = material.material_type;
+        } else {
+            materialTypeSelect.value = material.material_type || "notes";
+            customTypeContainer.style.display = "none";
+            customMaterialTypeInput.value = "";
+        }
         sortOrderInput.value = material.sort_order || 1;
         isActiveCheckbox.checked = material.is_active !== false;
         pdfInput.value = material.pdf_url || "";
@@ -694,6 +717,17 @@ function attachEventListeners() {
 
     // Search
     searchInput.addEventListener("input", applySearch);
+
+    materialTypeSelect.addEventListener("change", () => {
+        if (materialTypeSelect.value === "others") {
+            customTypeContainer.style.display = "block";
+            customMaterialTypeInput.required = true;
+        } else {
+            customTypeContainer.style.display = "none";
+            customMaterialTypeInput.required = false;
+            customMaterialTypeInput.value = "";
+        }
+    });
 
     // Delete modal
     document.getElementById("cancelDeleteBtn")?.addEventListener("click", closeDeleteModal);

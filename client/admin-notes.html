@@ -1461,27 +1461,28 @@
         }
 
         .admin-table {
-    width: 100%;
-    border-collapse: collapse;
-    table-layout: auto; /* was fixed — let columns size to content */
-}
+            width: 100%;
+            border-collapse: collapse;
+            table-layout: auto;
+            /* was fixed — let columns size to content */
+        }
 
-.admin-table tbody tr {
-    border-bottom: 1px solid rgba(212, 175, 55, .15);
-}
+        .admin-table tbody tr {
+            border-bottom: 1px solid rgba(212, 175, 55, .15);
+        }
 
-.admin-table tbody tr:hover {
-    background: rgba(212, 175, 55, .03);
-}
+        .admin-table tbody tr:hover {
+            background: rgba(212, 175, 55, .03);
+        }
 
-/* Actions column — let it size naturally, no clipping */
-.admin-table td:last-child {
-    display: flex;
-    gap: 8px;
-    white-space: nowrap;
-    overflow: visible;
-    width: 1%;
-}
+        /* Actions column — let it size naturally, no clipping */
+        .admin-table td:last-child {
+            display: flex;
+            gap: 8px;
+            white-space: nowrap;
+            overflow: visible;
+            width: 1%;
+        }
     </style>
     <script type="module" src="speed-insights.js"></script>
 </head>
@@ -1695,50 +1696,28 @@
                 <div class="admin-form-group">
 
                     <label for="materialType">
-
                         Material Type
-
                     </label>
 
                     <select id="materialType" required>
-
-                        <option value="notes">
-
-                            Notes
-
-                        </option>
-
-                        <option value="important_questions">
-
-                            Important Questions
-
-                        </option>
-
-                        <option value="question_bank">
-
-                            Question Bank
-
-                        </option>
-
-                        <option value="formula_sheet">
-
-                            Formula Sheet
-
-                        </option>
-
-                        <option value="revision_notes">
-
-                            Revision Notes
-
-                        </option>
-
-                        <option value="assignment">
-
-                            Assignment
-
-                        </option>
-
+                        <option value="notes">Notes</option>
+                        <option value="important_questions">Important Questions</option>
+                        <option value="question_bank">Question Bank</option>
+                        <option value="formula_sheet">Formula Sheet</option>
+                        <option value="revision_notes">Revision Notes</option>
+                        <option value="assignment">Assignment</option>
+                        <option value="others">Others</option>
                     </select>
+
+                </div>
+
+                <div class="admin-form-group" id="customTypeContainer" style="display:none;">
+
+                    <label for="customMaterialType">
+                        Custom Type
+                    </label>
+
+                    <input type="text" id="customMaterialType" placeholder="Enter custom material type">
 
                 </div>
 
