@@ -1,11 +1,11 @@
-﻿<div align="center">
+<div align="center">
 
 <img src="client/assets/images/Logo.png" alt="Karthificial Logo" width="160" />
 
 # Karthificial Website
 
 **A premium academic platform for Tamil Nadu State Board students.**  
-Study notes · Question papers · MCQ practice · Career guidance · Admin-managed content · Analytics · Authentication · Media uploads
+Study notes · Question paper generator · MCQ practice · Career guidance · Admin-managed content · Analytics · Authentication · Media uploads
 
 <br>
 
@@ -51,6 +51,7 @@ Study notes · Question papers · MCQ practice · Career guidance · Admin-manag
 [![JavaScript](https://img.shields.io/badge/JavaScript-Logic-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
 [![Java](https://img.shields.io/badge/Java-Backend-ED8B00?style=for-the-badge&logo=openjdk&logoColor=white)](https://www.java.com/)
 [![Spring Boot](https://img.shields.io/badge/Spring%20Boot-API-6DB33F?style=for-the-badge&logo=springboot&logoColor=white)](https://spring.io/projects/spring-boot)
+[![PostgreSQL](https://img.shields.io/badge/PostgreSQL-Schema%20v3.0-4169E1?style=for-the-badge&logo=postgresql&logoColor=white)](https://www.postgresql.org/)
 
 </div>
 
@@ -58,11 +59,11 @@ Study notes · Question papers · MCQ practice · Career guidance · Admin-manag
 
 ## About
 
-**Karthificial** is an education-focused web platform built for **10th and 12th Tamil Nadu State Board students**. It brings together notes, question papers, MCQ practice, career guidance articles, authentication, admin controls, and analytics inside one structured platform.
+**Karthificial** is an education-focused web platform — now developing under the working name **Karthificial EduPortal** — built for **10th and 12th Tamil Nadu State Board students**. It brings together notes, question papers, an automated question paper generator, MCQ practice, career guidance articles, authentication, admin controls, and analytics inside one structured platform.
 
 The platform is designed so students can quickly access academic resources while admins can manage content from dedicated dashboard pages. MCQ sets, questions, articles, notes, papers, thumbnails, and performance records are handled through the admin-side workflow instead of being treated as static content only.
 
-The project combines a responsive frontend, Clerk authentication, Supabase database integration, Cloudinary media uploads, Vercel deployment, and a Spring Boot backend prototype inside the repository.
+The project combines a responsive vanilla HTML/CSS/JS frontend, Clerk authentication, Supabase database integration (PostgreSQL schema v3.0), Cloudinary media uploads, Vercel deployment, and a Spring Boot backend prototype inside the repository — with a Django migration plan under consideration for the backend.
 
 ---
 
@@ -72,10 +73,11 @@ The project combines a responsive frontend, Clerk authentication, Supabase datab
 
 - Access academic resources for 10th and 12th standard students.
 - Browse notes and question-paper resources by standard and subject.
+- Generate custom question papers through a guided, multi-step paper builder.
 - Read career guidance content in a clean article-style layout.
-- Attempt MCQ sets with scoring, timing, feedback, and performance insights.
+- Attempt MCQ sets with scoring, timing, feedback, and performance insights, inside a polished quiz UI.
 - Use authentication-powered pages where login, signup, logout, and profile flows are handled consistently.
-- View a responsive interface built for both desktop and mobile screens.
+- View a responsive interface built for both desktop and mobile screens, with a dark theme and gold accent identity.
 
 ### Admin Experience
 
@@ -83,17 +85,34 @@ The admin section gives the project a content-management layer. It allows projec
 
 Admins can manage:
 
-- MCQ sets and questions
+- MCQ sets and questions, including manual entry and bulk upload
 - Career guidance articles
 - Notes resources
-- Question paper resources
+- Question paper resources and the question bank powering the paper generator
 - Media URLs and uploaded thumbnails
-- MCQ performance analytics
+- MCQ performance analytics and weak-question reports
 - Student attempt records
 
 ---
 
 ## Detailed Feature Breakdown
+
+### Question Paper Generator (in progress)
+
+A dedicated paper-building tool (`paper.html` + `paper.js`) that lets admins and students assemble custom question papers from the question bank.
+
+Planned/implemented capabilities:
+
+- Cascading dropdowns for standard, subject, and unit/chapter selection
+- Chip-based multi-select UI for picking question types and topics
+- Mark distribution inputs to control how many marks come from each question type or difficulty level
+- Live A4-formatted preview of the generated paper as selections are made
+- PDF export of the final question paper for printing or sharing
+- Built on the existing question bank tables in the Supabase schema
+
+This feature is actively being developed alongside structured prompt engineering for AI coding tools (Cursor, ChatGPT) to drive implementation quickly while keeping the codebase vanilla HTML/CSS/JS.
+
+---
 
 ### Clerk Authentication
 
@@ -113,19 +132,20 @@ This creates one auth flow for both normal students and admin-controlled pages.
 
 ---
 
-### Supabase Database Integration
+### Supabase Database Integration (Schema v3.0)
 
-Supabase is used as the hosted database layer for dynamic platform data.
+Supabase is used as the hosted database layer for dynamic platform data, now running on a comprehensive **PostgreSQL schema (v3.0)** spanning **19 tables** that cover the full platform domain.
 
-The project uses Supabase for:
+The schema and project use Supabase for:
 
-- MCQ sets
-- MCQ questions
-- MCQ attempts
-- MCQ attempt answers
+- Question bank (questions, units, topics, difficulty, marks)
+- Generated question papers
+- MCQ sets, questions, attempts, and attempt answers
 - Career guidance articles
 - Notes records
-- Question paper records
+- Question paper resource records
+- Study materials
+- User profiles
 - Analytics reads and writes
 
 This keeps the content live and expandable instead of locking everything inside fixed HTML.
@@ -149,7 +169,7 @@ The Cloudinary upload widget makes the admin panel easier to use because images 
 
 ### Career Guidance Article System
 
-The career guidance section is built as a structured article system instead of only a set of plain static pages.
+The career guidance section is built as a structured article system instead of only a set of plain static pages (deliberately avoiding "blog" framing in the UI).
 
 It includes:
 
@@ -157,7 +177,7 @@ It includes:
 - Dynamic article cards
 - Article title, category, excerpt, thumbnail, and date
 - Slug-based single article page
-- Rich text article body support
+- Rich text article body support (Quill editor)
 - YouTube embed support
 - Related article suggestions
 - Admin article creation workflow
@@ -179,13 +199,15 @@ Question paper features:
 - PDF/resource URL
 - Year field
 - Public display through relevant 10th/12th paper pages
+- Feeds into the new Question Paper Generator's question bank
 
 Notes features:
 
 - 10th and 12th resource support
 - Subject-based organization
-- Admin-managed note entries
+- Admin-managed note entries via a rebuilt, bug-fixed `admin-notes.js` (corrected Supabase CRUD logic, consolidated event handlers)
 - Public notes pages for students
+- Syllabus content processed into structured, interactive index tables for subjects including RDBMS, Web Technology, Software Engineering, and Operating Systems
 
 ---
 
@@ -207,6 +229,15 @@ Admins can create and manage MCQ sets with:
 - Shuffle question setting
 - Shuffle answer option setting
 
+### Admin MCQ Management (Four-Tab Dashboard)
+
+The admin MCQ page is organized into four tabs:
+
+1. **Manual Entry** — add and edit individual questions directly
+2. **Bulk Upload** — import questions in bulk via SheetJS-powered spreadsheet upload
+3. **Student Analytics** — review per-student performance across sets
+4. **Weak Question Reports** — surface frequently-missed questions for review
+
 ### Question Management
 
 Each MCQ question can include:
@@ -223,11 +254,11 @@ Each MCQ question can include:
 Students can:
 
 - Select an MCQ set
-- Answer questions
+- Answer questions inside an improved quiz UI with a progress bar and fade transitions between questions
 - Track total time
 - Track per-question time
 - Submit the attempt
-- View result popup
+- View a finish modal with a score ring and per-question review
 - Receive score, rank, accuracy, and feedback
 
 ---
@@ -248,7 +279,7 @@ Scoring considers:
 | Final Percentage | Converts attempt performance into a readable result |
 | Rank Title | Gives students a performance label after submission |
 
-This makes MCQ practice feel more like a performance system than a basic quiz.
+This makes MCQ practice feel more like a performance system than a basic quiz. A broader gamification layer (points and badges) is part of the longer-term backend roadmap.
 
 ---
 
@@ -363,23 +394,40 @@ This prevents accidental deletion of actual learning content.
 
 ---
 
+## Design System
+
+The frontend follows a three-file CSS architecture for maintainability:
+
+| File | Purpose |
+| --- | --- |
+| `variables.css` | Design tokens — colors, spacing, typography variables |
+| `structure.css` | Layout, grid, and structural rules |
+| `style.css` | Component-level styling |
+
+The visual identity is a **dark theme with a gold accent (`#d4af37`)**, used consistently across student-facing pages, admin dashboards, and the MCQ/quiz experience.
+
+---
+
 ## Tech Stack
 
 | Layer | Technology |
 | --- | --- |
-| Frontend | HTML5, CSS3, JavaScript |
+| Frontend | HTML5, CSS3, JavaScript (vanilla) |
 | Authentication | Clerk |
-| Database | Supabase PostgreSQL |
+| Database | Supabase PostgreSQL (schema v3.0, 19 tables) |
 | Media Storage | Cloudinary |
 | Rich Text Editor | Quill |
+| Spreadsheet Handling | SheetJS (bulk MCQ upload) |
+| PDF Generation | Client-side PDF export (Question Paper Generator) |
 | Backend Prototype | Java, Spring Boot, Maven |
+| Backend Migration Target (planned) | Django 5.x + Django REST Framework |
 | API Style | REST API |
 | ORM / Java Data Layer | Spring Data JPA, Hibernate |
 | Performance Monitoring | Vercel Speed Insights |
 | Frontend Hosting | Vercel |
 | Backend Hosting / Prototype Testing | Replit |
 | Version Control | Git, GitHub |
-| Development Tools | VS Code, Browser DevTools |
+| Development Tools | VS Code, Cursor, ChatGPT, Claude, Browser DevTools |
 
 ---
 
@@ -399,13 +447,14 @@ HTML / CSS / JavaScript
  │     ├── Logout
  │     └── Admin protection
  │
- ├── Database: Supabase
- │     ├── MCQ sets
- │     ├── MCQ questions
- │     ├── MCQ attempts
+ ├── Database: Supabase (Schema v3.0 — 19 tables)
+ │     ├── Question bank
+ │     ├── Generated question papers
+ │     ├── MCQ sets / questions / attempts / answers
  │     ├── Career articles
- │     ├── Notes
- │     ├── Question papers
+ │     ├── Notes / study materials
+ │     ├── Question papers (resources)
+ │     ├── User profiles
  │     └── Analytics records
  │
  ├── Media: Cloudinary
@@ -417,7 +466,12 @@ HTML / CSS / JavaScript
  └── Backend Prototype: Spring Boot / Replit
        ├── Auth-related API work
        ├── MCQ attempt handling experiments
-       └── Server-side foundation work
+       ├── Server-side foundation work
+       └── Planned migration to Django 5.x + DRF
+             ├── Admin dashboard (Jazzmin)
+             ├── Per-question analytics
+             ├── Gamification (points/badges)
+             └── Personalized learning path engine
 ```
 
 ---
@@ -446,6 +500,7 @@ Karthificial-Website/
 │   ├── notes-12th.html
 │   ├── papers-10th.html
 │   ├── papers-12th.html
+│   ├── paper.html
 │   ├── login.html
 │   ├── signup.html
 │   ├── forgot-password.html
@@ -471,10 +526,12 @@ Karthificial-Website/
 │   ├── admin-mcq-manager.js
 │   ├── admin-career.js
 │   ├── admin-papers.js
+│   ├── admin-notes.js
 │   ├── career-articles.js
 │   ├── article.js
 │   ├── static-related-articles.js
 │   ├── papers.js
+│   ├── paper.js
 │   ├── script.js
 │   ├── speed-insights.js
 │   ├── speed-insights-lib.js
@@ -532,6 +589,7 @@ Karthificial-Website/
 | `notes-12th.html` | 12th standard notes page |
 | `papers-10th.html` | 10th standard question papers |
 | `papers-12th.html` | 12th standard question papers |
+| `paper.html` | Question Paper Generator — build and export custom papers |
 | `contact.html` | Contact and social links page |
 
 ---
@@ -541,10 +599,10 @@ Karthificial-Website/
 | Page | Purpose |
 | --- | --- |
 | `admin.html` | Main admin dashboard |
-| `admin-mcq.html` | MCQ set, question, and analytics management |
+| `admin-mcq.html` | MCQ set, question, and analytics management (manual entry, bulk upload, student analytics, weak question reports) |
 | `admin-career.html` | Career article creation and management |
 | `admin-notes.html` | Notes resource management |
-| `admin-papers.html` | Question paper management |
+| `admin-papers.html` | Question paper management and question bank for the paper generator |
 
 ---
 
@@ -561,7 +619,7 @@ Karthificial-Website/
       <br>
       <a href="https://github.com/jbmsacps-stack">@jbmsacps-stack</a>
       <br><br>
-      Project lead, frontend integration, admin dashboard work, Supabase integration, Clerk authentication, MCQ logic, analytics, debugging, documentation, and deployment coordination.
+      Project lead, frontend integration, admin dashboard work, Supabase integration, Clerk authentication, MCQ logic, analytics, Question Paper Generator development, debugging, documentation, and deployment coordination.
     </td>
     <td align="center" width="33%">
       <a href="https://github.com/sivaraj0827">
@@ -592,7 +650,7 @@ Karthificial-Website/
 
 ## Contribution Analysis
 
-The project was developed through active GitHub commits and daily documentation. The commit history shows work across frontend development, styling, admin pages, authentication, analytics, Cloudinary, backend experimentation, and project documentation.
+The project was developed through active GitHub commits and daily documentation. The commit history shows work across frontend development, styling, admin pages, authentication, analytics, Cloudinary, the question paper generator, backend experimentation, and project documentation.
 
 ### Joshua Baskar
 
@@ -602,13 +660,14 @@ Main contribution areas:
 - Frontend page integration
 - Admin dashboard development
 - Clerk authentication integration
-- Supabase connection and data flow
+- Supabase connection and data flow (schema v3.0 design)
 - MCQ set and question logic
 - MCQ analytics and delete analytics feature
+- Question Paper Generator design and implementation
 - Career guidance system improvements
 - Cloudinary media upload integration
 - Contact page and navbar fixes
-- Backend prototype and Spring Boot re-entry work
+- Backend prototype and Spring Boot re-entry work, plus Django migration planning
 - README and daily documentation updates
 - Deployment and public repository presentation
 
@@ -653,15 +712,18 @@ These logs record:
 - Admin dashboard improvements
 - Career guidance improvements
 - MCQ and analytics planning
+- Question Paper Generator planning and progress
 - Deployment and repository preparation
 
 ---
 
 ## Current Status
 
-Karthificial is an actively developed academic platform. The project already includes the major student-facing pages, admin-facing pages, authentication flow, Supabase integration, Cloudinary upload support, MCQ practice flow, analytics logic, and documentation structure.
+Karthificial is an actively developed academic platform. The project already includes the major student-facing pages, admin-facing pages, authentication flow, Supabase integration (schema v3.0), Cloudinary upload support, MCQ practice flow with an improved quiz UI, analytics logic, and documentation structure.
 
-The repository also contains backend prototype work, but the current public-facing platform mainly uses the frontend with hosted services such as Clerk, Supabase, Cloudinary, and Vercel.
+The **Question Paper Generator** (`paper.html` + `paper.js`) is the current primary focus, with cascading dropdowns, chip-based selection, mark distribution, A4 preview, and PDF export underway.
+
+The repository also contains backend prototype work, with a planned migration from Spring Boot to Django 5.x + DRF to support an admin dashboard, per-question analytics, gamification, and a personalized learning path engine. The current public-facing platform mainly uses the frontend with hosted services such as Clerk, Supabase, Cloudinary, and Vercel.
 
 ---
 
