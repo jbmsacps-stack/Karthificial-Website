@@ -17756,3 +17756,26 @@ border-left:4px solid var(--gold);
 font-weight:600;
 
 }
+.qb-modal-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,.65);
+    z-index: 100000;
+    align-items: flex-start;
+    justify-content: center;
+    padding: 40px 20px;
+    overflow-y: auto;
+}
+.qb-modal-overlay.show {
+    display: flex;
+}
+.qb-modal-box {
+    background: #181818;
+    border: 1px solid rgba(212, 175, 55, .25);
+    border-radius: 18px;
+    padding: 28px;
+    max-width: 1300px;
+    width: 100%;
+    box-shadow: 0 20px 60px rgba(0,0,0,.5);
+}

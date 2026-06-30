@@ -50,14 +50,44 @@ const previewTable = document.getElementById("previewTable");
 // INIT
 // =========================
 
+let questionBankLoaded = false;
+
 document.addEventListener("DOMContentLoaded", async () => {
     injectDashboardStyles();
     await loadBoards(boardSelect, "Select Board");
-    await loadBoards(filterBoard, "All Boards");
     await loadChapterMap();
     attachListeners();
-    await loadQuestions();
+    attachModalListeners();
 });
+
+function attachModalListeners() {
+    const modal = document.getElementById("questionBankModal");
+    const openBtn = document.getElementById("openQuestionBankBtn");
+    const closeBtn = document.getElementById("closeQuestionBankBtn");
+
+    openBtn.addEventListener("click", async () => {
+        modal.classList.add("show");
+        document.body.style.overflow = "hidden";
+
+        if (!questionBankLoaded) {
+            await loadBoards(filterBoard, "All Boards");
+            await loadQuestions();
+            questionBankLoaded = true;
+        }
+    });
+
+    closeBtn.addEventListener("click", () => {
+        modal.classList.remove("show");
+        document.body.style.overflow = "";
+    });
+
+    modal.addEventListener("click", (e) => {
+        if (e.target === modal) {
+            modal.classList.remove("show");
+            document.body.style.overflow = "";
+        }
+    });
+}
 
 // =========================
 // CORE HELPERS
@@ -572,6 +602,13 @@ async function loadQuestions() {
 }
 
 window.editQuestion = async function (id) {
+    // Close the Question Bank modal so the edit form is visible
+    const modal = document.getElementById("questionBankModal");
+    if (modal) {
+        modal.classList.remove("show");
+        document.body.style.overflow = "";
+    }
+
     const { data: question, error } = await window.supabaseClient
         .from("mcq_questions")
         .select("*")

@@ -1798,87 +1798,46 @@
 
             </div>
 
-            <div class="admin-card">
+            <!-- Trigger button -->
+<div class="admin-card" style="text-align:center;">
+    <h2 style="margin-bottom:14px;">Question Bank</h2>
+    <p style="margin-bottom:20px;">View, search and manage all questions in one place.</p>
+    <button id="openQuestionBankBtn" class="btn-gold">📚 Open Question Bank</button>
+</div>
 
-                <div class="admin-header question-bank-header">
-
-                    <h2>Question Bank</h2>
-
-                    <button id="refreshQuestionsBtn" class="btn-outline">
-
-                        ↻ Refresh
-
-                    </button>
-
-                </div>
-
-
-                <div class="table-filters">
-
-                    <select id="filterBoard">
-                        <option>All Boards</option>
-                    </select>
-
-                    <select id="filterClass">
-                        <option>All Classes</option>
-                    </select>
-
-                    <select id="filterSubject">
-                        <option>All Subjects</option>
-                    </select>
-
-                    <select id="filterChapter">
-                        <option>All Chapters</option>
-                    </select>
-
-                    <input id="searchQuestion" type="text" placeholder="Search Question..." autocomplete="off">
-
-                </div>
-
-                <div class="table-wrapper">
-
-                    <table class="admin-table">
-
-                        <thead>
-
-                            <tr>
-
-                                <th>#</th>
-
-                                <th>Chapter</th>
-
-                                <th>Question</th>
-
-                                <th>Correct</th>
-
-                                <th>Difficulty</th>
-
-                                <th>Actions</th>
-
-                            </tr>
-
-                        </thead>
-
-                        <tbody id="questionTableBody">
-
-                            <tr>
-
-                                <td colspan="6">
-
-                                    No Questions Found
-
-                                </td>
-
-                            </tr>
-
-                        </tbody>
-
-                    </table>
-
-                </div>
-
+<!-- Modal -->
+<div id="questionBankModal" class="qb-modal-overlay">
+    <div class="qb-modal-box">
+        <div class="admin-header question-bank-header">
+            <h2>Question Bank</h2>
+            <div style="display:flex; gap:10px;">
+                <button id="refreshQuestionsBtn" class="btn-outline">↻ Refresh</button>
+                <button id="closeQuestionBankBtn" class="btn-outline">✕ Close</button>
             </div>
+        </div>
 
+        <div class="table-filters">
+            <select id="filterBoard"><option>All Boards</option></select>
+            <select id="filterClass"><option>All Classes</option></select>
+            <select id="filterSubject"><option>All Subjects</option></select>
+            <select id="filterChapter"><option>All Chapters</option></select>
+            <input id="searchQuestion" type="text" placeholder="Search Question..." autocomplete="off">
+        </div>
+
+        <div class="table-wrapper">
+            <table class="admin-table">
+                <thead>
+                    <tr>
+                        <th>#</th><th>Chapter</th><th>Question</th><th>Correct</th><th>Difficulty</th><th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="questionTableBody">
+                    <tr><td colspan="6">No Questions Found</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
         </section>
 
 
