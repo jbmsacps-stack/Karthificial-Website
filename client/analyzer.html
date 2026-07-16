@@ -209,6 +209,255 @@
         /* .analyzer-grid-section:first-of-type {
             margin-top: 50px;
         } */
+
+        .streak-card {
+
+            width: min(1200px, 92%);
+            margin: 35px auto;
+
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            background: #111827;
+
+            border: 1px solid rgba(212, 175, 55, .18);
+
+            border-radius: 22px;
+
+            padding: 28px 32px;
+
+        }
+
+        .streak-left {
+
+            display: flex;
+            align-items: center;
+            gap: 20px;
+
+        }
+
+        .streak-fire {
+
+            width: 72px;
+            height: 72px;
+
+            border-radius: 50%;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            font-size: 2rem;
+
+            background: rgba(212, 175, 55, .08);
+
+        }
+
+        .streak-label {
+
+            color: #9ca3af;
+            margin-bottom: 6px;
+
+        }
+
+        #streakCount {
+
+            font-size: 2rem;
+            color: var(--gold);
+
+        }
+
+        .streak-right {
+
+            display: flex;
+            gap: 50px;
+
+        }
+
+        .streak-right div {
+
+            display: flex;
+            flex-direction: column;
+
+        }
+
+        .streak-right span {
+
+            color: #9ca3af;
+            font-size: .9rem;
+
+        }
+
+        .streak-right strong {
+
+            margin-top: 6px;
+            color: white;
+            font-size: 1.1rem;
+
+        }
+
+        @media(max-width:768px) {
+
+            .streak-card {
+
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 25px;
+
+            }
+
+            .streak-right {
+
+                width: 100%;
+                justify-content: space-between;
+
+            }
+
+        }
+
+        /* ===============================
+   STREAK
+================================*/
+
+        .streak-banner {
+
+            width: min(1200px, 92%);
+            margin: 50px auto;
+
+            background: #141b29;
+
+            border: 1px solid rgba(212, 175, 55, .18);
+
+            border-radius: 24px;
+
+            padding: 28px 34px;
+
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+        }
+
+        .streak-banner-left {
+
+            display: flex;
+            align-items: center;
+            gap: 22px;
+
+        }
+
+        .streak-fire {
+
+            width: 72px;
+            height: 72px;
+
+            border-radius: 50%;
+
+            background: rgba(212, 175, 55, .08);
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            font-size: 2.4rem;
+
+        }
+
+        .streak-content h2 {
+
+            color: #fff;
+
+            font-size: 2rem;
+
+            margin: 0 0 8px;
+
+        }
+
+        #streakCount {
+
+            color: var(--gold);
+
+        }
+
+        .streak-content p {
+
+            color: #9aa7bd;
+
+            margin: 0;
+
+        }
+
+        .streak-banner-right {
+
+            display: flex;
+
+            gap: 60px;
+
+        }
+
+        .streak-item {
+
+            display: flex;
+            flex-direction: column;
+
+        }
+
+        .streak-item span {
+
+            color: #8b95a7;
+
+            margin-bottom: 6px;
+
+        }
+
+        .streak-item strong {
+
+            color: white;
+
+            font-size: 1.1rem;
+
+        }
+
+        .completed {
+
+            color: #33d17a !important;
+
+        }
+
+        .not-completed {
+
+            color: #ff6b6b !important;
+
+        }
+
+        @media(max-width:768px) {
+
+            .streak-banner {
+
+                flex-direction: column;
+
+                align-items: flex-start;
+
+                gap: 25px;
+
+            }
+
+            .streak-banner-right {
+
+                width: 100%;
+
+                justify-content: space-between;
+
+            }
+
+            .streak-content h2 {
+
+                font-size: 1.6rem;
+
+            }
+
+        }
     </style>
     <script type="module" src="speed-insights.js"></script>
 </head>
@@ -270,6 +519,54 @@
     </nav>
 
     <main>
+        <!-- <section class="streak-banner">
+
+            <div class="streak-banner-left">
+
+                <div class="streak-fire">
+                    🔥
+                </div>
+
+                <div class="streak-content">
+
+                    <h2>
+                        <span id="streakCount">0</span> Day Streak
+                    </h2>
+
+                    <p id="streakMessage">
+                        Analyze one paper today to keep your streak alive.
+                    </p>
+
+                </div>
+
+            </div>
+
+            <div class="streak-banner-right">
+
+                <div class="streak-item">
+
+                    <span>Status</span>
+
+                    <strong id="todayStatus">
+                        ❌ Not Completed
+                    </strong>
+
+                </div>
+
+                <div class="streak-item">
+
+                    <span>Best</span>
+
+                    <strong id="bestStreak">
+                        0 Days
+                    </strong>
+
+                </div>
+
+            </div>
+
+        </section> -->
+
         <!-- 10th Standard -->
         <section class="analyzer-grid-section">
 
@@ -277,7 +574,7 @@
 
             <div class="analyzer-grid">
 
-                <a href="10th-maths.html" class="analyzer-card">
+                <a href="10th-maths.html" class="analyzer-card" data-analyzer-card="true">
                     <div class="analyzer-card-icon">MA</div>
                     <h3>Mathematics</h3>
                     <p>
@@ -288,7 +585,7 @@
                     </span>
                 </a>
 
-                <a href="10th-science.html" class="analyzer-card">
+                <a href="10th-science.html" class="analyzer-card" data-analyzer-card="true">
                     <div class="analyzer-card-icon">SC</div>
                     <h3>Science</h3>
                     <p>
@@ -299,7 +596,7 @@
                     </span>
                 </a>
 
-                <a href="10th-social.html" class="analyzer-card">
+                <a href="10th-social.html" class="analyzer-card" data-analyzer-card="true">
                     <div class="analyzer-card-icon">SS</div>
                     <h3>Social Science</h3>
                     <p>
@@ -431,7 +728,7 @@
                     </span>
                 </div>
 
-<div class="analyzer-card is-locked">
+                <div class="analyzer-card is-locked">
                     <div class="analyzer-card-icon">CA</div>
                     <h3>Computer Application</h3>
                     <p>
@@ -465,7 +762,7 @@
                 </div>
 
             </div>
-            
+
         </section>
 
         <!-- Bottom Note
@@ -482,9 +779,12 @@
 
     </main>
 
+
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
     <script src="supabase-config.js"></script>
+
+    <script src="streak.js"></script>
 
     <script src="config.js"></script>
 
