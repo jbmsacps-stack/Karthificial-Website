@@ -8,7 +8,7 @@
     <meta name="description"
         content="Karthificial provides Tamil Nadu State Board notes, question papers, MCQs, and career guidance for 10th and 12th students.">
 
-    <title>Karthificial | Question Paper Filter</title>
+    <title>Karthificial | Subject</title>
 
     <link rel="stylesheet" href="variables.css">
     <link rel="stylesheet" href="structure.css">
@@ -484,6 +484,310 @@
             }
 
         }
+
+        /* ===== CLASS TABS ===== */
+
+        .class-tabs {
+            width: min(1200px, 92%);
+            margin: 40px auto 20px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .class-tabs-inner {
+            display: flex;
+            gap: 10px;
+            padding: 8px;
+            background: #111c2d;
+            border: 1px solid rgba(212, 175, 55, .18);
+            border-radius: 20px;
+        }
+
+        .class-tab {
+            min-width: 220px;
+            padding: 18px 28px;
+            border: none;
+            border-radius: 14px;
+            cursor: pointer;
+            background: transparent;
+            color: #d5dde7;
+            font-size: 1.1rem;
+            font-weight: 700;
+            transition: .3s;
+        }
+
+        .class-tab:hover {
+            background: rgba(212, 175, 55, .08);
+        }
+
+        .class-tab.active {
+            background: linear-gradient(135deg, #e8c75d, #d4af37);
+            color: #081423;
+        }
+
+        /* Don't hide everything */
+
+        .analyzer-grid-section {
+            display: block;
+        }
+
+        /* Only when JS adds this class */
+
+        .analyzer-grid-section.hidden {
+            display: none;
+        }
+
+        @media(max-width:768px) {
+
+            .class-tabs-inner {
+                width: 100%;
+            }
+
+            .class-tab {
+                flex: 1;
+                min-width: 0;
+                padding: 15px;
+                font-size: 1rem;
+            }
+
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        /* ==========================================
+   FULL WIDTH CLASS SWITCHER
+========================================== */
+
+        .class-tabs {
+            width: min(1400px, 92%);
+            margin: 50px auto 60px;
+        }
+
+        .class-tabs-inner {
+
+            display: flex;
+            align-items: center;
+
+            padding: 12px;
+
+            width: 100%;
+
+            background: linear-gradient(180deg, #15253b, #101c2f);
+
+            border: 1px solid rgba(212, 175, 55, .18);
+
+            border-radius: 28px;
+
+            box-shadow:
+                0 20px 50px rgba(0, 0, 0, .28),
+                inset 0 1px rgba(255, 255, 255, .04);
+
+            gap: 12px;
+        }
+
+        .class-tab {
+
+            flex: 1;
+
+            height: 90px;
+
+            border: none;
+
+            border-radius: 22px;
+
+            background: transparent;
+
+            color: #d8e0ea;
+
+            cursor: pointer;
+
+            font-size: 2rem;
+
+            font-weight: 800;
+
+            transition: .35s ease;
+
+            letter-spacing: .5px;
+
+        }
+
+        .class-tab:hover {
+
+            background: rgba(212, 175, 55, .08);
+
+            color: white;
+
+        }
+
+        .class-tab.active {
+
+            background: linear-gradient(135deg, #e7c754, #d4af37);
+
+            color: #081423;
+
+            box-shadow:
+                0 12px 30px rgba(212, 175, 55, .35);
+
+        }
+
+        /* Mobile */
+
+        @media(max-width:768px) {
+
+            .class-tabs {
+
+                margin: 25px auto 35px;
+
+            }
+
+            .class-tabs-inner {
+
+                padding: 8px;
+
+            }
+
+            .class-tab {
+
+                height: 64px;
+
+                font-size: 1.1rem;
+
+                border-radius: 16px;
+
+            }
+
+        }
+
+        /* ===========================================
+   PREMIUM CLASS SWITCHER
+=========================================== */
+
+        .class-tabs {
+            width: min(1200px, 92%);
+            margin: 45px auto 35px;
+
+            display: flex;
+            justify-content: center;
+        }
+
+        .class-tabs-inner {
+
+            display: flex;
+            gap: 8px;
+
+            padding: 8px;
+
+            width: 520px;
+
+            background: #17263d;
+
+            border: 1px solid rgba(212, 175, 55, .15);
+
+            border-radius: 999px;
+
+            box-shadow:
+                0 12px 35px rgba(0, 0, 0, .28);
+
+        }
+
+        .class-tab {
+
+            flex: 1;
+
+            height: 58px;
+
+            border: none;
+
+            border-radius: 999px;
+
+            background: transparent;
+
+            color: #cfd6df;
+
+            cursor: pointer;
+
+            font-size: 1.2rem;
+
+            font-weight: 700;
+
+            transition: .35s;
+
+        }
+
+        .class-tab:hover {
+
+            color: white;
+
+            background: rgba(212, 175, 55, .08);
+
+        }
+
+        .class-tab.active {
+
+            background: linear-gradient(135deg, #e8c857, #d4af37);
+
+            color: #081423;
+
+            box-shadow:
+                0 0 18px rgba(212, 175, 55, .35);
+
+        }
+
+        .class-tabs {
+            width: min(1200px, 92%);
+            margin: 18px auto 22px;
+            /* was 45px auto 35px */
+        }
+
+        .class-tabs-inner {
+
+            display: flex;
+            gap: 6px;
+
+            width: 500px;
+
+            padding: 6px;
+            /* was 8px */
+
+            background: #17263d;
+
+            border: 1px solid rgba(212, 175, 55, .15);
+
+            border-radius: 999px;
+
+            box-shadow: 0 10px 28px rgba(0, 0, 0, .22);
+        }
+
+        .class-tab {
+
+            flex: 1;
+
+            height: 52px;
+            /* was 58px */
+
+            padding: 0 18px;
+
+            border: none;
+
+            border-radius: 999px;
+
+            font-size: 1.08rem;
+            /* was 1.2rem */
+
+            font-weight: 700;
+
+            transition: .3s;
+
+            cursor: pointer;
+        }
+
+        .class-tab.active {
+
+            box-shadow: 0 0 12px rgba(212, 175, 55, .28);
+
+        }
     </style>
     <script type="module" src="speed-insights.js"></script>
 </head>
@@ -512,7 +816,7 @@
                     <a href="index.html" class="nav-link">Home</a>
                 </li>
 
-                 <li>
+                <li>
                     <a href="subject.html" class="nav-link">Subject</a>
                 </li>
 
@@ -547,6 +851,19 @@
     </nav>
 
     <main>
+        <div class="class-tabs">
+            <div class="class-tabs-inner">
+
+                <button class="class-tab active" id="tab10">
+                    10th Standard
+                </button>
+
+                <button class="class-tab" id="tab12">
+                    12th Standard
+                </button>
+
+            </div>
+        </div>
 
         <!-- 10th Standard -->
         <section class="analyzer-grid-section">
@@ -559,6 +876,8 @@
                     <div class="analyzer-card-thumb">
                         <img src="assets/images/subjects/mathematics_light_thumbnail.webp" alt="Mathematics"
                             loading="lazy" onerror="this.parentElement.style.display='none'">
+                        <img src="assets/images/subjects/10th-maths.jpg" alt="Mathematics" loading="lazy"
+                            onerror="this.parentElement.style.display='none'">
                     </div>
                     <div class="analyzer-card-icon">MA</div>
                     <h3>Mathematics</h3>
@@ -572,7 +891,7 @@
 
                 <a href="10th-science.html" class="analyzer-card" data-analyzer-card="true">
                     <div class="analyzer-card-thumb">
-                        <img src="assets/images/subjects/science_thumbnail.webp" alt="Science"
+                        <img src="assets/images/subjects/10th-science.jpg" alt="Science"
                             loading="lazy" onerror="this.parentElement.style.display='none'">
                     </div>
                     <div class="analyzer-card-icon">SC</div>
@@ -587,8 +906,8 @@
 
                 <a href="10th-social.html" class="analyzer-card" data-analyzer-card="true">
                     <div class="analyzer-card-thumb">
-                        <img src="assets/images/subjects/10th-social.jpg" alt="Social Science"
-                            loading="lazy" onerror="this.parentElement.style.display='none'">
+                        <img src="assets/images/subjects/10th-social.jpg" alt="Social Science" loading="lazy"
+                            onerror="this.parentElement.style.display='none'">
                     </div>
                     <div class="analyzer-card-icon">SS</div>
                     <h3>Social Science</h3>
@@ -602,8 +921,8 @@
 
                 <div class="analyzer-card is-locked">
                     <div class="analyzer-card-thumb">
-                        <img src="assets/images/subjects/10th-english.jpg" alt="English"
-                            loading="lazy" onerror="this.parentElement.style.display='none'">
+                        <img src="assets/images/subjects/10th-english.jpg" alt="English" loading="lazy"
+                            onerror="this.parentElement.style.display='none'">
                     </div>
                     <div class="analyzer-card-icon">EN</div>
                     <h3>English</h3>
@@ -617,8 +936,8 @@
 
                 <div class="analyzer-card is-locked">
                     <div class="analyzer-card-thumb">
-                        <img src="assets/images/subjects/10th-tamil.jpg" alt="Tamil"
-                            loading="lazy" onerror="this.parentElement.style.display='none'">
+                        <img src="assets/images/subjects/10th-tamil.jpg" alt="Tamil" loading="lazy"
+                            onerror="this.parentElement.style.display='none'">
                     </div>
                     <div class="analyzer-card-icon">TA</div>
                     <h3>Tamil</h3>
@@ -643,8 +962,8 @@
 
                 <div class="analyzer-card is-locked">
                     <div class="analyzer-card-thumb">
-                        <img src="assets/images/subjects/12th-physics.jpg" alt="Physics"
-                            loading="lazy" onerror="this.parentElement.style.display='none'">
+                        <img src="assets/images/subjects/12th-physics.jpg" alt="Physics" loading="lazy"
+                            onerror="this.parentElement.style.display='none'">
                     </div>
                     <div class="analyzer-card-icon">PH</div>
                     <h3>Physics</h3>
@@ -658,8 +977,8 @@
 
                 <div class="analyzer-card is-locked">
                     <div class="analyzer-card-thumb">
-                        <img src="assets/images/subjects/12th-chemistry.jpg" alt="Chemistry"
-                            loading="lazy" onerror="this.parentElement.style.display='none'">
+                        <img src="assets/images/subjects/12th-chemistry.jpg" alt="Chemistry" loading="lazy"
+                            onerror="this.parentElement.style.display='none'">
                     </div>
                     <div class="analyzer-card-icon">CH</div>
                     <h3>Chemistry</h3>
@@ -673,8 +992,8 @@
 
                 <div class="analyzer-card is-locked">
                     <div class="analyzer-card-thumb">
-                        <img src="assets/images/subjects/12th-maths.jpg" alt="Mathematics"
-                            loading="lazy" onerror="this.parentElement.style.display='none'">
+                        <img src="assets/images/subjects/12th-maths.jpg" alt="Mathematics" loading="lazy"
+                            onerror="this.parentElement.style.display='none'">
                     </div>
                     <div class="analyzer-card-icon">MA</div>
                     <h3>Mathematics</h3>
@@ -703,8 +1022,8 @@
 
                 <div class="analyzer-card is-locked">
                     <div class="analyzer-card-thumb">
-                        <img src="assets/images/subjects/12th-biology.jpg" alt="Biology"
-                            loading="lazy" onerror="this.parentElement.style.display='none'">
+                        <img src="assets/images/subjects/12th-biology.jpg" alt="Biology" loading="lazy"
+                            onerror="this.parentElement.style.display='none'">
                     </div>
                     <div class="analyzer-card-icon">BI</div>
                     <h3>Biology</h3>
@@ -718,8 +1037,8 @@
 
                 <div class="analyzer-card is-locked">
                     <div class="analyzer-card-thumb">
-                        <img src="assets/images/subjects/12th-commerce.jpg" alt="Commerce"
-                            loading="lazy" onerror="this.parentElement.style.display='none'">
+                        <img src="assets/images/subjects/12th-commerce.jpg" alt="Commerce" loading="lazy"
+                            onerror="this.parentElement.style.display='none'">
                     </div>
                     <div class="analyzer-card-icon">CM</div>
                     <h3>Commerce</h3>
@@ -733,8 +1052,8 @@
 
                 <div class="analyzer-card is-locked">
                     <div class="analyzer-card-thumb">
-                        <img src="assets/images/subjects/12th-accountancy.jpg" alt="Accountancy"
-                            loading="lazy" onerror="this.parentElement.style.display='none'">
+                        <img src="assets/images/subjects/12th-accountancy.jpg" alt="Accountancy" loading="lazy"
+                            onerror="this.parentElement.style.display='none'">
                     </div>
                     <div class="analyzer-card-icon">AC</div>
                     <h3>Accountancy</h3>
@@ -748,8 +1067,8 @@
 
                 <div class="analyzer-card is-locked">
                     <div class="analyzer-card-thumb">
-                        <img src="assets/images/subjects/12th-economics.jpg" alt="Economics"
-                            loading="lazy" onerror="this.parentElement.style.display='none'">
+                        <img src="assets/images/subjects/12th-economics.jpg" alt="Economics" loading="lazy"
+                            onerror="this.parentElement.style.display='none'">
                     </div>
                     <div class="analyzer-card-icon">EC</div>
                     <h3>Economics</h3>
@@ -778,8 +1097,8 @@
 
                 <div class="analyzer-card is-locked">
                     <div class="analyzer-card-thumb">
-                        <img src="assets/images/subjects/12th-tamil.jpg" alt="Tamil"
-                            loading="lazy" onerror="this.parentElement.style.display='none'">
+                        <img src="assets/images/subjects/12th-tamil.jpg" alt="Tamil" loading="lazy"
+                            onerror="this.parentElement.style.display='none'">
                     </div>
                     <div class="analyzer-card-icon">TAM</div>
                     <h3>Tamil</h3>
@@ -793,8 +1112,8 @@
 
                 <div class="analyzer-card is-locked">
                     <div class="analyzer-card-thumb">
-                        <img src="assets/images/subjects/12th-english.jpg" alt="English"
-                            loading="lazy" onerror="this.parentElement.style.display='none'">
+                        <img src="assets/images/subjects/12th-english.jpg" alt="English" loading="lazy"
+                            onerror="this.parentElement.style.display='none'">
                     </div>
                     <div class="analyzer-card-icon">ENG</div>
                     <h3>English</h3>
@@ -811,7 +1130,29 @@
         </section>
 
     </main>
+    <script>
+        const tabs = document.querySelectorAll(".class-tab");
+        const sections = document.querySelectorAll(".analyzer-grid-section");
 
+        tabs.forEach((tab, index) => {
+
+            tab.addEventListener("click", () => {
+
+                tabs.forEach(t => t.classList.remove("active"));
+
+                tab.classList.add("active");
+
+                sections.forEach(s => s.classList.add("hidden"));
+
+                sections[index].classList.remove("hidden");
+
+            });
+
+        });
+
+        // Hide only the 12th section initially
+        sections[1].classList.add("hidden");
+    </script>
 
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
@@ -826,6 +1167,36 @@
     <script src="script.js"></script>
 
     <script defer src="paper.js"></script>
+
+    <script>
+
+        const tab10 = document.getElementById("tab10");
+        const tab12 = document.getElementById("tab12");
+
+        const section10 = document.getElementById("section10");
+        const section12 = document.getElementById("section12");
+
+        tab10.onclick = () => {
+
+            tab10.classList.add("active");
+            tab12.classList.remove("active");
+
+            section10.classList.remove("hidden");
+            section12.classList.add("hidden");
+
+        };
+
+        tab12.onclick = () => {
+
+            tab12.classList.add("active");
+            tab10.classList.remove("active");
+
+            section12.classList.remove("hidden");
+            section10.classList.add("hidden");
+
+        };
+
+    </script>
 
 </body>
 
