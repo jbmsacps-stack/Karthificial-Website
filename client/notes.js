@@ -6,6 +6,25 @@ const chapterSelect = document.getElementById("chapterFilter");
 
 const materialGrid = document.getElementById("studyMaterialGrid");
 
+const SUBJECT_THUMBNAIL_MAP = {
+    "tamil": "assets/thumbnail/tamil_thumb.png",
+    "english": "assets/thumbnail/english_thumb.png",
+    "mathematics": "assets/thumbnail/maths_thumb.png",
+    "physics": "assets/thumbnail/phy_thumb.webp",
+    "chemistry": "assets/thumbnail/chem_thumb.webp",
+    "biology": "assets/thumbnail/bio_thumb.webp",
+    "computer science": "assets/thumbnail/cs_thumb.webp",
+    "commerce": "assets/thumbnail/com_thumb.webp",
+    "accountancy": "assets/thumbnail/acc_thumb.webp",
+    "economics": "assets/thumbnail/econ_thumb.webp",
+    "business mathematics": "assets/thumbnail/bm_thumb.webp"
+};
+
+function getDefaultThumbnail(subjectName) {
+    const key = (subjectName || "").trim().toLowerCase();
+    return SUBJECT_THUMBNAIL_MAP[key] || "assets/thumbnail/maths_thumb.png";
+}
+
 let currentBoard = "";
 let currentClass = "";
 let currentSubject = "";
@@ -254,8 +273,16 @@ function renderMaterials(materials) {
 
     materials.forEach(material => {
 
+        const defaultThumb = getDefaultThumbnail(material.subjects?.name);
+        const thumbSrc = material.thumbnail_url || defaultThumb;
+
         html += `
         <div class="study-card">
+
+        <div class="study-thumbnail">
+        <img src="${thumbSrc}" alt="${material.title}" loading="lazy"
+            onerror="this.onerror=null;this.src='${defaultThumb}';">
+    </div>
 
             <h2>${material.title}</h2>
 

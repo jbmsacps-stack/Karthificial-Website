@@ -41,6 +41,9 @@ const pdfPreviewFrame = document.getElementById("pdfPreviewFrame");
 const customTypeContainer = document.getElementById("customTypeContainer");
 const customMaterialTypeInput = document.getElementById("customMaterialType");
 
+const thumbnailInput = document.getElementById("materialThumbnailUrl");
+const currentThumbnailContainer = document.getElementById("currentThumbnailContainer");
+const currentThumbnailPreview = document.getElementById("currentThumbnailPreview");
 // =======================================================
 // 1. INITIALIZATION
 // =======================================================
@@ -331,6 +334,7 @@ function renderTable(list) {
             <td>${item.subject_name || "-"}</td>
             <td>${item.chapter_name || "-"}</td>
             <td>${item.material_type || "-"}</td>
+            <td>${item.thumbnail_url ? `<img src="${item.thumbnail_url}" alt="thumbnail" style="width:48px;height:48px;object-fit:cover;border-radius:6px;">` : "-"}</td>
             <td>${item.pdf_url ? `<button class="btn-outline btn-sm" onclick="openPdfModal('${escapedPdfUrl}')">View PDF</button>` : "-"}</td>
             <td>${item.youtube_url ? `<a href="${item.youtube_url}" target="_blank" class="btn-outline btn-sm">Watch Video</a>` : "-"}</td>
             <td>${item.is_active ? "✅" : "❌"}</td>
@@ -463,6 +467,7 @@ async function saveMaterial(e) {
             title: titleInput.value.trim(),
             description: descriptionInput.value.trim(),
             pdf_url: pdfUrl,
+            thumbnail_url: thumbnailInput.value.trim(),
             youtube_url: youtubeInput.value.trim(),
             sort_order: Number(sortOrderInput.value),
             is_active: isActiveCheckbox.checked
@@ -500,6 +505,7 @@ async function saveMaterial(e) {
 
         materialForm.reset();
         currentPdfContainer.style.display = "none";
+        currentThumbnailContainer.style.display = "none";
         customTypeContainer.style.display = "none";   // ← add this
         customMaterialTypeInput.value = "";
         await loadMaterials();
@@ -542,6 +548,14 @@ async function editMaterial(id) {
         sortOrderInput.value = material.sort_order || 1;
         isActiveCheckbox.checked = material.is_active !== false;
         pdfInput.value = material.pdf_url || "";
+
+        thumbnailInput.value = material.thumbnail_url || "";
+        if (material.thumbnail_url) {
+            currentThumbnailContainer.style.display = "block";
+            currentThumbnailPreview.src = material.thumbnail_url;
+        } else {
+            currentThumbnailContainer.style.display = "none";
+        }
 
         // Populate current PDF link if exists
         if (material.pdf_url) {
@@ -665,6 +679,7 @@ function resetForm() {
     currentPdfUrl = null;
     materialForm.reset();
     currentPdfContainer.style.display = "none";
+    currentThumbnailContainer.style.display = "none";
     document.getElementById("saveMaterialBtn").textContent = "Save Material";
 }
 

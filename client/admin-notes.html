@@ -1735,6 +1735,27 @@
 
                 </div>
 
+                <!-- Thumbnail -->
+                <div class="admin-form-group">
+                    <label for="materialThumbnailUrl">
+                        Thumbnail Image URL (Optional)
+                    </label>
+                    <input type="url" id="materialThumbnailUrl" placeholder="https://example.com/image.webp">
+                    <button class="btn-outline" type="button" onclick="openCloudinaryUploader('materialThumbnailUrl')">
+                        Upload Image
+                    </button>
+                    <small class="form-helper">
+                        Shown as the card thumbnail on the Notes page. Leave blank to use the default subject thumbnail.
+                    </small>
+                </div>
+
+                <!-- Existing Thumbnail (Edit Mode) -->
+                <div id="currentThumbnailContainer" class="admin-form-group" style="display:none;">
+                    <label>Current Thumbnail</label>
+                    <img id="currentThumbnailPreview" src="" alt="Current thumbnail"
+                        style="max-width:160px;border-radius:8px;border:1px solid rgba(212,175,55,.35);display:block;">
+                </div>
+
                 <!-- Description -->
 
                 <div class="admin-form-group">
@@ -2172,6 +2193,8 @@
     <script src="script.js"></script>
 
     <script src="clerk-auth.js"></script>
+
+    <script src="https://upload-widget.cloudinary.com/latest/global/all.js"></script>
 
     <script src="cloudinary-upload.js"></script>
 

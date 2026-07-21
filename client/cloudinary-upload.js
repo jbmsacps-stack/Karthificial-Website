@@ -26,6 +26,7 @@ function openCloudinaryUploader(targetInputId) {
             maxFileSize: 3000000
         },
         (error, result) => {
+
             if (error) {
                 console.error("Cloudinary upload error:", error);
                 alert("Image upload failed.");
@@ -33,8 +34,23 @@ function openCloudinaryUploader(targetInputId) {
             }
 
             if (result.event === "success") {
-                targetInput.value = result.info.secure_url;
+
+                const imageUrl = result.info.secure_url;
+
+                targetInput.value = imageUrl;
+
+                // Update preview instantly
+                const preview = document.getElementById("currentThumbnailPreview");
+                const container = document.getElementById("currentThumbnailContainer");
+
+                if (preview && container) {
+                    preview.src = imageUrl;
+                    container.style.display = "block";
+                }
+
+                console.log("Uploaded:", imageUrl);
             }
+
         }
     );
 
