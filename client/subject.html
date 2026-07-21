@@ -77,11 +77,39 @@
         }
 
         .analyzer-card:hover:not(.is-locked) {
-            /* transform: translateY(-8px); */
             border-color: var(--gold);
             box-shadow:
                 0 25px 60px rgba(0, 0, 0, .45),
                 0 0 25px rgba(var(--gold-rgb), .18);
+        }
+
+        /* Thumbnail */
+
+        .analyzer-card-thumb {
+            width: 100%;
+            aspect-ratio: 16 / 9;
+            border-radius: 16px;
+            overflow: hidden;
+            margin-bottom: 22px;
+            background: rgba(var(--gold-rgb), .06);
+            border: 1px solid rgba(var(--gold-rgb), .16);
+            position: relative;
+        }
+
+        .analyzer-card-thumb img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: transform .5s ease;
+        }
+
+        .analyzer-card:hover:not(.is-locked) .analyzer-card-thumb img {
+            transform: scale(1.06);
+        }
+
+        .analyzer-card.is-locked .analyzer-card-thumb img {
+            filter: grayscale(60%);
         }
 
         /* Icon */
@@ -101,6 +129,10 @@
             color: var(--gold);
             font-size: 1.7rem;
             font-weight: 800;
+        }
+
+        .analyzer-card-thumb+.analyzer-card-icon {
+            margin-top: -4px;
         }
 
         /* Heading */
@@ -203,12 +235,6 @@
         main {
             padding-top: 40px;
         }
-
-        /* First section only */
-
-        /* .analyzer-grid-section:first-of-type {
-            margin-top: 50px;
-        } */
 
         .streak-card {
 
@@ -521,53 +547,6 @@
     </nav>
 
     <main>
-        <!-- <section class="streak-banner">
-
-            <div class="streak-banner-left">
-
-                <div class="streak-fire">
-                    🔥
-                </div>
-
-                <div class="streak-content">
-
-                    <h2>
-                        <span id="streakCount">0</span> Day Streak
-                    </h2>
-
-                    <p id="streakMessage">
-                        Analyze one paper today to keep your streak alive.
-                    </p>
-
-                </div>
-
-            </div>
-
-            <div class="streak-banner-right">
-
-                <div class="streak-item">
-
-                    <span>Status</span>
-
-                    <strong id="todayStatus">
-                        ❌ Not Completed
-                    </strong>
-
-                </div>
-
-                <div class="streak-item">
-
-                    <span>Best</span>
-
-                    <strong id="bestStreak">
-                        0 Days
-                    </strong>
-
-                </div>
-
-            </div>
-
-        </section> -->
 
         <!-- 10th Standard -->
         <section class="analyzer-grid-section">
@@ -577,6 +556,10 @@
             <div class="analyzer-grid">
 
                 <a href="10th-maths.html" class="analyzer-card" data-analyzer-card="true">
+                    <div class="analyzer-card-thumb">
+                        <img src="assets/images/subjects/10th-maths.jpg" alt="Mathematics"
+                            loading="lazy" onerror="this.parentElement.style.display='none'">
+                    </div>
                     <div class="analyzer-card-icon">MA</div>
                     <h3>Mathematics</h3>
                     <p>
@@ -588,6 +571,10 @@
                 </a>
 
                 <a href="10th-science.html" class="analyzer-card" data-analyzer-card="true">
+                    <div class="analyzer-card-thumb">
+                        <img src="assets/images/subjects/10th-science.jpg" alt="Science"
+                            loading="lazy" onerror="this.parentElement.style.display='none'">
+                    </div>
                     <div class="analyzer-card-icon">SC</div>
                     <h3>Science</h3>
                     <p>
@@ -599,6 +586,10 @@
                 </a>
 
                 <a href="10th-social.html" class="analyzer-card" data-analyzer-card="true">
+                    <div class="analyzer-card-thumb">
+                        <img src="assets/images/subjects/10th-social.jpg" alt="Social Science"
+                            loading="lazy" onerror="this.parentElement.style.display='none'">
+                    </div>
                     <div class="analyzer-card-icon">SS</div>
                     <h3>Social Science</h3>
                     <p>
@@ -610,6 +601,10 @@
                 </a>
 
                 <div class="analyzer-card is-locked">
+                    <div class="analyzer-card-thumb">
+                        <img src="assets/images/subjects/10th-english.jpg" alt="English"
+                            loading="lazy" onerror="this.parentElement.style.display='none'">
+                    </div>
                     <div class="analyzer-card-icon">EN</div>
                     <h3>English</h3>
                     <p>
@@ -621,6 +616,10 @@
                 </div>
 
                 <div class="analyzer-card is-locked">
+                    <div class="analyzer-card-thumb">
+                        <img src="assets/images/subjects/10th-tamil.jpg" alt="Tamil"
+                            loading="lazy" onerror="this.parentElement.style.display='none'">
+                    </div>
                     <div class="analyzer-card-icon">TA</div>
                     <h3>Tamil</h3>
                     <p>
@@ -643,6 +642,10 @@
             <div class="analyzer-grid">
 
                 <div class="analyzer-card is-locked">
+                    <div class="analyzer-card-thumb">
+                        <img src="assets/images/subjects/12th-physics.jpg" alt="Physics"
+                            loading="lazy" onerror="this.parentElement.style.display='none'">
+                    </div>
                     <div class="analyzer-card-icon">PH</div>
                     <h3>Physics</h3>
                     <p>
@@ -654,6 +657,10 @@
                 </div>
 
                 <div class="analyzer-card is-locked">
+                    <div class="analyzer-card-thumb">
+                        <img src="assets/images/subjects/12th-chemistry.jpg" alt="Chemistry"
+                            loading="lazy" onerror="this.parentElement.style.display='none'">
+                    </div>
                     <div class="analyzer-card-icon">CH</div>
                     <h3>Chemistry</h3>
                     <p>
@@ -665,6 +672,10 @@
                 </div>
 
                 <div class="analyzer-card is-locked">
+                    <div class="analyzer-card-thumb">
+                        <img src="assets/images/subjects/12th-maths.jpg" alt="Mathematics"
+                            loading="lazy" onerror="this.parentElement.style.display='none'">
+                    </div>
                     <div class="analyzer-card-icon">MA</div>
                     <h3>Mathematics</h3>
                     <p>
@@ -676,6 +687,10 @@
                 </div>
 
                 <div class="analyzer-card is-locked">
+                    <div class="analyzer-card-thumb">
+                        <img src="assets/images/subjects/12th-computer-science.jpg" alt="Computer Science"
+                            loading="lazy" onerror="this.parentElement.style.display='none'">
+                    </div>
                     <div class="analyzer-card-icon">CS</div>
                     <h3>Computer Science</h3>
                     <p>
@@ -687,6 +702,10 @@
                 </div>
 
                 <div class="analyzer-card is-locked">
+                    <div class="analyzer-card-thumb">
+                        <img src="assets/images/subjects/12th-biology.jpg" alt="Biology"
+                            loading="lazy" onerror="this.parentElement.style.display='none'">
+                    </div>
                     <div class="analyzer-card-icon">BI</div>
                     <h3>Biology</h3>
                     <p>
@@ -698,6 +717,10 @@
                 </div>
 
                 <div class="analyzer-card is-locked">
+                    <div class="analyzer-card-thumb">
+                        <img src="assets/images/subjects/12th-commerce.jpg" alt="Commerce"
+                            loading="lazy" onerror="this.parentElement.style.display='none'">
+                    </div>
                     <div class="analyzer-card-icon">CM</div>
                     <h3>Commerce</h3>
                     <p>
@@ -709,6 +732,10 @@
                 </div>
 
                 <div class="analyzer-card is-locked">
+                    <div class="analyzer-card-thumb">
+                        <img src="assets/images/subjects/12th-accountancy.jpg" alt="Accountancy"
+                            loading="lazy" onerror="this.parentElement.style.display='none'">
+                    </div>
                     <div class="analyzer-card-icon">AC</div>
                     <h3>Accountancy</h3>
                     <p>
@@ -720,6 +747,10 @@
                 </div>
 
                 <div class="analyzer-card is-locked">
+                    <div class="analyzer-card-thumb">
+                        <img src="assets/images/subjects/12th-economics.jpg" alt="Economics"
+                            loading="lazy" onerror="this.parentElement.style.display='none'">
+                    </div>
                     <div class="analyzer-card-icon">EC</div>
                     <h3>Economics</h3>
                     <p>
@@ -731,6 +762,10 @@
                 </div>
 
                 <div class="analyzer-card is-locked">
+                    <div class="analyzer-card-thumb">
+                        <img src="assets/images/subjects/12th-computer-application.jpg" alt="Computer Application"
+                            loading="lazy" onerror="this.parentElement.style.display='none'">
+                    </div>
                     <div class="analyzer-card-icon">CA</div>
                     <h3>Computer Application</h3>
                     <p>
@@ -742,6 +777,10 @@
                 </div>
 
                 <div class="analyzer-card is-locked">
+                    <div class="analyzer-card-thumb">
+                        <img src="assets/images/subjects/12th-tamil.jpg" alt="Tamil"
+                            loading="lazy" onerror="this.parentElement.style.display='none'">
+                    </div>
                     <div class="analyzer-card-icon">TAM</div>
                     <h3>Tamil</h3>
                     <p>
@@ -753,6 +792,10 @@
                 </div>
 
                 <div class="analyzer-card is-locked">
+                    <div class="analyzer-card-thumb">
+                        <img src="assets/images/subjects/12th-english.jpg" alt="English"
+                            loading="lazy" onerror="this.parentElement.style.display='none'">
+                    </div>
                     <div class="analyzer-card-icon">ENG</div>
                     <h3>English</h3>
                     <p>
@@ -766,18 +809,6 @@
             </div>
 
         </section>
-
-        <!-- Bottom Note
-        <section class="analyzer-final-note">
-
-            <h2>More Subjects Coming Soon</h2>
-
-            <p>
-                We're continuously adding detailed question paper analysis for every
-                Tamil Nadu State Board subject. Stay tuned for future updates.
-            </p>
-
-        </section> -->
 
     </main>
 
