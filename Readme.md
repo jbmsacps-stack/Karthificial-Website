@@ -1,6 +1,6 @@
 <div align="center">
 
-<img src="client/assets/images/Logo.png" alt="Karthificial Logo" width="160" />
+<img src="client/assets/images/Logo.webp" alt="Karthificial Logo" width="160" />
 
 # Karthificial Website
 
