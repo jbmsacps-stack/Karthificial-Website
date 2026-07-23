@@ -659,3 +659,77 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 });
+
+const removedMobileNavItems = new Map();
+
+function syncMobileQuickNav() {
+    const navbar = document.querySelector(".navbar:not(.admin-navbar)");
+
+    if (!navbar) {
+        return;
+    }
+
+    const isMobile = window.innerWidth <= 900;
+    const navMenu = navbar.querySelector(".nav-menu");
+    const existingQuickNav = document.querySelector(".mobile-quick-nav");
+
+    if (navMenu) {
+        const mobileNavItems = Array.from(navMenu.querySelectorAll("li")).filter((item) => {
+            const link = item.querySelector('a[href="index.html"], a[href="subject.html"]');
+            return Boolean(link);
+        });
+
+        mobileNavItems.forEach((item) => {
+            if (isMobile) {
+                if (!removedMobileNavItems.has(item)) {
+                    removedMobileNavItems.set(item, item.parentNode ? item.parentNode : null);
+                }
+                item.remove();
+            } else if (removedMobileNavItems.has(item)) {
+                const target = navMenu.querySelector(".mobile-actions") || null;
+                if (target) {
+                    target.insertAdjacentElement("beforebegin", item);
+                } else {
+                    navMenu.appendChild(item);
+                }
+                removedMobileNavItems.delete(item);
+            }
+        });
+    }
+
+    if (!isMobile) {
+        existingQuickNav?.remove();
+        return;
+    }
+
+    if (existingQuickNav) {
+        const page = (window.location.pathname.split("/").pop() || "index.html").toLowerCase();
+
+        existingQuickNav.querySelectorAll(".mobile-nav-btn").forEach((btn) => {
+            const target = btn.getAttribute("data-page") || "";
+            btn.classList.toggle("active", page === target);
+        });
+
+        return;
+    }
+
+    const quickNav = document.createElement("div");
+    quickNav.className = "mobile-quick-nav";
+    quickNav.setAttribute("role", "navigation");
+    quickNav.setAttribute("aria-label", "Mobile quick navigation");
+
+    quickNav.innerHTML = `
+        <a href="index.html" class="mobile-nav-btn" data-page="index.html">Home</a>
+        <a href="subject.html" class="mobile-nav-btn" data-page="subject.html">Subjects</a>
+    `;
+
+    navbar.insertAdjacentElement("afterend", quickNav);
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+    syncMobileQuickNav();
+});
+
+window.addEventListener("resize", () => {
+    window.requestAnimationFrame(syncMobileQuickNav);
+});

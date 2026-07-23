@@ -63,20 +63,22 @@ function bindLogoutButtons() {
 function renderNavbarHTML(desktopHTML, mobileHTML = desktopHTML) {
     const navActions = document.querySelector(".nav-actions");
     const mobileActions = document.querySelector(".mobile-actions");
+    const isMobile = isMobileNavbarView();
 
     if (navActions) {
-        navActions.innerHTML = desktopHTML;
+        navActions.innerHTML = isMobile ? "" : desktopHTML;
     }
 
     if (mobileActions) {
-        mobileActions.innerHTML = mobileHTML;
+        mobileActions.innerHTML = isMobile ? mobileHTML : "";
     }
 
     bindLogoutButtons();
 }
 
 function renderSignedInNavbar(displayName, isAdminUser) {
-    const showTopGreeting = !isMobileNavbarView();
+    const isMobile = isMobileNavbarView();
+    const showTopGreeting = !isMobile;
 
     const topNavbarHTML = getSignedInNavbarHTML(
         displayName,
@@ -84,13 +86,21 @@ function renderSignedInNavbar(displayName, isAdminUser) {
         showTopGreeting
     );
 
-    const mobileMenuHTML = getSignedInNavbarHTML(
+    const mobileMenuHTML = `<div class="mobile-auth-actions">${getSignedInNavbarHTML(
         displayName,
         isAdminUser,
         false
-    );
+    )}</div>`;
 
     renderNavbarHTML(topNavbarHTML, mobileMenuHTML);
+}
+
+function renderSignedOutNavbar() {
+    const isMobile = isMobileNavbarView();
+    const desktopHTML = getSignedOutNavbarHTML();
+    const mobileHTML = `<div class="mobile-auth-actions">${desktopHTML}</div>`;
+
+    renderNavbarHTML(desktopHTML, mobileHTML);
 }
 
 function renderCachedNavbarInstantly() {
@@ -98,6 +108,7 @@ function renderCachedNavbarInstantly() {
         const cachedUser = JSON.parse(localStorage.getItem("karthificialUser") || "null");
 
         if (!cachedUser?.displayName) {
+            renderSignedOutNavbar();
             return;
         }
 
@@ -110,6 +121,7 @@ function renderCachedNavbarInstantly() {
 
     } catch (error) {
         localStorage.removeItem("karthificialUser");
+        renderSignedOutNavbar();
     }
 }
 
@@ -119,7 +131,7 @@ function updateNavbarAuthState() {
     if (!user) {
         localStorage.removeItem("karthificialUser");
         localStorage.removeItem("karthificialGreetingAnimated");
-        renderNavbarHTML(getSignedOutNavbarHTML());
+        renderSignedOutNavbar();
         return;
     }
 
@@ -144,6 +156,25 @@ function updateNavbarAuthState() {
         document.body.classList.add("auth-greeting-seen");
     }
 }
+
+let authLayoutSyncScheduled = false;
+
+function scheduleAuthLayoutSync() {
+    if (authLayoutSyncScheduled) {
+        return;
+    }
+
+    authLayoutSyncScheduled = true;
+
+    requestAnimationFrame(() => {
+        authLayoutSyncScheduled = false;
+        renderCachedNavbarInstantly();
+    });
+}
+
+const authLayoutObserver = new MutationObserver(() => {
+    scheduleAuthLayoutSync();
+});
 
 function loadScript(src, attributes = {}) {
     return new Promise((resolve, reject) => {
@@ -171,6 +202,11 @@ function loadScript(src, attributes = {}) {
 }
 
 document.addEventListener("DOMContentLoaded", async () => {
+    authLayoutObserver.observe(document.body, {
+        childList: true,
+        subtree: true
+    });
+
     renderCachedNavbarInstantly();
 
     const signInBox = document.getElementById("clerk-sign-in");
@@ -333,16 +369,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
 window.addEventListener("resize", () => {
     try {
-        const cachedUser = JSON.parse(localStorage.getItem("karthificialUser") || "null");
-
-        if (!cachedUser?.displayName) {
-            return;
-        }
-
-        renderSignedInNavbar(
-            cachedUser.displayName,
-            cachedUser.role === "admin"
-        );
+        scheduleAuthLayoutSync();
     } catch (error) {
         console.error("Failed to refresh navbar on resize:", error);
     }

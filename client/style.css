@@ -389,10 +389,82 @@ img {
         display: none;
     }
 
+    .mobile-quick-nav {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 8px;
+        padding: 8px 18px 0;
+        width: min(100%, 1180px);
+        margin: 0 auto;
+    }
+
+    .mobile-nav-btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 40px;
+        padding: 0 14px;
+        border: 1px solid rgba(var(--gold-rgb), 0.18);
+        border-radius: 999px;
+        background: linear-gradient(180deg, rgba(255, 255, 255, 0.04), rgba(255, 255, 255, 0.02));
+        color: var(--gold);
+        font-size: 0.92rem;
+        font-weight: 700;
+        letter-spacing: 0.03em;
+        text-decoration: none;
+    }
+
+    .mobile-nav-btn.active {
+        background: linear-gradient(135deg, var(--gold), rgba(212, 175, 55, 0.78));
+        color: var(--black);
+        border-color: transparent;
+    }
+
+    .mobile-nav-btn:hover {
+        background: rgba(var(--gold-rgb), 0.12);
+    }
+
     .mobile-actions {
         display: flex;
+        align-items: center;
+        justify-content: center;
         gap: 12px;
-        margin-top: 15px;
+        width: 100%;
+        margin-top: 12px;
+        padding-top: 12px;
+        border-top: 1px solid rgba(var(--gold-rgb), 0.16);
+    }
+
+    .mobile-auth-actions {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 12px;
+        flex-wrap: nowrap;
+        width: 100%;
+    }
+
+    .mobile-auth-actions > a,
+    .mobile-auth-actions > button {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        flex: 0 1 140px;
+        width: min(140px, 100%);
+        max-width: 140px;
+        min-width: 0;
+        padding: 10px 14px;
+        text-align: center;
+        white-space: nowrap;
+        border-radius: 999px;
+    }
+
+    .article-page {
+        padding-top: 24px;
+    }
+
+    .article-back-link {
+        margin-bottom: 20px;
     }
 
     .footer-grid {
@@ -17779,3 +17851,4 @@ font-weight:600;
     width: 100%;
     box-shadow: 0 20px 60px rgba(0,0,0,.5);
 }
+
