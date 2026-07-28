@@ -172,9 +172,9 @@ function scheduleAuthLayoutSync() {
     });
 }
 
-const authLayoutObserver = new MutationObserver(() => {
-    scheduleAuthLayoutSync();
-});
+// const authLayoutObserver = new MutationObserver(() => {
+//     scheduleAuthLayoutSync();
+// });
 
 function loadScript(src, attributes = {}) {
     return new Promise((resolve, reject) => {
@@ -202,10 +202,10 @@ function loadScript(src, attributes = {}) {
 }
 
 document.addEventListener("DOMContentLoaded", async () => {
-    authLayoutObserver.observe(document.body, {
-        childList: true,
-        subtree: true
-    });
+    // authLayoutObserver.observe(document.body, {
+    //     childList: true,
+    //     subtree: true
+    // });
 
     renderCachedNavbarInstantly();
 

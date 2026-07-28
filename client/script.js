@@ -727,9 +727,15 @@ function syncMobileQuickNav() {
 }
 
 document.addEventListener("DOMContentLoaded", () => {
-    syncMobileQuickNav();
+    if (window.innerWidth <= 900) {
+        syncMobileQuickNav();
+    }
 });
 
 window.addEventListener("resize", () => {
-    window.requestAnimationFrame(syncMobileQuickNav);
+    if (window.innerWidth <= 900) {
+        syncMobileQuickNav();
+    } else {
+        document.querySelector(".mobile-quick-nav")?.remove();
+    }
 });
