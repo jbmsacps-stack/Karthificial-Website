@@ -9,7 +9,7 @@ Study notes · Question paper generator · MCQ practice · Career guidance · Ad
 
 <br>
 
-<a href="https://karthificial-website.vercel.app/index.html" target="_blank" rel="noopener noreferrer">
+<a href="https://karthificial.in/index.html" target="_blank" rel="noopener noreferrer">
   <img src="https://img.shields.io/badge/OPEN-KARTHIFICIAL-d4af37?style=for-the-badge&logo=googlechrome&logoColor=black" alt="Open Karthificial Live Website" />
 </a>
 
